@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.chaitin.xray.form.LookupConfigForm">
+  <grid id="27dc6" binding="lookupConfigPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="504" height="543"/>
+    </constraints>
+    <properties>
+      <background color="-725535"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <scrollpane id="c11de" binding="configTextPanel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="500" height="500"/>
+            <preferred-size width="500" height="500"/>
+            <maximum-size width="500" height="500"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-725535"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="fbfe3" class="javax.swing.JTextArea" binding="configTextArea">
+            <constraints/>
+            <properties>
+              <background color="-725535"/>
+              <foreground color="-12828863"/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
+      <grid id="1c809" binding="configButtonPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-725535"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="9e8ea" class="javax.swing.JButton" binding="saveConfigButton">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="保存配置文件"/>
+            </properties>
+          </component>
+          <component id="d5680" class="javax.swing.JButton" binding="refreshConfigButton">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="刷新最新配置文件"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

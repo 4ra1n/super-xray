@@ -1,0 +1,853 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.chaitin.xray.form.AdvanceConfigForm">
+  <grid id="27dc6" binding="advanceConfigPanel" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="1448" height="895"/>
+    </constraints>
+    <properties>
+      <background color="-725535"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="f88b4" binding="titlePanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="1" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-725535"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="c0cfc" class="javax.swing.JLabel" binding="titleLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="7ae40" binding="leftPanel" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-725535"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <grid id="dacd9" binding="baselinePanel" layout-manager="GridLayoutManager" row-count="12" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-725535"/>
+            </properties>
+            <border type="none" title="baseline"/>
+            <children>
+              <component id="2d8e9" class="javax.swing.JCheckBox" binding="detectCorsHeaderConfigCheckBox">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="detect_cors_header_config"/>
+                </properties>
+              </component>
+              <component id="af7a9" class="javax.swing.JLabel" binding="corsLabel">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="检查 cors 相关配置"/>
+                </properties>
+              </component>
+              <component id="5a0ba" class="javax.swing.JCheckBox" binding="detectServerErrorPageCheckBox">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="detect_server_error_page"/>
+                </properties>
+              </component>
+              <component id="affae" class="javax.swing.JCheckBox" binding="detectPhpinfoCheckBox">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="detect_phpinfo"/>
+                </properties>
+              </component>
+              <component id="b181f" class="javax.swing.JCheckBox" binding="detectSystemPathLeakCheckBox">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="detect_system_path_leak"/>
+                </properties>
+              </component>
+              <component id="79e43" class="javax.swing.JCheckBox" binding="detectOutdatedSslVersionCheckBox">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="detect_outdated_ssl_version"/>
+                </properties>
+              </component>
+              <component id="3cd6" class="javax.swing.JCheckBox" binding="detectHttpHeaderConfigCheckBox">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="detect_http_header_config"/>
+                </properties>
+              </component>
+              <component id="df0f6" class="javax.swing.JCheckBox" binding="detectCookieHttponlyCheckBox">
+                <constraints>
+                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="detect_cookie_httponly"/>
+                </properties>
+              </component>
+              <component id="30b48" class="javax.swing.JCheckBox" binding="detectChinaIdCardNumberCheckBox">
+                <constraints>
+                  <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="detect_china_id_card_number"/>
+                </properties>
+              </component>
+              <component id="7ef42" class="javax.swing.JCheckBox" binding="detectChinaPhoneNumberCheckBox">
+                <constraints>
+                  <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="detect_china_phone_number"/>
+                </properties>
+              </component>
+              <component id="c7574" class="javax.swing.JCheckBox" binding="detectChinaBankCardCheckBox">
+                <constraints>
+                  <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="detect_china_bank_card"/>
+                </properties>
+              </component>
+              <component id="40a2b" class="javax.swing.JCheckBox" binding="detectPrivateIpCheckBox">
+                <constraints>
+                  <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="detect_private_ip"/>
+                </properties>
+              </component>
+              <component id="3cc57" class="javax.swing.JLabel" binding="serverLabel">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="检查服务器错误信息"/>
+                </properties>
+              </component>
+              <component id="a3caa" class="javax.swing.JLabel" binding="phpinfoLabel">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="检查响应是否包含phpinfo"/>
+                </properties>
+              </component>
+              <component id="76b9c" class="javax.swing.JLabel" binding="leakLabel">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="检查响应是否包含系统路径泄露"/>
+                </properties>
+              </component>
+              <component id="a07c5" class="javax.swing.JLabel" binding="sslLabel">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="检查 ssl 版本问题"/>
+                </properties>
+              </component>
+              <component id="fc55a" class="javax.swing.JLabel" binding="headerLabel">
+                <constraints>
+                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="检查 http 安全相关 header 是否配置"/>
+                </properties>
+              </component>
+              <component id="6105f" class="javax.swing.JLabel" binding="setCookieLabel">
+                <constraints>
+                  <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="检查 set-cookie 时是否设置 http only"/>
+                </properties>
+              </component>
+              <component id="72d" class="javax.swing.JLabel" binding="idLabel">
+                <constraints>
+                  <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="检查响应是否存在身份证号"/>
+                </properties>
+              </component>
+              <component id="764b2" class="javax.swing.JLabel" binding="phoneLabel">
+                <constraints>
+                  <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="检查响应是否存在电话号码"/>
+                </properties>
+              </component>
+              <component id="df0f" class="javax.swing.JLabel" binding="bankLabel">
+                <constraints>
+                  <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="检查响应是否存在银行卡号"/>
+                </properties>
+              </component>
+              <component id="f8cc0" class="javax.swing.JLabel" binding="privateLabel">
+                <constraints>
+                  <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="检查响应是否包含内网 ip"/>
+                </properties>
+              </component>
+              <component id="5bf7d" class="javax.swing.JButton" binding="refreshBaselineButton">
+                <constraints>
+                  <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="刷新配置"/>
+                </properties>
+              </component>
+              <component id="b3a84" class="javax.swing.JButton" binding="saveBaselineButton">
+                <constraints>
+                  <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="确认配置"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="c4eb8" binding="sqldetPanel" layout-manager="GridLayoutManager" row-count="6" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-725535"/>
+            </properties>
+            <border type="none" title="sqldet"/>
+            <children>
+              <component id="1af1a" class="javax.swing.JCheckBox" binding="booleanBasedDetectionCheckBox">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="boolean_based_detection"/>
+                </properties>
+              </component>
+              <component id="4a2d7" class="javax.swing.JLabel" binding="boolLabel">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="是否检测布尔盲注"/>
+                </properties>
+              </component>
+              <component id="4ae30" class="javax.swing.JCheckBox" binding="errorBasedDetectionCheckBox">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="error_based_detection"/>
+                </properties>
+              </component>
+              <component id="6993e" class="javax.swing.JCheckBox" binding="timeBasedDetectionCheckBox">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="time_based_detection"/>
+                </properties>
+              </component>
+              <component id="ee2f1" class="javax.swing.JCheckBox" binding="useCommentInPayloadCheckBox">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="use_comment_in_payload"/>
+                </properties>
+              </component>
+              <component id="45796" class="javax.swing.JCheckBox" binding="detectSqliInCookieCheckBox">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="detect_sqli_in_cookie"/>
+                </properties>
+              </component>
+              <component id="f21e9" class="javax.swing.JLabel" binding="errorLabel">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="是否检测报错注入"/>
+                </properties>
+              </component>
+              <component id="670cc" class="javax.swing.JLabel" binding="timeLabel">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="是否检测时间盲注"/>
+                </properties>
+              </component>
+              <component id="1f225" class="javax.swing.JLabel" binding="commentLabel">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="在 payload 中使用 or (慎用！可能导致删库！)"/>
+                </properties>
+              </component>
+              <component id="d309a" class="javax.swing.JLabel" binding="sqlCookieLabel">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="是否检查在 cookie 中的注入"/>
+                </properties>
+              </component>
+              <component id="9000b" class="javax.swing.JButton" binding="refreshSqlButton">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="刷新配置"/>
+                </properties>
+              </component>
+              <component id="5e9da" class="javax.swing.JButton" binding="saveSqlButton">
+                <constraints>
+                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="确认配置"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="ccc61" binding="xssPanel" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-725535"/>
+            </properties>
+            <border type="none" title="xss"/>
+            <children>
+              <component id="54676" class="javax.swing.JCheckBox" binding="detectXssInCookieCheckBox">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="detect_xss_in_cookie"/>
+                </properties>
+              </component>
+              <component id="59d60" class="javax.swing.JLabel" binding="xssCookieLabel">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="是否探测入口点在 cookie 中的 xss"/>
+                </properties>
+              </component>
+              <component id="cfd2d" class="javax.swing.JCheckBox" binding="ieFeatureCheckBox">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="ie_feature"/>
+                </properties>
+              </component>
+              <component id="471b2" class="javax.swing.JLabel" binding="xssIeLabel">
+                <constraints>
+                  <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="是否扫描仅能在 ie 下利用的 xss"/>
+                </properties>
+              </component>
+              <component id="58faa" class="javax.swing.JButton" binding="xssRefreshButton">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="刷新配置"/>
+                </properties>
+              </component>
+              <component id="68edc" class="javax.swing.JButton" binding="xssSaveButton">
+                <constraints>
+                  <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="确认配置"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="38e4d" binding="thinkphpPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-725535"/>
+            </properties>
+            <border type="none" title="thinkphp"/>
+            <children>
+              <component id="37b7e" class="javax.swing.JCheckBox" binding="detectThinkphpSqliCheckBox">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="detect_thinkphp_sqli"/>
+                </properties>
+              </component>
+              <component id="bacf3" class="javax.swing.JLabel" binding="thinkphpSqlLabel">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="检查 thinkphp 的 sql 注入"/>
+                </properties>
+              </component>
+              <component id="595dd" class="javax.swing.JButton" binding="thinkphpRefreshButton">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="刷新配置"/>
+                </properties>
+              </component>
+              <component id="c62c5" class="javax.swing.JButton" binding="thinkphpSaveButton">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="确认配置"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <grid id="217f6" binding="midPanel" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-725535"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <grid id="11d98" binding="bruteForcePanel" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-725535"/>
+            </properties>
+            <border type="none" title="brute-force"/>
+            <children>
+              <component id="6990f" class="javax.swing.JTextField" binding="usernameDicText">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <editable value="false"/>
+                  <enabled value="false"/>
+                </properties>
+              </component>
+              <component id="48f3" class="javax.swing.JButton" binding="usernameButton">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="选择用户名字典文件"/>
+                </properties>
+              </component>
+              <component id="1ac56" class="javax.swing.JButton" binding="saveBruteButton">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="确认配置"/>
+                </properties>
+              </component>
+              <component id="e67c2" class="javax.swing.JButton" binding="refreshBruteButton">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="刷新配置"/>
+                </properties>
+              </component>
+              <component id="5659e" class="javax.swing.JTextField" binding="pwdText">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <editable value="false"/>
+                  <enabled value="false"/>
+                </properties>
+              </component>
+              <component id="a5cb1" class="javax.swing.JButton" binding="pwdDicButton">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="选择密码字典文件"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="162e6" binding="dirscanPanel" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-725535"/>
+            </properties>
+            <border type="none" title="dirscan"/>
+            <children>
+              <component id="be8b0" class="javax.swing.JTextField" binding="dirDepthText">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="c8b16" class="javax.swing.JTextField" binding="dirDicText">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <editable value="false"/>
+                  <enabled value="false"/>
+                </properties>
+              </component>
+              <component id="98a75" class="javax.swing.JButton" binding="dirDicButton">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="选择自定义字典"/>
+                </properties>
+              </component>
+              <component id="bd413" class="javax.swing.JButton" binding="dirRefreshButton">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="刷新配置"/>
+                </properties>
+              </component>
+              <component id="4fd9" class="javax.swing.JButton" binding="dirSaveButton">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="确认配置"/>
+                </properties>
+              </component>
+              <component id="61e3d" class="javax.swing.JLabel" binding="dirDepthLabel">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="输入检测深度（1-10）"/>
+                </properties>
+              </component>
+              <scrollpane id="e30b0" binding="dirScroll">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="bc8ca" class="javax.swing.JTextArea" binding="excludeArea">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
+              <component id="d74fd" class="javax.swing.JLabel" binding="excludeLabel">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="&lt;html&gt;&#10;排除哪些路径&#10;&lt;br&gt;&#10;如/admin或/system/key&#10;&lt;br&gt;&#10;可输入多条规则，每行一条&#10;&lt;/html&gt;"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="23b8b" binding="shiroPanel" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-725535"/>
+            </properties>
+            <border type="none" title="shiro"/>
+            <children>
+              <component id="f2595" class="javax.swing.JTextField" binding="shiroCookieText">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="45f00" class="javax.swing.JTextField" binding="shiroAesKeyText">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="4a028" class="javax.swing.JButton" binding="shiroRefreshButton">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="刷新配置"/>
+                </properties>
+              </component>
+              <component id="3438a" class="javax.swing.JButton" binding="shiroSaveButton">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="确认配置"/>
+                </properties>
+              </component>
+              <component id="3acea" class="javax.swing.JTextField" binding="shiroKeyFileText">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <editable value="false"/>
+                  <enabled value="false"/>
+                </properties>
+              </component>
+              <component id="92b96" class="javax.swing.JButton" binding="shiroKeyFileButton">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="选择Key文件"/>
+                </properties>
+              </component>
+              <component id="1dace" class="javax.swing.JLabel" binding="shiroCookieLabel">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="输入Cookie名称"/>
+                </properties>
+              </component>
+              <component id="23131" class="javax.swing.JLabel" binding="shiroAesKeyLabel">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="输入AES Key"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="3a9c" binding="phantasmPanel" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-725535"/>
+            </properties>
+            <border type="none" title="phantasm"/>
+            <children>
+              <component id="374a8" class="javax.swing.JTextField" binding="phantasmDepthText">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="a5361" class="javax.swing.JButton" binding="phRefreshButton">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="刷新配置"/>
+                </properties>
+              </component>
+              <component id="34f05" class="javax.swing.JButton" binding="phSaveButton">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="确认配置"/>
+                </properties>
+              </component>
+              <component id="8315f" class="javax.swing.JLabel" binding="phDefaultLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="&lt;html&gt;&#10;默认会启动所有的内置PoC&#10;&lt;br&gt;&#10;如果你希望指定某一个PoC&#10;&lt;br&gt;&#10;请前往主界面PoC模块配置&#10;&lt;/html&gt;"/>
+                </properties>
+              </component>
+              <component id="c11c8" class="javax.swing.JLabel" binding="phLoadLabel">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="&lt;html&gt;&#10;暂不支持加载本地自定义PoC&#10;&lt;br&gt;&#10;如果你有优质PoC可以优先提交给平台&#10;&lt;br&gt;&#10;我们会尽快合入内置PoC&#10;&lt;/html&gt;"/>
+                </properties>
+              </component>
+              <component id="27dd7" class="javax.swing.JLabel" binding="phDepthLabel">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="输入检测深度（1-10）"/>
+                </properties>
+              </component>
+              <scrollpane id="49fe3" binding="phScroll">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="bee16" class="javax.swing.JTextArea" binding="phExcludeArea">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                </children>
+              </scrollpane>
+              <component id="de7a1" class="javax.swing.JLabel" binding="phExcludeLabel">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="&lt;html&gt;&#10;排除哪些内置 PoC&#10;&lt;br&gt;&#10;支持通配符（如poc-yaml-tomcat*）&#10;&lt;br&gt;&#10;可输入多条规则，每行一条&#10;&lt;/html&gt;"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <grid id="fae6d" binding="configCenterPanel" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-725535"/>
+        </properties>
+        <border type="none" title="配置中心"/>
+        <children>
+          <component id="f2828" class="javax.swing.JButton" binding="allDefaultButton">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="恢复默认"/>
+            </properties>
+          </component>
+          <component id="8f515" class="javax.swing.JButton" binding="allRefreshButton">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="刷新配置"/>
+            </properties>
+          </component>
+          <component id="5beea" class="javax.swing.JButton" binding="applyAllButton">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="一键确认所有配置"/>
+            </properties>
+          </component>
+          <component id="e8f2f" class="javax.swing.JButton" binding="selectBaselineButton">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="baseline全部勾选"/>
+            </properties>
+          </component>
+          <component id="e6300" class="javax.swing.JButton" binding="selectSqlButton">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="sqldet全部勾选"/>
+            </properties>
+          </component>
+          <component id="70e05" class="javax.swing.JButton" binding="selectXssButton">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="xss全部勾选"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <component id="522b" class="javax.swing.JLabel" binding="showLabel">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="&lt;html&gt;&#10;高级配置并不会激活插件&#10;&lt;br&gt;&#10;勾选对应插件 点击 确认插件 生效&#10;&lt;/html&gt;"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
