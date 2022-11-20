@@ -16,7 +16,7 @@
 
 ## 快速上手
 
-观看B站视频：正在制作上传中
+观看B站视频：https://www.bilibili.com/video/BV1Ud4y147Er
 
 启动： `java -jar SuperXray.jar`
 
