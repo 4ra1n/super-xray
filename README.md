@@ -11,6 +11,7 @@
 - 本地有 `JRE` 环境
 - 使用 `java -jar SuperXray.jar` 启动
 - 前往 [ctstack](https://stack.chaitin.com/tool/detail?id=1) 下载正版 `xray`
+- 注意：请使用最新版`xray`（本工具未兼容老版本`xray`）
 
 
 
