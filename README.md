@@ -114,6 +114,9 @@
 ![](img/08.png)
 
 
+## Security
+
+本项目存在的安全漏洞：https://github.com/4ra1n/super-xray/security/advisories
 
 ## 免责声明
 
