@@ -1,6 +1,7 @@
 package com.chaitin.xray.form;
 
 import com.chaitin.xray.model.Const;
+import com.chaitin.xray.model.DB;
 import com.chaitin.xray.model.Poc;
 import com.chaitin.xray.model.XrayCmd;
 import com.chaitin.xray.utils.*;
@@ -354,6 +355,17 @@ public class MainForm {
 
                 stop = false;
                 execAndFresh(cmd);
+
+                // todo: global
+                DB data = new DB();
+                data.setLastXrayPath(absPath);
+
+                try{
+                    Files.write(Paths.get("super-xray.db"), data.getDB().getBytes());
+                }catch (Exception ex){
+                    logger.error(ex);
+                }
+
             } else {
                 xrayPathTextField.setText("你取消了选择");
             }
