@@ -16,9 +16,10 @@ public class Application {
     public static void main(String[] args) {
         try {
             Path dbPath = Paths.get("super-xray.db");
-            if(Files.exists(dbPath)){
+            if (Files.exists(dbPath)) {
                 DB db = DB.parseDB(Files.readAllBytes(dbPath));
                 String defaultSkin = db.getSkin();
+                System.out.println(defaultSkin);
                 try {
                     Class.forName(defaultSkin);
                 } catch (Exception ignored) {
@@ -30,9 +31,10 @@ public class Application {
                     } catch (Exception ignored) {
                         UIManager.setLookAndFeel(SKIN);
                     }
+                } else {
+                    UIManager.setLookAndFeel(SKIN);
                 }
             }
-            UIManager.setLookAndFeel(SKIN);
             MainForm.startMainForm();
         } catch (Exception ex) {
             ex.printStackTrace();

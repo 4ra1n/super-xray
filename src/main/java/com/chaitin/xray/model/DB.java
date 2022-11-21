@@ -29,7 +29,7 @@ public class DB {
                 getLastXrayPath(), "skin", getSkin());
     }
 
-    public static DB parseDB(byte[] data){
+    public static DB parseDB(byte[] data) {
         DB db = new DB();
         String[] temp = new String(data).split(";");
         db.setSkin(temp[1].split("=")[1]);
@@ -37,10 +37,10 @@ public class DB {
         return db;
     }
 
-    public void saveDB(){
-        try{
-            Files.write(Paths.get("super-xray.db"),getDB().getBytes());
-        }catch (Exception ex){
+    public void saveDB() {
+        try {
+            Files.write(Paths.get("super-xray.db"), getDB().getBytes());
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }

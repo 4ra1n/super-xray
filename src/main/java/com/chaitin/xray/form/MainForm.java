@@ -155,7 +155,7 @@ public class MainForm {
             if (Files.exists(dbPath)) {
                 byte[] data = Files.readAllBytes(dbPath);
                 db = DB.parseDB(data);
-            }else{
+            } else {
                 db = new DB();
             }
         } catch (Exception ex) {
@@ -376,7 +376,7 @@ public class MainForm {
     public void initLoadXray() {
         logger.info("init load xray module");
 
-        if(StringUtil.notEmpty(db.getLastXrayPath())) {
+        if (StringUtil.notEmpty(db.getLastXrayPath())) {
             loadXray(db.getLastXrayPath());
         }
 
@@ -966,60 +966,61 @@ public class MainForm {
                         Class.forName(nimbus);
                     } catch (Exception ignored) {
                         JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                        return;
                     }
                     UIManager.setLookAndFeel(nimbus);
                     db.setSkin(nimbus);
-                }
-                if (metalRadioButton.isSelected()) {
+                } else if (metalRadioButton.isSelected()) {
                     try {
                         Class.forName(metal);
                     } catch (Exception ignored) {
                         JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                        return;
                     }
                     UIManager.setLookAndFeel(metal);
                     db.setSkin(metal);
-                }
-                if (windowsRadioButton.isSelected()) {
+                } else if (windowsRadioButton.isSelected()) {
                     try {
                         Class.forName(windows);
                     } catch (Exception ignored) {
                         JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                        return;
                     }
                     UIManager.setLookAndFeel(windows);
                     db.setSkin(windows);
-                }
-                if (winClassicRadioButton.isSelected()) {
+                } else if (winClassicRadioButton.isSelected()) {
                     try {
                         Class.forName(winClassic);
                     } catch (Exception ignored) {
                         JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                        return;
                     }
                     UIManager.setLookAndFeel(winClassic);
                     db.setSkin(winClassic);
-                }
-                if (motifRadioButton.isSelected()) {
+                } else if (motifRadioButton.isSelected()) {
                     try {
                         Class.forName(motif);
                     } catch (Exception ignored) {
                         JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                        return;
                     }
                     UIManager.setLookAndFeel(motif);
                     db.setSkin(motif);
-                }
-                if (gtkRadioButton.isSelected()) {
+                } else if (gtkRadioButton.isSelected()) {
                     try {
                         Class.forName(gtk);
                     } catch (Exception ignored) {
                         JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                        return;
                     }
                     UIManager.setLookAndFeel(gtk);
                     db.setSkin(gtk);
-                }
-                if (aquaRadioButton.isSelected()) {
+                } else if (aquaRadioButton.isSelected()) {
                     try {
                         Class.forName(aqua);
                     } catch (Exception ignored) {
                         JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                        return;
                     }
                     UIManager.setLookAndFeel(aqua);
                     db.setSkin(aqua);
