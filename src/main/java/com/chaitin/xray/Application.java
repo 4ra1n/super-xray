@@ -5,7 +5,9 @@ import com.chaitin.xray.model.DB;
 import com.chaitin.xray.utils.StringUtil;
 
 import javax.swing.*;
+import java.io.File;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Application {
@@ -13,21 +15,24 @@ public class Application {
 
     public static void main(String[] args) {
         try {
-            DB db = DB.parseDB(Files.readAllBytes(Paths.get("super-xray.db")));
-            String defaultSkin = db.getSkin();
-
-            try {
-                Class.forName(defaultSkin);
-            } catch (Exception ignored) {
-                UIManager.setLookAndFeel(SKIN);
-            }
-            if (StringUtil.notEmpty(defaultSkin)) {
+            Path dbPath = Paths.get("super-xray.db");
+            if(Files.exists(dbPath)){
+                DB db = DB.parseDB(Files.readAllBytes(dbPath));
+                String defaultSkin = db.getSkin();
                 try {
-                    UIManager.setLookAndFeel(defaultSkin);
+                    Class.forName(defaultSkin);
                 } catch (Exception ignored) {
                     UIManager.setLookAndFeel(SKIN);
                 }
+                if (StringUtil.notEmpty(defaultSkin)) {
+                    try {
+                        UIManager.setLookAndFeel(defaultSkin);
+                    } catch (Exception ignored) {
+                        UIManager.setLookAndFeel(SKIN);
+                    }
+                }
             }
+            UIManager.setLookAndFeel(SKIN);
             MainForm.startMainForm();
         } catch (Exception ex) {
             ex.printStackTrace();

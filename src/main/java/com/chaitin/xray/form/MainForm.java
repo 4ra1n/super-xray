@@ -150,6 +150,18 @@ public class MainForm {
         checkBoxList = new ArrayList<>();
         xrayCmd = new XrayCmd();
 
+        try {
+            Path dbPath = Paths.get("super-xray.db");
+            if (Files.exists(dbPath)) {
+                byte[] data = Files.readAllBytes(dbPath);
+                db = DB.parseDB(data);
+            }else{
+                db = new DB();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         reloadConfig(true);
 
         logger.info("init look up config button");
@@ -364,15 +376,8 @@ public class MainForm {
     public void initLoadXray() {
         logger.info("init load xray module");
 
-        try {
-            Path dbPath = Paths.get("super-xray.db");
-            if (Files.exists(dbPath)) {
-                byte[] data = Files.readAllBytes(dbPath);
-                db = DB.parseDB(data);
-                loadXray(db.getLastXrayPath());
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        if(StringUtil.notEmpty(db.getLastXrayPath())) {
+            loadXray(db.getLastXrayPath());
         }
 
         choseDirButton.addActionListener(e -> {
@@ -946,7 +951,6 @@ public class MainForm {
     }
 
     private void initSkin() {
-        nimbusRadioButton.setSelected(true);
         saveSkinButton.addActionListener(e -> {
             try {
                 String nimbus = "javax.swing.plaf.nimbus.NimbusLookAndFeel";
