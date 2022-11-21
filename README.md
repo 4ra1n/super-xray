@@ -4,7 +4,9 @@
 
 [xray](https://github.com/chaitin/xray) 是一款优秀的漏洞扫描工具，但目前只有命令行版本，通过 `config.yaml` 配置文件启动，很多情况下不好上手，需要一款 GUI 工具来帮助新人更快使用。本工具仅是简单的命令行包装，并不是直接调用方法。在 xray 的规划中，未来会有一款真正的完善的 GUI 版 XrayPro 工具，敬请期待。
 
-本工具在 `JRE 8 ` 和 `JRE 11` 环境中测试通过，在 `Windows 11` 和 `Ubuntu 22.04` 以及 `Mac OS 12` 中测试通过。
+本工具在 `JRE 19 ` 和 `JRE 11` 环境中测试通过，在 `Windows 11` 和 `Ubuntu 22.04` 以及 `Mac OS 12` 中测试通过。
+
+注意：建议在 `JRE/JDK 9` 以上环境中运行
 
 使用前提：
 
