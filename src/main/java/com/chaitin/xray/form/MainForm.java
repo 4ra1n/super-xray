@@ -644,6 +644,7 @@ public class MainForm {
                 refreshOutput();
                 xrayCmd.setModule("webscan");
                 xrayCmd.setConfig(String.format("%s", configPath));
+                xrayCmd.setOthers(null);
                 String[] finalCmd = xrayCmd.buildCmd();
                 outputTextArea.setText(null);
                 execAndFresh(finalCmd);
