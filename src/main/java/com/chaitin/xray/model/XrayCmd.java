@@ -109,7 +109,7 @@ public class XrayCmd {
             list.add(getConfig());
         }
         list.add(getModule());
-        if(StringUtil.notEmpty(getConfig())) {
+        if(StringUtil.notEmpty(getPoc())) {
             list.add("--poc");
             list.add(getPoc());
         }
