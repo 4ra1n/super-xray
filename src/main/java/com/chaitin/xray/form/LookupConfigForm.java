@@ -7,6 +7,7 @@ import org.yaml.snakeyaml.Yaml;
 
 import javax.swing.*;
 import java.awt.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -51,7 +52,8 @@ public class LookupConfigForm {
 
                 MainForm.instance.reloadConfig(false);
 
-                Files.write(Paths.get(MainForm.configPath), newConfig.getBytes());
+                Files.write(Paths.get(MainForm.configPath),
+                        newConfig.getBytes(StandardCharsets.UTF_8));
                 JOptionPane.showMessageDialog(null, "已保存配置");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "您的配置有误");
