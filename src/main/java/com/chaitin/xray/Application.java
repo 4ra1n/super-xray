@@ -1,18 +1,16 @@
 package com.chaitin.xray;
 
 import com.chaitin.xray.form.MainForm;
+import com.chaitin.xray.model.Const;
 import com.chaitin.xray.model.DB;
 import com.chaitin.xray.utils.StringUtil;
 
 import javax.swing.*;
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Application {
-    private static final String SKIN = "javax.swing.plaf.nimbus.NimbusLookAndFeel";
-
     public static void main(String[] args) {
         try {
             Path dbPath = Paths.get("super-xray.db");
@@ -22,17 +20,19 @@ public class Application {
                 try {
                     Class.forName(defaultSkin);
                 } catch (Exception ignored) {
-                    UIManager.setLookAndFeel(SKIN);
+                    UIManager.setLookAndFeel(Const.nimbus);
                 }
                 if (StringUtil.notEmpty(defaultSkin)) {
                     try {
                         UIManager.setLookAndFeel(defaultSkin);
                     } catch (Exception ignored) {
-                        UIManager.setLookAndFeel(SKIN);
+                        UIManager.setLookAndFeel(Const.nimbus);
                     }
                 } else {
-                    UIManager.setLookAndFeel(SKIN);
+                    UIManager.setLookAndFeel(Const.nimbus);
                 }
+            } else {
+                UIManager.setLookAndFeel(Const.nimbus);
             }
             MainForm.startMainForm();
         } catch (Exception ex) {

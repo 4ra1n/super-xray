@@ -26,9 +26,7 @@ public class ListenUtilForm {
             int port = Integer.parseInt(portStr);
             new Thread(() -> SocketUtil.serve(port, terminalArea)).start();
         });
-        sendButton.addActionListener(e -> {
-            SocketUtil.sendServe(sendText.getText());
-        });
+        sendButton.addActionListener(e -> SocketUtil.sendServe(sendText.getText()));
     }
 
     {

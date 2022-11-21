@@ -955,77 +955,69 @@ public class MainForm {
     private void initSkin() {
         saveSkinButton.addActionListener(e -> {
             try {
-                String nimbus = "javax.swing.plaf.nimbus.NimbusLookAndFeel";
-                String metal = "javax.swing.plaf.metal.MetalLookAndFeel";
-                String windows = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
-                String winClassic = "com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel";
-                String motif = "com.sun.java.swing.plaf.motif.MotifLookAndFeel";
-                String gtk = "com.sun.java.swing.plaf.gtk.GTKLookAndFeel";
-                String aqua = "com.apple.laf.AquaLookAndFeel";
-
                 if (nimbusRadioButton.isSelected()) {
                     try {
-                        Class.forName(nimbus);
+                        Class.forName(Const.nimbus);
                     } catch (Exception ignored) {
                         JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
                         return;
                     }
-                    UIManager.setLookAndFeel(nimbus);
-                    db.setSkin(nimbus);
+                    UIManager.setLookAndFeel(Const.nimbus);
+                    db.setSkin(Const.nimbus);
                 } else if (metalRadioButton.isSelected()) {
                     try {
-                        Class.forName(metal);
+                        Class.forName(Const.metal);
                     } catch (Exception ignored) {
                         JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
                         return;
                     }
-                    UIManager.setLookAndFeel(metal);
-                    db.setSkin(metal);
+                    UIManager.setLookAndFeel(Const.metal);
+                    db.setSkin(Const.metal);
                 } else if (windowsRadioButton.isSelected()) {
                     try {
-                        Class.forName(windows);
+                        Class.forName(Const.windows);
                     } catch (Exception ignored) {
                         JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
                         return;
                     }
-                    UIManager.setLookAndFeel(windows);
-                    db.setSkin(windows);
+                    UIManager.setLookAndFeel(Const.windows);
+                    db.setSkin(Const.windows);
                 } else if (winClassicRadioButton.isSelected()) {
                     try {
-                        Class.forName(winClassic);
+                        Class.forName(Const.winClassic);
                     } catch (Exception ignored) {
                         JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
                         return;
                     }
-                    UIManager.setLookAndFeel(winClassic);
-                    db.setSkin(winClassic);
+                    UIManager.setLookAndFeel(Const.winClassic);
+                    db.setSkin(Const.winClassic);
                 } else if (motifRadioButton.isSelected()) {
                     try {
-                        Class.forName(motif);
+                        Class.forName(Const.motif);
                     } catch (Exception ignored) {
                         JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
                         return;
                     }
-                    UIManager.setLookAndFeel(motif);
-                    db.setSkin(motif);
+                    UIManager.setLookAndFeel(Const.motif);
+                    db.setSkin(Const.motif);
                 } else if (gtkRadioButton.isSelected()) {
                     try {
-                        Class.forName(gtk);
+                        Class.forName(Const.gtk);
                     } catch (Exception ignored) {
                         JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
                         return;
                     }
-                    UIManager.setLookAndFeel(gtk);
-                    db.setSkin(gtk);
+                    UIManager.setLookAndFeel(Const.gtk);
+                    db.setSkin(Const.gtk);
                 } else if (aquaRadioButton.isSelected()) {
                     try {
-                        Class.forName(aqua);
+                        Class.forName(Const.aqua);
                     } catch (Exception ignored) {
                         JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
                         return;
                     }
-                    UIManager.setLookAndFeel(aqua);
-                    db.setSkin(aqua);
+                    UIManager.setLookAndFeel(Const.aqua);
+                    db.setSkin(Const.aqua);
                 }
                 SwingUtilities.updateComponentTreeUI(SuperXray);
                 db.saveDB();

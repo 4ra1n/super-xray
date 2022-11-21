@@ -1,14 +1,11 @@
 package com.chaitin.xray.model;
 
 import com.chaitin.xray.utils.StringUtil;
-import org.apache.log4j.Logger;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class XrayCmd {
-    private static final Logger logger = Logger.getLogger(XrayCmd.class);
     private String xray;
     private String module;
     private String config;

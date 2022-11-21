@@ -3,9 +3,6 @@ package com.chaitin.xray.utils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.io.InputStream;
-import java.nio.file.Paths;
-
 public class ExecUtil {
     private static final Logger logger = LogManager.getLogger(ExecUtil.class);
 

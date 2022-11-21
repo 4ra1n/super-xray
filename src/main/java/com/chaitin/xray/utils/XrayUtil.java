@@ -4,7 +4,6 @@ import com.chaitin.xray.model.Const;
 import org.apache.log4j.Logger;
 
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class XrayUtil {
