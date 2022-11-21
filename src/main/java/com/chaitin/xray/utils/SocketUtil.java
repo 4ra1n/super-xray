@@ -17,7 +17,7 @@ public class SocketUtil {
                 readByte = (byte) is.read();
                 lineByteList.add(readByte);
                 total++;
-            } while (total < contentLe);//消息体读还未读完
+            } while (total < contentLe);
         } else {
             do {
                 readByte = (byte) is.read();
@@ -41,7 +41,7 @@ public class SocketUtil {
     public static void serve(int port, JTextArea targetArea) {
         try {
             ServerSocket server = new ServerSocket(port);
-            area =targetArea;
+            area = targetArea;
             area.setText(String.format("start listen port: %d", port));
             Socket socket = server.accept();
             String line;

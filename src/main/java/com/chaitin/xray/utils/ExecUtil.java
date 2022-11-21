@@ -31,11 +31,11 @@ public class ExecUtil {
 
     public static void execOpen(String outputFilePath) {
         if (OSUtil.isWindows()) {
-            String cmd = String.format("start %s",outputFilePath);
+            String cmd = String.format("start %s", outputFilePath);
             String[] xrayCmd = new String[]{"cmd.exe", "/c", String.format("%s", cmd)};
-           exec(xrayCmd);
+            exec(xrayCmd);
         } else {
-            String cmd = String.format("open %s",outputFilePath);
+            String cmd = String.format("open %s", outputFilePath);
             String[] xrayCmd = new String[]{"/bin/bash", "-c", String.format("%s", cmd)};
             exec(xrayCmd);
         }

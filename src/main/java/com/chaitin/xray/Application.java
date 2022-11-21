@@ -14,9 +14,9 @@ public class Application {
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(SKIN);
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error(String.format("nimbus look and feel not found: %s", e));
-        }finally {
+        } finally {
             logger.info("start main form");
             MainForm.startMainForm();
         }

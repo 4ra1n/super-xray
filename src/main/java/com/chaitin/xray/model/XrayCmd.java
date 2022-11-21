@@ -104,24 +104,24 @@ public class XrayCmd {
     public String[] buildCmd() {
         List<String> list = new ArrayList<>();
         list.add(getXray());
-        if(StringUtil.notEmpty(getConfig())){
+        if (StringUtil.notEmpty(getConfig())) {
             list.add("--config");
             list.add(getConfig());
         }
         list.add(getModule());
-        if(StringUtil.notEmpty(getPoc())) {
+        if (StringUtil.notEmpty(getPoc())) {
             list.add("--poc");
             list.add(getPoc());
         }
-        if(StringUtil.notEmpty(getInput())) {
+        if (StringUtil.notEmpty(getInput())) {
             list.add(getInputPrefix());
             list.add(getInput());
         }
-        if(StringUtil.notEmpty(getOutput())) {
+        if (StringUtil.notEmpty(getOutput())) {
             list.add(getOutputPrefix());
             list.add(getOutput());
         }
-        if(StringUtil.notEmpty(getOthers())) {
+        if (StringUtil.notEmpty(getOthers())) {
             list.add(getOthersPrefix());
             list.add(getOthers());
         }

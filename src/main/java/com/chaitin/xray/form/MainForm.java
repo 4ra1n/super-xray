@@ -308,8 +308,61 @@ public class MainForm {
         thread.start();
     }
 
+    private void loadXray(String absPath){
+        logger.info(String.format("user chose file: %s", absPath));
+        String targetDir = Paths.get(absPath).toFile().getParent() + File.separator;
+        XrayUtil.rmAllConfig(targetDir);
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> XrayUtil.rmAllConfig(targetDir)));
+
+        xrayPathTextField.setText(absPath);
+        if (!OSUtil.isWindows()) {
+            ExecUtil.chmod(absPath);
+        }
+
+        String[] cmd = new String[]{absPath};
+        Thread t = new Thread(() -> ExecUtil.execCmdNoRet(cmd));
+        t.start();
+        if (OSUtil.isMacOS()) {
+            JOptionPane.showMessageDialog(null, Const.MacNeedAgree);
+        }
+
+        try {
+            Thread.sleep(1000);
+            t.interrupt();
+        } catch (Exception ex) {
+            logger.error(ex);
+        }
+        XrayUtil.cpAllConfig(targetDir);
+
+        try {
+            Path configPathPath = Paths.get(targetDir + Const.ConfigYaml);
+            configPath = configPathPath.toFile().getAbsolutePath();
+            Files.write(configPathPath,
+                    configStr.getBytes(StandardCharsets.UTF_8));
+        } catch (Exception ex) {
+            logger.error(ex);
+        }
+
+        xrayCmd.setXray(absPath);
+
+        stop = false;
+        execAndFresh(cmd);
+    }
+
     public void initLoadXray() {
         logger.info("init load xray module");
+
+        try{
+            Path dbPath = Paths.get("super-xray.db");
+            if(Files.exists(dbPath)){
+                byte[] data = Files.readAllBytes(dbPath);
+                DB db = DB.parseDB(data);
+                loadXray(db.getLastXrayPath());
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
         choseDirButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -317,53 +370,14 @@ public class MainForm {
             if (option == JFileChooser.APPROVE_OPTION) {
                 File file = fileChooser.getSelectedFile();
                 String absPath = file.getAbsolutePath();
-                logger.info(String.format("user chose file: %s", absPath));
-                String targetDir = Paths.get(absPath).toFile().getParent() + File.separator;
-                XrayUtil.rmAllConfig(targetDir);
-                Runtime.getRuntime().addShutdownHook(new Thread(() -> XrayUtil.rmAllConfig(targetDir)));
 
-                xrayPathTextField.setText(absPath);
-                if (!OSUtil.isWindows()) {
-                    ExecUtil.chmod(absPath);
-                }
+                loadXray(absPath);
 
-                String[] cmd = new String[]{absPath};
-                Thread t = new Thread(() -> ExecUtil.execCmdNoRet(cmd));
-                t.start();
-                if (OSUtil.isMacOS()) {
-                    JOptionPane.showMessageDialog(null, Const.MacNeedAgree);
-                }
-
-                JOptionPane.showMessageDialog(null, "请等待初始化");
-                try {
-                    Thread.sleep(1000);
-                    t.interrupt();
-                } catch (Exception ex) {
-                    logger.error(ex);
-                }
-                XrayUtil.cpAllConfig(targetDir);
-
-                try {
-                    Path configPathPath = Paths.get(targetDir + Const.ConfigYaml);
-                    configPath = configPathPath.toFile().getAbsolutePath();
-                    Files.write(configPathPath,
-                            configStr.getBytes(StandardCharsets.UTF_8));
-                } catch (Exception ex) {
-                    logger.error(ex);
-                }
-
-                xrayCmd.setXray(absPath);
-
-                stop = false;
-                execAndFresh(cmd);
-
-                // todo: global
                 DB data = new DB();
                 data.setLastXrayPath(absPath);
-
-                try{
+                try {
                     Files.write(Paths.get("super-xray.db"), data.getDB().getBytes());
-                }catch (Exception ex){
+                } catch (Exception ex) {
                     logger.error(ex);
                 }
 

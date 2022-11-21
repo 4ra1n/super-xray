@@ -15,11 +15,11 @@ public class Poc {
         }
     }
 
-    public static void clear(){
+    public static void clear() {
         pocList.clear();
     }
 
-    public static void addAll(List<String> poc){
+    public static void addAll(List<String> poc) {
         pocList.addAll(poc);
     }
 

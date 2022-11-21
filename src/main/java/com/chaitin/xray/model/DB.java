@@ -24,4 +24,12 @@ public class DB {
         return String.format("%s=%s;%s=%s", "last-xray-path",
                 getLastXrayPath(), "skin", getSkin());
     }
+
+    public static DB parseDB(byte[] data){
+        DB db = new DB();
+        String[] temp = new String(data).split(";");
+        db.setSkin(temp[1].split("=")[1]);
+        db.setLastXrayPath(temp[0].split("=")[1]);
+        return db;
+    }
 }
