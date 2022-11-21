@@ -82,7 +82,7 @@ public class LookupConfigForm {
         lookupConfigPanel.setBackground(new Color(-725535));
         configTextPanel = new JScrollPane();
         configTextPanel.setBackground(new Color(-725535));
-        lookupConfigPanel.add(configTextPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(500, 500), new Dimension(500, 500), new Dimension(500, 500), 0, false));
+        lookupConfigPanel.add(configTextPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(600, 500), new Dimension(600, 500), null, 0, false));
         configTextArea = new JTextArea();
         configTextArea.setBackground(new Color(-725535));
         configTextArea.setForeground(new Color(-12828863));
