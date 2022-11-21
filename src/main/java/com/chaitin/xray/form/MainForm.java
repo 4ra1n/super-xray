@@ -270,7 +270,8 @@ public class MainForm {
                 }
                 BufferedReader isReader;
                 if (OSUtil.isWindows()) {
-                    InputStreamReader isr = new InputStreamReader(inputStream, "GBK");
+                    InputStreamReader isr = new InputStreamReader(inputStream,
+                            StandardCharsets.UTF_8);
                     isReader = new BufferedReader(isr);
                 } else {
                     isReader = new BufferedReader(new InputStreamReader(inputStream));

@@ -39,6 +39,7 @@ Bug:
 - [important] windows taskkill 命令 bug #29
 - [important] 允许界面扩大缩小并重构高级配置的UI #28
 - [important] 查看配置文件只改变Panel大小但Area不变 #31
+- [important] windows 控制台乱码修复不完善 #27
 
 Others:
 - 支持使用本地自定义PoC的功能 #6
