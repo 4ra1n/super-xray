@@ -19,7 +19,6 @@ public class Application {
             if (Files.exists(dbPath)) {
                 DB db = DB.parseDB(Files.readAllBytes(dbPath));
                 String defaultSkin = db.getSkin();
-                System.out.println(defaultSkin);
                 try {
                     Class.forName(defaultSkin);
                 } catch (Exception ignored) {
