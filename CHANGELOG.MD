@@ -17,6 +17,9 @@ Bug:
 
 之前强制停止的逻辑并不能真正地停止，必须使用`kill/taskkill`命令才可以实现
 
+Security:
+- 修复潜在提权漏洞 [GHSA-2g28-xrw6-fq5f](https://github.com/4ra1n/super-xray/security/advisories/GHSA-2g28-xrw6-fq5f)
+
 Bug:
 - [important] 被动扫描后无法主动扫描的问题 #23
 - [important] PoC参数为空的问题 #21
