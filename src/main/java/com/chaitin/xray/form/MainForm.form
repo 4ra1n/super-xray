@@ -59,7 +59,7 @@
               </component>
             </children>
           </grid>
-          <grid id="ec4cd" binding="pathButtonPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="ec4cd" binding="pathButtonPanel" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -87,6 +87,82 @@
                   <text value="注意：在 Mac OS 中请用 control+c/v 复制/粘贴（不是 command 键）"/>
                 </properties>
               </component>
+              <grid id="55662" binding="skinPanel" layout-manager="GridLayoutManager" row-count="2" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-725535"/>
+                </properties>
+                <border type="none" title="皮肤选择"/>
+                <children>
+                  <component id="7bd56" class="javax.swing.JRadioButton" binding="metalRadioButton" default-binding="true">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Metal"/>
+                    </properties>
+                  </component>
+                  <component id="159a3" class="javax.swing.JRadioButton" binding="motifRadioButton">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Motif"/>
+                    </properties>
+                  </component>
+                  <component id="e3dc" class="javax.swing.JRadioButton" binding="nimbusRadioButton" default-binding="true">
+                    <constraints>
+                      <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Nimbus"/>
+                    </properties>
+                  </component>
+                  <component id="2f791" class="javax.swing.JRadioButton" binding="windowsRadioButton">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Win"/>
+                    </properties>
+                  </component>
+                  <component id="4e5c7" class="javax.swing.JRadioButton" binding="winClassicRadioButton">
+                    <constraints>
+                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Win Classic"/>
+                    </properties>
+                  </component>
+                  <component id="56a7e" class="javax.swing.JRadioButton" binding="gtkRadioButton">
+                    <constraints>
+                      <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Gtk"/>
+                    </properties>
+                  </component>
+                  <component id="6182a" class="javax.swing.JButton" binding="saveSkinButton">
+                    <constraints>
+                      <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="确认皮肤"/>
+                    </properties>
+                  </component>
+                  <component id="d18b" class="javax.swing.JRadioButton" binding="aquaRadioButton" default-binding="true">
+                    <constraints>
+                      <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Aqua"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
             </children>
           </grid>
         </children>
@@ -917,6 +993,14 @@
       <member id="7e768"/>
       <member id="d4857"/>
       <member id="a9ca8"/>
+    </group>
+    <group name="skinGroup">
+      <member id="7bd56"/>
+      <member id="159a3"/>
+      <member id="e3dc"/>
+      <member id="2f791"/>
+      <member id="4e5c7"/>
+      <member id="56a7e"/>
     </group>
   </buttonGroups>
 </form>

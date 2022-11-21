@@ -1,5 +1,9 @@
 package com.chaitin.xray.model;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class DB {
     private String lastXrayPath;
     private String skin;
@@ -31,5 +35,13 @@ public class DB {
         db.setSkin(temp[1].split("=")[1]);
         db.setLastXrayPath(temp[0].split("=")[1]);
         return db;
+    }
+
+    public void saveDB(){
+        try{
+            Files.write(Paths.get("super-xray.db"),getDB().getBytes());
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 }

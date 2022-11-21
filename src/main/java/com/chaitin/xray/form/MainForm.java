@@ -34,8 +34,9 @@ public class MainForm {
     public static Map<String, Object> configObj;
     private static ArrayList<JCheckBox> checkBoxList;
     private static boolean pluginAll = false;
-
     private static String outputFilePath;
+    private static DB db;
+
     private JButton choseDirButton;
     private JPanel SuperXray;
     private JPanel showPathPanel;
@@ -132,6 +133,15 @@ public class MainForm {
     private JButton updatePocButton;
     private JTextField localPoCText;
     private JButton localPoCButton;
+    private JPanel skinPanel;
+    private JButton saveSkinButton;
+    private JRadioButton metalRadioButton;
+    private JRadioButton motifRadioButton;
+    private JRadioButton nimbusRadioButton;
+    private JRadioButton windowsRadioButton;
+    private JRadioButton winClassicRadioButton;
+    private JRadioButton gtkRadioButton;
+    private JRadioButton aquaRadioButton;
 
     public void init() {
         logger.info("init main form");
@@ -356,7 +366,7 @@ public class MainForm {
             Path dbPath = Paths.get("super-xray.db");
             if(Files.exists(dbPath)){
                 byte[] data = Files.readAllBytes(dbPath);
-                DB db = DB.parseDB(data);
+                db = DB.parseDB(data);
                 loadXray(db.getLastXrayPath());
             }
         }catch (Exception ex){
@@ -931,8 +941,92 @@ public class MainForm {
         });
     }
 
+    private void initSkin(){
+        nimbusRadioButton.setSelected(true);
+        saveSkinButton.addActionListener(e->{
+            try {
+                String nimbus = "javax.swing.plaf.nimbus.NimbusLookAndFeel";
+                String metal = "javax.swing.plaf.metal.MetalLookAndFeel";
+                String windows = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
+                String winClassic = "com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel";
+                String motif = "com.sun.java.swing.plaf.motif.MotifLookAndFeel";
+                String gtk = "com.sun.java.swing.plaf.gtk.GTKLookAndFeel";
+                String aqua = "com.apple.laf.AquaLookAndFeel";
+
+                if(nimbusRadioButton.isSelected()){
+                    try {
+                        Class.forName(nimbus);
+                    }catch (Exception ignored){
+                        JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                    }
+                    UIManager.setLookAndFeel(nimbus);
+                    db.setSkin(nimbus);
+                }
+                if(metalRadioButton.isSelected()){
+                    try {
+                        Class.forName(metal);
+                    }catch (Exception ignored){
+                        JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                    }
+                    UIManager.setLookAndFeel(metal);
+                    db.setSkin(metal);
+                }
+                if(windowsRadioButton.isSelected()){
+                    try {
+                        Class.forName(windows);
+                    }catch (Exception ignored){
+                        JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                    }
+                    UIManager.setLookAndFeel(windows);
+                    db.setSkin(windows);
+                }
+                if(winClassicRadioButton.isSelected()){
+                    try {
+                        Class.forName(winClassic);
+                    }catch (Exception ignored){
+                        JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                    }
+                    UIManager.setLookAndFeel(winClassic);
+                    db.setSkin(winClassic);
+                }
+                if(motifRadioButton.isSelected()){
+                    try {
+                        Class.forName(motif);
+                    }catch (Exception ignored){
+                        JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                    }
+                    UIManager.setLookAndFeel(motif);
+                    db.setSkin(motif);
+                }
+                if(gtkRadioButton.isSelected()){
+                    try {
+                        Class.forName(gtk);
+                    }catch (Exception ignored){
+                        JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                    }
+                    UIManager.setLookAndFeel(gtk);
+                    db.setSkin(gtk);
+                }
+                if(aquaRadioButton.isSelected()){
+                    try {
+                        Class.forName(aqua);
+                    }catch (Exception ignored){
+                        JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                    }
+                    UIManager.setLookAndFeel(aqua);
+                    db.setSkin(aqua);
+                }
+                SwingUtilities.updateComponentTreeUI(SuperXray);
+                db.saveDB();
+            } catch (Exception ex){
+                ex.printStackTrace();
+            }
+        });
+    }
+
     public MainForm() {
         init();
+        initSkin();
         initLoadXray();
         initPluginCheckBox();
         initPluginSave();

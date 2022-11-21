@@ -1,24 +1,36 @@
 package com.chaitin.xray;
 
 import com.chaitin.xray.form.MainForm;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import com.chaitin.xray.model.DB;
+import com.chaitin.xray.utils.StringUtil;
 
 import javax.swing.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Application {
-    private static final Logger logger = LogManager.getLogger(Application.class);
-
     private static final String SKIN = "javax.swing.plaf.nimbus.NimbusLookAndFeel";
 
     public static void main(String[] args) {
         try {
-            UIManager.setLookAndFeel(SKIN);
-        } catch (Exception e) {
-            logger.error(String.format("nimbus look and feel not found: %s", e));
-        } finally {
-            logger.info("start main form");
+            DB db = DB.parseDB(Files.readAllBytes(Paths.get("super-xray.db")));
+            String defaultSkin = db.getSkin();
+
+            try {
+                Class.forName(defaultSkin);
+            } catch (Exception ignored) {
+                UIManager.setLookAndFeel(SKIN);
+            }
+            if (StringUtil.notEmpty(defaultSkin)) {
+                try {
+                    UIManager.setLookAndFeel(defaultSkin);
+                } catch (Exception ignored) {
+                    UIManager.setLookAndFeel(SKIN);
+                }
+            }
             MainForm.startMainForm();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 }
