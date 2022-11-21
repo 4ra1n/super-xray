@@ -262,7 +262,13 @@ public class MainForm {
                 if (inputStream == null) {
                     return;
                 }
-                BufferedReader isReader = new BufferedReader(new InputStreamReader(inputStream));
+                BufferedReader isReader;
+                if (OSUtil.isWindows()) {
+                    InputStreamReader isr = new InputStreamReader(inputStream, "GBK");
+                    isReader = new BufferedReader(isr);
+                } else {
+                    isReader = new BufferedReader(new InputStreamReader(inputStream));
+                }
                 String thisLine;
                 while ((thisLine = isReader.readLine()) != null) {
                     outputTextArea.append(thisLine);
