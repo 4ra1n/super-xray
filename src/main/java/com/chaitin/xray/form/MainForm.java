@@ -283,8 +283,7 @@ public class MainForm {
                                             Long.toString(process.pid())).start();
                                 } else {
                                     new ProcessBuilder("cmd.exe", "/c",
-                                            String.format("taskkill /f /pid %d", process.pid()),
-                                            Long.toString(process.pid())).start();
+                                            String.format("taskkill /f /pid %d", process.pid())).start();
                                 }
                                 return;
                             } catch (IOException e) {
