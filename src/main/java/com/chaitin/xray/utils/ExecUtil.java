@@ -10,7 +10,7 @@ public class ExecUtil {
     private static final Logger logger = LogManager.getLogger(ExecUtil.class);
 
     public static void chmod(String path) {
-        String[] chmodCmd = new String[]{"/bin/chmod", "777", path};
+        String[] chmodCmd = new String[]{"/bin/chmod", "u+x", path};
         exec(chmodCmd);
     }
 
