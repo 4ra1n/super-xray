@@ -102,8 +102,6 @@ public class AdvanceConfigForm {
     private JLabel thinkphpSqlLabel;
     private JLabel excludeLabel;
     private JLabel phExcludeLabel;
-    private JLabel phDefaultLabel;
-    private JLabel phLoadLabel;
     private JPanel phantasmPanel;
     private JLabel xssCookieLabel;
     private JLabel xssIeLabel;
@@ -865,7 +863,7 @@ public class AdvanceConfigForm {
         rightPanel.setBackground(new Color(-725535));
         advanceConfigPanel.add(rightPanel, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         phantasmPanel = new JPanel();
-        phantasmPanel.setLayout(new GridLayoutManager(4, 2, new Insets(0, 0, 0, 0), -1, -1));
+        phantasmPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
         phantasmPanel.setBackground(new Color(-725535));
         rightPanel.add(phantasmPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         phantasmPanel.setBorder(BorderFactory.createTitledBorder(null, "phantasm", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
@@ -873,16 +871,10 @@ public class AdvanceConfigForm {
         phantasmPanel.add(phantasmDepthText, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         phRefreshButton = new JButton();
         phRefreshButton.setText("刷新配置");
-        phantasmPanel.add(phRefreshButton, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        phantasmPanel.add(phRefreshButton, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         phSaveButton = new JButton();
         phSaveButton.setText("确认配置");
-        phantasmPanel.add(phSaveButton, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        phDefaultLabel = new JLabel();
-        phDefaultLabel.setText("<html>\n默认会启动所有的内置PoC\n<br>\n如果你希望指定某一个PoC\n<br>\n请前往主界面PoC模块配置\n</html>");
-        phantasmPanel.add(phDefaultLabel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        phLoadLabel = new JLabel();
-        phLoadLabel.setText("<html>\n暂不支持加载本地自定义PoC\n<br>\n如果你有优质PoC可以优先提交给平台\n<br>\n我们会尽快合入内置PoC\n</html>");
-        phantasmPanel.add(phLoadLabel, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        phantasmPanel.add(phSaveButton, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         phDepthLabel = new JLabel();
         phDepthLabel.setText("输入检测深度（1-10）");
         phantasmPanel.add(phDepthLabel, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -946,4 +938,5 @@ public class AdvanceConfigForm {
     public JComponent $$$getRootComponent$$$() {
         return advanceConfigPanel;
     }
+
 }

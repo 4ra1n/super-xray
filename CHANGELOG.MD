@@ -1,9 +1,11 @@
 ## 0.1-beta
+
 初始版本
 
 ## 0.2-beta
+
 Security:
-- [GHSA-732j-763p-cvqg - RCE Vulnerability in URL input](https://github.com/4ra1n/super-xray/security/advisories/GHSA-732j-763p-cvqg)
+- 修复潜在RCE漏洞 [GHSA-732j-763p-cvqg](https://github.com/4ra1n/super-xray/security/advisories/GHSA-732j-763p-cvqg)
 
 Bug:
 - [important] 复制和删除文件应该选择Java代码实现 #3
@@ -30,3 +32,12 @@ Bug:
 
 Others:
 - 打印命令应该用一个新的Form更优雅地展示 #9
+
+## 0.4-beta
+
+Bug:
+- [important] windows taskkill 命令 bug #29
+- [important] 允许界面扩大缩小并重构高级配置的UI #28
+
+Others:
+- 支持使用本地自定义PoC的功能 #6

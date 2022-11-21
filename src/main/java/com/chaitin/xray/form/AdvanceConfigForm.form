@@ -634,7 +634,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <grid id="3a9c" binding="phantasmPanel" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="3a9c" binding="phantasmPanel" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -654,7 +654,7 @@
               </component>
               <component id="a5361" class="javax.swing.JButton" binding="phRefreshButton">
                 <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="刷新配置"/>
@@ -662,26 +662,10 @@
               </component>
               <component id="34f05" class="javax.swing.JButton" binding="phSaveButton">
                 <constraints>
-                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="确认配置"/>
-                </properties>
-              </component>
-              <component id="8315f" class="javax.swing.JLabel" binding="phDefaultLabel">
-                <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="&lt;html&gt;&#10;默认会启动所有的内置PoC&#10;&lt;br&gt;&#10;如果你希望指定某一个PoC&#10;&lt;br&gt;&#10;请前往主界面PoC模块配置&#10;&lt;/html&gt;"/>
-                </properties>
-              </component>
-              <component id="c11c8" class="javax.swing.JLabel" binding="phLoadLabel">
-                <constraints>
-                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="&lt;html&gt;&#10;暂不支持加载本地自定义PoC&#10;&lt;br&gt;&#10;如果你有优质PoC可以优先提交给平台&#10;&lt;br&gt;&#10;我们会尽快合入内置PoC&#10;&lt;/html&gt;"/>
                 </properties>
               </component>
               <component id="27dd7" class="javax.swing.JLabel" binding="phDepthLabel">

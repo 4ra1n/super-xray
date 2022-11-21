@@ -129,6 +129,8 @@ public class MainForm {
     private JButton encodeUtilButton;
     private JButton listenUtilButton;
     private JButton updatePocButton;
+    private JTextField localPoCText;
+    private JButton localPoCButton;
 
     public void init() {
         logger.info("init main form");
@@ -694,7 +696,51 @@ public class MainForm {
     }
 
     @SuppressWarnings("unchecked")
+    private void onlyUsePhantasm(String poc) {
+        xrayCmd.setPoc(String.format("%s", poc));
+
+        for (JCheckBox box : checkBoxList) {
+            box.setSelected(false);
+        }
+        phantasmCheckBox.setSelected(true);
+
+        for (Map.Entry<String, Object> entry : configObj.entrySet()) {
+            if (entry.getKey().equals("plugins")) {
+                Map<String, Object> plugins = (Map<String, Object>) entry.getValue();
+                for (Map.Entry<String, Object> plugin : plugins.entrySet()) {
+                    Map<String, Object> items = (Map<String, Object>) plugin.getValue();
+                    if (plugin.getKey().equals("phantasm")) {
+                        items.put("enabled", true);
+                    } else {
+                        items.put("enabled", false);
+                    }
+                }
+            }
+        }
+
+        refreshConfig();
+    }
+
     public void initTargetPoC() {
+        localPoCButton.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            int option = fileChooser.showOpenDialog(new JFrame());
+            if (option == JFileChooser.APPROVE_OPTION) {
+                File file = fileChooser.getSelectedFile();
+                String absPath = file.getAbsolutePath();
+                String[] temp = absPath.split("\\.");
+                String suffix = temp[temp.length - 1].toLowerCase().trim();
+                if (!suffix.equals("yml") && !suffix.equals("yaml")) {
+                    JOptionPane.showMessageDialog(null, "你选择的不是合法YAML文件");
+                    return;
+                }
+                localPoCText.setText(absPath);
+                onlyUsePhantasm(absPath);
+                JOptionPane.showMessageDialog(null, "设置PoC成功");
+            }
+        });
+
         updatePocButton.addActionListener(e -> {
             String[] cmd = new String[]{xrayCmd.getXray(), "ws", "--list"};
             InputStream is = Objects.requireNonNull(ExecUtil.exec(cmd)).getInputStream();
@@ -733,30 +779,7 @@ public class MainForm {
                 JOptionPane.showMessageDialog(null, "PoC不存在");
                 return;
             }
-
-            xrayCmd.setPoc(String.format("%s", poc));
-
-            for (JCheckBox box : checkBoxList) {
-                box.setSelected(false);
-            }
-            phantasmCheckBox.setSelected(true);
-
-            for (Map.Entry<String, Object> entry : configObj.entrySet()) {
-                if (entry.getKey().equals("plugins")) {
-                    Map<String, Object> plugins = (Map<String, Object>) entry.getValue();
-                    for (Map.Entry<String, Object> plugin : plugins.entrySet()) {
-                        Map<String, Object> items = (Map<String, Object>) plugin.getValue();
-                        if (plugin.getKey().equals("phantasm")) {
-                            items.put("enabled", true);
-                        } else {
-                            items.put("enabled", false);
-                        }
-                    }
-                }
-            }
-
-            refreshConfig();
-
+            onlyUsePhantasm(poc);
             JOptionPane.showMessageDialog(null, "设置PoC成功");
         });
     }
@@ -1124,7 +1147,7 @@ public class MainForm {
         midConfigPanel.setBackground(new Color(-725535));
         configPanel.add(midConfigPanel, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         pocPanel = new JPanel();
-        pocPanel.setLayout(new GridLayoutManager(2, 3, new Insets(0, 0, 0, 0), -1, -1));
+        pocPanel.setLayout(new GridLayoutManager(3, 3, new Insets(0, 0, 0, 0), -1, -1));
         pocPanel.setBackground(new Color(-725535));
         midConfigPanel.add(pocPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, 1, 1, null, null, null, 0, false));
         pocPanel.setBorder(BorderFactory.createTitledBorder(null, "PoC模块", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
@@ -1142,6 +1165,13 @@ public class MainForm {
         updatePocButton = new JButton();
         updatePocButton.setText("同步PoC数据库");
         pocPanel.add(updatePocButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        localPoCText = new JTextField();
+        localPoCText.setEditable(false);
+        localPoCText.setEnabled(false);
+        pocPanel.add(localPoCText, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        localPoCButton = new JButton();
+        localPoCButton.setText("选择本地PoC");
+        pocPanel.add(localPoCButton, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         scanTargetPanel = new JPanel();
         scanTargetPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
         scanTargetPanel.setBackground(new Color(-725535));
