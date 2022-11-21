@@ -15,7 +15,6 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.io.*;
-import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -130,8 +129,6 @@ public class MainForm {
     private JButton encodeUtilButton;
     private JButton listenUtilButton;
     private JButton updatePocButton;
-
-    private final List<Thread> threadPool = new ArrayList<>();
 
     public void init() {
         logger.info("init main form");
@@ -254,11 +251,17 @@ public class MainForm {
         }
     }
 
-    private Thread execAndFresh(String[] finalCmd) {
+    private volatile boolean stop = false;
+
+    private void execAndFresh(String[] finalCmd) {
         outputTextArea.setText(null);
         Thread thread = new Thread(() -> {
             try {
-                InputStream inputStream = ExecUtil.execCmdGetStream(finalCmd);
+                Process process = ExecUtil.exec(finalCmd);
+                if(process==null) {
+                    return;
+                }
+                InputStream inputStream = process.getInputStream();
                 if (inputStream == null) {
                     return;
                 }
@@ -270,7 +273,20 @@ public class MainForm {
                     isReader = new BufferedReader(new InputStreamReader(inputStream));
                 }
                 String thisLine;
-                while ((thisLine = isReader.readLine()) != null) {
+                new Thread(() -> {
+                    while (true) {
+                        if (stop) {
+                            logger.info(String.format("stop pid: %d", process.pid()));
+                            try {
+                                new ProcessBuilder("kill", "-9", Long.toString(process.pid())).start();
+                                return;
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }
+                }).start();
+                while ((!stop)&&(thisLine = isReader.readLine()) != null) {
                     outputTextArea.append(thisLine);
                     outputTextArea.append("\n");
                     outputTextArea.setCaretPosition(outputTextArea.getText().length());
@@ -280,8 +296,6 @@ public class MainForm {
             }
         });
         thread.start();
-        threadPool.add(thread);
-        return thread;
     }
 
     public void initLoadXray() {
@@ -330,6 +344,7 @@ public class MainForm {
 
                 xrayCmd.setXray(absPath);
 
+                stop = false;
                 execAndFresh(cmd);
             } else {
                 xrayPathTextField.setText("你取消了选择");
@@ -648,6 +663,7 @@ public class MainForm {
                 xrayCmd.setOthers(null);
                 String[] finalCmd = xrayCmd.buildCmd();
                 outputTextArea.setText(null);
+                stop = false;
                 execAndFresh(finalCmd);
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -675,8 +691,9 @@ public class MainForm {
     public void initTargetPoC() {
         updatePocButton.addActionListener(e -> {
             String[] cmd =new String[]{xrayCmd.getXray(),"ws","--list"};
-            InputStream is = ExecUtil.execCmdGetStream(cmd);
-            new Thread(() -> execAndFresh(cmd)).start();
+            InputStream is = Objects.requireNonNull(ExecUtil.exec(cmd)).getInputStream();
+            stop = false;
+            execAndFresh(cmd);
             List<String> poc = new ArrayList<>();
             String data = IOUtil.readStringFromIs(is);
             assert data != null;
@@ -739,7 +756,6 @@ public class MainForm {
     }
 
     private static boolean mitmRunning = false;
-    private static Thread mitmThread;
 
     public void initMitmScan() {
         mitmScanButton.addActionListener(e -> {
@@ -751,14 +767,13 @@ public class MainForm {
                 xrayCmd.setOthersPrefix("--listen");
                 xrayCmd.setOthers("127.0.0.1:" + port);
                 String[] cmd = xrayCmd.buildCmd();
-                mitmThread = execAndFresh(cmd);
+                stop = false;
+                execAndFresh(cmd);
                 mitmScanButton.setText("关闭被动监听");
                 portText.setEnabled(false);
                 mitmRunning = true;
             }else{
-                if(mitmThread!=null) {
-                    forcedStopThread(mitmThread);
-                }
+                stop = true;
                 portText.setEnabled(true);
                 mitmScanButton.setText("开启被动扫描");
                 mitmRunning = false;
@@ -803,10 +818,7 @@ public class MainForm {
 
     public void initForcedStop() {
         stopButton.addActionListener(e -> {
-            for (Thread t : threadPool) {
-                forcedStopThread(t);
-            }
-            threadPool.clear();
+            stop = true;
             outputTextArea.setText(null);
             JOptionPane.showMessageDialog(null, "已强制停止");
         });
@@ -886,19 +898,6 @@ public class MainForm {
         initListenUtil();
         initEncodeUtil();
     }
-
-    private void forcedStopThread(Thread f) {
-        try {
-            Method m = Thread.class.getDeclaredMethod("stop0", Object.class);
-            m.setAccessible(true);
-            m.invoke(f, new ThreadDeath());
-        } catch (Exception e) {
-            f.interrupt();
-        } finally {
-            logger.info("forced stop thread: " + f.getId());
-        }
-    }
-
 
     public static void startMainForm() {
         JFrame frame = new JFrame(Const.ApplicationName);

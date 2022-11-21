@@ -18,28 +18,11 @@ public class ExecUtil {
         exec(cmd);
     }
 
-    public static InputStream execCmdGetStream(String[] cmd) {
-        return execGetStream(cmd);
-    }
-
-    public static String exec(String[] cmdArray) {
+    public static Process exec(String[] cmdArray) {
         try {
             String cmd = String.join(" ", cmdArray);
             logger.info(String.format("run cmd: %s", cmd));
-            Process process = new ProcessBuilder(cmdArray).start();
-            return IOUtil.readStringFromIs(process.getInputStream());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
-    public static InputStream execGetStream(String[] cmdArray) {
-        try {
-            String cmd = String.join(" ", cmdArray);
-            logger.info(String.format("run cmd: %s", cmd));
-            Process process = new ProcessBuilder(cmdArray).start();
-            return process.getInputStream();
+            return new ProcessBuilder(cmdArray).start();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
