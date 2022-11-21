@@ -35,12 +35,18 @@ Others:
 
 ## 0.4-beta
 
+这个版本主要是提高稳定性，对已有`bug`进行修复，并且加入了两个重要：
+- 皮肤选择功能，可以选择七款主题皮肤之一（需要操作系统支持）
+- 保存上次xray设置的功能，不用每次打开都重新选择
+
 Bug:
 - [important] windows taskkill 命令 bug #29
 - [important] 允许界面扩大缩小并重构高级配置的UI #28
 - [important] 查看配置文件只改变Panel大小但Area不变 #31
 - [important] windows 控制台乱码修复不完善 #27
 - [important] 设置从上次配置自动加载xray #17
+- [important] 反连平台支持token认证 #32
 
 Others:
 - 支持使用本地自定义PoC的功能 #6
+- [new feature] 新增一个主题皮肤选择的功能 #11

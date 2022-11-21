@@ -142,6 +142,8 @@ public class MainForm {
     private JRadioButton winClassicRadioButton;
     private JRadioButton gtkRadioButton;
     private JRadioButton aquaRadioButton;
+    private JTextField tokenText;
+    private JLabel tokenLabel;
 
     public void init() {
         logger.info("init main form");
@@ -318,7 +320,7 @@ public class MainForm {
         thread.start();
     }
 
-    private void loadXray(String absPath){
+    private void loadXray(String absPath) {
         logger.info(String.format("user chose file: %s", absPath));
         String targetDir = Paths.get(absPath).toFile().getParent() + File.separator;
         XrayUtil.rmAllConfig(targetDir);
@@ -362,14 +364,14 @@ public class MainForm {
     public void initLoadXray() {
         logger.info("init load xray module");
 
-        try{
+        try {
             Path dbPath = Paths.get("super-xray.db");
-            if(Files.exists(dbPath)){
+            if (Files.exists(dbPath)) {
                 byte[] data = Files.readAllBytes(dbPath);
                 db = DB.parseDB(data);
                 loadXray(db.getLastXrayPath());
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
@@ -868,10 +870,12 @@ public class MainForm {
         reverseConfigButton.addActionListener(e -> {
             String http = httpReverseText.getText();
             String dns = dnsText.getText();
+            String token = tokenText.getText();
             for (Map.Entry<String, Object> entry : configObj.entrySet()) {
                 if (entry.getKey().equals("reverse")) {
                     Map<String, Object> reverse = (Map<String, Object>) entry.getValue();
                     Map<String, Object> client = (Map<String, Object>) reverse.get("client");
+                    reverse.put("token", token);
                     client.put("reverse_server", true);
                     client.put("http_base_url", http);
                     client.put("dns_server_ip", dns);
@@ -941,9 +945,9 @@ public class MainForm {
         });
     }
 
-    private void initSkin(){
+    private void initSkin() {
         nimbusRadioButton.setSelected(true);
-        saveSkinButton.addActionListener(e->{
+        saveSkinButton.addActionListener(e -> {
             try {
                 String nimbus = "javax.swing.plaf.nimbus.NimbusLookAndFeel";
                 String metal = "javax.swing.plaf.metal.MetalLookAndFeel";
@@ -953,64 +957,64 @@ public class MainForm {
                 String gtk = "com.sun.java.swing.plaf.gtk.GTKLookAndFeel";
                 String aqua = "com.apple.laf.AquaLookAndFeel";
 
-                if(nimbusRadioButton.isSelected()){
+                if (nimbusRadioButton.isSelected()) {
                     try {
                         Class.forName(nimbus);
-                    }catch (Exception ignored){
+                    } catch (Exception ignored) {
                         JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
                     }
                     UIManager.setLookAndFeel(nimbus);
                     db.setSkin(nimbus);
                 }
-                if(metalRadioButton.isSelected()){
+                if (metalRadioButton.isSelected()) {
                     try {
                         Class.forName(metal);
-                    }catch (Exception ignored){
+                    } catch (Exception ignored) {
                         JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
                     }
                     UIManager.setLookAndFeel(metal);
                     db.setSkin(metal);
                 }
-                if(windowsRadioButton.isSelected()){
+                if (windowsRadioButton.isSelected()) {
                     try {
                         Class.forName(windows);
-                    }catch (Exception ignored){
+                    } catch (Exception ignored) {
                         JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
                     }
                     UIManager.setLookAndFeel(windows);
                     db.setSkin(windows);
                 }
-                if(winClassicRadioButton.isSelected()){
+                if (winClassicRadioButton.isSelected()) {
                     try {
                         Class.forName(winClassic);
-                    }catch (Exception ignored){
+                    } catch (Exception ignored) {
                         JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
                     }
                     UIManager.setLookAndFeel(winClassic);
                     db.setSkin(winClassic);
                 }
-                if(motifRadioButton.isSelected()){
+                if (motifRadioButton.isSelected()) {
                     try {
                         Class.forName(motif);
-                    }catch (Exception ignored){
+                    } catch (Exception ignored) {
                         JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
                     }
                     UIManager.setLookAndFeel(motif);
                     db.setSkin(motif);
                 }
-                if(gtkRadioButton.isSelected()){
+                if (gtkRadioButton.isSelected()) {
                     try {
                         Class.forName(gtk);
-                    }catch (Exception ignored){
+                    } catch (Exception ignored) {
                         JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
                     }
                     UIManager.setLookAndFeel(gtk);
                     db.setSkin(gtk);
                 }
-                if(aquaRadioButton.isSelected()){
+                if (aquaRadioButton.isSelected()) {
                     try {
                         Class.forName(aqua);
-                    }catch (Exception ignored){
+                    } catch (Exception ignored) {
                         JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
                     }
                     UIManager.setLookAndFeel(aqua);
@@ -1018,7 +1022,7 @@ public class MainForm {
                 }
                 SwingUtilities.updateComponentTreeUI(SuperXray);
                 db.saveDB();
-            } catch (Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         });
