@@ -293,8 +293,7 @@ public class MainForm {
                 File file = fileChooser.getSelectedFile();
                 String absPath = file.getAbsolutePath();
                 logger.info(String.format("user chose file: %s", absPath));
-
-                String targetDir = Paths.get(absPath).toFile().getParent() + "/";
+                String targetDir = Paths.get(absPath).toFile().getParent() + File.separator;
                 XrayUtil.rmAllConfig(targetDir);
                 Runtime.getRuntime().addShutdownHook(new Thread(() -> XrayUtil.rmAllConfig(targetDir)));
 

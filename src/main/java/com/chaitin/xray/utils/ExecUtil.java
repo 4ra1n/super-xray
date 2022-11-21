@@ -14,40 +14,6 @@ public class ExecUtil {
         exec(chmodCmd);
     }
 
-    public static void cpConfig(String source, String target) {
-        if (OSUtil.isWindows()) {
-            target = target.substring(0,target.length()-1);
-            String[] temp = source.split("\\\\");
-            String filename = temp[temp.length-1];
-            target = target+"\\"+filename;
-            source = source.replace("/","\\");
-            target = target.replace("/","\\");
-
-            source = Paths.get(source).toFile().getAbsolutePath();
-            target = Paths.get(target).toFile().getAbsolutePath();
-
-            String[] chmodCmd = new String[]{"cmd.exe", "/c",
-                    String.format("copy %s %s",source,target)};
-            exec(chmodCmd);
-        } else {
-            String[] chmodCmd = new String[]{"/bin/cp", source, target};
-            exec(chmodCmd);
-        }
-    }
-
-    public static void rmConfig(String file) {
-        if (OSUtil.isWindows()) {
-            file = file.replace("/","\\");
-            String absPath = Paths.get(file).toFile().getAbsolutePath();
-            String[] chmodCmd = new String[]{"cmd.exe", "/c",
-                    String.format("del %s",absPath)};
-            exec(chmodCmd);
-        }else{
-            String[] chmodCmd = new String[]{"/bin/rm", file};
-            exec(chmodCmd);
-        }
-    }
-
     public static void execCmdNoRet(String cmd) {
         if (OSUtil.isWindows()) {
             String[] xrayCmd = new String[]{"cmd.exe", "/c", String.format("%s", cmd)};
@@ -68,7 +34,6 @@ public class ExecUtil {
         }
     }
 
-    @SuppressWarnings("all")
     public static String exec(String[] cmdArray) {
         try {
             String cmd = String.join(" ", cmdArray);

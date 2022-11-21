@@ -1,23 +1,73 @@
 package com.chaitin.xray.utils;
 
 import com.chaitin.xray.model.Const;
+import org.apache.log4j.Logger;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class XrayUtil {
-    public static void rmAllConfig(String targetDir){
-        ExecUtil.rmConfig(targetDir + Const.ModuleXrayYaml);
-        ExecUtil.rmConfig(targetDir + Const.XrayYaml);
-        ExecUtil.rmConfig(targetDir + Const.PluginXrayYaml);
-        ExecUtil.rmConfig(targetDir + Const.ConfigYaml);
-        ExecUtil.rmConfig(Const.ModuleXrayYaml);
-        ExecUtil.rmConfig(Const.XrayYaml);
-        ExecUtil.rmConfig(Const.PluginXrayYaml);
-        ExecUtil.rmConfig(Const.ConfigYaml);
+    private static final Logger logger = Logger.getLogger(XrayUtil.class);
+
+    public static void rmAllConfig(String targetDir) {
+        logger.info("delete all config");
+        try {
+            Files.delete(Paths.get(targetDir + Const.ModuleXrayYaml));
+        } catch (Exception ignored) {
+
+        }
+        try {
+            Files.delete(Paths.get(targetDir + Const.XrayYaml));
+        } catch (Exception ignored) {
+        }
+        try {
+            Files.delete(Paths.get(targetDir + Const.PluginXrayYaml));
+        } catch (Exception ignored) {
+        }
+        try {
+            Files.delete(Paths.get(targetDir + Const.ConfigYaml));
+        } catch (Exception ignored) {
+        }
+        try {
+            Files.delete(Paths.get(Const.ModuleXrayYaml));
+        } catch (Exception ignored) {
+        }
+        try {
+            Files.delete(Paths.get(Const.XrayYaml));
+        } catch (Exception ignored) {
+        }
+        try {
+            Files.delete(Paths.get(Const.PluginXrayYaml));
+        } catch (Exception ignored) {
+        }
+        try {
+            Files.delete(Paths.get(Const.ConfigYaml));
+        } catch (Exception ignored) {
+        }
     }
 
-    public static void cpAllConfig(String targetDir){
-        ExecUtil.cpConfig(Const.ConfigYaml, targetDir);
-        ExecUtil.cpConfig(Const.ModuleXrayYaml, targetDir);
-        ExecUtil.cpConfig(Const.XrayYaml, targetDir);
-        ExecUtil.cpConfig(Const.PluginXrayYaml, targetDir);
+    public static void cpAllConfig(String targetDir) {
+        logger.info("copy all config");
+        try {
+            Files.write(Paths.get(targetDir + Const.ConfigYaml),
+                    Files.readAllBytes(Paths.get(Const.ConfigYaml)));
+        } catch (Exception ignored) {
+        }
+        try {
+            Files.write(Paths.get(targetDir + Const.ModuleXrayYaml),
+                    Files.readAllBytes(Paths.get(Const.ModuleXrayYaml)));
+        } catch (Exception ignored) {
+        }
+        try {
+            Files.write(Paths.get(targetDir + Const.XrayYaml),
+                    Files.readAllBytes(Paths.get(Const.XrayYaml)));
+        } catch (Exception ignored) {
+        }
+        try {
+            Files.write(Paths.get(targetDir + Const.PluginXrayYaml),
+                    Files.readAllBytes(Paths.get(Const.PluginXrayYaml)));
+        } catch (Exception ignored) {
+        }
     }
 }
