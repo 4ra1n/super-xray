@@ -258,7 +258,7 @@ public class MainForm {
         Thread thread = new Thread(() -> {
             try {
                 Process process = ExecUtil.exec(finalCmd);
-                if(process==null) {
+                if (process == null) {
                     return;
                 }
                 InputStream inputStream = process.getInputStream();
@@ -278,7 +278,14 @@ public class MainForm {
                         if (stop) {
                             logger.info(String.format("stop pid: %d", process.pid()));
                             try {
-                                new ProcessBuilder("kill", "-9", Long.toString(process.pid())).start();
+                                if (!OSUtil.isWindows()) {
+                                    new ProcessBuilder("kill", "-9",
+                                            Long.toString(process.pid())).start();
+                                } else {
+                                    new ProcessBuilder("cmd.exe", "/c",
+                                            String.format("taskkill /f /pid %d", process.pid()),
+                                            Long.toString(process.pid())).start();
+                                }
                                 return;
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
@@ -286,7 +293,7 @@ public class MainForm {
                         }
                     }
                 }).start();
-                while ((!stop)&&(thisLine = isReader.readLine()) != null) {
+                while ((!stop) && (thisLine = isReader.readLine()) != null) {
                     outputTextArea.append(thisLine);
                     outputTextArea.append("\n");
                     outputTextArea.setCaretPosition(outputTextArea.getText().length());
@@ -317,7 +324,7 @@ public class MainForm {
                     ExecUtil.chmod(absPath);
                 }
 
-                String[] cmd =  new String[]{absPath};
+                String[] cmd = new String[]{absPath};
                 Thread t = new Thread(() -> ExecUtil.execCmdNoRet(cmd));
                 t.start();
                 if (OSUtil.isMacOS()) {
@@ -690,7 +697,7 @@ public class MainForm {
     @SuppressWarnings("unchecked")
     public void initTargetPoC() {
         updatePocButton.addActionListener(e -> {
-            String[] cmd =new String[]{xrayCmd.getXray(),"ws","--list"};
+            String[] cmd = new String[]{xrayCmd.getXray(), "ws", "--list"};
             InputStream is = Objects.requireNonNull(ExecUtil.exec(cmd)).getInputStream();
             stop = false;
             execAndFresh(cmd);
@@ -759,7 +766,7 @@ public class MainForm {
 
     public void initMitmScan() {
         mitmScanButton.addActionListener(e -> {
-            if(!mitmRunning){
+            if (!mitmRunning) {
                 String port = portText.getText();
                 xrayCmd.setModule("webscan");
                 xrayCmd.setConfig(String.format("%s", configPath));
@@ -772,7 +779,7 @@ public class MainForm {
                 mitmScanButton.setText("关闭被动监听");
                 portText.setEnabled(false);
                 mitmRunning = true;
-            }else{
+            } else {
                 stop = true;
                 portText.setEnabled(true);
                 mitmScanButton.setText("开启被动扫描");
