@@ -574,7 +574,7 @@ public class MainForm {
         advanceButton.addActionListener(e -> {
             JFrame frame = new JFrame("高级配置");
             frame.setContentPane(new AdvanceConfigForm().advanceConfigPanel);
-            frame.setResizable(false);
+            frame.setResizable(true);
             frame.pack();
             frame.setVisible(true);
         });
@@ -911,7 +911,6 @@ public class MainForm {
         instance = new MainForm();
         frame.setContentPane(instance.SuperXray);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
         frame.pack();
         frame.setVisible(true);
     }
@@ -1218,7 +1217,7 @@ public class MainForm {
         outputPanel = new JScrollPane();
         outputPanel.setBackground(new Color(-725535));
         outputPanel.setForeground(new Color(-725535));
-        SuperXray.add(outputPanel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 300), null, null, 0, false));
+        SuperXray.add(outputPanel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 200), null, null, 0, false));
         outputPanel.setBorder(BorderFactory.createTitledBorder(null, "命令行输出结果：", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         outputTextArea = new JTextArea();
         outputTextArea.setBackground(new Color(-12828863));
