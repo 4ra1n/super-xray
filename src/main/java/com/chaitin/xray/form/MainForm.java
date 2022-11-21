@@ -254,7 +254,7 @@ public class MainForm {
         }
     }
 
-    private void execAndFresh(String[] finalCmd) {
+    private Thread execAndFresh(String[] finalCmd) {
         outputTextArea.setText(null);
         Thread thread = new Thread(() -> {
             try {
@@ -281,6 +281,7 @@ public class MainForm {
         });
         thread.start();
         threadPool.add(thread);
+        return thread;
     }
 
     public void initLoadXray() {
@@ -737,16 +738,32 @@ public class MainForm {
         });
     }
 
+    private static boolean mitmRunning = false;
+    private static Thread mitmThread;
+
     public void initMitmScan() {
         mitmScanButton.addActionListener(e -> {
-            String port = portText.getText();
-            xrayCmd.setModule("webscan");
-            xrayCmd.setConfig(String.format("%s", configPath));
-            xrayCmd.setInput(null);
-            xrayCmd.setOthersPrefix("--listen");
-            xrayCmd.setOthers("127.0.0.1:" + port);
-            String[] cmd = xrayCmd.buildCmd();
-            execAndFresh(cmd);
+            if(!mitmRunning){
+                String port = portText.getText();
+                xrayCmd.setModule("webscan");
+                xrayCmd.setConfig(String.format("%s", configPath));
+                xrayCmd.setInput(null);
+                xrayCmd.setOthersPrefix("--listen");
+                xrayCmd.setOthers("127.0.0.1:" + port);
+                String[] cmd = xrayCmd.buildCmd();
+                mitmThread = execAndFresh(cmd);
+                mitmScanButton.setText("关闭被动监听");
+                portText.setEnabled(false);
+                mitmRunning = true;
+            }else{
+                if(mitmThread!=null) {
+                    forcedStopThread(mitmThread);
+                }
+                portText.setEnabled(true);
+                mitmScanButton.setText("开启被动扫描");
+                mitmRunning = false;
+                outputTextArea.setText(null);
+            }
         });
     }
 
