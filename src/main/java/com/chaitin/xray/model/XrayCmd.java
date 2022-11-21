@@ -1,8 +1,11 @@
 package com.chaitin.xray.model;
 
+import com.chaitin.xray.utils.StringUtil;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class XrayCmd {
     private static final Logger logger = Logger.getLogger(XrayCmd.class);
@@ -11,8 +14,35 @@ public class XrayCmd {
     private String config;
     private String poc;
     private String input;
+    private String inputPrefix;
     private String output;
+    private String outputPrefix;
     private String others;
+    private String othersPrefix;
+
+    public String getInputPrefix() {
+        return inputPrefix;
+    }
+
+    public void setInputPrefix(String inputPrefix) {
+        this.inputPrefix = inputPrefix;
+    }
+
+    public String getOutputPrefix() {
+        return outputPrefix;
+    }
+
+    public void setOutputPrefix(String outputPrefix) {
+        this.outputPrefix = outputPrefix;
+    }
+
+    public String getOthersPrefix() {
+        return othersPrefix;
+    }
+
+    public void setOthersPrefix(String othersPrefix) {
+        this.othersPrefix = othersPrefix;
+    }
 
     public String getOthers() {
         return others != null ? others : "";
@@ -71,21 +101,32 @@ public class XrayCmd {
     }
 
     @SuppressWarnings("all")
-    public String buildCmd() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.getXray());
-        sb.append(" ");
-        sb.append(this.getConfig());
-        sb.append(" ");
-        sb.append(this.getModule());
-        sb.append(" ");
-        sb.append(this.getPoc());
-        sb.append(" ");
-        sb.append(this.getInput());
-        sb.append(" ");
-        sb.append(this.getOutput());
-        sb.append(" ");
-        sb.append(this.getOthers());
-        return sb.toString();
+    public String[] buildCmd() {
+        List<String> list = new ArrayList<>();
+        list.add(getXray());
+        if(StringUtil.notEmpty(getConfig())){
+            list.add("--config");
+            list.add(getConfig());
+        }
+        list.add(getModule());
+        if(StringUtil.notEmpty(getConfig())) {
+            list.add("--poc");
+            list.add(getPoc());
+        }
+        if(StringUtil.notEmpty(getInput())) {
+            list.add(getInputPrefix());
+            list.add(getInput());
+        }
+        if(StringUtil.notEmpty(getOutput())) {
+            list.add(getOutputPrefix());
+            list.add(getOutput());
+        }
+        if(StringUtil.notEmpty(getOthers())) {
+            list.add(getOthersPrefix());
+            list.add(getOthers());
+        }
+        String[] arr = new String[list.size()];
+        list.toArray(arr);
+        return arr;
     }
 }

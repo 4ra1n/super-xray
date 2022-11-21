@@ -254,7 +254,7 @@ public class MainForm {
         }
     }
 
-    private void execAndFresh(String finalCmd) {
+    private void execAndFresh(String[] finalCmd) {
         outputTextArea.setText(null);
         Thread thread = new Thread(() -> {
             try {
@@ -302,7 +302,8 @@ public class MainForm {
                     ExecUtil.chmod(absPath);
                 }
 
-                Thread t = new Thread(() -> ExecUtil.execCmdNoRet(absPath));
+                String[] cmd =  new String[]{absPath};
+                Thread t = new Thread(() -> ExecUtil.execCmdNoRet(cmd));
                 t.start();
                 if (OSUtil.isMacOS()) {
                     JOptionPane.showMessageDialog(null, Const.MacNeedAgree);
@@ -327,7 +328,8 @@ public class MainForm {
                 }
 
                 xrayCmd.setXray(absPath);
-                execAndFresh(absPath);
+
+                execAndFresh(cmd);
             } else {
                 xrayPathTextField.setText("你取消了选择");
             }
@@ -525,6 +527,7 @@ public class MainForm {
                 }
             }
             refreshConfig();
+            xrayCmd.setPoc(null);
             JOptionPane.showMessageDialog(null, "设置完成");
         });
     }
@@ -566,22 +569,20 @@ public class MainForm {
     }
 
     public void refreshOutput() {
-        final String htmlOutputParam = "--html-output xray-%s.html";
-        final String jsonOutputParam = "--json-output xray-%s.txt";
-        String cmd = null;
         String uuid = UUID.randomUUID().toString();
         if (htmlRadioButton.isSelected()) {
-            cmd = String.format(htmlOutputParam, uuid);
             outputFilePath = Paths.get(String.format("./xray-%s.html", uuid)).toFile().getAbsolutePath();
+            xrayCmd.setOutputPrefix("--html-output");
+            xrayCmd.setOutput(outputFilePath);
         }
         if (jsonRadioButton.isSelected()) {
-            cmd = String.format(jsonOutputParam, uuid);
             outputFilePath = Paths.get(String.format("./xray-%s.txt", uuid)).toFile().getAbsolutePath();
+            xrayCmd.setOutputPrefix("--json-output");
+            xrayCmd.setOutput(outputFilePath);
         }
         if (cliRadioButton.isSelected()) {
-            cmd = "";
+            xrayCmd.setOutput(null);
         }
-        xrayCmd.setOutput(cmd);
     }
 
     public void initTargetUrlConfig() {
@@ -590,7 +591,8 @@ public class MainForm {
             rawFileField.setText(null);
             String url = urlField.getText();
             logger.info(String.format("target url: %s", url));
-            xrayCmd.setInput("--url " + url);
+            xrayCmd.setInputPrefix("--url");
+            xrayCmd.setInput(url);
             JOptionPane.showMessageDialog(null, "设置URL成功");
         });
     }
@@ -607,7 +609,8 @@ public class MainForm {
                 File file = fileChooser.getSelectedFile();
                 String absPath = file.getAbsolutePath();
                 urlFileField.setText(absPath);
-                xrayCmd.setInput(String.format("--url-file %s", absPath));
+                xrayCmd.setInputPrefix("--url-file");
+                xrayCmd.setInput(String.format("%s", absPath));
             } else {
                 rawFileField.setText("你取消了选择");
             }
@@ -626,7 +629,8 @@ public class MainForm {
                 File file = fileChooser.getSelectedFile();
                 String absPath = file.getAbsolutePath();
                 rawFileField.setText(absPath);
-                xrayCmd.setInput(String.format("--raw-request %s", absPath));
+                xrayCmd.setInputPrefix("--raw-request");
+                xrayCmd.setInput(String.format("%s", absPath));
             } else {
                 rawFileField.setText("你取消了选择");
             }
@@ -639,8 +643,8 @@ public class MainForm {
             try {
                 refreshOutput();
                 xrayCmd.setModule("webscan");
-                xrayCmd.setConfig(String.format("--config %s", configPath));
-                String finalCmd = xrayCmd.buildCmd();
+                xrayCmd.setConfig(String.format("%s", configPath));
+                String[] finalCmd = xrayCmd.buildCmd();
                 outputTextArea.setText(null);
                 execAndFresh(finalCmd);
             } catch (Exception ex) {
@@ -668,7 +672,7 @@ public class MainForm {
     @SuppressWarnings("unchecked")
     public void initTargetPoC() {
         updatePocButton.addActionListener(e -> {
-            String cmd = String.format("%s ws --list", xrayCmd.getXray());
+            String[] cmd =new String[]{xrayCmd.getXray(),"ws","--list"};
             InputStream is = ExecUtil.execCmdGetStream(cmd);
             new Thread(() -> execAndFresh(cmd)).start();
             List<String> poc = new ArrayList<>();
@@ -705,7 +709,7 @@ public class MainForm {
                 return;
             }
 
-            xrayCmd.setPoc(String.format("--poc %s", poc));
+            xrayCmd.setPoc(String.format("%s", poc));
 
             for (JCheckBox box : checkBoxList) {
                 box.setSelected(false);
@@ -736,10 +740,11 @@ public class MainForm {
         mitmScanButton.addActionListener(e -> {
             String port = portText.getText();
             xrayCmd.setModule("webscan");
-            xrayCmd.setConfig(String.format("--config %s", configPath));
+            xrayCmd.setConfig(String.format("%s", configPath));
             xrayCmd.setInput(null);
-            xrayCmd.setOthers("--listen 127.0.0.1:" + port);
-            String cmd = xrayCmd.buildCmd();
+            xrayCmd.setOthersPrefix("--listen");
+            xrayCmd.setOthers("127.0.0.1:" + port);
+            String[] cmd = xrayCmd.buildCmd();
             execAndFresh(cmd);
         });
     }

@@ -14,24 +14,12 @@ public class ExecUtil {
         exec(chmodCmd);
     }
 
-    public static void execCmdNoRet(String cmd) {
-        if (OSUtil.isWindows()) {
-            String[] xrayCmd = new String[]{"cmd.exe", "/c", String.format("%s", cmd)};
-            exec(xrayCmd);
-        } else {
-            String[] xrayCmd = new String[]{"/bin/bash", "-c", String.format("%s", cmd)};
-            exec(xrayCmd);
-        }
+    public static void execCmdNoRet(String[] cmd) {
+        exec(cmd);
     }
 
-    public static InputStream execCmdGetStream(String cmd) {
-        if (OSUtil.isWindows()) {
-            String[] xrayCmd = new String[]{"cmd.exe", "/c", String.format("%s", cmd)};
-            return execGetStream(xrayCmd);
-        } else {
-            String[] xrayCmd = new String[]{"/bin/bash", "-c", String.format("%s", cmd)};
-            return execGetStream(xrayCmd);
-        }
+    public static InputStream execCmdGetStream(String[] cmd) {
+        return execGetStream(cmd);
     }
 
     public static String exec(String[] cmdArray) {
