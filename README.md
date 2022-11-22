@@ -1,4 +1,6 @@
 # Super Xray
+[![](https://img.shields.io/github/v/release/4ra1n/super-xray)](https://github.com/4ra1n/super-xray/releases/latest)
+![](https://img.shields.io/github/downloads/4ra1n/super-xray/total)
 
 ## 介绍
 
@@ -18,6 +20,8 @@
 - 注意：请使用最新版`xray`（本工具未兼容老版本`xray`）
 
 ## 快速上手
+
+最新版下载地址：[Latest Release](https://github.com/4ra1n/super-xray/releases/latest)
 
 观看B站视频：https://www.bilibili.com/video/BV1Ud4y147Er
 
