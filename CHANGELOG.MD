@@ -53,6 +53,12 @@ Others:
 
 ## 0.5-beta
 
+Bug:
+- [important] 换皮肤后一些按钮的背景色不应该是灰色 #42
+
 Others:
+- [important] 添加start.bat和start.sh #41
 - 在Mac OS中如果保存了xray配置每次打开都会弹出提示 #36
+- 皮肤RadioButton默认不该是空而应是当前皮肤 #37
+- 应该将日志输出到临时文件并关闭后删除 #43
 - 皮肤RadioButton默认不该是空而应是当前皮肤 #37
