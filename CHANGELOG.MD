@@ -50,3 +50,9 @@ Bug:
 Others:
 - 支持使用本地自定义PoC的功能 #6
 - [new feature] 新增一个主题皮肤选择的功能 #11
+
+## 0.5-beta
+
+Others:
+- 在Mac OS中如果保存了xray配置每次打开都会弹出提示 #36
+- 皮肤RadioButton默认不该是空而应是当前皮肤 #37
