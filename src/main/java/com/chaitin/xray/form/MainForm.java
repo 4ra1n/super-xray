@@ -17,6 +17,7 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.io.*;
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -147,6 +148,8 @@ public class MainForm {
     private JTextField tokenText;
     private JLabel tokenLabel;
     private JCheckBox autoDelCheckBox;
+    private JButton cleanAreaButton;
+    private JButton xrayUrlButton;
 
     public void init() {
         logger.info("init main form");
@@ -1090,6 +1093,19 @@ public class MainForm {
         });
     }
 
+    private void initOther() {
+        cleanAreaButton.addActionListener(e -> outputTextArea.setText(null));
+        xrayUrlButton.addActionListener(e -> {
+            try {
+                Desktop desktop = Desktop.getDesktop();
+                URI oURL = new URI("https://download.xray.cool/xray");
+                desktop.browse(oURL);
+            } catch (Exception ex) {
+                logger.error(ex);
+            }
+        });
+    }
+
     public MainForm() {
         init();
         initSkin();
@@ -1113,6 +1129,7 @@ public class MainForm {
         initHttpUtil();
         initListenUtil();
         initEncodeUtil();
+        initOther();
     }
 
     public static void startMainForm() {
@@ -1379,7 +1396,7 @@ public class MainForm {
         portLabel.setText("被动监听端口:");
         mitmPanel.add(portLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         otherPanel = new JPanel();
-        otherPanel.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
+        otherPanel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
         otherPanel.setBackground(new Color(-725535));
         rightConfigPanel.add(otherPanel, new GridConstraints(6, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         otherPanel.setBorder(BorderFactory.createTitledBorder(null, "其他", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
@@ -1389,6 +1406,12 @@ public class MainForm {
         lookupConfigButton = new JButton();
         lookupConfigButton.setText("查看当前配置文件");
         otherPanel.add(lookupConfigButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        cleanAreaButton = new JButton();
+        cleanAreaButton.setText("清空命令行输出");
+        otherPanel.add(cleanAreaButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        xrayUrlButton = new JButton();
+        xrayUrlButton.setText("xray下载网站");
+        otherPanel.add(xrayUrlButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         midConfigPanel = new JPanel();
         midConfigPanel.setLayout(new GridLayoutManager(4, 1, new Insets(0, 0, 0, 0), -1, -1));
         midConfigPanel.setBackground(new Color(-725535));
