@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="advanceConfigPanel" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="1448" height="643"/>
+      <xy x="20" y="20" width="1448" height="659"/>
     </constraints>
     <properties>
       <background color="-725535"/>
@@ -35,6 +35,7 @@
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-725535"/>
                   <text value="detect_cors_header_config"/>
                 </properties>
               </component>
@@ -51,6 +52,7 @@
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-725535"/>
                   <text value="detect_server_error_page"/>
                 </properties>
               </component>
@@ -59,6 +61,7 @@
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-725535"/>
                   <text value="detect_phpinfo"/>
                 </properties>
               </component>
@@ -67,6 +70,7 @@
                   <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-725535"/>
                   <text value="detect_system_path_leak"/>
                 </properties>
               </component>
@@ -75,6 +79,7 @@
                   <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-725535"/>
                   <text value="detect_outdated_ssl_version"/>
                 </properties>
               </component>
@@ -83,6 +88,7 @@
                   <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-725535"/>
                   <text value="detect_http_header_config"/>
                 </properties>
               </component>
@@ -91,6 +97,7 @@
                   <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-725535"/>
                   <text value="detect_cookie_httponly"/>
                 </properties>
               </component>
@@ -99,6 +106,7 @@
                   <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-725535"/>
                   <text value="detect_china_id_card_number"/>
                 </properties>
               </component>
@@ -107,6 +115,7 @@
                   <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-725535"/>
                   <text value="detect_china_phone_number"/>
                 </properties>
               </component>
@@ -115,6 +124,7 @@
                   <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-725535"/>
                   <text value="detect_china_bank_card"/>
                 </properties>
               </component>
@@ -123,6 +133,7 @@
                   <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-725535"/>
                   <text value="detect_private_ip"/>
                 </properties>
               </component>
@@ -239,6 +250,7 @@
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-725535"/>
                   <text value="boolean_based_detection"/>
                 </properties>
               </component>
@@ -255,6 +267,7 @@
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-725535"/>
                   <text value="error_based_detection"/>
                 </properties>
               </component>
@@ -263,6 +276,7 @@
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-725535"/>
                   <text value="time_based_detection"/>
                 </properties>
               </component>
@@ -271,6 +285,7 @@
                   <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-725535"/>
                   <text value="use_comment_in_payload"/>
                 </properties>
               </component>
@@ -279,6 +294,7 @@
                   <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-725535"/>
                   <text value="detect_sqli_in_cookie"/>
                 </properties>
               </component>
@@ -509,6 +525,7 @@
                   <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-725535"/>
                   <text value="detect_xss_in_cookie"/>
                 </properties>
               </component>
@@ -525,6 +542,7 @@
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-725535"/>
                   <text value="ie_feature"/>
                 </properties>
               </component>
@@ -793,6 +811,7 @@
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <background color="-725535"/>
                   <text value="detect_thinkphp_sqli"/>
                 </properties>
               </component>
