@@ -55,6 +55,8 @@ Others:
 
 Bug:
 - [important] 换皮肤后一些按钮的背景色不应该是灰色 #42
+- [important] 被动扫描可能会由于输出文件存在无法启动 #33
+- 没有设置输出的情况下打开输出文件报错 #38
 
 Others:
 - [important] 添加start.bat和start.sh #41

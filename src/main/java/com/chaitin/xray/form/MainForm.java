@@ -841,6 +841,11 @@ public class MainForm {
                 xrayCmd.setModule("webscan");
                 xrayCmd.setConfig(String.format("%s", configPath));
                 xrayCmd.setInput(null);
+
+                if (StringUtil.notEmpty(xrayCmd.getOutput())) {
+                    refreshOutput();
+                }
+
                 xrayCmd.setOthersPrefix("--listen");
                 xrayCmd.setOthers("127.0.0.1:" + port);
                 String[] cmd = xrayCmd.buildCmd();
@@ -905,6 +910,9 @@ public class MainForm {
 
     public void initOpenOutput() {
         openResultButton.addActionListener(e -> {
+            if (outputFilePath == null) {
+                return;
+            }
             if (StringUtil.notEmpty(outputFilePath.trim())) {
                 if (Files.exists(Paths.get(outputFilePath))) {
                     ExecUtil.execOpen(outputFilePath);

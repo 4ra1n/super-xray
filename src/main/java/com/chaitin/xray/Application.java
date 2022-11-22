@@ -7,7 +7,6 @@ import com.chaitin.xray.utils.StringUtil;
 
 import javax.swing.*;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
