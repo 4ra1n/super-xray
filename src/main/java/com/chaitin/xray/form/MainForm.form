@@ -84,7 +84,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <text value="注意：在 Mac OS 中请用 control+c/v 复制/粘贴（不是 command 键）"/>
+                  <text value="&lt;html&gt;&#10;注意：在 Mac OS 中请用 control+c/v 复制/粘贴&#10;&lt;br&gt;&#10;（不是 command+c/v 键，这是 swing 的 bug）&#10;&lt;/html&gt;"/>
                 </properties>
               </component>
               <grid id="55662" binding="skinPanel" layout-manager="GridLayoutManager" row-count="2" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
