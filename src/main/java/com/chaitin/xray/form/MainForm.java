@@ -36,6 +36,7 @@ public class MainForm {
     private static ArrayList<JCheckBox> checkBoxList;
     private static boolean pluginAll = false;
     private static String outputFilePath;
+    private static final List<String> existOutputList = new ArrayList<>();
     private static DB db;
 
     private JButton choseDirButton;
@@ -145,6 +146,7 @@ public class MainForm {
     private JRadioButton aquaRadioButton;
     private JTextField tokenText;
     private JLabel tokenLabel;
+    private JCheckBox autoDelCheckBox;
 
     public void init() {
         logger.info("init main form");
@@ -644,11 +646,13 @@ public class MainForm {
         String uuid = UUID.randomUUID().toString();
         if (htmlRadioButton.isSelected()) {
             outputFilePath = Paths.get(String.format("./xray-%s.html", uuid)).toFile().getAbsolutePath();
+            existOutputList.add(outputFilePath);
             xrayCmd.setOutputPrefix("--html-output");
             xrayCmd.setOutput(outputFilePath);
         }
         if (jsonRadioButton.isSelected()) {
             outputFilePath = Paths.get(String.format("./xray-%s.txt", uuid)).toFile().getAbsolutePath();
+            existOutputList.add(outputFilePath);
             xrayCmd.setOutputPrefix("--json-output");
             xrayCmd.setOutput(outputFilePath);
         }
@@ -909,13 +913,35 @@ public class MainForm {
     }
 
     public void initOpenOutput() {
+        autoDelCheckBox.setSelected(false);
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            if (autoDelCheckBox.isSelected()) {
+                for (String s : existOutputList) {
+                    try {
+                        Files.delete(Paths.get(s));
+                    } catch (Exception ignored) {
+                    }
+                }
+            }
+        }));
+
         openResultButton.addActionListener(e -> {
             if (outputFilePath == null) {
                 return;
             }
             if (StringUtil.notEmpty(outputFilePath.trim())) {
                 if (Files.exists(Paths.get(outputFilePath))) {
-                    ExecUtil.execOpen(outputFilePath);
+                    String tempOutput = outputFilePath.replace(".html",
+                            "copy.html");
+                    try {
+                        // copy
+                        Files.write(Paths.get(tempOutput),
+                                Files.readAllBytes(Paths.get(outputFilePath)));
+                    } catch (Exception ignored) {
+                    }
+                    existOutputList.add(tempOutput);
+                    new Thread(() -> ExecUtil.execOpen(tempOutput)).start();
                 } else {
                     logger.info("output file not exist");
                 }
@@ -1493,7 +1519,7 @@ public class MainForm {
         resetConfigButton.setText("点击按钮恢复");
         resetPanel.add(resetConfigButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, 1, GridConstraints.SIZEPOLICY_FIXED, null, null, new Dimension(100, -1), 0, false));
         openResultPanel = new JPanel();
-        openResultPanel.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
+        openResultPanel.setLayout(new GridLayoutManager(1, 3, new Insets(0, 0, 0, 0), -1, -1));
         openResultPanel.setBackground(new Color(-725535));
         otherButton.add(openResultPanel, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 1, false));
         openResultLabel = new JLabel();
@@ -1501,7 +1527,11 @@ public class MainForm {
         openResultPanel.add(openResultLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         openResultButton = new JButton();
         openResultButton.setText("点击打开扫描结果");
-        openResultPanel.add(openResultButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        openResultPanel.add(openResultButton, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        autoDelCheckBox = new JCheckBox();
+        autoDelCheckBox.setBackground(new Color(-725535));
+        autoDelCheckBox.setText("关闭后自动删除报告");
+        openResultPanel.add(autoDelCheckBox, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         stopPanel = new JPanel();
         stopPanel.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
         stopPanel.setBackground(new Color(-725535));
