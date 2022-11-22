@@ -1,5 +1,6 @@
 package com.chaitin.xray.form;
 
+import com.chaitin.xray.Application;
 import com.chaitin.xray.model.Const;
 import com.chaitin.xray.model.DB;
 import com.chaitin.xray.model.Poc;
@@ -347,7 +348,8 @@ public class MainForm {
         String[] cmd = new String[]{absPath};
         Thread t = new Thread(() -> ExecUtil.execCmdNoRet(cmd));
         t.start();
-        if (OSUtil.isMacOS()) {
+        if (OSUtil.isMacOS() &&
+                (!StringUtil.notEmpty(db.getSkin()) || db.getSkin().equals("null"))) {
             JOptionPane.showMessageDialog(null, Const.MacNeedAgree);
         }
 
@@ -953,6 +955,32 @@ public class MainForm {
     }
 
     private void initSkin() {
+        switch (Application.globalSkin) {
+            case Const.nimbus:
+                nimbusRadioButton.setSelected(true);
+                break;
+            case Const.aqua:
+                aquaRadioButton.setSelected(true);
+                break;
+            case Const.gtk:
+                gtkRadioButton.setSelected(true);
+                break;
+            case Const.metal:
+                metalRadioButton.setSelected(true);
+                break;
+            case Const.motif:
+                motifRadioButton.setSelected(true);
+                break;
+            case Const.windows:
+                windowsRadioButton.setSelected(true);
+                break;
+            case Const.winClassic:
+                winClassicRadioButton.setSelected(true);
+                break;
+            default:
+                logger.error("error skin");
+        }
+
         saveSkinButton.addActionListener(e -> {
             try {
                 if (nimbusRadioButton.isSelected()) {

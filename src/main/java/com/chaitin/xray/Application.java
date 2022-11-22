@@ -11,6 +11,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Application {
+    public static String globalSkin;
+
+    private static void setNimbus() {
+        try {
+            UIManager.setLookAndFeel(Const.nimbus);
+            globalSkin = Const.nimbus;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         try {
             Path dbPath = Paths.get("super-xray.db");
@@ -20,19 +31,20 @@ public class Application {
                 try {
                     Class.forName(defaultSkin);
                 } catch (Exception ignored) {
-                    UIManager.setLookAndFeel(Const.nimbus);
+                    setNimbus();
                 }
                 if (StringUtil.notEmpty(defaultSkin)) {
                     try {
                         UIManager.setLookAndFeel(defaultSkin);
+                        globalSkin = defaultSkin;
                     } catch (Exception ignored) {
-                        UIManager.setLookAndFeel(Const.nimbus);
+                        setNimbus();
                     }
                 } else {
-                    UIManager.setLookAndFeel(Const.nimbus);
+                    setNimbus();
                 }
             } else {
-                UIManager.setLookAndFeel(Const.nimbus);
+                setNimbus();
             }
             MainForm.startMainForm();
         } catch (Exception ex) {
