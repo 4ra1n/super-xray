@@ -96,6 +96,14 @@
 
 ![](img/08.png)
 
+## 皮肤
+
+加入了一些皮肤选择：
+- Java 原生的`Metal`，`Motif`和`Nimbus`
+- Windows 独有的现代和经典两款皮肤
+- Mac OS 独有的`Auqa`
+- Gnome 独有`Gtk`
+
 ## Security
 
 本项目存在的安全漏洞：https://github.com/4ra1n/super-xray/security/advisories
