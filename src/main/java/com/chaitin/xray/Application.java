@@ -1,11 +1,8 @@
 package com.chaitin.xray;
 
 import com.chaitin.xray.form.MainForm;
-import com.chaitin.xray.model.Const;
 import com.chaitin.xray.model.DB;
 import com.chaitin.xray.utils.StringUtil;
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.*;

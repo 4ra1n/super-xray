@@ -1,7 +1,7 @@
 # Super Xray
 [![](https://img.shields.io/github/v/release/4ra1n/super-xray)](https://github.com/4ra1n/super-xray/releases/latest)
 ![](https://img.shields.io/github/downloads/4ra1n/super-xray/total)
-![](https://img.shields.io/badge/Java%20Code%20Lines-4084-orange)
+![](https://img.shields.io/badge/Java%20Code%20Lines-4089-orange)
 
 ## Introduce
 
