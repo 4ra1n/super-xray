@@ -1141,7 +1141,83 @@ public class MainForm {
 
     public void refreshLang() {
         if (LANG == ENGLISH) {
-
+            xrayPathLabel.setText("你选择的xray文件是：");
+            noteLabel.setText("<html> 注意：在 Mac OS 中请用 control+c/v 复制/粘贴 </html>");
+            langButton.setText("确认语言");
+            skinPanel.setBorder(BorderFactory.createTitledBorder(null,
+                    "皮肤选择", TitledBorder.DEFAULT_JUSTIFICATION,
+                    TitledBorder.DEFAULT_POSITION, null, null));
+            saveSkinButton.setText("确认皮肤");
+            leftConfigPanel.setBorder(BorderFactory.createTitledBorder(null,
+                    "扫描插件配置", TitledBorder.DEFAULT_JUSTIFICATION,
+                    TitledBorder.DEFAULT_POSITION, null, null));
+            catConfigLabel.setText("<html> 使用的插件： <br> " +
+                    "<b>请配置完成后点击->确认插件</b> <p>(部分插件仅高级版支持)</p> </html>");
+            bruteForceCheckBox.setText("bruteforce（暴力破解）");
+            baselineCheckBox.setText("baseline（基线检查）");
+            phantasmCheckBox.setText("phantasm（PoC合集）");
+            sqldetCheckBox.setText("sqldet（sql注入）");
+            enableAllButton.setText("全选 / 取消全选");
+            advanceButton.setText("高级配置");
+            pocPanel.setBorder(BorderFactory.createTitledBorder(null,
+                    "PoC模块", TitledBorder.DEFAULT_JUSTIFICATION,
+                    TitledBorder.DEFAULT_POSITION, null, null));
+            pocNumLabel.setText("当前xray的PoC数量：");
+            updatePocButton.setText("同步PoC数据库");
+            allPoCButton.setText("查看所有PoC");
+            pocButton.setText("指定PoC");
+            localPoCButton.setText("选择本地PoC");
+            scanTargetPanel.setBorder(BorderFactory.createTitledBorder(null,
+                    " 扫描目标设置", TitledBorder.DEFAULT_JUSTIFICATION,
+                    TitledBorder.DEFAULT_POSITION, null, null));
+            rawFileButton.setText("指定request文件");
+            urlButton.setText("指定url");
+            urlFileButton.setText("指定url列表文件");
+            outputConfigPanel.setBorder(BorderFactory.createTitledBorder(null,
+                    "输出模块", TitledBorder.DEFAULT_JUSTIFICATION,
+                    TitledBorder.DEFAULT_POSITION, null, null));
+            outputConfigButton.setText("点击确认输出配置");
+            utilPanel.setBorder(BorderFactory.createTitledBorder(null, "小工具",
+                    TitledBorder.DEFAULT_JUSTIFICATION,
+                    TitledBorder.DEFAULT_POSITION, null, null));
+            httpUtilButton.setText("http 请求测试");
+            listenUtilButton.setText("监听端口");
+            encodeUtilButton.setText("编码工具");
+            proxyConfigPanel.setBorder(BorderFactory.createTitledBorder(null,
+                    "代理配置", TitledBorder.DEFAULT_JUSTIFICATION,
+                    TitledBorder.DEFAULT_POSITION, null, null));
+            proxyLabel.setText("输入HTTP代理URL");
+            proxyConfigButton.setText("确认");
+            reverseConfigPanel.setBorder(BorderFactory.createTitledBorder(null,
+                    "反连平台", TitledBorder.DEFAULT_JUSTIFICATION,
+                    TitledBorder.DEFAULT_POSITION, null, null));
+            tokenLabel.setText("Token");
+            httpReverseLabel.setText("请输入HTTP URL（IP形式）");
+            dnsReverseLabel.setText("DNS IP（IP形式）");
+            reverseConfigButton.setText("确认配置");
+            startScanPanel.setBorder(BorderFactory.createTitledBorder(null,
+                    "启动", TitledBorder.DEFAULT_JUSTIFICATION,
+                    TitledBorder.DEFAULT_POSITION, null, null));
+            activeScanButton.setText("开启主动扫描");
+            portLabel.setText("被动监听端口:");
+            mitmScanButton.setText("开启被动扫描");
+            otherPanel.setBorder(BorderFactory.createTitledBorder(null,
+                    "其他", TitledBorder.DEFAULT_JUSTIFICATION,
+                    TitledBorder.DEFAULT_POSITION, null, null));
+            lookupCmdButton.setText("查看当前命令");
+            lookupConfigButton.setText("查看当前配置文件");
+            xrayUrlButton.setText("xray下载网站");
+            cleanAreaButton.setText("清空命令行输出");
+            outputPanel.setBorder(BorderFactory.createTitledBorder(null,
+                    "命令行输出结果：", TitledBorder.DEFAULT_JUSTIFICATION,
+                    TitledBorder.DEFAULT_POSITION, null, null));
+            stopLabel.setText("  如果意外地运行了危险的程序可以点击：");
+            resetConfigLabel.setText("恢复默认配置：");
+            openResultLabel.setText(" 打开扫描结果：（如果存在）");
+            stopButton.setText("强制停止");
+            resetConfigButton.setText("点击按钮恢复");
+            autoDelCheckBox.setText("关闭后自动删除报告");
+            openResultButton.setText("点击打开扫描结果");
         } else if (LANG == CHINESE) {
             xrayPathLabel.setText("你选择的xray文件是：");
             noteLabel.setText("<html> 注意：在 Mac OS 中请用 control+c/v 复制/粘贴 </html>");
