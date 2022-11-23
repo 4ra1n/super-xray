@@ -1284,6 +1284,11 @@ public class MainForm {
                 LANG = ENGLISH;
             }
             refreshLang();
+            if (LANG == CHINESE) {
+                pocNumLabel.setText(String.format("当前共有: %s 个PoC", Poc.getPocList().size()));
+            } else {
+                pocNumLabel.setText(String.format("PoC Num: %s", Poc.getPocList().size()));
+            }
         });
     }
 
@@ -1452,6 +1457,16 @@ public class MainForm {
         }
     }
 
+    private void initExit() {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            instance.stop = true;
+            try {
+                Thread.sleep(3000);
+            } catch (Exception ignored) {
+            }
+        }));
+    }
+
     public MainForm() {
         init();
         initLang();
@@ -1477,6 +1492,7 @@ public class MainForm {
         initListenUtil();
         initEncodeUtil();
         initOther();
+        initExit();
     }
 
     public static void startMainForm() {

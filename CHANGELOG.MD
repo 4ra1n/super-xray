@@ -76,10 +76,16 @@ Others:
 
 ## 0.6-beta
 
+支持了英文版本，修复了各种UI的问题
+
 Bug:
 - [important] 在1080P下界面无法完全显示 #46
+- [important] 切换语言和皮肤时无法正确容纳UI #51
+- [important] 关闭应用前应该先停止所有xray进程 #50
+- 切换语言时无法正常显示PoC数量 #52
 
 Others:
+- [new feature] english version #40
 - #36问题的修复不完善 #47
 - 打开扫描结果的Label与Button的UI不匹配 #48
 - 点击底部Label跳转Github #49
