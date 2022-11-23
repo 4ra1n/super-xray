@@ -990,7 +990,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <text value="点击按钮恢复"/>
+                  <text value="确认"/>
                 </properties>
               </component>
             </children>

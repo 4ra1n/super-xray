@@ -1452,7 +1452,7 @@ public class MainForm {
             resetConfigLabel.setText("恢复默认配置：");
             openResultLabel.setText(" 打开扫描结果：（如果存在）");
             stopButton.setText("强制停止");
-            resetConfigButton.setText("点击按钮恢复");
+            resetConfigButton.setText("确认");
             autoDelCheckBox.setText("关闭后自动删除报告");
             openResultButton.setText("点击打开扫描结果");
             choseDirButton.setText("点击按钮选择");
@@ -1912,7 +1912,7 @@ public class MainForm {
         resetConfigLabel.setText("恢复默认配置：");
         resetPanel.add(resetConfigLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         resetConfigButton = new JButton();
-        resetConfigButton.setText("点击按钮恢复");
+        resetConfigButton.setText("确认");
         resetPanel.add(resetConfigButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, 1, GridConstraints.SIZEPOLICY_FIXED, null, null, new Dimension(100, -1), 0, false));
         openResultPanel = new JPanel();
         openResultPanel.setLayout(new GridLayoutManager(1, 3, new Insets(0, 0, 0, 0), -1, -1));
