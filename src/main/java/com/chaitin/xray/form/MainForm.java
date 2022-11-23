@@ -16,6 +16,8 @@ import org.yaml.snakeyaml.Yaml;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.*;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
@@ -42,7 +44,6 @@ public class MainForm {
 
     private JButton choseDirButton;
     private JPanel SuperXray;
-    private JPanel showPathPanel;
     private JPanel pathButtonPanel;
     private JLabel xrayPathLabel;
     private JTextField xrayPathTextField;
@@ -354,7 +355,8 @@ public class MainForm {
         Thread t = new Thread(() -> ExecUtil.execCmdNoRet(cmd));
         t.start();
         if (OSUtil.isMacOS() &&
-                (!StringUtil.notEmpty(db.getSkin()) || db.getSkin().equals("null"))) {
+                (!StringUtil.notEmpty(db.getLastXrayPath()) ||
+                        db.getLastXrayPath().equals("null"))) {
             JOptionPane.showMessageDialog(null, Const.MacNeedAgree);
         }
 
@@ -1104,6 +1106,18 @@ public class MainForm {
                 logger.error(ex);
             }
         });
+        authorLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop desktop = Desktop.getDesktop();
+                    URI oURL = new URI("https://github.com/4ra1n");
+                    desktop.browse(oURL);
+                } catch (Exception ex) {
+                    logger.error(ex);
+                }
+            }
+        });
     }
 
     public MainForm() {
@@ -1160,38 +1174,27 @@ public class MainForm {
         SuperXray.setLayout(new GridLayoutManager(6, 1, new Insets(0, 0, 0, 0), -1, -1));
         SuperXray.setBackground(new Color(-725535));
         loadXrayPanel = new JPanel();
-        loadXrayPanel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
+        loadXrayPanel.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
         loadXrayPanel.setBackground(new Color(-725535));
         SuperXray.add(loadXrayPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         loadXrayPanel.setBorder(BorderFactory.createTitledBorder(null, "Super Xray", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         choseXrayLabel = new JLabel();
         choseXrayLabel.setText("选择你的xray文件");
-        loadXrayPanel.add(choseXrayLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        showPathPanel = new JPanel();
-        showPathPanel.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
-        showPathPanel.setBackground(new Color(-725535));
-        loadXrayPanel.add(showPathPanel, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        xrayPathLabel = new JLabel();
-        xrayPathLabel.setText("你选择的xray文件是：");
-        showPathPanel.add(xrayPathLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        xrayPathTextField = new JTextField();
-        xrayPathTextField.setEditable(false);
-        xrayPathTextField.setEnabled(false);
-        showPathPanel.add(xrayPathTextField, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(500, -1), null, 0, false));
+        loadXrayPanel.add(choseXrayLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         pathButtonPanel = new JPanel();
-        pathButtonPanel.setLayout(new GridLayoutManager(1, 3, new Insets(0, 0, 0, 0), -1, -1));
+        pathButtonPanel.setLayout(new GridLayoutManager(2, 3, new Insets(0, 0, 0, 0), -1, -1));
         pathButtonPanel.setBackground(new Color(-725535));
-        loadXrayPanel.add(pathButtonPanel, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        loadXrayPanel.add(pathButtonPanel, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         choseDirButton = new JButton();
         choseDirButton.setText("点击按钮选择");
-        pathButtonPanel.add(choseDirButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, 1, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        pathButtonPanel.add(choseDirButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, 1, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         noteLabel = new JLabel();
-        noteLabel.setText("<html>\n注意：在 Mac OS 中请用 control+c/v 复制/粘贴\n<br>\n（不是 command+c/v 键，这是 swing 的 bug）\n</html>");
-        pathButtonPanel.add(noteLabel, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, new Dimension(300, -1), null, null, 0, false));
+        noteLabel.setText("<html>\n注意：在 Mac OS 中请用 control+c/v 复制/粘贴\n</html>");
+        pathButtonPanel.add(noteLabel, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, new Dimension(300, -1), null, null, 0, false));
         skinPanel = new JPanel();
         skinPanel.setLayout(new GridLayoutManager(2, 4, new Insets(0, 0, 0, 0), -1, -1));
         skinPanel.setBackground(new Color(-725535));
-        pathButtonPanel.add(skinPanel, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        pathButtonPanel.add(skinPanel, new GridConstraints(0, 2, 2, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         skinPanel.setBorder(BorderFactory.createTitledBorder(null, "皮肤选择", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         metalRadioButton = new JRadioButton();
         metalRadioButton.setBackground(new Color(-725535));
@@ -1224,6 +1227,13 @@ public class MainForm {
         aquaRadioButton.setBackground(new Color(-725535));
         aquaRadioButton.setText("Aqua");
         skinPanel.add(aquaRadioButton, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        xrayPathLabel = new JLabel();
+        xrayPathLabel.setText("你选择的xray文件是：");
+        pathButtonPanel.add(xrayPathLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        xrayPathTextField = new JTextField();
+        xrayPathTextField.setEditable(false);
+        xrayPathTextField.setEnabled(false);
+        pathButtonPanel.add(xrayPathTextField, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(500, -1), null, 0, false));
         configPanel = new JPanel();
         configPanel.setLayout(new GridLayoutManager(2, 3, new Insets(0, 0, 0, 0), -1, -1));
         configPanel.setBackground(new Color(-725535));

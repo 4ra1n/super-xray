@@ -73,3 +73,13 @@ Others:
 - 皮肤RadioButton默认不该是空而应是当前皮肤 #37
 - 添加一个是否自动删除扫描报告的按钮 #39
 - 增加一个清屏的按钮 #8
+
+## 0.6-beta
+
+Bug:
+- [important] 在1080P下界面无法完全显示 #46
+
+Others:
+- #36问题的修复不完善 #47
+- 打开扫描结果的Label与Button的UI不匹配 #48
+- 点击底部Label跳转Github #49
