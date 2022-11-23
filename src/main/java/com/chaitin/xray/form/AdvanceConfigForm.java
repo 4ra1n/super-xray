@@ -165,16 +165,28 @@ public class AdvanceConfigForm {
             applyDirScan();
             applyBruteForce();
             applyShiro();
-            JOptionPane.showMessageDialog(null, "设置成功");
+            if (MainForm.LANG == MainForm.CHINESE) {
+                JOptionPane.showMessageDialog(null, "设置成功");
+            } else {
+                JOptionPane.showMessageDialog(null, "Success");
+            }
         });
         allDefaultButton.addActionListener(e -> {
             MainForm.instance.reloadConfig(true);
             refreshAll();
-            JOptionPane.showMessageDialog(null, "重置成功");
+            if (MainForm.LANG == MainForm.CHINESE) {
+                JOptionPane.showMessageDialog(null, "重置成功");
+            } else {
+                JOptionPane.showMessageDialog(null, "Success");
+            }
         });
         allRefreshButton.addActionListener(e -> {
             refreshAll();
-            JOptionPane.showMessageDialog(null, "刷新成功");
+            if (MainForm.LANG == MainForm.CHINESE) {
+                JOptionPane.showMessageDialog(null, "刷新成功");
+            } else {
+                JOptionPane.showMessageDialog(null, "Success");
+            }
         });
         selectBaselineButton.addActionListener(e -> {
             if (baselineAll) {
@@ -384,7 +396,11 @@ public class AdvanceConfigForm {
         refreshBaselineButton.addActionListener(e -> refreshBaseline());
         saveBaselineButton.addActionListener(e -> {
             applyBaseline();
-            JOptionPane.showMessageDialog(null, "保存成功");
+            if (MainForm.LANG == MainForm.CHINESE) {
+                JOptionPane.showMessageDialog(null, "设置成功");
+            } else {
+                JOptionPane.showMessageDialog(null, "Success");
+            }
         });
     }
 
@@ -404,7 +420,11 @@ public class AdvanceConfigForm {
         thinkphpRefreshButton.addActionListener(e -> refreshThinkphp());
         thinkphpSaveButton.addActionListener(e -> {
             applyThinkphp();
-            JOptionPane.showMessageDialog(null, "保存成功");
+            if (MainForm.LANG == MainForm.CHINESE) {
+                JOptionPane.showMessageDialog(null, "设置成功");
+            } else {
+                JOptionPane.showMessageDialog(null, "Success");
+            }
         });
     }
 
@@ -428,7 +448,11 @@ public class AdvanceConfigForm {
         refreshSqlButton.addActionListener(e -> refreshSql());
         saveSqlButton.addActionListener(e -> {
             applySql();
-            JOptionPane.showMessageDialog(null, "保存成功");
+            if (MainForm.LANG == MainForm.CHINESE) {
+                JOptionPane.showMessageDialog(null, "设置成功");
+            } else {
+                JOptionPane.showMessageDialog(null, "Success");
+            }
         });
     }
 
@@ -449,7 +473,11 @@ public class AdvanceConfigForm {
         xssRefreshButton.addActionListener(e -> refreshXss());
         xssSaveButton.addActionListener(e -> {
             applyXss();
-            JOptionPane.showMessageDialog(null, "保存成功");
+            if (MainForm.LANG == MainForm.CHINESE) {
+                JOptionPane.showMessageDialog(null, "设置成功");
+            } else {
+                JOptionPane.showMessageDialog(null, "Success");
+            }
         });
     }
 
@@ -484,7 +512,11 @@ public class AdvanceConfigForm {
         phRefreshButton.addActionListener(e -> refreshPhantasm());
         phSaveButton.addActionListener(e -> {
             applyPhantasm();
-            JOptionPane.showMessageDialog(null, "保存成功");
+            if (MainForm.LANG == MainForm.CHINESE) {
+                JOptionPane.showMessageDialog(null, "设置成功");
+            } else {
+                JOptionPane.showMessageDialog(null, "Success");
+            }
         });
     }
 
@@ -522,7 +554,11 @@ public class AdvanceConfigForm {
         refreshBruteButton.addActionListener(e -> refreshBrute());
         saveBruteButton.addActionListener(e -> {
             applyBruteForce();
-            JOptionPane.showMessageDialog(null, "保存成功");
+            if (MainForm.LANG == MainForm.CHINESE) {
+                JOptionPane.showMessageDialog(null, "设置成功");
+            } else {
+                JOptionPane.showMessageDialog(null, "Success");
+            }
         });
     }
 
@@ -559,7 +595,11 @@ public class AdvanceConfigForm {
         dirRefreshButton.addActionListener(e -> refreshDirScan());
         dirSaveButton.addActionListener(e -> {
             applyDirScan();
-            JOptionPane.showMessageDialog(null, "保存成功");
+            if (MainForm.LANG == MainForm.CHINESE) {
+                JOptionPane.showMessageDialog(null, "设置成功");
+            } else {
+                JOptionPane.showMessageDialog(null, "Success");
+            }
         });
     }
 
@@ -590,11 +630,142 @@ public class AdvanceConfigForm {
         shiroRefreshButton.addActionListener(e -> refreshShiro());
         shiroSaveButton.addActionListener(e -> {
             applyShiro();
-            JOptionPane.showMessageDialog(null, "保存成功");
+            if (MainForm.LANG == MainForm.CHINESE) {
+                JOptionPane.showMessageDialog(null, "设置成功");
+            } else {
+                JOptionPane.showMessageDialog(null, "Success");
+            }
         });
     }
 
+    private void initLang() {
+        if (MainForm.LANG == MainForm.CHINESE) {
+            configCenterPanel.setBorder(BorderFactory.createTitledBorder(null,
+                    "配置中心", TitledBorder.DEFAULT_JUSTIFICATION,
+                    TitledBorder.DEFAULT_POSITION, null, null));
+            applyAllButton.setText("一键确认所有配置");
+            allDefaultButton.setText("恢复默认");
+            selectBaselineButton.setText("baseline全部勾选");
+            selectSqlButton.setText("sqldet全部勾选");
+            refreshBaselineButton.setText("刷新配置");
+            saveBaselineButton.setText("确认配置");
+            refreshSqlButton.setText("刷新配置");
+            saveSqlButton.setText("确认配置");
+            usernameButton.setText("选择用户名字典文件");
+            pwdDicButton.setText("选择密码字典文件");
+            refreshBruteButton.setText("刷新配置");
+            saveBruteButton.setText("确认配置");
+            dirDepthLabel.setText("输入检测深度（1-10）");
+            dirDicButton.setText("选择自定义字典");
+            excludeLabel.setText("<html> 排除哪些路径 " +
+                    "<br> 如/admin或/system/key <br>" +
+                    " 可输入多条规则，每行一条 </html>");
+            dirRefreshButton.setText("刷新配置");
+            dirSaveButton.setText("确认配置");
+            xssRefreshButton.setText("刷新配置");
+            xssSaveButton.setText("确认配置");
+            phDepthLabel.setText("输入检测深度（1-10）");
+            phExcludeLabel.setText("<html> 排除哪些内置 PoC <br>" +
+                    " 支持通配符（如poc-yaml-tomcat*） <br>" +
+                    " 可输入多条规则，每行一条 </html>");
+            phRefreshButton.setText("刷新配置");
+            phSaveButton.setText("确认配置");
+            shiroCookieLabel.setText("输入Cookie名称");
+            shiroAesKeyLabel.setText("输入AES Key");
+            shiroKeyFileButton.setText("选择Key文件");
+            shiroRefreshButton.setText("刷新配置");
+            shiroSaveButton.setText("确认配置");
+            thinkphpSqlLabel.setText("检查 thinkphp 的 sql 注入");
+            thinkphpRefreshButton.setText("刷新配置");
+            thinkphpSaveButton.setText("确认配置");
+            showLabel.setText("<html> 高级配置并不会激活插件 " +
+                    "<br> 勾选对应插件 点击 确认插件 生效 </html>");
+            xssCookieLabel.setText("是否探测入口点在 cookie 中的 xss");
+            xssIeLabel.setText("是否扫描仅能在 ie 下利用的 xss");
+            boolLabel.setText("是否检测布尔盲注");
+            errorLabel.setText("是否检测报错注入");
+            timeLabel.setText("是否检测时间盲注");
+            commentLabel.setText("在 payload 中使用 or (慎用！可能导致删库！)");
+            sqlCookieLabel.setText("是否检查在 cookie 中的注入");
+            corsLabel.setText("检查 cors 相关配置");
+            serverLabel.setText("检查服务器错误信息");
+            phpinfoLabel.setText("检查响应是否包含phpinfo");
+            leakLabel.setText("检查响应是否包含系统路径泄露");
+            sslLabel.setText("检查 ssl 版本问题");
+            headerLabel.setText("检查 http 安全相关 header 是否配置");
+            setCookieLabel.setText("检查 set-cookie 时是否设置 http only");
+            idLabel.setText("检查响应是否存在身份证号");
+            phoneLabel.setText("检查响应是否存在电话号码");
+            bankLabel.setText("检查响应是否存在银行卡号");
+            privateLabel.setText("检查响应是否包含内网 ip");
+            allRefreshButton.setText("刷新配置");
+            selectXssButton.setText("xss全部勾选");
+        } else {
+            configCenterPanel.setBorder(BorderFactory.createTitledBorder(null,
+                    "Config Center", TitledBorder.DEFAULT_JUSTIFICATION,
+                    TitledBorder.DEFAULT_POSITION, null, null));
+            applyAllButton.setText("All Confirm");
+            allDefaultButton.setText("Reset Default");
+            selectBaselineButton.setText("baseline all");
+            selectSqlButton.setText("sqldet all");
+            refreshBaselineButton.setText("Refresh");
+            saveBaselineButton.setText("Save");
+            refreshSqlButton.setText("Refresh");
+            saveSqlButton.setText("Save");
+            usernameButton.setText("Username Dict");
+            pwdDicButton.setText("Password Dict");
+            refreshBruteButton.setText("Refresh");
+            saveBruteButton.setText("Save");
+            dirDepthLabel.setText("Depth (1-10)");
+            dirDicButton.setText("Your Dict");
+            excludeLabel.setText("<html> Exclude Dir " +
+                    "<br> /admin or /system/key <br>" +
+                    " one rule per line </html>");
+            dirRefreshButton.setText("Refresh");
+            dirSaveButton.setText("Save");
+            xssRefreshButton.setText("Refresh");
+            xssSaveButton.setText("Save");
+            phDepthLabel.setText("Depth (1-10)");
+            phExcludeLabel.setText("<html> Exclude PoC <br>" +
+                    " poc-yaml-tomcat* <br>" +
+                    " one rule per line </html>");
+            phRefreshButton.setText("Refresh");
+            phSaveButton.setText("Save");
+            shiroCookieLabel.setText("Cookie Name");
+            shiroAesKeyLabel.setText("AES Key");
+            shiroKeyFileButton.setText("Key File");
+            shiroRefreshButton.setText("Refresh");
+            shiroSaveButton.setText("Save");
+            thinkphpSqlLabel.setText("thinkphp sql injection");
+            thinkphpRefreshButton.setText("Refresh");
+            thinkphpSaveButton.setText("Save");
+            showLabel.setText("<html> Advanced configuration does not activate plug-ins " +
+                    "<br> Check the corresponding plug-in and click to confirm the plug-in takes effect </html>");
+            xssCookieLabel.setText("detect xss in cookie");
+            xssIeLabel.setText("detect xss in IE");
+            boolLabel.setText("boolean based");
+            errorLabel.setText("error based");
+            timeLabel.setText("time based");
+            commentLabel.setText("use or (dangerous!)");
+            sqlCookieLabel.setText("check cookie injection");
+            corsLabel.setText("check cors");
+            serverLabel.setText("check error page");
+            phpinfoLabel.setText("check phpinfo");
+            leakLabel.setText("check path leak");
+            sslLabel.setText("check ssl version");
+            headerLabel.setText("check security http header");
+            setCookieLabel.setText("check http-only cookie");
+            idLabel.setText("check id number");
+            phoneLabel.setText("check phone number");
+            bankLabel.setText("check bank number");
+            privateLabel.setText("check private ip");
+            allRefreshButton.setText("Refresh All");
+            selectXssButton.setText("xss all");
+        }
+    }
+
     public AdvanceConfigForm() {
+        initLang();
         init();
         initConfigCenter();
         initBaseline();
