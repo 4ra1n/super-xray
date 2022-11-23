@@ -19,7 +19,20 @@ public class LookupConfigForm {
     private JScrollPane configTextPanel;
     private JPanel configButtonPanel;
 
+    private void initLang() {
+        if (MainForm.LANG == MainForm.CHINESE) {
+            saveConfigButton.setText("保存配置文件");
+            refreshConfigButton.setText("刷新最新配置文件");
+        } else {
+            saveConfigButton.setText("Save Config");
+            refreshConfigButton.setText("Refresh Config");
+        }
+    }
+
     public LookupConfigForm() {
+
+        initLang();
+
         configTextArea.setText(MainForm.configStr);
         configTextArea.setCaretPosition(0);
 

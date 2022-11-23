@@ -121,7 +121,26 @@ public class EncodeUtilForm {
         });
     }
 
+    private void initLang() {
+        if (MainForm.LANG == MainForm.CHINESE) {
+            bashLabel.setText("  解决 Java 执行命令无法使用重定向和管道符号问题");
+            pwLabel.setText("  解决 Java 执行命令无法使用重定向和管道符号问题");
+            stringCmdLabel.setText("用于生成可以绕WAF的Java命令");
+            stringCmdPanel.setBorder(BorderFactory.createTitledBorder(null,
+                    "   特殊命令字符串生成", TitledBorder.DEFAULT_JUSTIFICATION,
+                    TitledBorder.DEFAULT_POSITION, null, null));
+        } else {
+            bashLabel.setText("  Java commands cannot use redirection and pipeline symbols");
+            pwLabel.setText("  Java commands cannot use redirection and pipeline symbols");
+            stringCmdLabel.setText("   Amazing encode");
+            stringCmdPanel.setBorder(BorderFactory.createTitledBorder(null,
+                    "Amazing Encode", TitledBorder.DEFAULT_JUSTIFICATION,
+                    TitledBorder.DEFAULT_POSITION, null, null));
+        }
+    }
+
     public EncodeUtilForm() {
+        initLang();
         initBase64();
         initUrl();
         initMd5();

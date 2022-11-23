@@ -23,7 +23,22 @@ public class HttpUtilForm {
     private JScrollPane reqScroll;
     private JScrollPane respScroll;
 
+    private void initLang(){
+        if (MainForm.LANG == MainForm.CHINESE) {
+            reqLabel.setText("  请求");
+            ipLabel.setText("  目标IP");
+            portLabel.setText("  目标端口");
+            reqButton.setText("发送");
+        }else {
+            reqLabel.setText("  Request");
+            ipLabel.setText("  Target IP");
+            portLabel.setText("  Target Port");
+            reqButton.setText("Send");
+        }
+    }
+
     public HttpUtilForm() {
+        initLang();
         reqButton.addActionListener(e -> {
             String ip = ipText.getText().trim();
             String port = portText.getText().trim();

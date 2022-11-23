@@ -20,7 +20,22 @@ public class ListenUtilForm {
     private JPanel centerPanel;
     private JPanel sendPanel;
 
+    private void initLang() {
+        if (MainForm.LANG == MainForm.CHINESE) {
+            portLabel.setText("监听端口");
+            listenButton.setText("开始监听端口");
+            sendButton.setText("发送");
+        } else {
+            portLabel.setText("Port");
+            listenButton.setText("Start Listen");
+            sendButton.setText("Send");
+        }
+    }
+
     public ListenUtilForm() {
+
+        initLang();
+
         listenButton.addActionListener(e -> {
             String portStr = portText.getText().trim();
             int port = Integer.parseInt(portStr);

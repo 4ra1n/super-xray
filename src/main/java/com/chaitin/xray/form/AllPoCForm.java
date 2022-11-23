@@ -19,7 +19,24 @@ public class AllPoCForm {
     private JButton searchButton;
     private JPanel searchPanel;
 
+    private void initLang() {
+        if (MainForm.LANG == MainForm.CHINESE) {
+            pocLabel.setText("相关的PoC");
+            searchButton.setText("搜索");
+            searchPoC.setBorder(BorderFactory.createTitledBorder(null, "PoC列表",
+                    TitledBorder.DEFAULT_JUSTIFICATION,
+                    TitledBorder.DEFAULT_POSITION, null, null));
+        } else {
+            pocLabel.setText("All PoC");
+            searchButton.setText("Search");
+            searchPoC.setBorder(BorderFactory.createTitledBorder(null, "PoC List",
+                    TitledBorder.DEFAULT_JUSTIFICATION,
+                    TitledBorder.DEFAULT_POSITION, null, null));
+        }
+    }
+
     public AllPoCForm() {
+        initLang();
         pocList.setText(Poc.getString());
         pocList.setCaretPosition(0);
         searchButton.addActionListener(e -> {
