@@ -6,6 +6,8 @@ import com.chaitin.xray.model.DB;
 import com.chaitin.xray.model.Poc;
 import com.chaitin.xray.model.XrayCmd;
 import com.chaitin.xray.utils.*;
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
@@ -139,7 +141,7 @@ public class MainForm {
     private JPanel skinPanel;
     private JButton saveSkinButton;
     private JRadioButton metalRadioButton;
-    private JRadioButton motifRadioButton;
+    private JRadioButton flatLafRadioButton;
     private JRadioButton nimbusRadioButton;
     private JRadioButton windowsRadioButton;
     private JRadioButton winClassicRadioButton;
@@ -1121,8 +1123,8 @@ public class MainForm {
             case Const.metal:
                 metalRadioButton.setSelected(true);
                 break;
-            case Const.motif:
-                motifRadioButton.setSelected(true);
+            case Const.flatLaf:
+                flatLafRadioButton.setSelected(true);
                 break;
             case Const.windows:
                 windowsRadioButton.setSelected(true);
@@ -1192,9 +1194,9 @@ public class MainForm {
                     }
                     UIManager.setLookAndFeel(Const.winClassic);
                     db.setSkin(Const.winClassic);
-                } else if (motifRadioButton.isSelected()) {
+                } else if (flatLafRadioButton.isSelected()) {
                     try {
-                        Class.forName(Const.motif);
+                        FlatLightLaf.setup();
                     } catch (Exception ignored) {
                         if (LANG == CHINESE) {
                             JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
@@ -1204,8 +1206,9 @@ public class MainForm {
                         }
                         return;
                     }
-                    UIManager.setLookAndFeel(Const.motif);
-                    db.setSkin(Const.motif);
+                    FlatLightLaf.setup();
+                    ;
+                    db.setSkin(Const.flatLaf);
                 } else if (gtkRadioButton.isSelected()) {
                     try {
                         Class.forName(Const.gtk);
@@ -1549,10 +1552,10 @@ public class MainForm {
         metalRadioButton.setBackground(new Color(-725535));
         metalRadioButton.setText("Metal");
         skinPanel.add(metalRadioButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        motifRadioButton = new JRadioButton();
-        motifRadioButton.setBackground(new Color(-725535));
-        motifRadioButton.setText("Motif");
-        skinPanel.add(motifRadioButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        flatLafRadioButton = new JRadioButton();
+        flatLafRadioButton.setBackground(new Color(-725535));
+        flatLafRadioButton.setText("FlatLaf");
+        skinPanel.add(flatLafRadioButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         nimbusRadioButton = new JRadioButton();
         nimbusRadioButton.setBackground(new Color(-725535));
         nimbusRadioButton.setText("Nimbus");
@@ -1942,7 +1945,7 @@ public class MainForm {
         buttonGroup.add(jsonRadioButton);
         buttonGroup = new ButtonGroup();
         buttonGroup.add(metalRadioButton);
-        buttonGroup.add(motifRadioButton);
+        buttonGroup.add(flatLafRadioButton);
         buttonGroup.add(nimbusRadioButton);
         buttonGroup.add(windowsRadioButton);
         buttonGroup.add(winClassicRadioButton);

@@ -1,5 +1,7 @@
 package com.chaitin.xray.model;
 
+import com.formdev.flatlaf.FlatLaf;
+
 import java.io.File;
 
 public interface Const {
@@ -10,6 +12,7 @@ public interface Const {
     String XrayYaml = String.format(".%s%s", File.separator, "xray.yaml");
     String PluginXrayYaml = String.format(".%s%s", File.separator, "plugin.xray.yaml");
     String ConfigYaml = String.format(".%s%s", File.separator, "config.yaml");
+    String flatLaf = "FlatLaf";
     String nimbus = "javax.swing.plaf.nimbus.NimbusLookAndFeel";
     String metal = "javax.swing.plaf.metal.MetalLookAndFeel";
     String windows = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";

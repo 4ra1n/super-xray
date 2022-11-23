@@ -86,7 +86,12 @@ Bug:
 - 解析所有POC的逻辑有问题导致漏掉部分 #53
 
 Others:
+- [important] 添加一款现代皮肤IDEA同款 #54
 - [new feature] english version #40
 - #36问题的修复不完善 #47
 - 打开扫描结果的Label与Button的UI不匹配 #48
 - 点击底部Label跳转Github #49
+
+## 0.7-beta
+
+Others: 
