@@ -24,9 +24,9 @@
 
 在0.6-beta版本以后支持英文版：
 
-![](img/12.png)
+![](img/16.png)
 
-![](img/13.png)
+![](img/17.png)
 
 ## 快速上手
 
@@ -39,6 +39,8 @@
 最新版已更新IDEA同款皮肤：
 
 ![](img/14.png)
+
+![](img/15.png)
 
 启动： `java -jar SuperXray.jar`
 
