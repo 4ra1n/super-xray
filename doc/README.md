@@ -21,9 +21,9 @@ Other Note:
 
 After 0.5-beta version we support English Version：
 
-![](img/12.png)
+![](../img/12.png)
 
-![](img/13.png)
+![](../img/13.png)
 
 ## Quick Start
 
