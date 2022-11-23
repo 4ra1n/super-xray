@@ -9,6 +9,7 @@
 This project was tested under `JRE 19 ` and `JRE 11`, in `Windows 11` and `Ubuntu 22.04` and `Mac OS 12`.
 
 Please Note:
+- The screenshot in this doc is Chinese, but there is a button to select English UI
 - Must be running above JDK9
 - Please use a resolution of 1080P or above, and it may not be fully displayed at a resolution of 720P or below
 
