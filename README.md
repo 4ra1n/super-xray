@@ -21,6 +21,12 @@
 - 前往 [ctstack](https://stack.chaitin.com/tool/detail?id=1) 下载正版 `xray`
 - 注意：请使用最新版`xray`（本工具未兼容老版本`xray`）
 
+在0.5-beta版本以后支持英文版：
+
+![](img/12.png)
+
+![](img/13.png)
+
 ## 快速上手
 
 最新版下载地址：[Latest Release](https://github.com/4ra1n/super-xray/releases/latest)

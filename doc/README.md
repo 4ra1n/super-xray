@@ -19,6 +19,12 @@ Other Note:
 - **Must**use `java -jar SuperXray.jar` start（Double click startup will cause permission problems in `Windows`）
 - Please use the latest version of xray (this tool is not compatible with the old version of xray)
 
+After 0.5-beta version we support English Version：
+
+![](img/12.png)
+
+![](img/13.png)
+
 ## Quick Start
 
 Latest Download：[Latest Release](https://github.com/4ra1n/super-xray/releases/latest)
