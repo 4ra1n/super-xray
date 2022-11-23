@@ -32,7 +32,9 @@
 
 最新版下载地址：[Latest Release](https://github.com/4ra1n/super-xray/releases/latest)
 
-观看B站视频：https://www.bilibili.com/video/BV1Ud4y147Er
+观看B站视频：
+- https://www.bilibili.com/video/BV1Ud4y147Er
+- https://www.bilibili.com/video/BV1t84y1C76D
 
 启动： `java -jar SuperXray.jar`
 
