@@ -1486,6 +1486,9 @@ public class MainForm {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
+        frame.setSize(1280, 960);
+
     }
 
     {
