@@ -1367,6 +1367,8 @@ public class MainForm {
             resetConfigButton.setText("Reset");
             autoDelCheckBox.setText("Delete All Reports When Exit");
             openResultButton.setText("Open");
+            choseDirButton.setText("Chose File");
+            confirmPluginButton.setText("Confirm");
         } else if (LANG == CHINESE) {
             xrayPathLabel.setText("你选择的xray文件是：");
             noteLabel.setText("<html> 注意：在 Mac OS 中请用 control+c/v 复制/粘贴 </html>");
@@ -1445,6 +1447,8 @@ public class MainForm {
             resetConfigButton.setText("点击按钮恢复");
             autoDelCheckBox.setText("关闭后自动删除报告");
             openResultButton.setText("点击打开扫描结果");
+            choseDirButton.setText("点击按钮选择");
+            confirmPluginButton.setText("确认插件");
         }
     }
 
