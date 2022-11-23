@@ -5,6 +5,7 @@ import java.io.File;
 public interface Const {
     String ApplicationName = "SuperXray";
     String MacNeedAgree = "Mac OS 请设置 系统偏好设置->安全性与隐私->通用->仍要打开";
+    String MacNeedAgreeEn = "Please set System Preferences -> Security and Privacy -> General -> Still Open";
     String ModuleXrayYaml = String.format(".%s%s", File.separator, "module.xray.yaml");
     String XrayYaml = String.format(".%s%s", File.separator, "xray.yaml");
     String PluginXrayYaml = String.format(".%s%s", File.separator, "plugin.xray.yaml");

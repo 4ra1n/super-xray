@@ -176,7 +176,13 @@ public class MainForm {
 
         logger.info("init look up config button");
         lookupConfigButton.addActionListener(e -> {
-            JFrame frame = new JFrame("查看配置文件");
+            String t;
+            if (LANG == CHINESE) {
+                t = "查看配置文件";
+            } else {
+                t = "Lookup Config";
+            }
+            JFrame frame = new JFrame(t);
             frame.setContentPane(new LookupConfigForm().lookupConfigPanel);
             frame.pack();
             frame.setVisible(true);
@@ -359,7 +365,11 @@ public class MainForm {
         if (OSUtil.isMacOS() &&
                 (!StringUtil.notEmpty(db.getLastXrayPath()) ||
                         db.getLastXrayPath().equals("null"))) {
-            JOptionPane.showMessageDialog(null, Const.MacNeedAgree);
+            if (LANG == CHINESE) {
+                JOptionPane.showMessageDialog(null, Const.MacNeedAgree);
+            } else {
+                JOptionPane.showMessageDialog(null, Const.MacNeedAgreeEn);
+            }
         }
 
         try {
@@ -412,7 +422,11 @@ public class MainForm {
                 }
 
             } else {
-                xrayPathTextField.setText("你取消了选择");
+                if (LANG == CHINESE) {
+                    xrayPathTextField.setText("你取消了选择");
+                } else {
+                    xrayPathTextField.setText("Cancel");
+                }
             }
         });
     }
@@ -609,7 +623,11 @@ public class MainForm {
             }
             refreshConfig();
             xrayCmd.setPoc(null);
-            JOptionPane.showMessageDialog(null, "设置完成");
+            if (LANG == CHINESE) {
+                JOptionPane.showMessageDialog(null, "设置完成");
+            } else {
+                JOptionPane.showMessageDialog(null, "Success");
+            }
         });
     }
 
@@ -630,7 +648,13 @@ public class MainForm {
     public void initAdvanceConfig() {
         logger.info("init advance config button");
         advanceButton.addActionListener(e -> {
-            JFrame frame = new JFrame("高级配置");
+            String t;
+            if (LANG == CHINESE) {
+                t = "高级配置";
+            } else {
+                t = "Advance Config";
+            }
+            JFrame frame = new JFrame(t);
             frame.setContentPane(new AdvanceConfigForm().advanceConfigPanel);
             frame.setResizable(true);
             frame.pack();
@@ -645,7 +669,11 @@ public class MainForm {
         cliRadioButton.setSelected(false);
         outputConfigButton.addActionListener(e -> {
             refreshOutput();
-            JOptionPane.showMessageDialog(null, "设置输出成功");
+            if (LANG == CHINESE) {
+                JOptionPane.showMessageDialog(null, "设置输出成功");
+            } else {
+                JOptionPane.showMessageDialog(null, "Success");
+            }
         });
     }
 
@@ -676,7 +704,11 @@ public class MainForm {
             logger.info(String.format("target url: %s", url));
             xrayCmd.setInputPrefix("--url");
             xrayCmd.setInput(url);
-            JOptionPane.showMessageDialog(null, "设置URL成功");
+            if (LANG == CHINESE) {
+                JOptionPane.showMessageDialog(null, "设置URL成功");
+            } else {
+                JOptionPane.showMessageDialog(null, "Success");
+            }
         });
     }
 
@@ -695,7 +727,11 @@ public class MainForm {
                 xrayCmd.setInputPrefix("--url-file");
                 xrayCmd.setInput(String.format("%s", absPath));
             } else {
-                rawFileField.setText("你取消了选择");
+                if (LANG == CHINESE) {
+                    rawFileField.setText("你取消了选择");
+                } else {
+                    rawFileField.setText("Cancel");
+                }
             }
         });
     }
@@ -715,7 +751,11 @@ public class MainForm {
                 xrayCmd.setInputPrefix("--raw-request");
                 xrayCmd.setInput(String.format("%s", absPath));
             } else {
-                rawFileField.setText("你取消了选择");
+                if (LANG == CHINESE) {
+                    rawFileField.setText("你取消了选择");
+                } else {
+                    rawFileField.setText("Cancel");
+                }
             }
         });
     }
@@ -744,9 +784,19 @@ public class MainForm {
         assert allPocStr != null;
         String[] temp = allPocStr.split("\n");
         Poc.addPoc(temp);
-        pocNumLabel.setText(String.format("当前共有: %s 个PoC", Poc.getPocList().size()));
+        if (LANG == CHINESE) {
+            pocNumLabel.setText(String.format("当前共有: %s 个PoC", Poc.getPocList().size()));
+        } else {
+            pocNumLabel.setText(String.format("PoC Num: %s", Poc.getPocList().size()));
+        }
         allPoCButton.addActionListener(e -> {
-            JFrame frame = new JFrame("查看所有PoC");
+            String t;
+            if (LANG == CHINESE) {
+                t = "查看所有PoC";
+            } else {
+                t = "All PoC";
+            }
+            JFrame frame = new JFrame(t);
             frame.setContentPane(new AllPoCForm().searchPoC);
             frame.setResizable(false);
             frame.pack();
@@ -791,12 +841,20 @@ public class MainForm {
                 String[] temp = absPath.split("\\.");
                 String suffix = temp[temp.length - 1].toLowerCase().trim();
                 if (!suffix.equals("yml") && !suffix.equals("yaml")) {
-                    JOptionPane.showMessageDialog(null, "你选择的不是合法YAML文件");
+                    if (LANG == CHINESE) {
+                        JOptionPane.showMessageDialog(null, "你选择的不是合法YAML文件");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error File Type");
+                    }
                     return;
                 }
                 localPoCText.setText(absPath);
                 onlyUsePhantasm(absPath);
-                JOptionPane.showMessageDialog(null, "设置PoC成功");
+                if (LANG == CHINESE) {
+                    JOptionPane.showMessageDialog(null, "设置PoC成功");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Success");
+                }
             }
         });
 
@@ -828,18 +886,30 @@ public class MainForm {
             }
             Poc.clear();
             Poc.addAll(poc);
-            pocNumLabel.setText(String.format("当前共有: %s 个PoC", Poc.getPocList().size()));
+            if (LANG == CHINESE) {
+                pocNumLabel.setText(String.format("当前共有: %s 个PoC", Poc.getPocList().size()));
+            } else {
+                pocNumLabel.setText(String.format("PoC Num: %s", Poc.getPocList().size()));
+            }
         });
 
         pocButton.addActionListener(e -> {
             String poc = usePoCText.getText();
             logger.info(poc);
             if (!Poc.getPocList().contains(poc.trim())) {
-                JOptionPane.showMessageDialog(null, "PoC不存在");
+                if (LANG == CHINESE) {
+                    JOptionPane.showMessageDialog(null, "PoC不存在");
+                } else {
+                    JOptionPane.showMessageDialog(null, "PoC Not Exist");
+                }
                 return;
             }
             onlyUsePhantasm(poc);
-            JOptionPane.showMessageDialog(null, "设置PoC成功");
+            if (LANG == CHINESE) {
+                JOptionPane.showMessageDialog(null, "设置PoC成功");
+            } else {
+                JOptionPane.showMessageDialog(null, "Success");
+            }
         });
     }
 
@@ -862,13 +932,21 @@ public class MainForm {
                 String[] cmd = xrayCmd.buildCmd();
                 stop = false;
                 execAndFresh(cmd);
-                mitmScanButton.setText("关闭被动监听");
+                if (LANG == CHINESE) {
+                    mitmScanButton.setText("关闭被动监听");
+                } else {
+                    mitmScanButton.setText("Shutdown");
+                }
                 portText.setEnabled(false);
                 mitmRunning = true;
             } else {
                 stop = true;
                 portText.setEnabled(true);
-                mitmScanButton.setText("开启被动扫描");
+                if (LANG == CHINESE) {
+                    mitmScanButton.setText("开启被动扫描");
+                } else {
+                    mitmScanButton.setText("Start MITM");
+                }
                 mitmRunning = false;
                 outputTextArea.setText(null);
             }
@@ -886,7 +964,11 @@ public class MainForm {
                 }
             }
             refreshConfig();
-            JOptionPane.showMessageDialog(null, "设置代理成功");
+            if (LANG == CHINESE) {
+                JOptionPane.showMessageDialog(null, "设置代理成功");
+            } else {
+                JOptionPane.showMessageDialog(null, "Success");
+            }
         });
     }
 
@@ -907,7 +989,11 @@ public class MainForm {
                 }
             }
             refreshConfig();
-            JOptionPane.showMessageDialog(null, "设置反连成功");
+            if (LANG == CHINESE) {
+                JOptionPane.showMessageDialog(null, "设置反连成功");
+            } else {
+                JOptionPane.showMessageDialog(null, "Success");
+            }
         });
     }
 
@@ -915,7 +1001,11 @@ public class MainForm {
         stopButton.addActionListener(e -> {
             stop = true;
             outputTextArea.setText(null);
-            JOptionPane.showMessageDialog(null, "已强制停止");
+            if (LANG == CHINESE) {
+                JOptionPane.showMessageDialog(null, "已强制停止");
+            } else {
+                JOptionPane.showMessageDialog(null, "Stop Success");
+            }
         });
     }
 
@@ -961,13 +1051,23 @@ public class MainForm {
     public void initReset() {
         resetConfigButton.addActionListener(e -> {
             reloadConfig(true);
-            JOptionPane.showMessageDialog(null, "已恢复");
+            if (LANG == CHINESE) {
+                JOptionPane.showMessageDialog(null, "已恢复");
+            } else {
+                JOptionPane.showMessageDialog(null, "Success");
+            }
         });
     }
 
     private void initHttpUtil() {
         httpUtilButton.addActionListener(e -> {
-            JFrame frame = new JFrame("Http工具");
+            String t;
+            if (LANG == CHINESE) {
+                t = "Http工具";
+            } else {
+                t = "Repeater";
+            }
+            JFrame frame = new JFrame(t);
             frame.setContentPane(new HttpUtilForm().httpUtilPanel);
             frame.setResizable(false);
             frame.pack();
@@ -977,7 +1077,13 @@ public class MainForm {
 
     public void initListenUtil() {
         listenUtilButton.addActionListener(e -> {
-            JFrame frame = new JFrame("监听端口工具");
+            String t;
+            if (LANG == CHINESE) {
+                t = "监听端口工具";
+            } else {
+                t = "Listener";
+            }
+            JFrame frame = new JFrame(t);
             frame.setContentPane(new ListenUtilForm().listenUtilPanel);
             frame.setResizable(false);
             frame.pack();
@@ -987,7 +1093,13 @@ public class MainForm {
 
     public void initEncodeUtil() {
         encodeUtilButton.addActionListener(e -> {
-            JFrame frame = new JFrame("编码工具");
+            String t;
+            if (LANG == CHINESE) {
+                t = "编码工具";
+            } else {
+                t = "Decoder";
+            }
+            JFrame frame = new JFrame(t);
             frame.setContentPane(new EncodeUtilForm().encodeUtilPanel);
             frame.setResizable(false);
             frame.pack();
@@ -1028,7 +1140,12 @@ public class MainForm {
                     try {
                         Class.forName(Const.nimbus);
                     } catch (Exception ignored) {
-                        JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                        if (LANG == CHINESE) {
+                            JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                        } else {
+                            JOptionPane.showMessageDialog(null,
+                                    "Your OS not support this skin");
+                        }
                         return;
                     }
                     UIManager.setLookAndFeel(Const.nimbus);
@@ -1037,7 +1154,12 @@ public class MainForm {
                     try {
                         Class.forName(Const.metal);
                     } catch (Exception ignored) {
-                        JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                        if (LANG == CHINESE) {
+                            JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                        } else {
+                            JOptionPane.showMessageDialog(null,
+                                    "Your OS not support this skin");
+                        }
                         return;
                     }
                     UIManager.setLookAndFeel(Const.metal);
@@ -1046,7 +1168,12 @@ public class MainForm {
                     try {
                         Class.forName(Const.windows);
                     } catch (Exception ignored) {
-                        JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                        if (LANG == CHINESE) {
+                            JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                        } else {
+                            JOptionPane.showMessageDialog(null,
+                                    "Your OS not support this skin");
+                        }
                         return;
                     }
                     UIManager.setLookAndFeel(Const.windows);
@@ -1055,7 +1182,12 @@ public class MainForm {
                     try {
                         Class.forName(Const.winClassic);
                     } catch (Exception ignored) {
-                        JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                        if (LANG == CHINESE) {
+                            JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                        } else {
+                            JOptionPane.showMessageDialog(null,
+                                    "Your OS not support this skin");
+                        }
                         return;
                     }
                     UIManager.setLookAndFeel(Const.winClassic);
@@ -1064,7 +1196,12 @@ public class MainForm {
                     try {
                         Class.forName(Const.motif);
                     } catch (Exception ignored) {
-                        JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                        if (LANG == CHINESE) {
+                            JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                        } else {
+                            JOptionPane.showMessageDialog(null,
+                                    "Your OS not support this skin");
+                        }
                         return;
                     }
                     UIManager.setLookAndFeel(Const.motif);
@@ -1073,7 +1210,12 @@ public class MainForm {
                     try {
                         Class.forName(Const.gtk);
                     } catch (Exception ignored) {
-                        JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                        if (LANG == CHINESE) {
+                            JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                        } else {
+                            JOptionPane.showMessageDialog(null,
+                                    "Your OS not support this skin");
+                        }
                         return;
                     }
                     UIManager.setLookAndFeel(Const.gtk);
@@ -1082,7 +1224,12 @@ public class MainForm {
                     try {
                         Class.forName(Const.aqua);
                     } catch (Exception ignored) {
-                        JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                        if (LANG == CHINESE) {
+                            JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                        } else {
+                            JOptionPane.showMessageDialog(null,
+                                    "Your OS not support this skin");
+                        }
                         return;
                     }
                     UIManager.setLookAndFeel(Const.aqua);
@@ -1128,6 +1275,7 @@ public class MainForm {
 
     public void initLang() {
         chineseLangButton.setSelected(true);
+        LANG = CHINESE;
         englishLangButton.setSelected(false);
         langButton.addActionListener(e -> {
             if (chineseLangButton.isSelected()) {
