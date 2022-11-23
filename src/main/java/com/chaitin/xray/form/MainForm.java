@@ -875,7 +875,7 @@ public class MainForm {
                 if (s.contains(":")) {
                     continue;
                 }
-                if (s.contains("test")) {
+                if (s.contains("test") && !s.contains("testrail")) {
                     continue;
                 }
                 if (!s.contains("poc")) {

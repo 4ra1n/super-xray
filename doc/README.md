@@ -1,7 +1,7 @@
 # Super Xray
 [![](https://img.shields.io/github/v/release/4ra1n/super-xray)](https://github.com/4ra1n/super-xray/releases/latest)
 ![](https://img.shields.io/github/downloads/4ra1n/super-xray/total)
-![](https://img.shields.io/badge/Java%20Code%20Lines-4080-orange)
+![](https://img.shields.io/badge/Java%20Code%20Lines-4084-orange)
 
 ## Introduce
 
@@ -20,7 +20,7 @@ Other Note:
 - **Must**use `java -jar SuperXray.jar` start（Double click startup will cause permission problems in `Windows`）
 - Please use the latest version of xray (this tool is not compatible with the old version of xray)
 
-After 0.5-beta version we support English Version：
+After 0.6-beta version we support English Version：
 
 ![](../img/12.png)
 

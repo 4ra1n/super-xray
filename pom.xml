@@ -6,7 +6,7 @@
 
     <groupId>com.chaitin</groupId>
     <artifactId>super-xray</artifactId>
-    <version>0.5-beta</version>
+    <version>0.6-beta</version>
 
     <properties>
         <maven.compiler.source>9</maven.compiler.source>

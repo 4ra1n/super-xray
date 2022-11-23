@@ -1,5 +1,7 @@
 package com.chaitin.xray.model;
 
+import com.chaitin.xray.utils.StringUtil;
+
 import java.util.HashSet;
 import java.util.List;
 
@@ -8,6 +10,9 @@ public class Poc {
 
     public static void addPoc(String[] pocArray) {
         for (String s : pocArray) {
+            if(!StringUtil.notEmpty(s.trim())){
+                continue;
+            }
             if (s.endsWith("\r")) {
                 s = s.substring(0, s.length() - 1);
             }

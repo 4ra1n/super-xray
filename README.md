@@ -1,7 +1,7 @@
 # Super Xray
 [![](https://img.shields.io/github/v/release/4ra1n/super-xray)](https://github.com/4ra1n/super-xray/releases/latest)
 ![](https://img.shields.io/github/downloads/4ra1n/super-xray/total)
-![](https://img.shields.io/badge/Java%20Code%20Lines-4080-orange)
+![](https://img.shields.io/badge/Java%20Code%20Lines-4084-orange)
 
 [English Version](doc/README.md)
 
@@ -22,7 +22,7 @@
 - 前往 [ctstack](https://stack.chaitin.com/tool/detail?id=1) 下载正版 `xray`
 - 注意：请使用最新版`xray`（本工具未兼容老版本`xray`）
 
-在0.5-beta版本以后支持英文版：
+在0.6-beta版本以后支持英文版：
 
 ![](img/12.png)
 

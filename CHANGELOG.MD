@@ -83,6 +83,7 @@ Bug:
 - [important] 切换语言和皮肤时无法正确容纳UI #51
 - [important] 关闭应用前应该先停止所有xray进程 #50
 - 切换语言时无法正常显示PoC数量 #52
+- 解析所有POC的逻辑有问题导致漏掉部分 #53
 
 Others:
 - [new feature] english version #40
