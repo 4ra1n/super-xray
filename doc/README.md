@@ -30,6 +30,10 @@ After 0.6-beta version we support English Version：
 
 Latest Download：[Latest Release](https://github.com/4ra1n/super-xray/releases/latest)
 
+The latest version has updated the same skin of IDEA:
+
+![](../img/14.png)
+
 Start： `java -jar SuperXray.jar`
 
 ![](../img/01.png)

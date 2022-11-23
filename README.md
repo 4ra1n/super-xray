@@ -36,6 +36,10 @@
 - https://www.bilibili.com/video/BV1Ud4y147Er
 - https://www.bilibili.com/video/BV1t84y1C76D
 
+最新版已更新IDEA同款皮肤：
+
+![](img/14.png)
+
 启动： `java -jar SuperXray.jar`
 
 ![](img/01.png)

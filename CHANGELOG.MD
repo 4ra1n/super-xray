@@ -91,7 +91,3 @@ Others:
 - #36问题的修复不完善 #47
 - 打开扫描结果的Label与Button的UI不匹配 #48
 - 点击底部Label跳转Github #49
-
-## 0.7-beta
-
-Others: 
