@@ -1285,7 +1285,6 @@ public class MainForm {
                         return;
                     }
                     FlatLightLaf.setup();
-                    ;
                     db.setSkin(Const.flatLaf);
                 } else if (gtkRadioButton.isSelected()) {
                     try {
