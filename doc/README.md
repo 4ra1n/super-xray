@@ -7,18 +7,18 @@
 
 [xray](https://github.com/chaitin/xray) is an excellent web vulnerability scanning tool, But only the command line version, Start via `config.yaml` file. In many cases, it is difficult to get started, and a GUI tool is needed to help newcomers use it faster. This tool is just a simple command line wrapper, not a direct method call. In the planning of xray, there will be a truly perfect GUI version of XrayPro tool in the future. Please look forward to it.
 
-This project was tested under `JRE 19 ` and `JRE 11`, in `Windows 11` and `Ubuntu 22.04` and `Mac OS 12`.
-
 Please Note:
 - The screenshot in this doc is Chinese, but there is a button to select English UI
-- Must be running above JDK9
+- Must be running above JDK8
 - Please use a resolution of 1080P or above, and it may not be fully displayed at a resolution of 720P or below
 
 Other Note:
 
-- There is JRE 9+ environment locally
+- There is JRE 8+ environment locally
 - **Must**use `java -jar SuperXray.jar` start（Double click startup will cause permission problems in `Windows`）
 - Please use the latest version of xray (this tool is not compatible with the old version of xray)
+
+**After 0.7 version we support `exe` version**
 
 After 0.6-beta version we support English Version：
 
@@ -30,12 +30,6 @@ After 0.6-beta version we support English Version：
 ## Quick Start
 
 Latest Download：[Latest Release](https://github.com/4ra1n/super-xray/releases/latest)
-
-The latest version has updated the same skin of IDEA:
-
-![](../img/14.png)
-
-![](../img/15.png)
 
 Start： `java -jar SuperXray.jar`
 

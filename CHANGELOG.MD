@@ -91,15 +91,21 @@ Others:
 - 打开扫描结果的Label与Button的UI不匹配 #48
 - 点击底部Label跳转Github #49
 
-## 0.7-beta
+## 0.7
 
-该版本为重大更新，因为是支持了`JDK8`的版本，当环境是`JDK8`时使用`JNA`技术访问`Native`方法，通过`Windows API`实现功能；
-当环境是`JDK9+`时，反射调用方法即可。
+该版本是第一个正式版，支持了`JDK8`的版本，当环境是`JDK8`时使用`JNA`技术访问`Native`方法，通过`Windows API`实现功能；
+当环境是`JDK9+`时，反射调用方法即可。修复了一处功能`bug`并优先加载当前目录的`config.yaml`文件，不会删除，实现了保存设置功能。
+
+另外提供了两种`exe`的下载：
+- 内置`JRE`和`xray`的`exe`可以一键启动：`super-xray-0.7-jre-exe.zip`
+- 调用系统`JRE`的`exe`：`super-xray-0.7-system-jre.exe`
+
+第一种不需要安装任何环境，解压后直接使用；第二种需要本地`JAVA_HOME`或环境变量有配置`Java`
 
 Bug:
 - [important] 寻找一种能够支持JDK8的魔法 #61
-- 不能支持JDK8的解决方案建议 #63 (同 #61)
 - [important] 反连平台没有设置remote_server为true #57
+- 不能支持JDK8的解决方案建议 #63 (同 #61)
 - 使用IDEA皮肤时底部恢复按钮无法展示完全 #55
 
 Others:
