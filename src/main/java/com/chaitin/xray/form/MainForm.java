@@ -6,7 +6,6 @@ import com.chaitin.xray.model.DB;
 import com.chaitin.xray.model.Poc;
 import com.chaitin.xray.model.XrayCmd;
 import com.chaitin.xray.utils.*;
-import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
