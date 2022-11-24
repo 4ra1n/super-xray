@@ -5,8 +5,6 @@ import com.sun.jna.platform.win32.Kernel32;
 import com.sun.jna.platform.win32.WinNT;
 import sun.misc.Unsafe;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -15,8 +13,7 @@ import java.util.Objects;
 public class JNAUtil {
 
     private static Unsafe getUnsafe() {
-        Unsafe unsafe = null;
-
+        Unsafe unsafe;
         try {
             Field field = Unsafe.class.getDeclaredField("theUnsafe");
             field.setAccessible(true);
@@ -26,86 +23,86 @@ public class JNAUtil {
         }
         return unsafe;
     }
-    public static byte[] readInputStream(InputStream inputStream) {
-        byte[] temp = new byte[4096];
-        int readOneNum = 0;
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+    private static void removeClassCache(Unsafe unsafe, Class<?> clazz) {
         try {
-            while ((readOneNum = inputStream.read(temp)) != -1) {
-                bos.write(temp, 0, readOneNum);
-            }
-            inputStream.close();
-        }catch (Exception e){
-        }
-        return bos.toByteArray();
-    }
-    private static void removeClassCache(Unsafe unsafe,Class clazz){
-        try {
-            Class ClassAnonymousClass = unsafe.defineAnonymousClass(
-                    clazz,readInputStream(Class.class.getResourceAsStream("Class.class")),null);
+            Class<?> ClassAnonymousClass = unsafe.defineAnonymousClass(
+                    clazz, Objects.requireNonNull(
+                            IOUtil.readBytesFromIs(
+                                    Class.class.getResourceAsStream("Class.class"))), null);
             Field reflectionDataField = ClassAnonymousClass.getDeclaredField("reflectionData");
-            unsafe.putObject(clazz,unsafe.objectFieldOffset(reflectionDataField),null);
-        }catch (Exception e){
+            unsafe.putObject(clazz, unsafe.objectFieldOffset(reflectionDataField), null);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private static void bypassReflectionFilter(){
+    public static boolean bypassReflectionFilter() {
         try {
             Unsafe unsafe = getUnsafe();
-            Class classClass = Class.class;
+            Class<?> classClass = Class.class;
             try {
-                System.out.println(String.format("没有Reflection Filter ClassLoader :%s", classClass.getDeclaredField("classLoader")));
-            }catch (Exception e){
+                System.out.println(classClass.getDeclaredField("classLoader"));
+                return true;
+            } catch (Exception e) {
                 try {
-                    Class reflectionClass=Class.forName("jdk.internal.reflect.Reflection");
-                    byte[] classBuffer = readInputStream(reflectionClass.getResourceAsStream("Reflection.class"));
-                    Class reflectionAnonymousClass = unsafe.defineAnonymousClass(reflectionClass,classBuffer,null);
+                    Class<?> reflectionClass = Class.forName("jdk.internal.reflect.Reflection");
+                    byte[] classBuffer = IOUtil.readBytesFromIs(
+                            reflectionClass.getResourceAsStream("Reflection.class"));
+                    assert classBuffer != null;
+                    Class<?> reflectionAnonymousClass = unsafe.defineAnonymousClass(
+                            reflectionClass, classBuffer, null);
 
-                    Field fieldFilterMapField=reflectionAnonymousClass.getDeclaredField("fieldFilterMap");
-                    Field methodFilterMapField=reflectionAnonymousClass.getDeclaredField("methodFilterMap");
+                    Field fieldFilterMapField = reflectionAnonymousClass.getDeclaredField("fieldFilterMap");
+                    Field methodFilterMapField = reflectionAnonymousClass.getDeclaredField("methodFilterMap");
 
-                    if(fieldFilterMapField.getType().isAssignableFrom(HashMap.class)){
-                        unsafe.putObject(reflectionClass,unsafe.staticFieldOffset(fieldFilterMapField),new HashMap());
+                    if (fieldFilterMapField.getType().isAssignableFrom(HashMap.class)) {
+                        unsafe.putObject(reflectionClass, unsafe.staticFieldOffset(
+                                fieldFilterMapField), new HashMap<>());
                     }
-                    if(methodFilterMapField.getType().isAssignableFrom(HashMap.class)){
-                        unsafe.putObject(reflectionClass,unsafe.staticFieldOffset(methodFilterMapField),new HashMap());
+                    if (methodFilterMapField.getType().isAssignableFrom(HashMap.class)) {
+                        unsafe.putObject(reflectionClass, unsafe.staticFieldOffset(
+                                methodFilterMapField), new HashMap<>());
                     }
-                    removeClassCache(unsafe,classClass);
-                    System.out.println(String.format("Bypass Jdk Reflection Filter Successfully! ClassLoader :%s", classClass.getDeclaredField("classLoader")));
-
-                }catch (ClassNotFoundException e2){
+                    removeClassCache(unsafe, classClass);
+                    System.out.println(classClass.getDeclaredField("classLoader"));
+                    return true;
+                } catch (ClassNotFoundException e2) {
                     try {
-                        Class reflectionClass=Class.forName("sun.reflect.Reflection");
-                        byte[] classBuffer = readInputStream(reflectionClass.getResourceAsStream("Reflection.class"));
-                        Class reflectionAnonymousClass = unsafe.defineAnonymousClass(reflectionClass,classBuffer,null);
+                        Class<?> reflectionClass = Class.forName("sun.reflect.Reflection");
+                        byte[] classBuffer = IOUtil.readBytesFromIs(
+                                reflectionClass.getResourceAsStream("Reflection.class"));
+                        assert classBuffer != null;
+                        Class<?> reflectionAnonymousClass = unsafe.defineAnonymousClass(
+                                reflectionClass, classBuffer, null);
 
-                        Field fieldFilterMapField=reflectionAnonymousClass.getDeclaredField("fieldFilterMap");
-                        Field methodFilterMapField=reflectionAnonymousClass.getDeclaredField("methodFilterMap");
+                        Field fieldFilterMapField = reflectionAnonymousClass.getDeclaredField("fieldFilterMap");
+                        Field methodFilterMapField = reflectionAnonymousClass.getDeclaredField("methodFilterMap");
 
-                        if(fieldFilterMapField.getType().isAssignableFrom(HashMap.class)){
-                            unsafe.putObject(reflectionClass,unsafe.staticFieldOffset(fieldFilterMapField),new HashMap());
+                        if (fieldFilterMapField.getType().isAssignableFrom(HashMap.class)) {
+                            unsafe.putObject(reflectionClass, unsafe.staticFieldOffset(
+                                    fieldFilterMapField), new HashMap<>());
                         }
-                        if(methodFilterMapField.getType().isAssignableFrom(HashMap.class)){
-                            unsafe.putObject(reflectionClass,unsafe.staticFieldOffset(methodFilterMapField),new HashMap());
+                        if (methodFilterMapField.getType().isAssignableFrom(HashMap.class)) {
+                            unsafe.putObject(reflectionClass, unsafe.staticFieldOffset(
+                                    methodFilterMapField), new HashMap<>());
                         }
-                        removeClassCache(unsafe,classClass);
-                        System.out.println(String.format("Bypass Jdk Reflection Filter Successfully! ClassLoader :%s", classClass.getDeclaredField("classLoader")));
-
-                    }catch (Exception e3){
-
+                        removeClassCache(unsafe, classClass);
+                        return true;
+                    } catch (Exception ignored) {
+                        return false;
                     }
                 }
             }
-        }catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            return false;
         }
     }
 
     public static long getProcessID(Process p) {
         String javaVersion = System.getProperty("java.version");
         long result = Integer.MAX_VALUE;
-        if(javaVersion.startsWith("1.8")) {
+        if (javaVersion.startsWith("1.8")) {
             try {
                 if (OSUtil.isWindows()) {
                     Field f = p.getClass().getDeclaredField("handle");
@@ -125,12 +122,11 @@ public class JNAUtil {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-        }else{
+        } else {
             try {
-                bypassReflectionFilter();
                 Method method = Process.class.getDeclaredMethod("pid");
                 result = (long) method.invoke(p);
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
