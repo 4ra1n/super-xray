@@ -93,9 +93,15 @@ Others:
 
 ## 0.7-beta
 
+该版本为重大更新，因为是支持了`JDK8`的版本，当环境是`JDK8`时使用`JNA`技术访问`Native`方法，通过`Windows API`实现功能；
+当环境是`JDK9+`时，反射调用方法即可。
+
 Bug:
-- [important] 反连平台没有设置enabled为true #57
+- [important] 寻找一种能够支持JDK8的魔法 #61
+- 不能支持JDK8的解决方案建议 #63 (同 #61)
+- [important] 反连平台没有设置remote_server为true #57
 - 使用IDEA皮肤时底部恢复按钮无法展示完全 #55
 
 Others:
 - [important] 配置文件无法保存每次都会新建 #58
+- 优化启动脚本 #60 (最终没有优化因为支持了`JDK8`)

@@ -40,8 +40,6 @@ public class JNAUtil {
         }
     }
 
-    // 虽然这里用不到，但以后很大可能性会用到
-    @SuppressWarnings("all")
     public static boolean bypassReflectionFilter() {
         try {
             Unsafe unsafe = getUnsafe();
@@ -139,7 +137,17 @@ public class JNAUtil {
                 Method method = Process.class.getDeclaredMethod("pid");
                 result = (long) method.invoke(p);
             } catch (Exception ex) {
-                ex.printStackTrace();
+                try {
+                    if (bypassReflectionFilter()) {
+                        logger.info("java 9+ bypass reflect get pid");
+                        Method method = Process.class.getDeclaredMethod("pid");
+                        result = (long) method.invoke(p);
+                    } else {
+                        return result;
+                    }
+                } catch (Exception ignored) {
+                    return result;
+                }
             }
         }
         return result;
