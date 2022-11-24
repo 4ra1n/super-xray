@@ -372,14 +372,14 @@ public class MainForm {
                 new Thread(() -> {
                     while (true) {
                         if (stop) {
-                            logger.info(String.format("stop pid: %d", process.pid()));
+                            logger.info(String.format("stop pid: %d", JNAUtil.getProcessID(process)));
                             try {
                                 if (!OSUtil.isWindows()) {
                                     new ProcessBuilder("kill", "-9",
-                                            Long.toString(process.pid())).start();
+                                            Long.toString(JNAUtil.getProcessID(process))).start();
                                 } else {
                                     new ProcessBuilder("cmd.exe", "/c",
-                                            String.format("taskkill /f /pid %d", process.pid())).start();
+                                            String.format("taskkill /f /pid %d", JNAUtil.getProcessID(process))).start();
                                 }
                                 return;
                             } catch (IOException e) {
