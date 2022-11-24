@@ -174,7 +174,7 @@ public class MainForm {
             ex.printStackTrace();
         }
 
-        reloadConfig(true);
+        reloadConfig(true, false);
 
         logger.info("init look up config button");
         lookupConfigButton.addActionListener(e -> {
@@ -196,21 +196,34 @@ public class MainForm {
     }
 
     @SuppressWarnings("unchecked")
-    public void reloadConfig(boolean init) {
+    public void reloadConfig(boolean init, boolean reset) {
         Path curConfig = Paths.get("config.yaml");
         if (init) {
+            if (reset) {
+                InputStream is = this.getClass().getClassLoader().getResourceAsStream("config.yaml");
+                configStr = IOUtil.readStringFromIs(is);
+            } else {
+                if (Files.exists(curConfig)) {
+                    try {
+                        configStr = new String(Files.readAllBytes(curConfig));
+                    } catch (Exception ex) {
+                        logger.error(ex);
+                    }
+                } else {
+                    InputStream is = this.getClass().getClassLoader().getResourceAsStream("config.yaml");
+                    configStr = IOUtil.readStringFromIs(is);
+                }
+            }
+        } else {
             if (Files.exists(curConfig)) {
                 try {
                     configStr = new String(Files.readAllBytes(curConfig));
                 } catch (Exception ex) {
                     logger.error(ex);
                 }
-            } else {
-                InputStream is = this.getClass().getClassLoader().getResourceAsStream("config.yaml");
-                configStr = IOUtil.readStringFromIs(is);
             }
-            configTemplate = configStr;
         }
+        configTemplate = configStr;
 
         Yaml yaml = new Yaml();
         configObj = yaml.load(configStr);
@@ -303,6 +316,33 @@ public class MainForm {
                         xxeCheckBox.setSelected((boolean) (items.get("enabled")));
                     }
                 }
+            }
+        }
+
+        String data = null;
+        for (Map.Entry<String, Object> entry : configObj.entrySet()) {
+            if (entry.getKey().equals("http")) {
+                Map<String, Object> httpModule = (Map<String, Object>) entry.getValue();
+                data = (String) httpModule.get("proxy");
+            }
+        }
+        if (data != null) {
+            proxyText.setText(data);
+        }
+
+        for (Map.Entry<String, Object> entry : configObj.entrySet()) {
+            if (entry.getKey().equals("reverse")) {
+                Map<String, Object> reverse = (Map<String, Object>) entry.getValue();
+                Map<String, Object> client = (Map<String, Object>) reverse.get("client");
+                String token = (String) reverse.get("token");
+                String httpUrl = (String) client.get("http_base_url");
+                String dnsServer = (String) client.get("dns_server_ip");
+                if (StringUtil.notEmpty(httpUrl) || StringUtil.notEmpty(dnsServer)) {
+                    client.put("remote_server", true);
+                }
+                tokenText.setText(token);
+                httpReverseText.setText(httpUrl);
+                dnsText.setText(dnsServer);
             }
         }
     }
@@ -1091,7 +1131,7 @@ public class MainForm {
 
     public void initReset() {
         resetConfigButton.addActionListener(e -> {
-            reloadConfig(true);
+            reloadConfig(true, true);
             if (LANG == CHINESE) {
                 JOptionPane.showMessageDialog(null, "已恢复");
             } else {

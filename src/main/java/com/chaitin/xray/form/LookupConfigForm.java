@@ -63,7 +63,7 @@ public class LookupConfigForm {
 
                 MainForm.configStr = newConfig;
 
-                MainForm.instance.reloadConfig(false);
+                MainForm.instance.reloadConfig(false, false);
 
                 Files.write(Paths.get(MainForm.configPath),
                         newConfig.getBytes(StandardCharsets.UTF_8));

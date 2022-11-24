@@ -172,7 +172,7 @@ public class AdvanceConfigForm {
             }
         });
         allDefaultButton.addActionListener(e -> {
-            MainForm.instance.reloadConfig(true);
+            MainForm.instance.reloadConfig(true, true);
             refreshAll();
             if (MainForm.LANG == MainForm.CHINESE) {
                 JOptionPane.showMessageDialog(null, "重置成功");
