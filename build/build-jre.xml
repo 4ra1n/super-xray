@@ -15,7 +15,7 @@
   <manifest></manifest>
   <icon>D:\super-xray\build\super-xray.ico</icon>
   <jre>
-    <path>../jre/bin</path>
+    <path>jre/bin</path>
     <requiresJdk>false</requiresJdk>
     <requires64Bit>false</requires64Bit>
     <minVersion></minVersion>
