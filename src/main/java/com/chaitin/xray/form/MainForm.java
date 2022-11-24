@@ -12,7 +12,9 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.SafeConstructor;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -224,7 +226,7 @@ public class MainForm {
         }
         configTemplate = configStr;
 
-        Yaml yaml = new Yaml();
+        Yaml yaml = new Yaml(new SafeConstructor(new LoaderOptions()));
         configObj = yaml.load(configStr);
 
         try {
@@ -684,7 +686,7 @@ public class MainForm {
     }
 
     public void refreshConfig() {
-        Yaml yaml = new Yaml();
+        Yaml yaml = new Yaml(new SafeConstructor(new LoaderOptions()));
         StringWriter writer = new StringWriter();
         yaml.dump(configObj, writer);
         configStr = writer.toString();

@@ -3,7 +3,9 @@ package com.chaitin.xray.form;
 import com.chaitin.xray.utils.StringUtil;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.SafeConstructor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -57,7 +59,7 @@ public class LookupConfigForm {
                 return;
             }
             try {
-                Yaml yaml = new Yaml();
+                Yaml yaml = new Yaml(new SafeConstructor(new LoaderOptions()));
                 String newConfig = configTextArea.getText();
                 MainForm.configObj = yaml.load(newConfig);
 

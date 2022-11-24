@@ -97,7 +97,7 @@ Others:
 当环境是`JDK9+`时，反射调用方法即可。修复了一处功能`bug`并优先加载当前目录的`config.yaml`文件，不会删除，实现了保存设置功能。
 
 另外提供了两种`exe`的下载：
-- 内置`JRE`和`xray`的`exe`可以一键启动：`super-xray-0.7-jre-exe.zip`
+- 内置`JRE`的`exe`可以一键启动：`super-xray-0.7-jre-exe.zip`
 - 调用系统`JRE`的`exe`：`super-xray-0.7-system-jre.exe`
 
 第一种不需要安装任何环境，解压后直接使用；第二种需要本地`JAVA_HOME`或环境变量有配置`Java`
