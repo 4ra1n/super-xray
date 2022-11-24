@@ -3,6 +3,7 @@ package com.chaitin.xray.utils;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Kernel32;
 import com.sun.jna.platform.win32.WinNT;
+import org.apache.log4j.Logger;
 import sun.misc.Unsafe;
 
 import java.lang.reflect.Field;
@@ -11,6 +12,8 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class JNAUtil {
+
+    private static final Logger logger = Logger.getLogger(JNAUtil.class);
 
     private static Unsafe getUnsafe() {
         Unsafe unsafe;
@@ -37,6 +40,8 @@ public class JNAUtil {
         }
     }
 
+    // 虽然这里用不到，但以后很大可能性会用到
+    @SuppressWarnings("all")
     public static boolean bypassReflectionFilter() {
         try {
             Unsafe unsafe = getUnsafe();
@@ -53,8 +58,10 @@ public class JNAUtil {
                     Class<?> reflectionAnonymousClass = unsafe.defineAnonymousClass(
                             reflectionClass, classBuffer, null);
 
-                    Field fieldFilterMapField = reflectionAnonymousClass.getDeclaredField("fieldFilterMap");
-                    Field methodFilterMapField = reflectionAnonymousClass.getDeclaredField("methodFilterMap");
+                    Field fieldFilterMapField =
+                            reflectionAnonymousClass.getDeclaredField("fieldFilterMap");
+                    Field methodFilterMapField =
+                            reflectionAnonymousClass.getDeclaredField("methodFilterMap");
 
                     if (fieldFilterMapField.getType().isAssignableFrom(HashMap.class)) {
                         unsafe.putObject(reflectionClass, unsafe.staticFieldOffset(
@@ -76,8 +83,10 @@ public class JNAUtil {
                         Class<?> reflectionAnonymousClass = unsafe.defineAnonymousClass(
                                 reflectionClass, classBuffer, null);
 
-                        Field fieldFilterMapField = reflectionAnonymousClass.getDeclaredField("fieldFilterMap");
-                        Field methodFilterMapField = reflectionAnonymousClass.getDeclaredField("methodFilterMap");
+                        Field fieldFilterMapField =
+                                reflectionAnonymousClass.getDeclaredField("fieldFilterMap");
+                        Field methodFilterMapField =
+                                reflectionAnonymousClass.getDeclaredField("methodFilterMap");
 
                         if (fieldFilterMapField.getType().isAssignableFrom(HashMap.class)) {
                             unsafe.putObject(reflectionClass, unsafe.staticFieldOffset(
@@ -105,6 +114,7 @@ public class JNAUtil {
         if (javaVersion.startsWith("1.8")) {
             try {
                 if (OSUtil.isWindows()) {
+                    logger.info("java 1.8 windows jna get pid");
                     Field f = p.getClass().getDeclaredField("handle");
                     f.setAccessible(true);
                     long handle = f.getLong(p);
@@ -114,6 +124,7 @@ public class JNAUtil {
                     result = kernel.GetProcessId(hand);
                     f.setAccessible(false);
                 } else {
+                    logger.info("java 1.8 mac/linux reflect get pid");
                     Field f = p.getClass().getDeclaredField("pid");
                     f.setAccessible(true);
                     result = f.getLong(p);
@@ -124,6 +135,7 @@ public class JNAUtil {
             }
         } else {
             try {
+                logger.info("java 9+ reflect get pid");
                 Method method = Process.class.getDeclaredMethod("pid");
                 result = (long) method.invoke(p);
             } catch (Exception ex) {
