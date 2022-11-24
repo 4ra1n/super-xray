@@ -102,6 +102,9 @@ Others:
 
 第一种不需要安装任何环境，解压后直接使用；第二种需要本地`JAVA_HOME`或环境变量有配置`Java`
 
+Security:
+- 修复SnakeYAML反序列化漏洞 [GHSA-39pv-4vmj-c4fr](https://github.com/4ra1n/super-xray/security/advisories/GHSA-39pv-4vmj-c4fr)
+
 Bug:
 - [important] 寻找一种能够支持JDK8的魔法 #61
 - [important] 反连平台没有设置remote_server为true #57
