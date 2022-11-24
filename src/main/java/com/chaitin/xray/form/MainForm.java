@@ -197,9 +197,18 @@ public class MainForm {
 
     @SuppressWarnings("unchecked")
     public void reloadConfig(boolean init) {
+        Path curConfig = Paths.get("config.yaml");
         if (init) {
-            InputStream is = this.getClass().getClassLoader().getResourceAsStream("config.yaml");
-            configStr = IOUtil.readStringFromIs(is);
+            if (Files.exists(curConfig)) {
+                try {
+                    configStr = new String(Files.readAllBytes(curConfig));
+                } catch (Exception ex) {
+                    logger.error(ex);
+                }
+            } else {
+                InputStream is = this.getClass().getClassLoader().getResourceAsStream("config.yaml");
+                configStr = IOUtil.readStringFromIs(is);
+            }
             configTemplate = configStr;
         }
 
@@ -209,6 +218,8 @@ public class MainForm {
         try {
             if (StringUtil.notEmpty(configPath)) {
                 Files.write(Paths.get(configPath),
+                        configStr.getBytes(StandardCharsets.UTF_8));
+                Files.write(curConfig,
                         configStr.getBytes(StandardCharsets.UTF_8));
             }
         } catch (Exception ex) {
@@ -639,6 +650,8 @@ public class MainForm {
         yaml.dump(configObj, writer);
         configStr = writer.toString();
         try {
+            Files.write(Paths.get("config.yaml"),
+                    configStr.getBytes(StandardCharsets.UTF_8));
             Files.write(Paths.get(configPath),
                     configStr.getBytes(StandardCharsets.UTF_8));
         } catch (Exception ex) {
@@ -957,6 +970,16 @@ public class MainForm {
 
     @SuppressWarnings("unchecked")
     public void initHttpProxy() {
+        String data = null;
+        for (Map.Entry<String, Object> entry : configObj.entrySet()) {
+            if (entry.getKey().equals("http")) {
+                Map<String, Object> httpModule = (Map<String, Object>) entry.getValue();
+                data = (String) httpModule.get("proxy");
+            }
+        }
+        if (data != null) {
+            proxyText.setText(data);
+        }
         proxyConfigButton.addActionListener(e -> {
             String httpProxy = proxyText.getText();
             for (Map.Entry<String, Object> entry : configObj.entrySet()) {
@@ -976,6 +999,22 @@ public class MainForm {
 
     @SuppressWarnings("unchecked")
     public void initReverse() {
+        for (Map.Entry<String, Object> entry : configObj.entrySet()) {
+            if (entry.getKey().equals("reverse")) {
+                Map<String, Object> reverse = (Map<String, Object>) entry.getValue();
+                Map<String, Object> client = (Map<String, Object>) reverse.get("client");
+                String token = (String) reverse.get("token");
+                String httpUrl = (String) client.get("http_base_url");
+                String dnsServer = (String) client.get("dns_server_ip");
+                if (StringUtil.notEmpty(httpUrl) || StringUtil.notEmpty(dnsServer)) {
+                    client.put("remote_server", true);
+                }
+                tokenText.setText(token);
+                httpReverseText.setText(httpUrl);
+                dnsText.setText(dnsServer);
+            }
+        }
+
         reverseConfigButton.addActionListener(e -> {
             String http = httpReverseText.getText();
             String dns = dnsText.getText();
@@ -985,7 +1024,7 @@ public class MainForm {
                     Map<String, Object> reverse = (Map<String, Object>) entry.getValue();
                     Map<String, Object> client = (Map<String, Object>) reverse.get("client");
                     reverse.put("token", token);
-                    client.put("reverse_server", true);
+                    client.put("remote_server", true);
                     client.put("http_base_url", http);
                     client.put("dns_server_ip", dns);
                 }

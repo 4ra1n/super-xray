@@ -94,4 +94,8 @@ Others:
 ## 0.7-beta
 
 Bug:
+- [important] 反连平台没有设置enabled为true #57
 - 使用IDEA皮肤时底部恢复按钮无法展示完全 #55
+
+Others:
+- [important] 配置文件无法保存每次都会新建 #58

@@ -40,10 +40,7 @@ public class XrayUtil {
             Files.delete(Paths.get(Const.PluginXrayYaml));
         } catch (Exception ignored) {
         }
-        try {
-            Files.delete(Paths.get(Const.ConfigYaml));
-        } catch (Exception ignored) {
-        }
+        // do not delete current config.yaml
     }
 
     public static void cpAllConfig(String targetDir) {
