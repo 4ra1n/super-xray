@@ -17,7 +17,6 @@ public interface Const {
     String metal = "javax.swing.plaf.metal.MetalLookAndFeel";
     String windows = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
     String winClassic = "com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel";
-    String motif = "com.sun.java.swing.plaf.motif.MotifLookAndFeel";
     String gtk = "com.sun.java.swing.plaf.gtk.GTKLookAndFeel";
     String aqua = "com.apple.laf.AquaLookAndFeel";
 }
