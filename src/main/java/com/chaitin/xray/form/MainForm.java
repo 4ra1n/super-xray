@@ -1538,16 +1538,6 @@ public class MainForm {
     }
 
     private void initExit() {
-        String version = System.getProperty("java.version");
-        if (!version.startsWith("1.8")) {
-            if (LANG == CHINESE) {
-                JOptionPane.showMessageDialog(null, "JDK 9 以上请勿使用此版本");
-                System.exit(0);
-            } else {
-                JOptionPane.showMessageDialog(null, "do not use this version in JDK 9+");
-                System.exit(0);
-            }
-        }
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             instance.stop = true;
             try {
