@@ -10,10 +10,6 @@ import com.formdev.flatlaf.FlatLightLaf;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
-import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
-import javafx.scene.Scene;
-import javafx.scene.web.WebView;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.yaml.snakeyaml.LoaderOptions;
@@ -2059,5 +2055,4 @@ public class MainForm {
     public JComponent $$$getRootComponent$$$() {
         return SuperXray;
     }
-
 }

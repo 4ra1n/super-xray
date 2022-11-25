@@ -1,7 +1,5 @@
 package com.chaitin.xray.model;
 
-import com.formdev.flatlaf.FlatLaf;
-
 import java.io.File;
 
 public interface Const {
