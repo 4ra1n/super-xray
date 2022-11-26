@@ -957,6 +957,7 @@
             <properties>
               <background color="-12828863"/>
               <editable value="false"/>
+              <font name="Consolas"/>
               <foreground color="-16711895"/>
               <lineWrap value="true"/>
             </properties>

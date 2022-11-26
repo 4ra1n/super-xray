@@ -18,6 +18,8 @@ import org.yaml.snakeyaml.constructor.SafeConstructor;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -1560,8 +1562,23 @@ public class MainForm {
         }));
     }
 
+    private void initFont() {
+        try {
+            InputStream is = this.getClass().getClassLoader().getResourceAsStream("Consolas.ttf");
+            if (is == null) {
+                return;
+            }
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, is);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(customFont);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public MainForm() {
         init();
+        initFont();
         initLang();
         initSkin();
         initLoadXray();
@@ -1990,6 +2007,8 @@ public class MainForm {
         outputTextArea = new JTextArea();
         outputTextArea.setBackground(new Color(-12828863));
         outputTextArea.setEditable(false);
+        Font outputTextAreaFont = this.$$$getFont$$$("Consolas", -1, -1, outputTextArea.getFont());
+        if (outputTextAreaFont != null) outputTextArea.setFont(outputTextAreaFont);
         outputTextArea.setForeground(new Color(-16711895));
         outputTextArea.setLineWrap(true);
         outputPanel.setViewportView(outputTextArea);
@@ -2047,6 +2066,28 @@ public class MainForm {
         buttonGroup = new ButtonGroup();
         buttonGroup.add(chineseLangButton);
         buttonGroup.add(englishLangButton);
+    }
+
+    /**
+     * @noinspection ALL
+     */
+    private Font $$$getFont$$$(String fontName, int style, int size, Font currentFont) {
+        if (currentFont == null) return null;
+        String resultName;
+        if (fontName == null) {
+            resultName = currentFont.getName();
+        } else {
+            Font testFont = new Font(fontName, Font.PLAIN, 10);
+            if (testFont.canDisplay('a') && testFont.canDisplay('1')) {
+                resultName = fontName;
+            } else {
+                resultName = currentFont.getName();
+            }
+        }
+        Font font = new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
+        boolean isMac = System.getProperty("os.name", "").toLowerCase(Locale.ENGLISH).startsWith("mac");
+        Font fontWithFallback = isMac ? new Font(font.getFamily(), font.getStyle(), font.getSize()) : new StyleContext().getFont(font.getFamily(), font.getStyle(), font.getSize());
+        return fontWithFallback instanceof FontUIResource ? fontWithFallback : new FontUIResource(fontWithFallback);
     }
 
     /**
