@@ -36,6 +36,7 @@
             <properties>
               <background color="-725535"/>
               <editable value="false"/>
+              <font name="Consolas" size="12"/>
               <foreground color="-12828863"/>
             </properties>
           </component>

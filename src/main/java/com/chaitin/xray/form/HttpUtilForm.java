@@ -7,7 +7,10 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.text.StyleContext;
 import java.awt.*;
+import java.util.Locale;
 
 public class HttpUtilForm {
     public JPanel httpUtilPanel;
@@ -103,6 +106,8 @@ public class HttpUtilForm {
         reqScroll.setBorder(BorderFactory.createTitledBorder(null, "request", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         reqArea = new JTextArea();
         reqArea.setBackground(new Color(-725535));
+        Font reqAreaFont = this.$$$getFont$$$("Consolas", -1, 18, reqArea.getFont());
+        if (reqAreaFont != null) reqArea.setFont(reqAreaFont);
         reqArea.setLineWrap(true);
         reqArea.setText("");
         reqScroll.setViewportView(reqArea);
@@ -112,10 +117,34 @@ public class HttpUtilForm {
         respScroll.setBorder(BorderFactory.createTitledBorder(null, "response", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         respArea = new JTextArea();
         respArea.setBackground(new Color(-725535));
+        Font respAreaFont = this.$$$getFont$$$("Consolas", -1, 18, respArea.getFont());
+        if (respAreaFont != null) respArea.setFont(respAreaFont);
         respArea.setLineWrap(true);
         respArea.setText("");
         respArea.setWrapStyleWord(false);
         respScroll.setViewportView(respArea);
+    }
+
+    /**
+     * @noinspection ALL
+     */
+    private Font $$$getFont$$$(String fontName, int style, int size, Font currentFont) {
+        if (currentFont == null) return null;
+        String resultName;
+        if (fontName == null) {
+            resultName = currentFont.getName();
+        } else {
+            Font testFont = new Font(fontName, Font.PLAIN, 10);
+            if (testFont.canDisplay('a') && testFont.canDisplay('1')) {
+                resultName = fontName;
+            } else {
+                resultName = currentFont.getName();
+            }
+        }
+        Font font = new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
+        boolean isMac = System.getProperty("os.name", "").toLowerCase(Locale.ENGLISH).startsWith("mac");
+        Font fontWithFallback = isMac ? new Font(font.getFamily(), font.getStyle(), font.getSize()) : new StyleContext().getFont(font.getFamily(), font.getStyle(), font.getSize());
+        return fontWithFallback instanceof FontUIResource ? fontWithFallback : new FontUIResource(fontWithFallback);
     }
 
     /**

@@ -4,6 +4,7 @@ import com.chaitin.xray.model.Const;
 import org.apache.log4j.Logger;
 
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class XrayUtil {
@@ -14,7 +15,6 @@ public class XrayUtil {
         try {
             Files.delete(Paths.get(targetDir + Const.ModuleXrayYaml));
         } catch (Exception ignored) {
-
         }
         try {
             Files.delete(Paths.get(targetDir + Const.XrayYaml));
@@ -22,10 +22,6 @@ public class XrayUtil {
         }
         try {
             Files.delete(Paths.get(targetDir + Const.PluginXrayYaml));
-        } catch (Exception ignored) {
-        }
-        try {
-            Files.delete(Paths.get(targetDir + Const.ConfigYaml));
         } catch (Exception ignored) {
         }
         try {
@@ -40,7 +36,16 @@ public class XrayUtil {
             Files.delete(Paths.get(Const.PluginXrayYaml));
         } catch (Exception ignored) {
         }
-        // do not delete current config.yaml
+        try {
+            Path thisPath = Paths.get(Const.ConfigYaml);
+            Path xrayPath = Paths.get(targetDir + Const.ConfigYaml);
+            // do not delete current config.yaml
+            if(!thisPath.toFile().getAbsolutePath().equals(
+                    xrayPath.toFile().getAbsolutePath())){
+                Files.delete(xrayPath);
+            }
+        } catch (Exception ignored) {
+        }
     }
 
     public static void cpAllConfig(String targetDir) {

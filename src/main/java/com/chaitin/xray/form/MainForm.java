@@ -819,18 +819,37 @@ public class MainForm {
         });
     }
 
+    private static boolean activeRunning = false;
+
     public void initActiveScan() {
         logger.info("init active scan module");
         activeScanButton.addActionListener(e -> {
             try {
-                refreshOutput();
-                xrayCmd.setModule("webscan");
-                xrayCmd.setConfig(String.format("%s", configPath));
-                xrayCmd.setOthers(null);
-                String[] finalCmd = xrayCmd.buildCmd();
-                outputTextArea.setText(null);
-                stop = false;
-                execAndFresh(finalCmd);
+                if (!activeRunning) {
+                    refreshOutput();
+                    xrayCmd.setModule("webscan");
+                    xrayCmd.setConfig(String.format("%s", configPath));
+                    xrayCmd.setOthers(null);
+                    String[] finalCmd = xrayCmd.buildCmd();
+                    outputTextArea.setText(null);
+                    stop = false;
+                    execAndFresh(finalCmd);
+                    activeRunning = true;
+                    if (LANG == CHINESE) {
+                        activeScanButton.setText("停止主动扫描");
+                    } else {
+                        activeScanButton.setText("Stop Active Scan");
+                    }
+                } else {
+                    if (LANG == CHINESE) {
+                        activeScanButton.setText("开始主动扫描");
+                    } else {
+                        activeScanButton.setText("Start Active Scan");
+                    }
+                    stop = true;
+                    outputTextArea.setText(null);
+                    activeRunning = false;
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -1648,7 +1667,7 @@ public class MainForm {
         choseDirButton.setText("点击按钮选择");
         pathButtonPanel.add(choseDirButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, 1, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         noteLabel = new JLabel();
-        noteLabel.setText("<html>\n注意：在 Mac OS 中请用 control+c/v 复制/粘贴\n</html>");
+        noteLabel.setText("注意：Mac OS 用 control+c/v 复制/粘贴");
         pathButtonPanel.add(noteLabel, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, new Dimension(300, -1), null, null, 0, false));
         skinPanel = new JPanel();
         skinPanel.setLayout(new GridLayoutManager(2, 4, new Insets(0, 0, 0, 0), -1, -1));
@@ -2096,4 +2115,5 @@ public class MainForm {
     public JComponent $$$getRootComponent$$$() {
         return SuperXray;
     }
+
 }

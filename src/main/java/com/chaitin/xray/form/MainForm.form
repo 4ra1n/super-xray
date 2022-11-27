@@ -45,7 +45,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <text value="&lt;html&gt;&#10;注意：在 Mac OS 中请用 control+c/v 复制/粘贴&#10;&lt;/html&gt;"/>
+                  <text value="注意：Mac OS 用 control+c/v 复制/粘贴"/>
                 </properties>
               </component>
               <grid id="55662" binding="skinPanel" layout-manager="GridLayoutManager" row-count="2" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
