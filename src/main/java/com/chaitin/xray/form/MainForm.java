@@ -47,6 +47,7 @@ public class MainForm {
     private static final List<String> existOutputList = new ArrayList<>();
     private static DB db;
 
+    public RadForm radInstance;
     private JButton choseDirButton;
     private JPanel SuperXray;
     private JPanel pathButtonPanel;
@@ -1583,6 +1584,9 @@ public class MainForm {
     private void initExit() {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             instance.stop = true;
+            if (radInstance != null) {
+                radInstance.stop = true;
+            }
             try {
                 Thread.sleep(3000);
             } catch (Exception ignored) {
@@ -1607,7 +1611,8 @@ public class MainForm {
     private void initGetRad() {
         radButton.addActionListener(e -> {
             JFrame frame = new JFrame("Rad Command");
-            frame.setContentPane(new RadForm(portText.getText()).radPanel);
+            radInstance = new RadForm(portText.getText());
+            frame.setContentPane(radInstance.radPanel);
             frame.setResizable(false);
             frame.pack();
             frame.setVisible(true);

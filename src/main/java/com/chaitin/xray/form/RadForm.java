@@ -34,8 +34,7 @@ public class RadForm {
     private JLabel startLabel;
 
     private static RadCmd radCmd;
-
-    private volatile boolean stop = false;
+    public volatile boolean stop = false;
 
     private void execAndFresh(String[] finalCmd) {
         outputTextArea.setText(null);
