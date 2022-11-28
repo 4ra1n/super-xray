@@ -1,7 +1,7 @@
 # Super Xray
 [![](https://img.shields.io/github/v/release/4ra1n/super-xray)](https://github.com/4ra1n/super-xray/releases/latest)
 ![](https://img.shields.io/github/downloads/4ra1n/super-xray/total)
-![](https://img.shields.io/badge/Java%20Code%20Lines-4317-orange)
+![](https://img.shields.io/badge/Java%20Code%20Lines-4580-orange)
 
 [English Version](doc/README.md)
 
@@ -64,6 +64,7 @@
 
 其他：
 
+- 默认读取当前目录的`config.yaml`同时保存，可以用于加载上次配置
 - 点击下方`点击恢复按钮`可以恢复默认配置
 - 点击下方强制停止在立刻停下当前的任务
 - 反连平台是重要功能，但需要更多的配置，请前往官网查看文档
@@ -93,6 +94,21 @@
 
 ![](img/05.png)
 
+## 反连平台
+
+`xray`的反连平台支持独立和一体两种，绝大多数的情况是独立部署，所以该项目只考虑这种情况
+
+所谓独立部署意味着：
+- 服务端开启一个`reverse server`并配置`token`
+- 客户端配置完成后通过`token`连接服务端
+
+![](img/18.png)
+
+在0.8版本以后，该项目支持这种：
+- 首先配置好服务端并导出`config.yaml`
+- 用户自行上传到服务端`xray`并启动
+- 开启扫描时设置客户端`token`和`http ip`即可
+
 ## 小工具
 
 `http` 请求测试类似 `burp` 的 `repeater` 功能
@@ -110,6 +126,7 @@
 ## 皮肤
 
 加入了一些皮肤选择：
+- IDEA同款`Flat`皮肤
 - Java 原生的`Metal`，`Motif`和`Nimbus`
 - Windows 独有的现代和经典两款皮肤
 - Mac OS 独有的`Auqa`

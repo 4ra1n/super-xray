@@ -1,7 +1,7 @@
 # Super Xray
 [![](https://img.shields.io/github/v/release/4ra1n/super-xray)](https://github.com/4ra1n/super-xray/releases/latest)
 ![](https://img.shields.io/github/downloads/4ra1n/super-xray/total)
-![](https://img.shields.io/badge/Java%20Code%20Lines-4317-orange)
+![](https://img.shields.io/badge/Java%20Code%20Lines-4580-orange)
 
 ## Introduce
 
@@ -89,6 +89,22 @@ Some plug-ins can be advanced configured:
 
 ![](../img/05.png)
 
+## Reverse
+
+`xray`reverse platform supports both independent and integrated platforms. 
+In most cases, it is deployed independently, so this project only considers this situation.
+
+Independent deployment means:
+- server open `reverse server` with `token` config
+- client config `token` to connect server
+
+![](../img/18.png)
+
+After 0.8 version, we support:
+- config server and export `config.yaml`
+- user upload this config to server and start `xray`
+- start scan with your `token` and `http ip`
+
 ## Tools
 
 Like burp suite repeater
@@ -106,6 +122,7 @@ Like burp suite decoder
 ## Skin
 
 Add some skin:
+- IDEA `Flat`
 - Java `Metal`,`Motif`,`Nimbus`
 - Windows and classic
 - Mac OS `Auqa`

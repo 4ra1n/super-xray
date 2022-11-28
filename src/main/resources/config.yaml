@@ -121,7 +121,7 @@ reverse:
   dns:
     enabled: false
     listen_ip: 0.0.0.0
-    domain: "4ra1n.love"                          # DNS 域名配置
+    domain: ""                          # DNS 域名配置
     is_domain_name_server: false        # 是否修改了域名的 ns 为反连平台，如果是，那 nslookup 等就不需要指定 dns 了
     resolve:                            # DNS 静态解析规则
       - type: A                           # A, AAAA, TXT 三种

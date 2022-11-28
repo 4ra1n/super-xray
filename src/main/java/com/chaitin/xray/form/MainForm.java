@@ -119,11 +119,9 @@ public class MainForm {
     private JTextField proxyText;
     private JLabel proxyLabel;
     private JPanel proxyPanel;
-    private JTextField dnsText;
     private JTextField httpReverseText;
     private JPanel reverseUrlPanel;
     private JLabel httpReverseLabel;
-    private JLabel dnsReverseLabel;
     private JButton stopButton;
     private JButton resetConfigButton;
     private JButton openResultButton;
@@ -159,6 +157,7 @@ public class MainForm {
     private JRadioButton englishLangButton;
     private JButton langButton;
     private JButton onlineButton;
+    private JButton reverseServerButton;
 
     public void init() {
         logger.info("init main form");
@@ -346,7 +345,6 @@ public class MainForm {
                 }
                 tokenText.setText(token);
                 httpReverseText.setText(httpUrl);
-                dnsText.setText(dnsServer);
             }
         }
     }
@@ -1078,19 +1076,25 @@ public class MainForm {
                 Map<String, Object> client = (Map<String, Object>) reverse.get("client");
                 String token = (String) reverse.get("token");
                 String httpUrl = (String) client.get("http_base_url");
-                String dnsServer = (String) client.get("dns_server_ip");
-                if (StringUtil.notEmpty(httpUrl) || StringUtil.notEmpty(dnsServer)) {
+                if (StringUtil.notEmpty(httpUrl)) {
                     client.put("remote_server", true);
                 }
                 tokenText.setText(token);
                 httpReverseText.setText(httpUrl);
-                dnsText.setText(dnsServer);
             }
         }
 
+        reverseServerButton.addActionListener(e -> {
+            String t = "Reverse Server Config";
+            JFrame frame = new JFrame(t);
+            frame.setContentPane(new ReverseForm().reversePanel);
+            frame.setResizable(false);
+            frame.pack();
+            frame.setVisible(true);
+        });
+
         reverseConfigButton.addActionListener(e -> {
             String http = httpReverseText.getText();
-            String dns = dnsText.getText();
             String token = tokenText.getText();
             for (Map.Entry<String, Object> entry : configObj.entrySet()) {
                 if (entry.getKey().equals("reverse")) {
@@ -1099,7 +1103,6 @@ public class MainForm {
                     reverse.put("token", token);
                     client.put("remote_server", true);
                     client.put("http_base_url", http);
-                    client.put("dns_server_ip", dns);
                 }
             }
             refreshConfig();
@@ -1461,7 +1464,6 @@ public class MainForm {
                     TitledBorder.DEFAULT_POSITION, null, null));
             tokenLabel.setText("Token");
             httpReverseLabel.setText("Input HTTP URL(IP)");
-            dnsReverseLabel.setText("DNS IP(IP)");
             reverseConfigButton.setText("Confirm");
             startScanPanel.setBorder(BorderFactory.createTitledBorder(null,
                     "Start", TitledBorder.DEFAULT_JUSTIFICATION,
@@ -1488,6 +1490,7 @@ public class MainForm {
             openResultButton.setText("Open");
             choseDirButton.setText("Chose File");
             confirmPluginButton.setText("Confirm");
+            reverseServerButton.setText("Server Config");
         } else if (LANG == CHINESE) {
             xrayPathLabel.setText("你选择的xray文件是：");
             noteLabel.setText("<html> 注意：在 Mac OS 中请用 control+c/v 复制/粘贴 </html>");
@@ -1541,7 +1544,6 @@ public class MainForm {
                     TitledBorder.DEFAULT_POSITION, null, null));
             tokenLabel.setText("Token");
             httpReverseLabel.setText("请输入HTTP URL（IP形式）");
-            dnsReverseLabel.setText("DNS IP（IP形式）");
             reverseConfigButton.setText("确认配置");
             startScanPanel.setBorder(BorderFactory.createTitledBorder(null,
                     "启动", TitledBorder.DEFAULT_JUSTIFICATION,
@@ -1568,6 +1570,7 @@ public class MainForm {
             openResultButton.setText("点击打开扫描结果");
             choseDirButton.setText("点击按钮选择");
             confirmPluginButton.setText("确认插件");
+            reverseServerButton.setText("配置服务端");
         }
     }
 
@@ -1847,24 +1850,19 @@ public class MainForm {
         proxyText = new JTextField();
         proxyPanel.add(proxyText, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         reverseConfigPanel = new JPanel();
-        reverseConfigPanel.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
+        reverseConfigPanel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
         reverseConfigPanel.setBackground(new Color(-725535));
         rightConfigPanel.add(reverseConfigPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         reverseConfigPanel.setBorder(BorderFactory.createTitledBorder(null, "反连平台", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         reverseUrlPanel = new JPanel();
-        reverseUrlPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
+        reverseUrlPanel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
         reverseUrlPanel.setBackground(new Color(-725535));
-        reverseConfigPanel.add(reverseUrlPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        reverseConfigPanel.add(reverseUrlPanel, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         httpReverseLabel = new JLabel();
         httpReverseLabel.setText("请输入HTTP URL（IP形式）");
         reverseUrlPanel.add(httpReverseLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         httpReverseText = new JTextField();
         reverseUrlPanel.add(httpReverseText, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        dnsReverseLabel = new JLabel();
-        dnsReverseLabel.setText("DNS IP（IP形式）");
-        reverseUrlPanel.add(dnsReverseLabel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        dnsText = new JTextField();
-        reverseUrlPanel.add(dnsText, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         tokenLabel = new JLabel();
         tokenLabel.setText("Token");
         reverseUrlPanel.add(tokenLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -1873,6 +1871,9 @@ public class MainForm {
         reverseConfigButton = new JButton();
         reverseConfigButton.setText("确认配置");
         reverseConfigPanel.add(reverseConfigButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        reverseServerButton = new JButton();
+        reverseServerButton.setText("配置服务端");
+        reverseConfigPanel.add(reverseServerButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         startScanPanel = new JPanel();
         startScanPanel.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
         startScanPanel.setBackground(new Color(-725535));
