@@ -28,7 +28,7 @@ After 0.6-beta version we support English Version：
 
 After 0.8 version we support run with `rad`:
 
-![](../img/19.png)
+![](../img/20.png)
 
 ## Quick Start
 
