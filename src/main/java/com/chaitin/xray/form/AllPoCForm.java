@@ -87,7 +87,7 @@ public class AllPoCForm {
         pocList = new JTextArea();
         pocList.setBackground(new Color(-725535));
         pocList.setEditable(false);
-        Font pocListFont = this.$$$getFont$$$("Consolas", -1, 12, pocList.getFont());
+        Font pocListFont = this.$$$getFont$$$(null, -1, -1, pocList.getFont());
         if (pocListFont != null) pocList.setFont(pocListFont);
         pocList.setForeground(new Color(-12828863));
         pocScroll.setViewportView(pocList);

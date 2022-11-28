@@ -127,6 +127,7 @@ Others:
 Bugs:
 - [important] [公告] CPU消耗过高问题的解决 #69
 - [important] 当xray和super-xray同目录时不能保存配置 #68
+- [bug] 查看所有poc界面使用新字体后可能有意外行为 #70
 
 Others:
 - 控制台使用更好看的字体 #67
