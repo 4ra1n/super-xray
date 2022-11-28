@@ -28,6 +28,10 @@
 
 ![](img/17.png)
 
+在0.8版本以后可以与`rad`联动：
+
+![](img/19.png)
+
 ## 快速上手
 
 最新版下载地址：[Latest Release](https://github.com/4ra1n/super-xray/releases/latest)

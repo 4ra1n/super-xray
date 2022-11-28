@@ -26,6 +26,9 @@ After 0.6-beta version we support English Version：
 
 ![](../img/17.png)
 
+After 0.8 version we support run with `rad`:
+
+![](../img/19.png)
 
 ## Quick Start
 
