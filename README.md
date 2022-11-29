@@ -38,8 +38,8 @@
 最新版下载地址：[Latest Release](https://github.com/4ra1n/super-xray/releases/latest)
 
 观看B站视频：
-- https://www.bilibili.com/video/BV1Ud4y147Er
-- https://www.bilibili.com/video/BV1t84y1C76D
+- https://www.bilibili.com/video/BV1Ud4y147Er（基础版）
+- https://www.bilibili.com/video/BV1p8411j7vX（进阶版）
 
 启动： `java -jar SuperXray.jar`
 
@@ -113,20 +113,6 @@
 - 首先配置好服务端并导出`config.yaml`
 - 用户自行上传到服务端`xray`并启动
 - 开启扫描时设置客户端`token`和`http ip`即可
-
-## 小工具
-
-`http` 请求测试类似 `burp` 的 `repeater` 功能
-
-![](img/06.png)
-
-端口监听工具类似 `nc` 的监听
-
-![](img/07.png)
-
-编码工具类似 `burp` 的 `decoder` 模块
-
-![](img/08.png)
 
 ## 皮肤
 

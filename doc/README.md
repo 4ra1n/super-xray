@@ -109,20 +109,6 @@ After 0.8 version, we support:
 - user upload this config to server and start `xray`
 - start scan with your `token` and `http ip`
 
-## Tools
-
-Like burp suite repeater
-
-![](../img/06.png)
-
-Like nc
-
-![](../img/07.png)
-
-Like burp suite decoder
-
-![](../img/08.png)
-
 ## Skin
 
 Add some skin:
