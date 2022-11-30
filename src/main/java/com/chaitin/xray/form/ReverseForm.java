@@ -21,10 +21,7 @@ import java.util.Map;
 public class ReverseForm {
     public JPanel reversePanel;
     private JTextField dbPathText;
-    private JButton dbPathButton;
     private JTextField tokenText;
-    private JButton tokenButton;
-    private JButton httpButton;
     private JButton exportButton;
     private JPanel thePanel;
     private JLabel dbPathLabel;
@@ -68,6 +65,8 @@ public class ReverseForm {
                     httpObj.put("enabled", true);
                     httpObj.put("listen_ip", ip);
                     httpObj.put("listen_port", port);
+                    Map<String, Object> client = (Map<String, Object>) reverse.get("client");
+                    client.put("http_base_url", MainForm.instance.httpReverseText.getText());
                 }
             }
 

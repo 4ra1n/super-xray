@@ -120,7 +120,7 @@ public class MainForm {
     private JTextField proxyText;
     private JLabel proxyLabel;
     private JPanel proxyPanel;
-    private JTextField httpReverseText;
+    public JTextField httpReverseText;
     private JPanel reverseUrlPanel;
     private JLabel httpReverseLabel;
     private JButton stopButton;

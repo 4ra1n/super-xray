@@ -142,4 +142,5 @@ Others:
 ## 0.9
 
 Bugs:
+- [important] [bug] 反连平台应该自动配置client属性否则会失效 #72
 - [important] [bug] 当reverse配置为空但确认配置后无法正常启动 #71
