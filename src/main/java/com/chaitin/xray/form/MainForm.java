@@ -1099,6 +1099,16 @@ public class MainForm {
         reverseConfigButton.addActionListener(e -> {
             String http = httpReverseText.getText();
             String token = tokenText.getText();
+            if (!StringUtil.notEmpty(http) || !StringUtil.notEmpty(token)) {
+                httpReverseText.setText(null);
+                tokenText.setText(null);
+                if (LANG == CHINESE) {
+                    JOptionPane.showMessageDialog(null, "输入不可以为空");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Do not input null");
+                }
+                return;
+            }
             for (Map.Entry<String, Object> entry : configObj.entrySet()) {
                 if (entry.getKey().equals("reverse")) {
                     Map<String, Object> reverse = (Map<String, Object>) entry.getValue();
