@@ -107,6 +107,7 @@ Independent deployment means:
 ![](../img/18.png)
 
 After 0.8 version, we support:
+- do config reverse client first
 - config server and export `config.yaml`
 - user upload this config to server and start `xray`
 - start scan with your `token` and `http ip`
