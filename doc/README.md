@@ -29,6 +29,8 @@ After 0.6-beta version we support English Version：
 
 After 0.8 version we support run with `rad`:
 
+Make sure open mitm scan before run `rad`
+
 ![](../img/20.png)
 
 ## Quick Start
