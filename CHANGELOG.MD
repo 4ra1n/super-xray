@@ -145,6 +145,7 @@ Bugs:
 - [important] [bug] showMessageDialog多屏情况下的位置问题 #76
 - [important] [bug] 反连平台应该自动配置client属性否则会失效 #72
 - [important] [bug] 当reverse配置为空但确认配置后无法正常启动 #71
+- [bug] 高级配置的某个ui绑定错误 #79
 - [bug] 在线生成的翻译问题 #75 (另外修复多处翻译问题)
 
 Others:

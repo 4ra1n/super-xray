@@ -340,7 +340,7 @@ public class AdvanceConfigForm {
                     sb.append(ex);
                     sb.append("\n");
                 }
-                phExcludeArea.setText(sb.toString());
+                excludeArea.setText(sb.toString());
             }
         }
     }
