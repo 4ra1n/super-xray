@@ -31,7 +31,7 @@
 
 可以方便地搜索poc并运行：
 
-![](img/21.png)
+<img src="img/21.png" width="500px" style="vertical-align: middle; text-align: center;">
 
 ## 下载
 
