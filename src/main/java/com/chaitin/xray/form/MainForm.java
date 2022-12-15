@@ -127,7 +127,6 @@ public class MainForm {
     private JButton resetConfigButton;
     private JButton openResultButton;
     private JLabel stopLabel;
-    private JLabel openResultLabel;
     private JLabel resetConfigLabel;
     private JPanel resetPanel;
     private JPanel openResultPanel;
@@ -1165,6 +1164,11 @@ public class MainForm {
 
         openResultButton.addActionListener(e -> {
             if (outputFilePath == null) {
+                if (LANG == CHINESE) {
+                    JOptionPane.showMessageDialog(this.SuperXray, "目前没有输出文件");
+                } else {
+                    JOptionPane.showMessageDialog(this.SuperXray, "No output file");
+                }
                 return;
             }
             if (StringUtil.notEmpty(outputFilePath.trim())) {
@@ -1506,7 +1510,6 @@ public class MainForm {
                     TitledBorder.DEFAULT_POSITION, null, null));
             stopLabel.setText("  Force Stop");
             resetConfigLabel.setText("Reset Default Config");
-            openResultLabel.setText(" Open Scan Result");
             stopButton.setText("Stop");
             resetConfigButton.setText("Reset");
             autoDelCheckBox.setText("Delete All Reports When Exit");
@@ -1589,7 +1592,6 @@ public class MainForm {
                     TitledBorder.DEFAULT_POSITION, null, null));
             stopLabel.setText("  如果意外地运行了危险的程序可以点击：");
             resetConfigLabel.setText("恢复默认配置：");
-            openResultLabel.setText(" 打开扫描结果：（如果存在）");
             stopButton.setText("强制停止");
             resetConfigButton.setText("确认");
             autoDelCheckBox.setText("关闭后自动删除报告");
@@ -2091,19 +2093,16 @@ public class MainForm {
         resetConfigButton.setText("确认");
         resetPanel.add(resetConfigButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, 1, GridConstraints.SIZEPOLICY_FIXED, null, null, new Dimension(100, -1), 0, false));
         openResultPanel = new JPanel();
-        openResultPanel.setLayout(new GridLayoutManager(1, 3, new Insets(0, 0, 0, 0), -1, -1));
+        openResultPanel.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
         openResultPanel.setBackground(new Color(-725535));
         otherButton.add(openResultPanel, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 1, false));
-        openResultLabel = new JLabel();
-        openResultLabel.setText(" 打开扫描结果：（如果存在）");
-        openResultPanel.add(openResultLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         openResultButton = new JButton();
         openResultButton.setText("点击打开扫描结果");
-        openResultPanel.add(openResultButton, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        openResultPanel.add(openResultButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         autoDelCheckBox = new JCheckBox();
         autoDelCheckBox.setBackground(new Color(-725535));
         autoDelCheckBox.setText("关闭后自动删除报告");
-        openResultPanel.add(autoDelCheckBox, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        openResultPanel.add(autoDelCheckBox, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         stopPanel = new JPanel();
         stopPanel.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
         stopPanel.setBackground(new Color(-725535));
