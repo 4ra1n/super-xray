@@ -198,7 +198,7 @@ public class MainForm {
 
         logger.info("init look up cmd button");
         lookupCmdButton.addActionListener(e ->
-                JOptionPane.showMessageDialog(null, xrayCmd.buildCmd()));
+                JOptionPane.showMessageDialog(this.SuperXray, xrayCmd.buildCmd()));
     }
 
     @SuppressWarnings("unchecked")
@@ -424,9 +424,9 @@ public class MainForm {
                 (!StringUtil.notEmpty(db.getLastXrayPath()) ||
                         db.getLastXrayPath().equals("null"))) {
             if (LANG == CHINESE) {
-                JOptionPane.showMessageDialog(null, Const.MacNeedAgree);
+                JOptionPane.showMessageDialog(this.SuperXray, Const.MacNeedAgree);
             } else {
-                JOptionPane.showMessageDialog(null, Const.MacNeedAgreeEn);
+                JOptionPane.showMessageDialog(this.SuperXray, Const.MacNeedAgreeEn);
             }
         }
 
@@ -682,9 +682,9 @@ public class MainForm {
             refreshConfig();
             xrayCmd.setPoc(null);
             if (LANG == CHINESE) {
-                JOptionPane.showMessageDialog(null, "设置完成");
+                JOptionPane.showMessageDialog(this.SuperXray, "设置完成");
             } else {
-                JOptionPane.showMessageDialog(null, "Success");
+                JOptionPane.showMessageDialog(this.SuperXray, "Success");
             }
         });
     }
@@ -730,9 +730,9 @@ public class MainForm {
         outputConfigButton.addActionListener(e -> {
             refreshOutput();
             if (LANG == CHINESE) {
-                JOptionPane.showMessageDialog(null, "设置输出成功");
+                JOptionPane.showMessageDialog(this.SuperXray, "设置输出成功");
             } else {
-                JOptionPane.showMessageDialog(null, "Success");
+                JOptionPane.showMessageDialog(this.SuperXray, "Success");
             }
         });
     }
@@ -765,9 +765,9 @@ public class MainForm {
             xrayCmd.setInputPrefix("--url");
             xrayCmd.setInput(url);
             if (LANG == CHINESE) {
-                JOptionPane.showMessageDialog(null, "设置URL成功");
+                JOptionPane.showMessageDialog(this.SuperXray, "设置URL成功");
             } else {
-                JOptionPane.showMessageDialog(null, "Success");
+                JOptionPane.showMessageDialog(this.SuperXray, "Success");
             }
         });
     }
@@ -931,18 +931,18 @@ public class MainForm {
                 String suffix = temp[temp.length - 1].toLowerCase().trim();
                 if (!suffix.equals("yml") && !suffix.equals("yaml")) {
                     if (LANG == CHINESE) {
-                        JOptionPane.showMessageDialog(null, "你选择的不是合法YAML文件");
+                        JOptionPane.showMessageDialog(this.SuperXray, "你选择的不是合法YAML文件");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Error File Type");
+                        JOptionPane.showMessageDialog(this.SuperXray, "Error File Type");
                     }
                     return;
                 }
                 localPoCText.setText(absPath);
                 onlyUsePhantasm(absPath);
                 if (LANG == CHINESE) {
-                    JOptionPane.showMessageDialog(null, "设置PoC成功");
+                    JOptionPane.showMessageDialog(this.SuperXray, "设置PoC成功");
                 } else {
-                    JOptionPane.showMessageDialog(null, "Success");
+                    JOptionPane.showMessageDialog(this.SuperXray, "Success");
                 }
             }
         });
@@ -987,17 +987,17 @@ public class MainForm {
             logger.info(poc);
             if (!Poc.getPocList().contains(poc.trim())) {
                 if (LANG == CHINESE) {
-                    JOptionPane.showMessageDialog(null, "PoC不存在");
+                    JOptionPane.showMessageDialog(this.SuperXray, "PoC不存在");
                 } else {
-                    JOptionPane.showMessageDialog(null, "PoC Not Exist");
+                    JOptionPane.showMessageDialog(this.SuperXray, "PoC Not Exist");
                 }
                 return;
             }
             onlyUsePhantasm(poc);
             if (LANG == CHINESE) {
-                JOptionPane.showMessageDialog(null, "设置PoC成功");
+                JOptionPane.showMessageDialog(this.SuperXray, "设置PoC成功");
             } else {
-                JOptionPane.showMessageDialog(null, "Success");
+                JOptionPane.showMessageDialog(this.SuperXray, "Success");
             }
         });
     }
@@ -1008,6 +1008,16 @@ public class MainForm {
         mitmScanButton.addActionListener(e -> {
             if (!mitmRunning) {
                 String port = portText.getText();
+
+                if (!StringUtil.notEmpty(port)) {
+                    if (LANG == CHINESE) {
+                        JOptionPane.showMessageDialog(this.SuperXray, "请输入端口");
+                    } else {
+                        JOptionPane.showMessageDialog(this.SuperXray, "Need port");
+                    }
+                    return;
+                }
+
                 xrayCmd.setModule("webscan");
                 xrayCmd.setConfig(String.format("%s", configPath));
                 xrayCmd.setInput(null);
@@ -1064,9 +1074,9 @@ public class MainForm {
             }
             refreshConfig();
             if (LANG == CHINESE) {
-                JOptionPane.showMessageDialog(null, "设置代理成功");
+                JOptionPane.showMessageDialog(this.SuperXray, "设置代理成功");
             } else {
-                JOptionPane.showMessageDialog(null, "Success");
+                JOptionPane.showMessageDialog(this.SuperXray, "Success");
             }
         });
     }
@@ -1103,9 +1113,9 @@ public class MainForm {
                 httpReverseText.setText(null);
                 tokenText.setText(null);
                 if (LANG == CHINESE) {
-                    JOptionPane.showMessageDialog(null, "输入不可以为空");
+                    JOptionPane.showMessageDialog(this.SuperXray, "输入不可以为空");
                 } else {
-                    JOptionPane.showMessageDialog(null, "Do not input null");
+                    JOptionPane.showMessageDialog(this.SuperXray, "Do not input null");
                 }
                 return;
             }
@@ -1120,9 +1130,9 @@ public class MainForm {
             }
             refreshConfig();
             if (LANG == CHINESE) {
-                JOptionPane.showMessageDialog(null, "设置反连成功");
+                JOptionPane.showMessageDialog(this.SuperXray, "设置反连成功");
             } else {
-                JOptionPane.showMessageDialog(null, "Success");
+                JOptionPane.showMessageDialog(this.SuperXray, "Success");
             }
         });
     }
@@ -1132,9 +1142,9 @@ public class MainForm {
             stop = true;
             outputTextArea.setText(null);
             if (LANG == CHINESE) {
-                JOptionPane.showMessageDialog(null, "已强制停止");
+                JOptionPane.showMessageDialog(this.SuperXray, "已强制停止");
             } else {
-                JOptionPane.showMessageDialog(null, "Stop Success");
+                JOptionPane.showMessageDialog(this.SuperXray, "Stop Success");
             }
         });
     }
@@ -1182,9 +1192,9 @@ public class MainForm {
         resetConfigButton.addActionListener(e -> {
             reloadConfig(true, true);
             if (LANG == CHINESE) {
-                JOptionPane.showMessageDialog(null, "已恢复");
+                JOptionPane.showMessageDialog(this.SuperXray, "已恢复");
             } else {
-                JOptionPane.showMessageDialog(null, "Success");
+                JOptionPane.showMessageDialog(this.SuperXray, "Success");
             }
         });
     }
@@ -1271,9 +1281,9 @@ public class MainForm {
                         Class.forName(Const.nimbus);
                     } catch (Exception ignored) {
                         if (LANG == CHINESE) {
-                            JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                            JOptionPane.showMessageDialog(this.SuperXray, "您的操作系统不能设置该皮肤");
                         } else {
-                            JOptionPane.showMessageDialog(null,
+                            JOptionPane.showMessageDialog(this.SuperXray,
                                     "Your OS not support this skin");
                         }
                         return;
@@ -1285,9 +1295,9 @@ public class MainForm {
                         Class.forName(Const.metal);
                     } catch (Exception ignored) {
                         if (LANG == CHINESE) {
-                            JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                            JOptionPane.showMessageDialog(this.SuperXray, "您的操作系统不能设置该皮肤");
                         } else {
-                            JOptionPane.showMessageDialog(null,
+                            JOptionPane.showMessageDialog(this.SuperXray,
                                     "Your OS not support this skin");
                         }
                         return;
@@ -1299,9 +1309,9 @@ public class MainForm {
                         Class.forName(Const.windows);
                     } catch (Exception ignored) {
                         if (LANG == CHINESE) {
-                            JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                            JOptionPane.showMessageDialog(this.SuperXray, "您的操作系统不能设置该皮肤");
                         } else {
-                            JOptionPane.showMessageDialog(null,
+                            JOptionPane.showMessageDialog(this.SuperXray,
                                     "Your OS not support this skin");
                         }
                         return;
@@ -1313,9 +1323,9 @@ public class MainForm {
                         Class.forName(Const.winClassic);
                     } catch (Exception ignored) {
                         if (LANG == CHINESE) {
-                            JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                            JOptionPane.showMessageDialog(this.SuperXray, "您的操作系统不能设置该皮肤");
                         } else {
-                            JOptionPane.showMessageDialog(null,
+                            JOptionPane.showMessageDialog(this.SuperXray,
                                     "Your OS not support this skin");
                         }
                         return;
@@ -1327,9 +1337,9 @@ public class MainForm {
                         FlatLightLaf.setup();
                     } catch (Exception ignored) {
                         if (LANG == CHINESE) {
-                            JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                            JOptionPane.showMessageDialog(this.SuperXray, "您的操作系统不能设置该皮肤");
                         } else {
-                            JOptionPane.showMessageDialog(null,
+                            JOptionPane.showMessageDialog(this.SuperXray,
                                     "Your OS not support this skin");
                         }
                         return;
@@ -1341,9 +1351,9 @@ public class MainForm {
                         Class.forName(Const.gtk);
                     } catch (Exception ignored) {
                         if (LANG == CHINESE) {
-                            JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                            JOptionPane.showMessageDialog(this.SuperXray, "您的操作系统不能设置该皮肤");
                         } else {
-                            JOptionPane.showMessageDialog(null,
+                            JOptionPane.showMessageDialog(this.SuperXray,
                                     "Your OS not support this skin");
                         }
                         return;
@@ -1355,9 +1365,9 @@ public class MainForm {
                         Class.forName(Const.aqua);
                     } catch (Exception ignored) {
                         if (LANG == CHINESE) {
-                            JOptionPane.showMessageDialog(null, "您的操作系统不能设置该皮肤");
+                            JOptionPane.showMessageDialog(this.SuperXray, "您的操作系统不能设置该皮肤");
                         } else {
-                            JOptionPane.showMessageDialog(null,
+                            JOptionPane.showMessageDialog(this.SuperXray,
                                     "Your OS not support this skin");
                         }
                         return;
@@ -1506,6 +1516,7 @@ public class MainForm {
             reverseServerButton.setText("Server Config");
             radLabel.setText("Open mitm scan and run rad");
             radButton.setText("Run with rad");
+            onlineButton.setText("Generate Online");
         } else if (LANG == CHINESE) {
             xrayPathLabel.setText("你选择的xray文件是：");
             noteLabel.setText("<html> 注意：在 Mac OS 中请用 control+c/v 复制/粘贴 </html>");
@@ -1588,6 +1599,7 @@ public class MainForm {
             reverseServerButton.setText("配置服务端");
             radLabel.setText("开启被动扫描后可以联动rad");
             radButton.setText("点击联动");
+            onlineButton.setText("在线生成");
         }
     }
 
@@ -1604,22 +1616,17 @@ public class MainForm {
         }));
     }
 
-    private void initFont() {
-        try {
-            InputStream is = this.getClass().getClassLoader().getResourceAsStream("Consolas.ttf");
-            if (is == null) {
-                return;
-            }
-            Font customFont = Font.createFont(Font.TRUETYPE_FONT, is);
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(customFont);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     private void initGetRad() {
         radButton.addActionListener(e -> {
+            if (!StringUtil.notEmpty(portText.getText())) {
+                if (LANG == CHINESE) {
+                    JOptionPane.showMessageDialog(this.SuperXray, "请先开启被动扫描");
+                } else {
+                    JOptionPane.showMessageDialog(this.SuperXray, "Need open MITM");
+                }
+                return;
+            }
+
             JFrame frame = new JFrame("Rad Command");
             radInstance = new RadForm(portText.getText());
             frame.setContentPane(radInstance.radPanel);
@@ -1631,7 +1638,6 @@ public class MainForm {
 
     public MainForm() {
         init();
-        initFont();
         initLang();
         initSkin();
         initLoadXray();

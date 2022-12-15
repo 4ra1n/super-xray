@@ -40,7 +40,7 @@ public class LookupConfigForm {
 
         refreshConfigButton.addActionListener(e -> {
             if (!StringUtil.notEmpty(MainForm.configPath)) {
-                JOptionPane.showMessageDialog(null, "无法刷新");
+                JOptionPane.showMessageDialog(this.lookupConfigPanel, "无法刷新");
                 return;
             }
             try {
@@ -50,12 +50,12 @@ public class LookupConfigForm {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            JOptionPane.showMessageDialog(null, "已刷新配置");
+            JOptionPane.showMessageDialog(this.lookupConfigPanel, "已刷新配置");
         });
 
         saveConfigButton.addActionListener(e -> {
             if (!StringUtil.notEmpty(MainForm.configPath)) {
-                JOptionPane.showMessageDialog(null, "无法保存");
+                JOptionPane.showMessageDialog(this.lookupConfigPanel, "无法保存");
                 return;
             }
             try {
@@ -69,9 +69,9 @@ public class LookupConfigForm {
 
                 Files.write(Paths.get(MainForm.configPath),
                         newConfig.getBytes(StandardCharsets.UTF_8));
-                JOptionPane.showMessageDialog(null, "已保存配置");
+                JOptionPane.showMessageDialog(this.lookupConfigPanel, "已保存配置");
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "您的配置有误");
+                JOptionPane.showMessageDialog(this.lookupConfigPanel, "您的配置有误");
                 ex.printStackTrace();
             }
         });

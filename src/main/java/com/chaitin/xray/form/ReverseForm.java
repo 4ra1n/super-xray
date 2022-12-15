@@ -41,8 +41,21 @@ public class ReverseForm {
     private static String ip;
     private static String port;
 
+    private void initLang() {
+        if (MainForm.LANG == MainForm.CHINESE) {
+            dbPathLabel.setText("  数据库文件");
+            exportLabel.setText("  导出config.yaml配置文件");
+            exportButton.setText("导出");
+        } else {
+            dbPathLabel.setText("  db_file_path");
+            exportLabel.setText("  export server config.yaml");
+            exportButton.setText("export");
+        }
+    }
+
     @SuppressWarnings("unchecked")
     public ReverseForm() {
+        initLang();
         InputStream stdIs = ReverseForm.class.getClassLoader().getResourceAsStream("config.yaml");
         if (stdIs != null) {
             stdConfig = IOUtil.readStringFromIs(stdIs);
@@ -76,7 +89,7 @@ public class ReverseForm {
                 yaml.dump(stdConfigObj, writer);
                 stdConfig = writer.toString();
             } else {
-                JOptionPane.showMessageDialog(null, "error config");
+                JOptionPane.showMessageDialog(this.reversePanel, "error config");
                 return;
             }
             Path targetPath = Paths.get("reverse/config.yaml");
@@ -92,7 +105,7 @@ public class ReverseForm {
                 Files.write(targetPath, stdConfig.getBytes());
             } catch (Exception ignored) {
             }
-            JOptionPane.showMessageDialog(null, "write file to reverse/config.yaml");
+            JOptionPane.showMessageDialog(this.reversePanel, "write file to reverse/config.yaml");
         });
     }
 

@@ -47,7 +47,7 @@ public class HttpUtilForm {
             String port = portText.getText().trim();
             String req = reqArea.getText().trim();
             if (!StringUtil.notEmpty(ip) || !StringUtil.notEmpty(port)) {
-                JOptionPane.showMessageDialog(null, "请输入IP和端口");
+                JOptionPane.showMessageDialog(this.httpUtilPanel, "请输入IP和端口");
                 return;
             }
             int portInt = Integer.parseInt(port);

@@ -166,26 +166,26 @@ public class AdvanceConfigForm {
             applyBruteForce();
             applyShiro();
             if (MainForm.LANG == MainForm.CHINESE) {
-                JOptionPane.showMessageDialog(null, "设置成功");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "设置成功");
             } else {
-                JOptionPane.showMessageDialog(null, "Success");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "Success");
             }
         });
         allDefaultButton.addActionListener(e -> {
             MainForm.instance.reloadConfig(true, true);
             refreshAll();
             if (MainForm.LANG == MainForm.CHINESE) {
-                JOptionPane.showMessageDialog(null, "重置成功");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "重置成功");
             } else {
-                JOptionPane.showMessageDialog(null, "Success");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "Success");
             }
         });
         allRefreshButton.addActionListener(e -> {
             refreshAll();
             if (MainForm.LANG == MainForm.CHINESE) {
-                JOptionPane.showMessageDialog(null, "刷新成功");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "刷新成功");
             } else {
-                JOptionPane.showMessageDialog(null, "Success");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "Success");
             }
         });
         selectBaselineButton.addActionListener(e -> {
@@ -397,9 +397,9 @@ public class AdvanceConfigForm {
         saveBaselineButton.addActionListener(e -> {
             applyBaseline();
             if (MainForm.LANG == MainForm.CHINESE) {
-                JOptionPane.showMessageDialog(null, "设置成功");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "设置成功");
             } else {
-                JOptionPane.showMessageDialog(null, "Success");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "Success");
             }
         });
     }
@@ -421,9 +421,9 @@ public class AdvanceConfigForm {
         thinkphpSaveButton.addActionListener(e -> {
             applyThinkphp();
             if (MainForm.LANG == MainForm.CHINESE) {
-                JOptionPane.showMessageDialog(null, "设置成功");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "设置成功");
             } else {
-                JOptionPane.showMessageDialog(null, "Success");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "Success");
             }
         });
     }
@@ -449,9 +449,9 @@ public class AdvanceConfigForm {
         saveSqlButton.addActionListener(e -> {
             applySql();
             if (MainForm.LANG == MainForm.CHINESE) {
-                JOptionPane.showMessageDialog(null, "设置成功");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "设置成功");
             } else {
-                JOptionPane.showMessageDialog(null, "Success");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "Success");
             }
         });
     }
@@ -474,9 +474,9 @@ public class AdvanceConfigForm {
         xssSaveButton.addActionListener(e -> {
             applyXss();
             if (MainForm.LANG == MainForm.CHINESE) {
-                JOptionPane.showMessageDialog(null, "设置成功");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "设置成功");
             } else {
-                JOptionPane.showMessageDialog(null, "Success");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "Success");
             }
         });
     }
@@ -513,9 +513,9 @@ public class AdvanceConfigForm {
         phSaveButton.addActionListener(e -> {
             applyPhantasm();
             if (MainForm.LANG == MainForm.CHINESE) {
-                JOptionPane.showMessageDialog(null, "设置成功");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "设置成功");
             } else {
-                JOptionPane.showMessageDialog(null, "Success");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "Success");
             }
         });
     }
@@ -555,9 +555,9 @@ public class AdvanceConfigForm {
         saveBruteButton.addActionListener(e -> {
             applyBruteForce();
             if (MainForm.LANG == MainForm.CHINESE) {
-                JOptionPane.showMessageDialog(null, "设置成功");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "设置成功");
             } else {
-                JOptionPane.showMessageDialog(null, "Success");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "Success");
             }
         });
     }
@@ -596,9 +596,9 @@ public class AdvanceConfigForm {
         dirSaveButton.addActionListener(e -> {
             applyDirScan();
             if (MainForm.LANG == MainForm.CHINESE) {
-                JOptionPane.showMessageDialog(null, "设置成功");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "设置成功");
             } else {
-                JOptionPane.showMessageDialog(null, "Success");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "Success");
             }
         });
     }
@@ -631,9 +631,9 @@ public class AdvanceConfigForm {
         shiroSaveButton.addActionListener(e -> {
             applyShiro();
             if (MainForm.LANG == MainForm.CHINESE) {
-                JOptionPane.showMessageDialog(null, "设置成功");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "设置成功");
             } else {
-                JOptionPane.showMessageDialog(null, "Success");
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "Success");
             }
         });
     }

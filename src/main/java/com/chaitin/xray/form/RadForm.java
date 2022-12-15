@@ -19,7 +19,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 public class RadForm {
-
     private static final Logger logger = LogManager.getLogger(RadForm.class);
     public JPanel radPanel;
     private JPanel radPane;
@@ -49,8 +48,8 @@ public class RadForm {
                     return;
                 }
                 BufferedReader isReader;
-                    InputStreamReader isr = new InputStreamReader(inputStream,
-                            StandardCharsets.UTF_8);
+                InputStreamReader isr = new InputStreamReader(inputStream,
+                        StandardCharsets.UTF_8);
                 isReader = new BufferedReader(isr);
                 String thisLine;
                 new Thread(() -> {
@@ -86,7 +85,34 @@ public class RadForm {
 
     private static boolean isRunning = false;
 
+    private void initLang() {
+        if (MainForm.LANG == MainForm.CHINESE) {
+            choseRadFileButton.setText("选择rad文件");
+            startRadButton.setText("启动rad");
+            startLabel.setText("  启动");
+            targetLabel.setText("  目标url");
+            outputPanel.setBorder(BorderFactory.createTitledBorder(
+                    null, "控制台",
+                    TitledBorder.DEFAULT_JUSTIFICATION,
+                    TitledBorder.DEFAULT_POSITION,
+                    null,
+                    null));
+        } else {
+            choseRadFileButton.setText("Chose Rad File");
+            startRadButton.setText("Start Rad");
+            startLabel.setText("  Start");
+            targetLabel.setText("  Target URL");
+            outputPanel.setBorder(BorderFactory.createTitledBorder(
+                    null, "Console",
+                    TitledBorder.DEFAULT_JUSTIFICATION,
+                    TitledBorder.DEFAULT_POSITION,
+                    null,
+                    null));
+        }
+    }
+
     public RadForm(String inputPort) {
+        initLang();
         radCmd = new RadCmd();
         radCmd.setTarget("-t");
         radCmd.setProxy("-http-proxy");
