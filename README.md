@@ -2,7 +2,7 @@
 [![](https://img.shields.io/github/v/release/4ra1n/super-xray)](https://github.com/4ra1n/super-xray/releases/latest)
 ![](https://img.shields.io/github/downloads/4ra1n/super-xray/total)
 ![](https://img.shields.io/badge/build-JDK8-orange)
-![](https://img.shields.io/badge/Java%20Code%20Lines-4790-orange)
+![](https://img.shields.io/badge/Java%20Code%20Lines-4805-orange)
 
 [English Version](doc/README.md)
 
@@ -33,12 +33,26 @@
 
 ![](img/21.png)
 
+## 下载
+
+最新版下载地址：[Latest Release](https://github.com/4ra1n/super-xray/releases/latest)
+
+## 与rad联动
+
 在0.8版本以后可以与`rad`联动：
 
 注意：先输入端口开启被动扫描，再打开`rad`配合
 
 ![](img/20.png)
 
-## 下载
+## 反连平台
 
-最新版下载地址：[Latest Release](https://github.com/4ra1n/super-xray/releases/latest)
+1. 点击`配置服务端`
+2. 任意输入数据库文件名
+3. 任意输入token密码
+4. 不要改ip并输入一个监听端口
+5. 点击导出配置文件得到一个`reverse/config.yaml`
+6. 把`xray`和这个文件复制一份到服务端
+7. 服务端`./xray reverse`启动反连平台
+8. 在反连平台输入对应到`token`和`http url`即可（注意是ip格式例如http://1.1.1.1:8080）
+9. 开启主动扫描或被动扫描即可

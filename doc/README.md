@@ -2,7 +2,7 @@
 [![](https://img.shields.io/github/v/release/4ra1n/super-xray)](https://github.com/4ra1n/super-xray/releases/latest)
 ![](https://img.shields.io/github/downloads/4ra1n/super-xray/total)
 ![](https://img.shields.io/badge/build-JDK8-orange)
-![](https://img.shields.io/badge/Java%20Code%20Lines-4790-orange)
+![](https://img.shields.io/badge/Java%20Code%20Lines-4805-orange)
 
 ## Introduce
 
@@ -31,12 +31,26 @@ It is easy to search poc and run:
 
 ![](../img/21.png)
 
-After 0.8 version we support run with `rad`:
-
-Make sure open mitm scan before run `rad`
-
-![](../img/20.png)
-
 ## Download
 
 Latest Download：[Latest Release](https://github.com/4ra1n/super-xray/releases/latest)
+
+## With rad
+
+After version 0.8, it can be linked with `rad`:
+
+Note: First enter the port to enable passive scanning, and then open the `rad` coordination
+
+![](../img/20.png)
+
+## Reverse
+
+1. Click Configure Server
+2. Enter any database file name
+3. Enter the token password arbitrarily
+4. Do not change the IP address and enter a listening port
+5. Click Export Configuration File to get a reverse/config.yaml
+6. Copy xray and this file to the server
+7. Server `./xray reverse` Start the reverse platform
+8. Enter the corresponding token and http url on the reverse connection platform (note that the IP format is http://1.1.1.1:8080 ）
+9. Enable active scanning or passive scanning
