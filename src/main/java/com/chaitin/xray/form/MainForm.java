@@ -160,6 +160,7 @@ public class MainForm {
     private JButton reverseServerButton;
     private JButton radButton;
     private JLabel radLabel;
+    private JButton cleanPoCButton;
 
     public void init() {
         logger.info("init main form");
@@ -880,6 +881,16 @@ public class MainForm {
             frame.pack();
             frame.setVisible(true);
         });
+        cleanPoCButton.addActionListener(e -> {
+            usePoCText.setText(null);
+            localPoCText.setText(null);
+            xrayCmd.setPoc(null);
+            if (LANG == CHINESE) {
+                JOptionPane.showMessageDialog(this.SuperXray, "已清除PoC设置");
+            } else {
+                JOptionPane.showMessageDialog(this.SuperXray, "Clean PoC setting success");
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -1520,6 +1531,7 @@ public class MainForm {
             radLabel.setText("Open mitm scan and run rad");
             radButton.setText("Run with rad");
             onlineButton.setText("Generate Online");
+            cleanPoCButton.setText("Clean PoC setting ");
         } else if (LANG == CHINESE) {
             xrayPathLabel.setText("你选择的xray文件是：");
             noteLabel.setText("<html> 注意：在 Mac OS 中请用 control+c/v 复制/粘贴 </html>");
@@ -1602,6 +1614,7 @@ public class MainForm {
             radLabel.setText("开启被动扫描后可以联动rad");
             radButton.setText("点击联动");
             onlineButton.setText("在线生成");
+            cleanPoCButton.setText("清除PoC设置");
         }
     }
 
@@ -1963,7 +1976,7 @@ public class MainForm {
         midConfigPanel.setBackground(new Color(-725535));
         configPanel.add(midConfigPanel, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         pocPanel = new JPanel();
-        pocPanel.setLayout(new GridLayoutManager(3, 4, new Insets(0, 0, 0, 0), -1, -1));
+        pocPanel.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
         pocPanel.setBackground(new Color(-725535));
         midConfigPanel.add(pocPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, 1, 1, null, null, null, 0, false));
         pocPanel.setBorder(BorderFactory.createTitledBorder(null, "PoC模块", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
@@ -1987,10 +2000,13 @@ public class MainForm {
         pocPanel.add(localPoCText, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         localPoCButton = new JButton();
         localPoCButton.setText("选择本地PoC");
-        pocPanel.add(localPoCButton, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        pocPanel.add(localPoCButton, new GridConstraints(2, 2, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        cleanPoCButton = new JButton();
+        cleanPoCButton.setText("清除poc设置");
+        pocPanel.add(cleanPoCButton, new GridConstraints(3, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         onlineButton = new JButton();
         onlineButton.setText("在线生成");
-        pocPanel.add(onlineButton, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        pocPanel.add(onlineButton, new GridConstraints(3, 2, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         scanTargetPanel = new JPanel();
         scanTargetPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
         scanTargetPanel.setBackground(new Color(-725535));
