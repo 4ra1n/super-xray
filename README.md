@@ -2,7 +2,7 @@
 [![](https://img.shields.io/github/v/release/4ra1n/super-xray)](https://github.com/4ra1n/super-xray/releases/latest)
 ![](https://img.shields.io/github/downloads/4ra1n/super-xray/total)
 ![](https://img.shields.io/badge/build-JDK8-orange)
-![](https://img.shields.io/badge/Java%20Code%20Lines-4830-orange)
+![](https://img.shields.io/badge/Java%20Code%20Lines-4790-orange)
 
 [English Version](doc/README.md)
 
@@ -11,7 +11,7 @@
 [xray](https://github.com/chaitin/xray) 是一款优秀的漏洞扫描工具，但目前只有命令行版本，通过 `config.yaml` 配置文件启动，很多情况下不好上手，需要一款 GUI 工具来帮助新人更快使用。本工具仅是简单的命令行包装，并不是直接调用方法。在 xray 的规划中，未来会有一款真正的完善的 GUI 版 XrayPro 工具，敬请期待。
 
 注意：
-- 必须在 `JRE/JDK 8` 以上环境中运行
+- 必须在 `JRE/JDK 8` 以上环境中运行（建议不要高于`JDK 17`）
 - 请使用1080P及以上分辨率，在720P及以下分辨率可能无法完全显示
 
 使用前提：

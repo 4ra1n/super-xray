@@ -2,7 +2,7 @@
 [![](https://img.shields.io/github/v/release/4ra1n/super-xray)](https://github.com/4ra1n/super-xray/releases/latest)
 ![](https://img.shields.io/github/downloads/4ra1n/super-xray/total)
 ![](https://img.shields.io/badge/build-JDK8-orange)
-![](https://img.shields.io/badge/Java%20Code%20Lines-4830-orange)
+![](https://img.shields.io/badge/Java%20Code%20Lines-4790-orange)
 
 ## Introduce
 
@@ -15,7 +15,7 @@ Please Note:
 
 Other Note:
 
-- There is JRE 8+ environment locally
+- There is JRE 8+ environment locally (Recommended that JDK version should not be higher than 17)
 - **Must**use `java -jar SuperXray.jar` start（Double click startup will cause permission problems in `Windows`）
 - Please use the latest version of xray (this tool is not compatible with the old version of xray)
 
