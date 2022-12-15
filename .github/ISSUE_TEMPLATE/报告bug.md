@@ -2,7 +2,7 @@
 name: 报告bug
 about: 报告bug可以参考这个模版
 title: "[bug] 一句话描述你的bug"
-labels: bug
+labels: bug, enhancement
 assignees: 4ra1n
 
 ---
