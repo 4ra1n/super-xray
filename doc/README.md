@@ -21,11 +21,13 @@ Other Note:
 
 **After 0.7 version we support `exe` version**
 
-After 0.6-beta version we support English Version：
+After 0.6-beta version we support English Version:
 
 ![](../img/16.png)
 
 ![](../img/17.png)
+
+It is easy to search poc and run:
 
 ![](../img/21.png)
 
