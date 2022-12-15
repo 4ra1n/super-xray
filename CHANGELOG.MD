@@ -141,6 +141,8 @@ Others:
 
 ## 0.9
 
+一个`bug`修复版本，目前功能基本完善
+
 Bugs:
 - [important] [bug] showMessageDialog多屏情况下的位置问题 #76
 - [important] [bug] 反连平台应该自动配置client属性否则会失效 #72
