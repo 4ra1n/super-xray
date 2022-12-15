@@ -27,6 +27,8 @@ After 0.6-beta version we support English Version：
 
 ![](../img/17.png)
 
+![](../img/21.png)
+
 After 0.8 version we support run with `rad`:
 
 Make sure open mitm scan before run `rad`
