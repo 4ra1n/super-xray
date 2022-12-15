@@ -29,7 +29,7 @@ After 0.6-beta version we support English Version:
 
 It is easy to search poc and run:
 
-![](../img/21.png)
+<img src="../img/21.png" width="500px">
 
 ## Download
 
