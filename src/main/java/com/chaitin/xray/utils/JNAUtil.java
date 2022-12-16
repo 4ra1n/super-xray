@@ -42,13 +42,7 @@ public class JNAUtil {
                 Method method = Process.class.getDeclaredMethod("pid");
                 result = (long) method.invoke(p);
             } catch (Exception ex) {
-                try {
-                    logger.info("java 9+ bypass reflect get pid");
-                    Method method = Process.class.getDeclaredMethod("pid");
-                    result = (long) method.invoke(p);
-                } catch (Exception ignored) {
-                    return result;
-                }
+                ex.printStackTrace();
             }
         }
         return result;

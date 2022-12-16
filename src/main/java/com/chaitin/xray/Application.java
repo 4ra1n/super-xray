@@ -4,8 +4,6 @@ import com.chaitin.xray.form.MainForm;
 import com.chaitin.xray.model.DB;
 import com.chaitin.xray.utils.StringUtil;
 import com.formdev.flatlaf.FlatLightLaf;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.io.File;
@@ -15,9 +13,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Application {
-
-    private static final Logger logger = LogManager.getLogger(Application.class);
-
     public static String globalSkin;
 
     private static void setFlatLaf() {
@@ -35,15 +30,16 @@ public class Application {
             Path errLogPath = new File("xray-err.log").toPath();
             System.setOut(new PrintStream(Files.newOutputStream(outLogPath)));
             System.setErr(new PrintStream(Files.newOutputStream(errLogPath)));
-
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                try {
-                    Files.delete(errLogPath);
-                } catch (Exception ignored) {
-                }
-                try {
-                    Files.delete(outLogPath);
-                } catch (Exception ignored) {
+                if (MainForm.instance.delLogCheckBox.isSelected()) {
+                    try {
+                        Files.delete(errLogPath);
+                    } catch (Exception ignored) {
+                    }
+                    try {
+                        Files.delete(outLogPath);
+                    } catch (Exception ignored) {
+                    }
                 }
             }));
 

@@ -55,14 +55,15 @@ public class RadForm {
                 new Thread(() -> {
                     while (true) {
                         if (stop) {
-                            logger.info(String.format("stop pid: %d", JNAUtil.getProcessID(process)));
+                            long pid = JNAUtil.getProcessID(process);
+                            logger.info(String.format("stop pid: %d", pid));
                             try {
                                 if (!OSUtil.isWindows()) {
                                     new ProcessBuilder("kill", "-9",
-                                            Long.toString(JNAUtil.getProcessID(process))).start();
+                                            Long.toString(pid)).start();
                                 } else {
                                     new ProcessBuilder("cmd.exe", "/c",
-                                            String.format("taskkill /f /pid %d", JNAUtil.getProcessID(process))).start();
+                                            String.format("taskkill /f /pid %d", pid)).start();
                                 }
                                 return;
                             } catch (IOException e) {

@@ -166,9 +166,9 @@ public class MainForm {
     private JRadioButton mediumRadioButton;
     private JButton levelButton;
     private JPanel levelPanel;
+    public JCheckBox delLogCheckBox;
 
     public void init() {
-        logger.info("init main form");
         checkBoxList = new ArrayList<>();
         xrayCmd = new XrayCmd();
 
@@ -187,7 +187,6 @@ public class MainForm {
 
         reloadConfig(true, false);
 
-        logger.info("init look up config button");
         lookupConfigButton.addActionListener(e -> {
             String t;
             if (LANG == CHINESE) {
@@ -201,7 +200,6 @@ public class MainForm {
             frame.setVisible(true);
         });
 
-        logger.info("init look up cmd button");
         lookupCmdButton.addActionListener(e ->
                 JOptionPane.showMessageDialog(this.SuperXray, xrayCmd.buildCmd()));
     }
@@ -218,7 +216,7 @@ public class MainForm {
                     try {
                         configStr = new String(Files.readAllBytes(curConfig));
                     } catch (Exception ex) {
-                        logger.error(ex);
+                        ex.printStackTrace();
                     }
                 } else {
                     InputStream is = this.getClass().getClassLoader().getResourceAsStream("config.yaml");
@@ -230,7 +228,7 @@ public class MainForm {
                 try {
                     configStr = new String(Files.readAllBytes(curConfig));
                 } catch (Exception ex) {
-                    logger.error(ex);
+                    ex.printStackTrace();
                 }
             }
         }
@@ -247,7 +245,7 @@ public class MainForm {
                         configStr.getBytes(StandardCharsets.UTF_8));
             }
         } catch (Exception ex) {
-            logger.error(ex);
+            ex.printStackTrace();
         }
 
         for (Map.Entry<String, Object> entry : configObj.entrySet()) {
@@ -383,14 +381,15 @@ public class MainForm {
                 new Thread(() -> {
                     while (true) {
                         if (stop) {
-                            logger.info(String.format("stop pid: %d", JNAUtil.getProcessID(process)));
+                            long pid = JNAUtil.getProcessID(process);
+                            logger.info(String.format("stop pid: %d", pid));
                             try {
                                 if (!OSUtil.isWindows()) {
                                     new ProcessBuilder("kill", "-9",
-                                            Long.toString(JNAUtil.getProcessID(process))).start();
+                                            Long.toString(pid)).start();
                                 } else {
                                     new ProcessBuilder("cmd.exe", "/c",
-                                            String.format("taskkill /f /pid %d", JNAUtil.getProcessID(process))).start();
+                                            String.format("taskkill /f /pid %d", pid)).start();
                                 }
                                 return;
                             } catch (IOException e) {
@@ -412,7 +411,6 @@ public class MainForm {
     }
 
     private void loadXray(String absPath) {
-        logger.info(String.format("user chose file: %s", absPath));
         String targetDir = Paths.get(absPath).toFile().getParent() + File.separator;
         XrayUtil.rmAllConfig(targetDir);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> XrayUtil.rmAllConfig(targetDir)));
@@ -439,7 +437,7 @@ public class MainForm {
             Thread.sleep(1000);
             t.interrupt();
         } catch (Exception ex) {
-            logger.error(ex);
+            ex.printStackTrace();
         }
         XrayUtil.cpAllConfig(targetDir);
 
@@ -449,7 +447,7 @@ public class MainForm {
             Files.write(configPathPath,
                     configStr.getBytes(StandardCharsets.UTF_8));
         } catch (Exception ex) {
-            logger.error(ex);
+            ex.printStackTrace();
         }
 
         xrayCmd.setXray(absPath);
@@ -459,8 +457,6 @@ public class MainForm {
     }
 
     public void initLoadXray() {
-        logger.info("init load xray module");
-
         if (StringUtil.notEmpty(db.getLastXrayPath()) &&
                 !db.getLastXrayPath().equals("null")) {
             loadXray(db.getLastXrayPath());
@@ -481,7 +477,7 @@ public class MainForm {
                 try {
                     Files.write(Paths.get("super-xray.db"), data.getDB().getBytes());
                 } catch (Exception ex) {
-                    logger.error(ex);
+                    ex.printStackTrace();
                 }
 
             } else {
@@ -495,7 +491,6 @@ public class MainForm {
     }
 
     public void initPluginCheckBox() {
-        logger.info("init all plugins");
         pluginAll = true;
         checkBoxList.add(bruteForceCheckBox);
         checkBoxList.add(baselineCheckBox);
@@ -706,12 +701,10 @@ public class MainForm {
                     configStr.getBytes(StandardCharsets.UTF_8));
         } catch (Exception ex) {
             ex.printStackTrace();
-            logger.error(ex);
         }
     }
 
     public void initAdvanceConfig() {
-        logger.info("init advance config button");
         advanceButton.addActionListener(e -> {
             String t;
             if (LANG == CHINESE) {
@@ -728,7 +721,6 @@ public class MainForm {
     }
 
     public void initOutputConfig() {
-        logger.info("init output config module");
         htmlRadioButton.setSelected(true);
         jsonRadioButton.setSelected(false);
         cliRadioButton.setSelected(false);
@@ -766,7 +758,6 @@ public class MainForm {
             urlFileField.setText(null);
             rawFileField.setText(null);
             String url = urlField.getText();
-            logger.info(String.format("target url: %s", url));
             xrayCmd.setInputPrefix("--url");
             xrayCmd.setInput(url);
             if (LANG == CHINESE) {
@@ -778,7 +769,6 @@ public class MainForm {
     }
 
     public void initUrlFileConfig() {
-        logger.info("init url file module");
         urlFileButton.addActionListener(e -> {
             urlField.setText(null);
             rawFileField.setText(null);
@@ -802,7 +792,6 @@ public class MainForm {
     }
 
     public void initRawScanConfig() {
-        logger.info("init raw scan module");
         rawFileButton.addActionListener(e -> {
             urlField.setText(null);
             urlFileField.setText(null);
@@ -828,7 +817,6 @@ public class MainForm {
     private static boolean activeRunning = false;
 
     public void initActiveScan() {
-        logger.info("init active scan module");
         activeScanButton.addActionListener(e -> {
             if (!StringUtil.notEmpty(xrayCmd.getInput()) ||
                     !StringUtil.notEmpty(xrayCmd.getInputPrefix())) {
@@ -964,7 +952,7 @@ public class MainForm {
                 URI oURL = new URI("https://poc.xray.cool");
                 desktop.browse(oURL);
             } catch (Exception ex) {
-                logger.error(ex);
+                ex.printStackTrace();
             }
         });
 
@@ -1032,7 +1020,6 @@ public class MainForm {
 
         pocButton.addActionListener(e -> {
             String poc = usePoCText.getText();
-            logger.info(poc);
             if (!Poc.getPocList().contains(poc.trim())) {
                 if (LANG == CHINESE) {
                     JOptionPane.showMessageDialog(this.SuperXray, "PoC不存在");
@@ -1233,10 +1220,12 @@ public class MainForm {
                     existOutputList.add(tempOutput);
                     new Thread(() -> ExecUtil.execOpen(tempOutput)).start();
                 } else {
-                    logger.info("output file not exist");
+                    if (LANG == CHINESE) {
+                        JOptionPane.showMessageDialog(this.SuperXray, "目前没有输出文件");
+                    } else {
+                        JOptionPane.showMessageDialog(this.SuperXray, "No output file");
+                    }
                 }
-            } else {
-                logger.warn("output file is none");
             }
         });
     }
@@ -1323,8 +1312,6 @@ public class MainForm {
             case Const.winClassic:
                 winClassicRadioButton.setSelected(true);
                 break;
-            default:
-                logger.error("error skin");
         }
 
         saveSkinButton.addActionListener(e -> {
@@ -1445,7 +1432,7 @@ public class MainForm {
                 URI oURL = new URI("https://download.xray.cool/xray");
                 desktop.browse(oURL);
             } catch (Exception ex) {
-                logger.error(ex);
+                ex.printStackTrace();
             }
         });
         authorLabel.addMouseListener(new MouseAdapter() {
@@ -1456,7 +1443,7 @@ public class MainForm {
                     URI oURL = new URI("https://github.com/4ra1n");
                     desktop.browse(oURL);
                 } catch (Exception ex) {
-                    logger.error(ex);
+                    ex.printStackTrace();
                 }
             }
         });
@@ -1562,7 +1549,7 @@ public class MainForm {
             stopButton.setText("Stop");
             resetConfigButton.setText("Reset");
             autoDelCheckBox.setText("Delete All Reports When Exit");
-            openResultButton.setText("Open");
+            openResultButton.setText("Open Scan Result");
             choseDirButton.setText("Chose File");
             confirmPluginButton.setText("Confirm");
             reverseServerButton.setText("Server Config");
@@ -1570,6 +1557,8 @@ public class MainForm {
             radButton.setText("Run with rad");
             onlineButton.setText("Generate Online");
             cleanPoCButton.setText("Clean PoC setting ");
+            delLogCheckBox.setText("Delete All Logs When Exit");
+            levelButton.setText("Set Level");
         } else if (LANG == CHINESE) {
             xrayPathLabel.setText("你选择的xray文件是：");
             noteLabel.setText("<html> 注意：在 Mac OS 中请用 control+c/v 复制/粘贴 </html>");
@@ -1644,7 +1633,7 @@ public class MainForm {
             resetConfigLabel.setText("恢复默认配置：");
             stopButton.setText("强制停止");
             resetConfigButton.setText("确认");
-            autoDelCheckBox.setText("关闭后自动删除报告");
+            autoDelCheckBox.setText("关闭后删除报告");
             openResultButton.setText("点击打开扫描结果");
             choseDirButton.setText("点击按钮选择");
             confirmPluginButton.setText("确认插件");
@@ -1653,10 +1642,13 @@ public class MainForm {
             radButton.setText("点击联动");
             onlineButton.setText("在线生成");
             cleanPoCButton.setText("清除PoC设置");
+            delLogCheckBox.setText("关闭后删除日志");
+            levelButton.setText("设置等级");
         }
     }
 
     private void initExit() {
+        delLogCheckBox.setSelected(true);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             instance.stop = true;
             if (radInstance != null) {
@@ -1728,7 +1720,6 @@ public class MainForm {
         frame.setVisible(true);
 
         frame.setSize(1280, 960);
-
     }
 
     {
@@ -2167,16 +2158,20 @@ public class MainForm {
         resetConfigButton.setText("确认");
         resetPanel.add(resetConfigButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, 1, GridConstraints.SIZEPOLICY_FIXED, null, null, new Dimension(100, -1), 0, false));
         openResultPanel = new JPanel();
-        openResultPanel.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
+        openResultPanel.setLayout(new GridLayoutManager(1, 3, new Insets(0, 0, 0, 0), -1, -1));
         openResultPanel.setBackground(new Color(-725535));
         otherButton.add(openResultPanel, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 1, false));
         openResultButton = new JButton();
         openResultButton.setText("点击打开扫描结果");
-        openResultPanel.add(openResultButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        openResultPanel.add(openResultButton, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         autoDelCheckBox = new JCheckBox();
         autoDelCheckBox.setBackground(new Color(-725535));
-        autoDelCheckBox.setText("关闭后自动删除报告");
-        openResultPanel.add(autoDelCheckBox, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        autoDelCheckBox.setText("关闭后删除报告");
+        openResultPanel.add(autoDelCheckBox, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        delLogCheckBox = new JCheckBox();
+        delLogCheckBox.setBackground(new Color(-528927));
+        delLogCheckBox.setText("关闭后删除日志");
+        openResultPanel.add(delLogCheckBox, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         stopPanel = new JPanel();
         stopPanel.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
         stopPanel.setBackground(new Color(-725535));
