@@ -673,7 +673,7 @@
             </properties>
             <border type="none"/>
             <children>
-              <grid id="a7e5f" binding="pocPanel" layout-manager="GridLayoutManager" row-count="4" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="a7e5f" binding="pocPanel" layout-manager="GridLayoutManager" row-count="5" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -725,7 +725,7 @@
                   </component>
                   <component id="c755a" class="javax.swing.JTextField" binding="localPoCText">
                     <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                      <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
@@ -736,7 +736,7 @@
                   </component>
                   <component id="94ec3" class="javax.swing.JButton" binding="localPoCButton">
                     <constraints>
-                      <grid row="2" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="3" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="选择本地PoC"/>
@@ -744,7 +744,7 @@
                   </component>
                   <component id="7c964" class="javax.swing.JButton" binding="cleanPoCButton">
                     <constraints>
-                      <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="清除poc设置"/>
@@ -752,10 +752,57 @@
                   </component>
                   <component id="1d75a" class="javax.swing.JButton" binding="onlineButton">
                     <constraints>
-                      <grid row="3" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="4" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="在线生成"/>
+                    </properties>
+                  </component>
+                  <grid id="cb880" binding="levelPanel" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-725535"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <component id="82848" class="javax.swing.JRadioButton" binding="criticalRadioButton">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-725535"/>
+                          <text value="CRITICAL"/>
+                        </properties>
+                      </component>
+                      <component id="940e3" class="javax.swing.JRadioButton" binding="highRadioButton">
+                        <constraints>
+                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-725535"/>
+                          <text value="HIGH"/>
+                        </properties>
+                      </component>
+                      <component id="3ea46" class="javax.swing.JRadioButton" binding="mediumRadioButton">
+                        <constraints>
+                          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <background color="-725535"/>
+                          <text value="MEDIUM"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <component id="ebf10" class="javax.swing.JButton" binding="levelButton">
+                    <constraints>
+                      <grid row="2" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="指定等级"/>
                     </properties>
                   </component>
                 </children>
@@ -1099,6 +1146,11 @@
     <group name="lang">
       <member id="20344"/>
       <member id="ce55f"/>
+    </group>
+    <group name="level">
+      <member id="82848"/>
+      <member id="940e3"/>
+      <member id="3ea46"/>
     </group>
   </buttonGroups>
 </form>

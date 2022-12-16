@@ -107,8 +107,9 @@ public class XrayCmd {
         }
         list.add(getModule());
         if (StringUtil.notEmpty(getPoc())) {
-            list.add("--poc");
-            list.add(getPoc());
+            String temp = getPoc();
+            list.add(temp.split(" ")[0]);
+            list.add(temp.split(" ")[1]);
         }
         if (StringUtil.notEmpty(getInput())) {
             list.add(getInputPrefix());

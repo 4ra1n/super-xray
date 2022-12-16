@@ -161,6 +161,11 @@ public class MainForm {
     private JButton radButton;
     private JLabel radLabel;
     private JButton cleanPoCButton;
+    private JRadioButton criticalRadioButton;
+    private JRadioButton highRadioButton;
+    private JRadioButton mediumRadioButton;
+    private JButton levelButton;
+    private JPanel levelPanel;
 
     public void init() {
         logger.info("init main form");
@@ -825,6 +830,15 @@ public class MainForm {
     public void initActiveScan() {
         logger.info("init active scan module");
         activeScanButton.addActionListener(e -> {
+            if (!StringUtil.notEmpty(xrayCmd.getInput()) ||
+                    !StringUtil.notEmpty(xrayCmd.getInputPrefix())) {
+                if (LANG == CHINESE) {
+                    JOptionPane.showMessageDialog(this.SuperXray, "请输入扫描目标");
+                } else {
+                    JOptionPane.showMessageDialog(this.SuperXray, "Need input target");
+                }
+                return;
+            }
             try {
                 if (!activeRunning) {
                     refreshOutput();
@@ -894,8 +908,12 @@ public class MainForm {
     }
 
     @SuppressWarnings("unchecked")
-    private void onlyUsePhantasm(String poc) {
-        xrayCmd.setPoc(String.format("%s", poc));
+    private void onlyUsePhantasm(String poc, boolean flag) {
+        if (flag) {
+            xrayCmd.setPoc(String.format("--poc %s", poc));
+        } else {
+            xrayCmd.setPoc(String.format("--level %s", poc));
+        }
 
         for (JCheckBox box : checkBoxList) {
             box.setSelected(false);
@@ -917,6 +935,26 @@ public class MainForm {
         }
 
         refreshConfig();
+    }
+
+    private void initPoCLevel() {
+        criticalRadioButton.setSelected(true);
+        levelButton.addActionListener(e -> {
+            if (criticalRadioButton.isSelected()) {
+                onlyUsePhantasm("critical", false);
+            } else if (highRadioButton.isSelected()) {
+                onlyUsePhantasm("high", false);
+            } else if (mediumRadioButton.isSelected()) {
+                onlyUsePhantasm("medium", false);
+            } else {
+                return;
+            }
+            if (LANG == CHINESE) {
+                JOptionPane.showMessageDialog(this.SuperXray, "设置成功!");
+            } else {
+                JOptionPane.showMessageDialog(this.SuperXray, "Success!");
+            }
+        });
     }
 
     public void initTargetPoC() {
@@ -948,7 +986,7 @@ public class MainForm {
                     return;
                 }
                 localPoCText.setText(absPath);
-                onlyUsePhantasm(absPath);
+                onlyUsePhantasm(absPath, true);
                 if (LANG == CHINESE) {
                     JOptionPane.showMessageDialog(this.SuperXray, "设置PoC成功");
                 } else {
@@ -1003,7 +1041,7 @@ public class MainForm {
                 }
                 return;
             }
-            onlyUsePhantasm(poc);
+            onlyUsePhantasm(poc, true);
             if (LANG == CHINESE) {
                 JOptionPane.showMessageDialog(this.SuperXray, "设置PoC成功");
             } else {
@@ -1666,6 +1704,7 @@ public class MainForm {
         initAllPoC();
         initHttpProxy();
         initTargetPoC();
+        initPoCLevel();
         initActiveScan();
         initMitmScan();
         initGetRad();
@@ -1976,7 +2015,7 @@ public class MainForm {
         midConfigPanel.setBackground(new Color(-725535));
         configPanel.add(midConfigPanel, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         pocPanel = new JPanel();
-        pocPanel.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
+        pocPanel.setLayout(new GridLayoutManager(5, 4, new Insets(0, 0, 0, 0), -1, -1));
         pocPanel.setBackground(new Color(-725535));
         midConfigPanel.add(pocPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, 1, 1, null, null, null, 0, false));
         pocPanel.setBorder(BorderFactory.createTitledBorder(null, "PoC模块", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
@@ -1997,16 +2036,35 @@ public class MainForm {
         localPoCText = new JTextField();
         localPoCText.setEditable(false);
         localPoCText.setEnabled(false);
-        pocPanel.add(localPoCText, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        pocPanel.add(localPoCText, new GridConstraints(3, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         localPoCButton = new JButton();
         localPoCButton.setText("选择本地PoC");
-        pocPanel.add(localPoCButton, new GridConstraints(2, 2, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        pocPanel.add(localPoCButton, new GridConstraints(3, 2, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         cleanPoCButton = new JButton();
         cleanPoCButton.setText("清除poc设置");
-        pocPanel.add(cleanPoCButton, new GridConstraints(3, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        pocPanel.add(cleanPoCButton, new GridConstraints(4, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         onlineButton = new JButton();
         onlineButton.setText("在线生成");
-        pocPanel.add(onlineButton, new GridConstraints(3, 2, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        pocPanel.add(onlineButton, new GridConstraints(4, 2, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        levelPanel = new JPanel();
+        levelPanel.setLayout(new GridLayoutManager(1, 3, new Insets(0, 0, 0, 0), -1, -1));
+        levelPanel.setBackground(new Color(-725535));
+        pocPanel.add(levelPanel, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        criticalRadioButton = new JRadioButton();
+        criticalRadioButton.setBackground(new Color(-725535));
+        criticalRadioButton.setText("CRITICAL");
+        levelPanel.add(criticalRadioButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        highRadioButton = new JRadioButton();
+        highRadioButton.setBackground(new Color(-725535));
+        highRadioButton.setText("HIGH");
+        levelPanel.add(highRadioButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mediumRadioButton = new JRadioButton();
+        mediumRadioButton.setBackground(new Color(-725535));
+        mediumRadioButton.setText("MEDIUM");
+        levelPanel.add(mediumRadioButton, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        levelButton = new JButton();
+        levelButton.setText("指定等级");
+        pocPanel.add(levelButton, new GridConstraints(2, 2, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         scanTargetPanel = new JPanel();
         scanTargetPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
         scanTargetPanel.setBackground(new Color(-725535));
@@ -2145,6 +2203,10 @@ public class MainForm {
         buttonGroup = new ButtonGroup();
         buttonGroup.add(chineseLangButton);
         buttonGroup.add(englishLangButton);
+        buttonGroup = new ButtonGroup();
+        buttonGroup.add(criticalRadioButton);
+        buttonGroup.add(highRadioButton);
+        buttonGroup.add(mediumRadioButton);
     }
 
     /**
