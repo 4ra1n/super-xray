@@ -20,17 +20,17 @@
 - **务必**使用 `java -jar SuperXray.jar` 启动（在`Windows`中双击启动会有权限问题）
 - 前往 [ctstack](https://stack.chaitin.com/tool/detail?id=1) 下载正版 `xray`
 - 注意：请使用最新版`xray`（本工具未兼容老版本`xray`）
+- 在0.7版本支持了`exe`文件
 
-**告别`jar`包：在0.7版本支持了`exe`文件**
+整体架构：
 
-在0.6-beta版本以后支持英文版：
+![](img/00000.png)
+
+支持中文和英文：
 
 ![](img/16.png)
 
 ![](img/17.png)
-
-整体架构：
-![](img/00000.png)
 
 可以方便地搜索poc并运行：
 

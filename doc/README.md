@@ -18,17 +18,17 @@ Other Note:
 - There is JRE 8+ environment locally (Recommended that JDK version should not be higher than 17)
 - **Must**use `java -jar SuperXray.jar` start（Double click startup will cause permission problems in `Windows`）
 - Please use the latest version of xray (this tool is not compatible with the old version of xray)
+- we support `exe` version
 
-**After 0.7 version we support `exe` version**
+Overall architecture:
 
-After 0.6-beta version we support English Version:
+![](../img/00000.png)
+
+Support english UI:
 
 ![](../img/16.png)
 
 ![](../img/17.png)
-
-Overall architecture:
-![](../img/00000.png)
 
 It is easy to search poc and run:
 
