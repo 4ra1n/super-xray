@@ -27,6 +27,9 @@ After 0.6-beta version we support English Version:
 
 ![](../img/17.png)
 
+Overall architecture:
+![](../img/00000.png)
+
 It is easy to search poc and run:
 
 <img src="../img/21.png" width="500px">
