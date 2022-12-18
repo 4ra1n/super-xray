@@ -10,17 +10,15 @@
 
 [xray](https://github.com/chaitin/xray) 是一款优秀的漏洞扫描工具，但目前只有命令行版本，通过 `config.yaml` 配置文件启动，很多情况下不好上手，需要一款 GUI 工具来帮助新人更快使用。本工具仅是简单的命令行包装，并不是直接调用方法。在 xray 的规划中，未来会有一款真正的完善的 GUI 版 XrayPro 工具，敬请期待。
 
-注意：
-- 必须在 `JRE/JDK 8` 以上环境中运行（建议不要高于`JDK 17`）
-- 请使用1080P及以上分辨率，在720P及以下分辨率可能无法完全显示
-
 使用前提：
+- 本地有 `JRE/JDK 8+` 环境（如果使用内置`JRE`的`exe`版本无需`Java`环境）
+- 使用 `java -jar SuperXray.jar` 启动（在`Windows`中双击启动会有权限问题）
+- 前往 [ctstack](https://stack.chaitin.com/tool/detail?id=1) 或 [xray 下载站](https://download.xray.cool) 下载最新版 `xray`
 
-- 本地有 `JRE 8+` 环境
-- **务必**使用 `java -jar SuperXray.jar` 启动（在`Windows`中双击启动会有权限问题）
-- 前往 [ctstack](https://stack.chaitin.com/tool/detail?id=1) 下载正版 `xray`
-- 注意：请使用最新版`xray`（本工具未兼容老版本`xray`）
-- 在0.7版本支持了`exe`文件
+注意：
+- 请使用 1080P 及以上分辨率，在 720P 及以下分辨率可能无法完全显示
+- 请使用最新版`xray`（本工具未兼容老版本`xray`）
+- 支持两种方式的`exe`文件，`system`版使用系统的`JRE`，另一种内置了`JRE 8`
 
 整体架构：
 
