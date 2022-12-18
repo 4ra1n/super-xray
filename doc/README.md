@@ -6,12 +6,12 @@
 
 ## Introduce
 
-[xray](https://github.com/chaitin/xray) is an excellent web vulnerability scanning tool, But only the command line version, Start via `config.yaml` file. In many cases, it is difficult to get started, and a GUI tool is needed to help newcomers use it faster. This tool is just a simple command line wrapper, not a direct method call. In the planning of xray, there will be a truly perfect GUI version of XrayPro tool in the future. Please look forward to it.
+[xray](https://github.com/chaitin/xray) is an excellent web vulnerability scanning tool, but only the command line version, start via `config.yaml` file. In many cases, it is difficult to get started, and a GUI tool is needed to help newcomers use it faster. This tool is just a simple command line wrapper, not a direct method call. In the planning of xray, there will be a truly perfect GUI version of XrayPro tool in the future. Please look forward to it.
 
 Premise of use:
 - There is a `JRE/JDK 8+` environment locally (if you use the `exe` version of the built-in `JRE`, you do not need a `Java` environment)
--Use `java jar SuperXray Jar` startup (double click startup in `Windows` will cause permission problems)
--Go to [ctstack](https://stack.chaitin.com/tool/detail?id=1) or [xray download](https://download.xray.cool) to download the latest `xray`
+- Use `java jar SuperXray Jar` startup (double click startup in `Windows` will cause permission problems)
+- Go to [ctstack](https://stack.chaitin.com/tool/detail?id=1) or [xray download](https://download.xray.cool) to download the latest `xray`
 
 Note:
 - Please use a resolution of 1080P or above, and it may not be fully displayed at a resolution of 720P or below
