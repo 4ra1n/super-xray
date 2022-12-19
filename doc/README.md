@@ -24,9 +24,9 @@ Overall architecture:
 
 Support english UI:
 
-![](../img/16.png)
+![](../img/00003.jpg)
 
-![](../img/17.png)
+![](../img/00004.jpg)
 
 It is easy to search poc and run:
 
