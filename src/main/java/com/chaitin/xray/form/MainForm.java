@@ -167,6 +167,7 @@ public class MainForm {
     private JButton levelButton;
     private JPanel levelPanel;
     public JCheckBox delLogCheckBox;
+    private JButton radDownButton;
 
     public void init() {
         checkBoxList = new ArrayList<>();
@@ -1435,6 +1436,15 @@ public class MainForm {
                 ex.printStackTrace();
             }
         });
+        radDownButton.addActionListener(e -> {
+            try {
+                Desktop desktop = Desktop.getDesktop();
+                URI oURL = new URI("https://download.xray.cool/rad");
+                desktop.browse(oURL);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
         authorLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -1559,6 +1569,7 @@ public class MainForm {
             cleanPoCButton.setText("Clean PoC setting ");
             delLogCheckBox.setText("Delete All Logs When Exit");
             levelButton.setText("Set Level");
+            radDownButton.setText("Rad Download");
         } else if (LANG == CHINESE) {
             xrayPathLabel.setText("你选择的xray文件是：");
             noteLabel.setText("<html> 注意：在 Mac OS 中请用 control+c/v 复制/粘贴 </html>");
@@ -1638,12 +1649,13 @@ public class MainForm {
             choseDirButton.setText("点击按钮选择");
             confirmPluginButton.setText("确认插件");
             reverseServerButton.setText("配置服务端");
-            radLabel.setText("开启被动扫描后可以联动rad");
+            radLabel.setText("开启被动扫描后与rad联动");
             radButton.setText("点击联动");
             onlineButton.setText("在线生成");
             cleanPoCButton.setText("清除PoC设置");
             delLogCheckBox.setText("关闭后删除日志");
             levelButton.setText("设置等级");
+            radDownButton.setText("rad下载网站");
         }
     }
 
@@ -1966,24 +1978,27 @@ public class MainForm {
         activeScanButton.setText("开启主动扫描");
         startScanPanel.add(activeScanButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         mitmPanel = new JPanel();
-        mitmPanel.setLayout(new GridLayoutManager(2, 5, new Insets(0, 0, 0, 0), -1, -1));
+        mitmPanel.setLayout(new GridLayoutManager(2, 6, new Insets(0, 0, 0, 0), -1, -1));
         mitmPanel.setBackground(new Color(-725535));
         startScanPanel.add(mitmPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         mitmScanButton = new JButton();
         mitmScanButton.setText("开启被动扫描");
-        mitmPanel.add(mitmScanButton, new GridConstraints(0, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mitmPanel.add(mitmScanButton, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         portText = new JTextField();
         portText.setText("");
-        mitmPanel.add(portText, new GridConstraints(0, 1, 1, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        mitmPanel.add(portText, new GridConstraints(0, 1, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         portLabel = new JLabel();
         portLabel.setText("被动监听端口:");
         mitmPanel.add(portLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         radLabel = new JLabel();
-        radLabel.setText("开启被动扫描后可以联动rad");
+        radLabel.setText("开启被动扫描后与rad联动");
         mitmPanel.add(radLabel, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         radButton = new JButton();
         radButton.setText("点击联动");
-        mitmPanel.add(radButton, new GridConstraints(1, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mitmPanel.add(radButton, new GridConstraints(1, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        radDownButton = new JButton();
+        radDownButton.setText("rad下载网站");
+        mitmPanel.add(radDownButton, new GridConstraints(1, 2, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         otherPanel = new JPanel();
         otherPanel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
         otherPanel.setBackground(new Color(-725535));
