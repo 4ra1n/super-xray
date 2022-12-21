@@ -158,10 +158,17 @@ Others:
 
 ## 1.0
 
-Bugs:
-- null
+增加了子域名扫描的模块，高级版xray可用，截图如下：
 
-Others:
+todo
+
+增加了指定多个POC扫描的方式，其实可以在高级配置里面设置排除选项来做，但不太方便
+
+（xray目前不支持精准指定多个poc，只能指定一个范围，例如高危或中危，未来可能会支持）
+
+截图如下：todo
+
+- New Features:
 - [important] [feat] 添加子域名扫描的功能 #85
 - [important] [feat] 指定多个poc扫描的实现方式 #82
 - [important] 用户可选关闭后保留日志用于调试 #83
