@@ -168,6 +168,8 @@ public class MainForm {
     private JPanel levelPanel;
     public JCheckBox delLogCheckBox;
     private JButton radDownButton;
+    private JButton subDomainButton;
+    private SubdomainForm subdomainInstance;
 
     public void init() {
         checkBoxList = new ArrayList<>();
@@ -1570,6 +1572,7 @@ public class MainForm {
             delLogCheckBox.setText("Delete All Logs When Exit");
             levelButton.setText("Set Level");
             radDownButton.setText("Rad Download");
+            subDomainButton.setText("Subdomain Scan");
         } else if (LANG == CHINESE) {
             xrayPathLabel.setText("你选择的xray文件是：");
             noteLabel.setText("<html> 注意：在 Mac OS 中请用 control+c/v 复制/粘贴 </html>");
@@ -1656,6 +1659,7 @@ public class MainForm {
             delLogCheckBox.setText("关闭后删除日志");
             levelButton.setText("设置等级");
             radDownButton.setText("rad下载网站");
+            subDomainButton.setText("子域名扫描");
         }
     }
 
@@ -1665,6 +1669,9 @@ public class MainForm {
             instance.stop = true;
             if (radInstance != null) {
                 radInstance.stop = true;
+            }
+            if (subdomainInstance != null) {
+                subdomainInstance.stop = true;
             }
             try {
                 Thread.sleep(3000);
@@ -1687,6 +1694,31 @@ public class MainForm {
             JFrame frame = new JFrame("Rad Command");
             radInstance = new RadForm(portText.getText());
             frame.setContentPane(radInstance.radPanel);
+            frame.setResizable(false);
+            frame.pack();
+            frame.setVisible(true);
+        });
+    }
+
+    private void initSubdomain() {
+        subDomainButton.addActionListener(e -> {
+            String t;
+            if (LANG == CHINESE) {
+                t = "子域名扫描";
+            } else {
+                t = "Subdomain Scan";
+            }
+            if (!StringUtil.notEmpty(xrayCmd.getXray())) {
+                if (LANG == CHINESE) {
+                    JOptionPane.showMessageDialog(this.SuperXray, "请先加载xray");
+                } else {
+                    JOptionPane.showMessageDialog(this.SuperXray, "Load xray first");
+                }
+                return;
+            }
+            JFrame frame = new JFrame(t);
+            subdomainInstance = new SubdomainForm(xrayCmd);
+            frame.setContentPane(subdomainInstance.subdomainPanel);
             frame.setResizable(false);
             frame.pack();
             frame.setVisible(true);
@@ -1719,6 +1751,7 @@ public class MainForm {
         initHttpUtil();
         initListenUtil();
         initEncodeUtil();
+        initSubdomain();
         initOther();
         initExit();
     }
@@ -1996,26 +2029,29 @@ public class MainForm {
         radButton = new JButton();
         radButton.setText("点击联动");
         mitmPanel.add(radButton, new GridConstraints(1, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        radDownButton = new JButton();
-        radDownButton.setText("rad下载网站");
-        mitmPanel.add(radDownButton, new GridConstraints(1, 2, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         otherPanel = new JPanel();
-        otherPanel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
+        otherPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
         otherPanel.setBackground(new Color(-725535));
         rightConfigPanel.add(otherPanel, new GridConstraints(6, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         otherPanel.setBorder(BorderFactory.createTitledBorder(null, "其他", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
-        lookupCmdButton = new JButton();
-        lookupCmdButton.setText("查看当前命令");
-        otherPanel.add(lookupCmdButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        lookupConfigButton = new JButton();
-        lookupConfigButton.setText("查看当前配置文件");
-        otherPanel.add(lookupConfigButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        cleanAreaButton = new JButton();
-        cleanAreaButton.setText("清空命令行输出");
-        otherPanel.add(cleanAreaButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        subDomainButton = new JButton();
+        subDomainButton.setText("子域名扫描");
+        otherPanel.add(subDomainButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         xrayUrlButton = new JButton();
         xrayUrlButton.setText("xray下载网站");
-        otherPanel.add(xrayUrlButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        otherPanel.add(xrayUrlButton, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        lookupConfigButton = new JButton();
+        lookupConfigButton.setText("查看当前配置文件");
+        otherPanel.add(lookupConfigButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        lookupCmdButton = new JButton();
+        lookupCmdButton.setText("查看当前命令");
+        otherPanel.add(lookupCmdButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        cleanAreaButton = new JButton();
+        cleanAreaButton.setText("清空命令行输出");
+        otherPanel.add(cleanAreaButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        radDownButton = new JButton();
+        radDownButton.setText("rad下载网站");
+        otherPanel.add(radDownButton, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         midConfigPanel = new JPanel();
         midConfigPanel.setLayout(new GridLayoutManager(4, 1, new Insets(0, 0, 0, 0), -1, -1));
         midConfigPanel.setBackground(new Color(-725535));

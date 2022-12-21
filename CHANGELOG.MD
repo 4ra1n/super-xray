@@ -162,6 +162,7 @@ Bugs:
 - null
 
 Others:
+- [important] [feat] 添加子域名扫描的功能 #85
 - [important] [feat] 指定多个poc扫描的实现方式 #82
 - [important] 用户可选关闭后保留日志用于调试 #83
 - [feat] 不配置目标的时候应该禁止主动扫描 #81

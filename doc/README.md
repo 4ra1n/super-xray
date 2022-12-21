@@ -44,6 +44,12 @@ Note: First enter the port to enable passive scanning, and then open the `rad` c
 
 ![](../img/20.png)
 
+## Subdomain Scan
+
+After version 1.0, we support subdomain scan:
+
+![](../img/00005.jpg)
+
 ## Reverse
 
 1. Click Configure Server
