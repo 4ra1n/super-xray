@@ -235,7 +235,7 @@ public class SubdomainForm {
             }
             running = true;
             stop = false;
-            outputFileText.setText(null);
+            outputTextArea.setText(null);
             execAndFresh(finalCmd);
         });
     }
