@@ -1634,7 +1634,7 @@ public class MainForm {
                     TitledBorder.DEFAULT_POSITION, null, null));
             lookupCmdButton.setText("查看当前命令");
             lookupConfigButton.setText("查看当前配置文件");
-            xrayUrlButton.setText("xray下载网站");
+            xrayUrlButton.setText("xray下载面板");
             cleanAreaButton.setText("清空命令行输出");
             outputPanel.setBorder(BorderFactory.createTitledBorder(null,
                     "命令行输出结果：", TitledBorder.DEFAULT_JUSTIFICATION,
@@ -1654,7 +1654,7 @@ public class MainForm {
             cleanPoCButton.setText("清除PoC设置");
             delLogCheckBox.setText("关闭后删除日志");
             levelButton.setText("设置等级");
-            radDownButton.setText("rad下载网站");
+            radDownButton.setText("rad下载面板");
             subDomainButton.setText("子域名扫描");
         }
     }
@@ -2034,7 +2034,7 @@ public class MainForm {
         subDomainButton.setText("子域名扫描");
         otherPanel.add(subDomainButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         xrayUrlButton = new JButton();
-        xrayUrlButton.setText("xray下载网站");
+        xrayUrlButton.setText("xray下载面板");
         otherPanel.add(xrayUrlButton, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         lookupConfigButton = new JButton();
         lookupConfigButton.setText("查看当前配置文件");
@@ -2046,7 +2046,7 @@ public class MainForm {
         cleanAreaButton.setText("清空命令行输出");
         otherPanel.add(cleanAreaButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         radDownButton = new JButton();
-        radDownButton.setText("rad下载网站");
+        radDownButton.setText("rad下载面板");
         otherPanel.add(radDownButton, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         midConfigPanel = new JPanel();
         midConfigPanel.setLayout(new GridLayoutManager(4, 1, new Insets(0, 0, 0, 0), -1, -1));

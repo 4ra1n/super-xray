@@ -640,7 +640,7 @@
                       <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="xray下载网站"/>
+                      <text value="xray下载面板"/>
                     </properties>
                   </component>
                   <component id="cbb9c" class="javax.swing.JButton" binding="lookupConfigButton">
@@ -672,7 +672,7 @@
                       <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="rad下载网站"/>
+                      <text value="rad下载面板"/>
                     </properties>
                   </component>
                 </children>
