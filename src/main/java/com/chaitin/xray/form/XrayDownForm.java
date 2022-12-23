@@ -202,7 +202,7 @@ public class XrayDownForm {
                     while ((len = in.read(buf)) > 0) {
                         out.write(buf, 0, len);
                     }
-                    if(!OSUtil.isWindows()){
+                    if (!OSUtil.isWindows()) {
                         String absOutPath = Paths.get(outPath).toAbsolutePath().toString();
                         ExecUtil.chmod(absOutPath);
                     }

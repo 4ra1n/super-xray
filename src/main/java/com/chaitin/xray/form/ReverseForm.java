@@ -79,6 +79,16 @@ public class ReverseForm {
                     httpObj.put("listen_ip", ip);
                     httpObj.put("listen_port", port);
                     Map<String, Object> client = (Map<String, Object>) reverse.get("client");
+                    if (!StringUtil.notEmpty(MainForm.instance.httpReverseText.getText())) {
+                        if (MainForm.LANG == MainForm.CHINESE) {
+                            JOptionPane.showMessageDialog(this.reversePanel,
+                                    "请先填写: 主界面->反连->http url");
+                        } else {
+                            JOptionPane.showMessageDialog(this.reversePanel,
+                                    "Input main form -> reverse -> http url first");
+                        }
+                        return;
+                    }
                     client.put("http_base_url", MainForm.instance.httpReverseText.getText());
                 }
             }

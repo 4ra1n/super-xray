@@ -198,7 +198,7 @@ public class RadDownForm {
                     while ((len = in.read(buf)) > 0) {
                         out.write(buf, 0, len);
                     }
-                    if(!OSUtil.isWindows()){
+                    if (!OSUtil.isWindows()) {
                         String absOutPath = Paths.get(outPath).toAbsolutePath().toString();
                         ExecUtil.chmod(absOutPath);
                     }
@@ -313,6 +313,14 @@ public class RadDownForm {
         saveButton = new JButton();
         saveButton.setText("选择");
         innerPanel.add(saveButton, new GridConstraints(3, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ButtonGroup buttonGroup;
+        buttonGroup = new ButtonGroup();
+        buttonGroup.add(windowsAmd64RadioButton);
+        buttonGroup.add(windows386RadioButton);
+        buttonGroup.add(linuxArm64RadioButton);
+        buttonGroup.add(darwinAmd64RadioButton);
+        buttonGroup.add(linuxAmd64RadioButton);
+        buttonGroup.add(linux386RadioButton);
     }
 
     /**
