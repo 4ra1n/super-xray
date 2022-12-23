@@ -1437,13 +1437,11 @@ public class MainForm {
             frame.setVisible(true);
         });
         radDownButton.addActionListener(e -> {
-            try {
-                Desktop desktop = Desktop.getDesktop();
-                URI oURL = new URI("https://download.xray.cool/rad");
-                desktop.browse(oURL);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            JFrame frame = new JFrame("Rad Download");
+            frame.setContentPane(new RadDownForm().radPanel);
+            frame.setResizable(false);
+            frame.pack();
+            frame.setVisible(true);
         });
         authorLabel.addMouseListener(new MouseAdapter() {
             @Override

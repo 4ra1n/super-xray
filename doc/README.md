@@ -44,6 +44,12 @@ Note: First enter the port to enable passive scanning, and then open the `rad` c
 
 ![](../img/20.png)
 
+## Download Panel
+
+After version 1.0, we support download panel:
+
+![](../img/00006.png)
+
 ## Subdomain Scan
 
 After version 1.0, we support subdomain scan:
