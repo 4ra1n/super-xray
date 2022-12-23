@@ -158,11 +158,9 @@ Others:
 
 ## 1.0
 
-增加了子域名扫描的模块，高级版xray可用；增加了下载面板，可以一键下载最新版xray和rad并加载。
+介绍视频：https://www.bilibili.com/video/BV1Zd4y1h7Rf
 
-增加了指定多个POC扫描的方式，其实可以在高级配置里面设置排除选项来做，但不太方便
-
-（xray目前不支持精准指定多个poc，只能指定一个范围，例如高危或中危，未来可能会支持）
+增加了下载面板，可以一键下载最新版xray和rad并加载；增加了子域名扫描的模块，但仅高级版xray可用。
 
 - New Features:
 - [important] [feat] 自动下载解压最新版xray并加载 #86
