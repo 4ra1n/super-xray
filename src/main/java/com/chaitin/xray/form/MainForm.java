@@ -413,7 +413,7 @@ public class MainForm {
         thread.start();
     }
 
-    private void loadXray(String absPath) {
+    public void loadXray(String absPath) {
         String targetDir = Paths.get(absPath).toFile().getParent() + File.separator;
         XrayUtil.rmAllConfig(targetDir);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> XrayUtil.rmAllConfig(targetDir)));
@@ -1430,13 +1430,11 @@ public class MainForm {
     private void initOther() {
         cleanAreaButton.addActionListener(e -> outputTextArea.setText(null));
         xrayUrlButton.addActionListener(e -> {
-            try {
-                Desktop desktop = Desktop.getDesktop();
-                URI oURL = new URI("https://download.xray.cool/xray");
-                desktop.browse(oURL);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            JFrame frame = new JFrame("Xray Download");
+            frame.setContentPane(new XrayDownForm().xrayDownPanel);
+            frame.setResizable(false);
+            frame.pack();
+            frame.setVisible(true);
         });
         radDownButton.addActionListener(e -> {
             try {

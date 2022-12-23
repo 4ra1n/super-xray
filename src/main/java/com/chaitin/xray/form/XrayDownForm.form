@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.chaitin.xray.form.XrayDownForm">
+  <grid id="27dc6" binding="xrayDownPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="614" height="400"/>
+    </constraints>
+    <properties>
+      <background color="-528927"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="1544e" binding="innerPanel" layout-manager="GridLayoutManager" row-count="5" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="1" use-parent-layout="false">
+            <minimum-size width="600" height="200"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-528927"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="93dbc" class="javax.swing.JTextField" binding="curVerText">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <editable value="false"/>
+              <text value="1.9.3"/>
+            </properties>
+          </component>
+          <component id="e8c24" class="javax.swing.JLabel" binding="osTypeLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="选择你需要："/>
+            </properties>
+          </component>
+          <component id="4a007" class="javax.swing.JLabel" binding="curVerLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="下载版本"/>
+            </properties>
+          </component>
+          <grid id="ab781" binding="osTypePanel" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-528927"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="36126" class="javax.swing.JRadioButton" binding="windowsAmd64RadioButton" default-binding="true">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-528927"/>
+                  <text value="windows-amd64"/>
+                </properties>
+              </component>
+              <component id="6a0bc" class="javax.swing.JRadioButton" binding="windows386RadioButton" default-binding="true">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-528927"/>
+                  <text value="windows-386"/>
+                </properties>
+              </component>
+              <component id="1052d" class="javax.swing.JRadioButton" binding="darwinArm64RadioButton" default-binding="true">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-528927"/>
+                  <text value="darwin-arm64"/>
+                </properties>
+              </component>
+              <component id="53e0f" class="javax.swing.JRadioButton" binding="darwinAmd64RadioButton" default-binding="true">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-528927"/>
+                  <enabled value="true"/>
+                  <text value="darwin-amd64"/>
+                </properties>
+              </component>
+              <component id="d0c1c" class="javax.swing.JRadioButton" binding="linuxAmd64RadioButton" default-binding="true">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-528927"/>
+                  <text value="linux-amd64"/>
+                </properties>
+              </component>
+              <component id="f55" class="javax.swing.JRadioButton" binding="linux386RadioButton" default-binding="true">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-528927"/>
+                  <text value="linux-386"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <component id="2bd84" class="javax.swing.JLabel" binding="downLabel">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="下载进度："/>
+            </properties>
+          </component>
+          <component id="2359c" class="javax.swing.JProgressBar" binding="progressBar">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <stringPainted value="true"/>
+            </properties>
+          </component>
+          <component id="edd25" class="javax.swing.JLabel" binding="opLabel">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="操作"/>
+            </properties>
+          </component>
+          <grid id="7dc92" binding="opPanel" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="4" column="1" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-528927"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="d1da3" class="javax.swing.JButton" binding="downButton">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="下载"/>
+                </properties>
+              </component>
+              <component id="fa37a" class="javax.swing.JButton" binding="loadButton">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="加载"/>
+                </properties>
+              </component>
+              <component id="60d7c" class="javax.swing.JButton" binding="unzipButton">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="解压"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <component id="e3cae" class="javax.swing.JLabel" binding="saveLabel">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="选择保存路径："/>
+            </properties>
+          </component>
+          <component id="c496a" class="javax.swing.JTextField" binding="savePathText">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <editable value="false"/>
+            </properties>
+          </component>
+          <component id="b5b12" class="javax.swing.JButton" binding="saveButton">
+            <constraints>
+              <grid row="3" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="选择"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+  <buttonGroups>
+    <group name="osType">
+      <member id="36126"/>
+      <member id="6a0bc"/>
+      <member id="1052d"/>
+      <member id="53e0f"/>
+      <member id="d0c1c"/>
+      <member id="f55"/>
+    </group>
+  </buttonGroups>
+</form>
