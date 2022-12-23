@@ -196,4 +196,14 @@
       </grid>
     </children>
   </grid>
+  <buttonGroups>
+    <group name="radType">
+      <member id="6f990"/>
+      <member id="28923"/>
+      <member id="43f1e"/>
+      <member id="2584f"/>
+      <member id="e566d"/>
+      <member id="6f130"/>
+    </group>
+  </buttonGroups>
 </form>

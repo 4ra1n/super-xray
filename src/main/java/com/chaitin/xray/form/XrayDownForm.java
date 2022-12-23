@@ -1,5 +1,7 @@
 package com.chaitin.xray.form;
 
+import com.chaitin.xray.utils.ExecUtil;
+import com.chaitin.xray.utils.OSUtil;
 import com.chaitin.xray.utils.StringUtil;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
@@ -199,6 +201,10 @@ public class XrayDownForm {
                     int len;
                     while ((len = in.read(buf)) > 0) {
                         out.write(buf, 0, len);
+                    }
+                    if(!OSUtil.isWindows()){
+                        String absOutPath = Paths.get(outPath).toAbsolutePath().toString();
+                        ExecUtil.chmod(absOutPath);
                     }
                     if (MainForm.LANG == MainForm.CHINESE) {
                         JOptionPane.showMessageDialog(xrayDownPanel, "文件位置：" + outPath);
