@@ -58,7 +58,7 @@ After version 1.0, we support subdomain scan:
 
 ## Reverse
 
-1. Click Configure Server
+1. Finish client reverse config and Click Configure Server
 2. Enter any database file name
 3. Enter the token password arbitrarily
 4. Do not change the IP address and enter a listening port
