@@ -106,7 +106,6 @@ public class MainForm {
     private JButton confirmPluginButton;
     private JPanel pocPanel;
     private JButton allPoCButton;
-    private JTextField usePoCText;
     private JPanel scanTargetPanel;
     private JPanel proxyConfigPanel;
     private JPanel reverseConfigPanel;
@@ -170,6 +169,8 @@ public class MainForm {
     private JButton radDownButton;
     private JButton subDomainButton;
     private JCheckBox xstreamCheckBox;
+    private JScrollPane pocScroll;
+    private JTextArea targetPocArea;
     private SubdomainForm subdomainInstance;
 
     public void init() {
@@ -901,7 +902,7 @@ public class MainForm {
             frame.setVisible(true);
         });
         cleanPoCButton.addActionListener(e -> {
-            usePoCText.setText(null);
+            targetPocArea.setText(null);
             localPoCText.setText(null);
             xrayCmd.setPoc(null);
             if (LANG == CHINESE) {
@@ -1036,16 +1037,35 @@ public class MainForm {
         });
 
         pocButton.addActionListener(e -> {
-            String poc = usePoCText.getText();
-            if (!Poc.getPocList().contains(poc.trim())) {
+            String poc = targetPocArea.getText();
+            if (!StringUtil.notEmpty(poc)) {
                 if (LANG == CHINESE) {
-                    JOptionPane.showMessageDialog(this.SuperXray, "PoC不存在");
+                    JOptionPane.showMessageDialog(this.SuperXray, "输入为空");
                 } else {
-                    JOptionPane.showMessageDialog(this.SuperXray, "PoC Not Exist");
+                    JOptionPane.showMessageDialog(this.SuperXray, "Need Input");
                 }
                 return;
             }
-            onlyUsePhantasm(poc, true);
+            String[] pocs = poc.split("\n");
+            StringBuilder sb = new StringBuilder();
+            for (String p : pocs) {
+                p = p.trim();
+                if (p.endsWith("\r")) {
+                    p = p.substring(0, p.length() - 1);
+                }
+                if (!Poc.getPocList().contains(p)) {
+                    if (LANG == CHINESE) {
+                        JOptionPane.showMessageDialog(this.SuperXray, "PoC不存在");
+                    } else {
+                        JOptionPane.showMessageDialog(this.SuperXray, "PoC Not Exist");
+                    }
+                    return;
+                }
+                sb.append(p);
+                sb.append(",");
+            }
+            String finalCmd = sb.toString();
+            onlyUsePhantasm(finalCmd.substring(0, finalCmd.length() - 1), true);
             if (LANG == CHINESE) {
                 JOptionPane.showMessageDialog(this.SuperXray, "设置PoC成功");
             } else {
@@ -2081,8 +2101,6 @@ public class MainForm {
         allPoCButton = new JButton();
         allPoCButton.setText("查看所有PoC");
         pocPanel.add(allPoCButton, new GridConstraints(0, 2, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        usePoCText = new JTextField();
-        pocPanel.add(usePoCText, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         pocNumLabel = new JLabel();
         pocNumLabel.setText("当前xray的PoC数量：");
         pocPanel.add(pocNumLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -2121,6 +2139,10 @@ public class MainForm {
         levelButton = new JButton();
         levelButton.setText("指定等级");
         pocPanel.add(levelButton, new GridConstraints(2, 2, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        pocScroll = new JScrollPane();
+        pocPanel.add(pocScroll, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 100), null, null, 0, false));
+        targetPocArea = new JTextArea();
+        pocScroll.setViewportView(targetPocArea);
         scanTargetPanel = new JPanel();
         scanTargetPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
         scanTargetPanel.setBackground(new Color(-725535));

@@ -180,3 +180,4 @@ Others:
 
 更新内容：
 - [important] 支持xray 1.9.4版本 #91
+- [important] 指定多个POC #92

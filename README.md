@@ -2,7 +2,7 @@
 [![](https://img.shields.io/github/v/release/4ra1n/super-xray)](https://github.com/4ra1n/super-xray/releases/latest)
 ![](https://img.shields.io/github/downloads/4ra1n/super-xray/total)
 ![](https://img.shields.io/badge/build-JDK8-orange)
-![](https://img.shields.io/badge/Java%20Code%20Lines-5955-orange)
+![](https://img.shields.io/badge/Java%20Code%20Lines-5978-orange)
 
 [English Version](doc/README.md)
 
@@ -37,6 +37,12 @@
 ## 下载
 
 最新版下载地址：[Latest Release](https://github.com/4ra1n/super-xray/releases/latest)
+
+## 指定多个PoC
+
+搜索后复制到输入框，注意换行分割
+
+![](img/00007.png)
 
 ## 与rad联动
 
