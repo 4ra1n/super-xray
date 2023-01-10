@@ -801,9 +801,9 @@ public class MainForm {
                 xrayCmd.setInput(String.format("%s", absPath));
             } else {
                 if (LANG == CHINESE) {
-                    rawFileField.setText("你取消了选择");
+                    urlFileField.setText("你取消了选择");
                 } else {
-                    rawFileField.setText("Cancel");
+                    urlFileField.setText("Cancel");
                 }
             }
         });
