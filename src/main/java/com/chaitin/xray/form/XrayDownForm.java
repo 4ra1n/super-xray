@@ -1,5 +1,6 @@
 package com.chaitin.xray.form;
 
+import com.chaitin.xray.model.DB;
 import com.chaitin.xray.utils.ExecUtil;
 import com.chaitin.xray.utils.OSUtil;
 import com.chaitin.xray.utils.StringUtil;
@@ -42,7 +43,7 @@ public class XrayDownForm {
     private JButton saveButton;
     private static boolean finish = false;
     public static final String xrayDownBase = "https://download.xray.cool/xray";
-    private static String savePath = ".";
+    private static String savePath = "./xray-bin/";
     private static final String xrayVersion = "1.9.4";
     private static String osType = "xray_windows_amd64.exe.zip";
 
@@ -73,6 +74,11 @@ public class XrayDownForm {
     }
 
     private void initSavePath() {
+        savePathText.setText(savePath);
+        try {
+            Files.createDirectories(Paths.get(savePath));
+        } catch (Exception ignored) {
+        }
         saveButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -202,9 +208,9 @@ public class XrayDownForm {
                     while ((len = in.read(buf)) > 0) {
                         out.write(buf, 0, len);
                     }
+                    outPath = Paths.get(outPath).toAbsolutePath().toString();
                     if (!OSUtil.isWindows()) {
-                        String absOutPath = Paths.get(outPath).toAbsolutePath().toString();
-                        ExecUtil.chmod(absOutPath);
+                        ExecUtil.chmod(outPath);
                     }
                     if (MainForm.LANG == MainForm.CHINESE) {
                         JOptionPane.showMessageDialog(xrayDownPanel, "文件位置：" + outPath);
@@ -225,6 +231,14 @@ public class XrayDownForm {
         loadButton.addActionListener(e -> {
             if (StringUtil.notEmpty(outPath)) {
                 MainForm.instance.loadXray(outPath);
+
+                DB data = new DB();
+                data.setLastXrayPath(outPath);
+                try {
+                    Files.write(Paths.get("super-xray.db"), data.getDB().getBytes());
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             } else {
                 if (MainForm.LANG == MainForm.CHINESE) {
                     JOptionPane.showMessageDialog(xrayDownPanel, "文件不存在");

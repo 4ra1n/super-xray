@@ -181,3 +181,4 @@ Others:
 更新内容：
 - [important] 支持xray 1.9.4版本 #91
 - [important] 指定多个POC #92
+- [bug] 从下载面板得到的xray无法保存设置 #89
