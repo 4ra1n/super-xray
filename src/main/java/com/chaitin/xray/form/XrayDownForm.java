@@ -43,7 +43,7 @@ public class XrayDownForm {
     private static boolean finish = false;
     public static final String xrayDownBase = "https://download.xray.cool/xray";
     private static String savePath = ".";
-    private static final String xrayVersion = "1.9.3";
+    private static final String xrayVersion = "1.9.4";
     private static String osType = "xray_windows_amd64.exe.zip";
 
     private static String outPath;
@@ -237,6 +237,7 @@ public class XrayDownForm {
     }
 
     public XrayDownForm() {
+        curVerText.setText(xrayVersion);
         initLang();
         initSavePath();
         initOSType();

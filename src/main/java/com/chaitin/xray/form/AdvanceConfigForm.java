@@ -110,6 +110,11 @@ public class AdvanceConfigForm {
     private JScrollPane dirScroll;
     private JButton applyAllButton;
     private JPanel rightPanel;
+    private JPanel xstreamPanel;
+    private JCheckBox useFullModeCheckBox;
+    private JLabel useFullModeLabel;
+    private JButton xstreamRefreshButton;
+    private JButton xstreamSaveButton;
 
     private final List<JCheckBox> baselineCheckBoxList = new ArrayList<>();
     private final List<JCheckBox> sqlCheckBoxList = new ArrayList<>();
@@ -165,6 +170,7 @@ public class AdvanceConfigForm {
             applyDirScan();
             applyBruteForce();
             applyShiro();
+            applyXStream();
             if (MainForm.LANG == MainForm.CHINESE) {
                 JOptionPane.showMessageDialog(this.advanceConfigPanel, "设置成功");
             } else {
@@ -370,6 +376,17 @@ public class AdvanceConfigForm {
     }
 
     @SuppressWarnings("unchecked")
+    private void refreshXStream() {
+        for (Map.Entry<String, Object> entry : MainForm.configObj.entrySet()) {
+            if (entry.getKey().equals("plugins")) {
+                Map<String, Object> plugins = (Map<String, Object>) entry.getValue();
+                Map<String, Object> obj = (Map<String, Object>) plugins.get("xstream");
+                useFullModeCheckBox.setSelected((boolean) obj.get("full"));
+            }
+        }
+    }
+
+    @SuppressWarnings("unchecked")
     private void applyBaseline() {
         for (Map.Entry<String, Object> entry : MainForm.configObj.entrySet()) {
             if (entry.getKey().equals("plugins")) {
@@ -396,6 +413,30 @@ public class AdvanceConfigForm {
         refreshBaselineButton.addActionListener(e -> refreshBaseline());
         saveBaselineButton.addActionListener(e -> {
             applyBaseline();
+            if (MainForm.LANG == MainForm.CHINESE) {
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "设置成功");
+            } else {
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "Success");
+            }
+        });
+    }
+
+    @SuppressWarnings("unchecked")
+    private void applyXStream() {
+        for (Map.Entry<String, Object> entry : MainForm.configObj.entrySet()) {
+            if (entry.getKey().equals("plugins")) {
+                Map<String, Object> plugins = (Map<String, Object>) entry.getValue();
+                Map<String, Object> obj = (Map<String, Object>) plugins.get("xstream");
+                obj.put("full", useFullModeCheckBox.isSelected());
+            }
+        }
+        MainForm.instance.refreshConfig();
+    }
+
+    private void initXStream() {
+        xstreamRefreshButton.addActionListener(e -> refreshXStream());
+        xstreamSaveButton.addActionListener(e -> {
+            applyXStream();
             if (MainForm.LANG == MainForm.CHINESE) {
                 JOptionPane.showMessageDialog(this.advanceConfigPanel, "设置成功");
             } else {
@@ -700,6 +741,9 @@ public class AdvanceConfigForm {
             privateLabel.setText("检查响应是否包含内网 ip");
             allRefreshButton.setText("刷新配置");
             selectXssButton.setText("xss全部勾选");
+            useFullModeLabel.setText("是否开启完全扫描模式");
+            xstreamRefreshButton.setText("刷新配置");
+            xstreamSaveButton.setText("确认配置");
         } else {
             configCenterPanel.setBorder(BorderFactory.createTitledBorder(null,
                     "Config Center", TitledBorder.DEFAULT_JUSTIFICATION,
@@ -761,6 +805,9 @@ public class AdvanceConfigForm {
             privateLabel.setText("check private ip");
             allRefreshButton.setText("Refresh All");
             selectXssButton.setText("xss all");
+            useFullModeLabel.setText("use full mode");
+            xstreamRefreshButton.setText("Refresh");
+            xstreamSaveButton.setText("Save");
         }
     }
 
@@ -776,6 +823,7 @@ public class AdvanceConfigForm {
         initBruteForce();
         initDirScan();
         initShiro();
+        initXStream();
     }
 
     {
@@ -1045,7 +1093,7 @@ public class AdvanceConfigForm {
         showLabel.setText("<html>\n高级配置并不会激活插件\n<br>\n勾选对应插件 点击 确认插件 生效\n</html>");
         advanceConfigPanel.add(showLabel, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         rightPanel = new JPanel();
-        rightPanel.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
+        rightPanel.setLayout(new GridLayoutManager(4, 1, new Insets(0, 0, 0, 0), -1, -1));
         rightPanel.setBackground(new Color(-725535));
         advanceConfigPanel.add(rightPanel, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         phantasmPanel = new JPanel();
@@ -1102,7 +1150,7 @@ public class AdvanceConfigForm {
         thinkphpPanel = new JPanel();
         thinkphpPanel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
         thinkphpPanel.setBackground(new Color(-725535));
-        rightPanel.add(thinkphpPanel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        rightPanel.add(thinkphpPanel, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         thinkphpPanel.setBorder(BorderFactory.createTitledBorder(null, "thinkphp", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         detectThinkphpSqliCheckBox = new JCheckBox();
         detectThinkphpSqliCheckBox.setBackground(new Color(-725535));
@@ -1117,6 +1165,24 @@ public class AdvanceConfigForm {
         thinkphpSaveButton = new JButton();
         thinkphpSaveButton.setText("确认配置");
         thinkphpPanel.add(thinkphpSaveButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        xstreamPanel = new JPanel();
+        xstreamPanel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
+        xstreamPanel.setBackground(new Color(-528927));
+        rightPanel.add(xstreamPanel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        xstreamPanel.setBorder(BorderFactory.createTitledBorder(null, "xstream", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
+        useFullModeCheckBox = new JCheckBox();
+        useFullModeCheckBox.setBackground(new Color(-528927));
+        useFullModeCheckBox.setText("use full mode");
+        xstreamPanel.add(useFullModeCheckBox, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        useFullModeLabel = new JLabel();
+        useFullModeLabel.setText("是否开启完全扫描模式");
+        xstreamPanel.add(useFullModeLabel, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        xstreamRefreshButton = new JButton();
+        xstreamRefreshButton.setText("刷新配置");
+        xstreamPanel.add(xstreamRefreshButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        xstreamSaveButton = new JButton();
+        xstreamSaveButton.setText("确认配置");
+        xstreamPanel.add(xstreamSaveButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**

@@ -169,6 +169,7 @@ public class MainForm {
     public JCheckBox delLogCheckBox;
     private JButton radDownButton;
     private JButton subDomainButton;
+    private JCheckBox xstreamCheckBox;
     private SubdomainForm subdomainInstance;
 
     public void init() {
@@ -326,6 +327,10 @@ public class MainForm {
                     if (plugin.getKey().equals("xxe")) {
                         Map<String, Object> items = (Map<String, Object>) plugin.getValue();
                         xxeCheckBox.setSelected((boolean) (items.get("enabled")));
+                    }
+                    if (plugin.getKey().equals("xstream")) {
+                        Map<String, Object> items = (Map<String, Object>) plugin.getValue();
+                        xstreamCheckBox.setSelected((boolean) (items.get("enabled")));
                     }
                 }
             }
@@ -513,6 +518,7 @@ public class MainForm {
         checkBoxList.add(strutsCheckBox);
         checkBoxList.add(uploadCheckBox);
         checkBoxList.add(xxeCheckBox);
+        checkBoxList.add(xstreamCheckBox);
         enableAllButton.addActionListener(e -> {
             if (!pluginAll) {
                 for (JCheckBox checkBox : checkBoxList) {
@@ -674,6 +680,14 @@ public class MainForm {
                         if (plugin.getKey().equals("xxe")) {
                             Map<String, Object> items = (Map<String, Object>) plugin.getValue();
                             if (xxeCheckBox.isSelected()) {
+                                items.put("enabled", true);
+                            } else {
+                                items.put("enabled", false);
+                            }
+                        }
+                        if (plugin.getKey().equals("xstream")) {
+                            Map<String, Object> items = (Map<String, Object>) plugin.getValue();
+                            if (xstreamCheckBox.isSelected()) {
                                 items.put("enabled", true);
                             } else {
                                 items.put("enabled", false);
@@ -1855,7 +1869,7 @@ public class MainForm {
         configPanel.setBackground(new Color(-725535));
         SuperXray.add(configPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         leftConfigPanel = new JPanel();
-        leftConfigPanel.setLayout(new GridLayoutManager(11, 4, new Insets(0, 0, 0, 0), -1, -1));
+        leftConfigPanel.setLayout(new GridLayoutManager(12, 4, new Insets(0, 0, 0, 0), -1, -1));
         leftConfigPanel.setBackground(new Color(-725535));
         leftConfigPanel.setEnabled(true);
         leftConfigPanel.setForeground(new Color(-4540485));
@@ -1947,10 +1961,14 @@ public class MainForm {
         leftConfigPanel.add(xssCheckBox, new GridConstraints(9, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         enableAllButton = new JButton();
         enableAllButton.setText("全选 / 取消全选");
-        leftConfigPanel.add(enableAllButton, new GridConstraints(10, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        leftConfigPanel.add(enableAllButton, new GridConstraints(11, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         advanceButton = new JButton();
         advanceButton.setText("高级配置");
-        leftConfigPanel.add(advanceButton, new GridConstraints(10, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        leftConfigPanel.add(advanceButton, new GridConstraints(11, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        xstreamCheckBox = new JCheckBox();
+        xstreamCheckBox.setBackground(new Color(-528927));
+        xstreamCheckBox.setText("xstream");
+        leftConfigPanel.add(xstreamCheckBox, new GridConstraints(10, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         rightConfigPanel = new JPanel();
         rightConfigPanel.setLayout(new GridLayoutManager(8, 1, new Insets(0, 0, 0, 0), -1, -1));
         rightConfigPanel.setBackground(new Color(-725535));

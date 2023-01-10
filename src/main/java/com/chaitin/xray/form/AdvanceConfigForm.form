@@ -642,7 +642,7 @@
           <text value="&lt;html&gt;&#10;高级配置并不会激活插件&#10;&lt;br&gt;&#10;勾选对应插件 点击 确认插件 生效&#10;&lt;/html&gt;"/>
         </properties>
       </component>
-      <grid id="3670a" binding="rightPanel" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="3670a" binding="rightPanel" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -799,7 +799,7 @@
           <grid id="38e4d" binding="thinkphpPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <background color="-725535"/>
@@ -832,6 +832,51 @@
                 </properties>
               </component>
               <component id="c62c5" class="javax.swing.JButton" binding="thinkphpSaveButton">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="确认配置"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="1ff6e" binding="xstreamPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-528927"/>
+            </properties>
+            <border type="none" title="xstream"/>
+            <children>
+              <component id="dbcc1" class="javax.swing.JCheckBox" binding="useFullModeCheckBox">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-528927"/>
+                  <text value="use full mode"/>
+                </properties>
+              </component>
+              <component id="ef51" class="javax.swing.JLabel" binding="useFullModeLabel">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="是否开启完全扫描模式"/>
+                </properties>
+              </component>
+              <component id="de085" class="javax.swing.JButton" binding="xstreamRefreshButton">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="刷新配置"/>
+                </properties>
+              </component>
+              <component id="33be3" class="javax.swing.JButton" binding="xstreamSaveButton">
                 <constraints>
                   <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>

@@ -16,17 +16,17 @@ http:
   max_resp_body_size: 2097152           # 最大允许的响应大小, 默认 2M
   max_qps: 500                          # 每秒最大请求数
   allow_methods:                        # 允许的请求方法
-    - HEAD
-    - GET
-    - POST
-    - PUT
-    - PATCH
-    - DELETE
-    - OPTIONS
-    - CONNECT
-    - TRACE
-    - MOVE
-    - PROPFIND
+  - HEAD
+  - GET
+  - POST
+  - PUT
+  - PATCH
+  - DELETE
+  - OPTIONS
+  - CONNECT
+  - TRACE
+  - MOVE
+  - PROPFIND
   headers:
     User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0
     # Cookie: key=value
@@ -72,12 +72,12 @@ plugins:
     auto_load_poc: false                # 除内置 poc 外，额外自动加载当前目录以 "poc-" 为文件名前缀的POC文件，等同于在 include_poc 中增加 "./poc-*"
     exclude_poc: []                     # 排除哪些 poc, 支持 glob 语法, 如: "/home/poc/*thinkphp*" 或 "poc-yaml-weblogic*"
     include_poc: []                     # 只使用哪些内置 poc 以及 额外加载哪些本地 poc, 支持 glob 语法, 如："*weblogic*" 或 "/home/poc/*"
-      # 也可使用 --poc 仅运行 指定的内置或本地 poc，进行测试。
-      # 例如，可使用如下命令，仅运行当前目录下的 poc 且 不运行内置 poc 进行测试：
-    # webscan -poc ./poc-* -url http://example.com
+                                        # 也可使用 --poc 仅运行 指定的内置或本地 poc，进行测试。
+                                        # 例如，可使用如下命令，仅运行当前目录下的 poc 且 不运行内置 poc 进行测试：
+                                        # webscan -poc ./poc-* -url http://example.com
     poc_tags:                           # 为POC添加tag, 然后就可以使用--tags来选择启动哪些POC。poc-yaml-test为poc的name，[]中的内容为该POC对应的标签
       poc-yaml-test: ["HW", "ST"]
-      poc-yaml-test-1: ["ST"]
+      poc-yaml-test-1: ["ST"]                       
   redirect:
     enabled: true
   shiro:
@@ -90,7 +90,7 @@ plugins:
     boolean_based_detection: true       # 是否检测布尔盲注
     error_based_detection: true         # 是否检测报错注入
     time_based_detection: true          # 是否检测时间盲注
-    use_comment_in_payload: false       # 在 payload 中使用 or, 慎用！可能导致删库！
+    use_comment_in_payload: false       # 是否在时间盲注中使用 comment 关键字, 有风险, 建议不开
     detect_sqli_in_cookie: true         # 是否检查在 cookie 中的注入
   ssrf:
     enabled: true
@@ -107,6 +107,10 @@ plugins:
     ie_feature: false                   # 是否扫描仅能在 ie 下利用的 xss
   xxe:
     enabled: true
+  xstream:
+    enabled: true
+    full: false                         # 是否完全扫描，一般情况下只通过post请求body发post
+                                        # 如果开启完全扫描，则会有大量请求对每一个参数进行测试
 
 # 反连平台配置，更多解释见 https://docs.xray.cool/#/configration/reverse
 # 注意: 默认配置为禁用反连平台，这是无法扫描出依赖反连平台的漏洞，这些漏洞包括 fastjson，ssrf 以及 poc 中依赖反连的情况等
@@ -115,19 +119,19 @@ reverse:
   token: ""                             # 反连平台认证的 Token, 独立部署时不能为空
   http:
     enabled: false
-    listen_ip: 0.0.0.0
+    listen_ip: 0.0.0.0 
     listen_port: ""
     ip_header: ""                       # 在哪个 http header 中取 ip，为空代表从 REMOTE_ADDR 中取
   dns:
     enabled: false
-    listen_ip: 0.0.0.0
+    listen_ip: 0.0.0.0 
     domain: ""                          # DNS 域名配置
     is_domain_name_server: false        # 是否修改了域名的 ns 为反连平台，如果是，那 nslookup 等就不需要指定 dns 了
     resolve:                            # DNS 静态解析规则
-      - type: A                           # A, AAAA, TXT 三种
-        record: localhost
-        value: 127.0.0.1
-        ttl: 60
+    - type: A                           # A, AAAA, TXT 三种
+      record: localhost
+      value: 127.0.0.1
+      ttl: 60
   client:
     remote_server: false                # 是否是独立的远程 server，如果是要在下面配置好远程的服务端地址
     http_base_url: ""                   # 默认将根据 ListenIP 和 ListenPort 生成，该地址是存在漏洞的目标反连回来的地址, 当反连平台前面有反代、绑定域名、端口映射时需要自行配置
@@ -145,12 +149,12 @@ mitm:
   restriction:                          # 代理能够访问的资源限制, 以下各项为空表示不限制
     hostname_allowed: []                # 允许访问的 Hostname，支持格式如 t.com、*.t.com、1.1.1.1、1.1.1.1/24、1.1-4.1.1-8
     hostname_disallowed:                # 不允许访问的 Hostname，支持格式如 t.com、*.t.com、1.1.1.1、1.1.1.1/24、1.1-4.1.1-8
-      - '*google*'
-      - '*github*'
-      - '*.gov.cn'
-      - '*.edu.cn'
-      - '*chaitin*'
-      - '*.xray.cool'
+    - '*google*'
+    - '*github*'
+    - '*.gov.cn'
+    - '*.edu.cn'
+    - '*chaitin*'
+    - '*.xray.cool'
     port_allowed: []                    # 允许访问的端口, 支持的格式如: 80、80-85
     port_disallowed: []                 # 不允许访问的端口, 支持的格式如: 80、80-85
     path_allowed: []                    # 允许访问的路径，支持的格式如: test、*test*
@@ -177,12 +181,12 @@ basic-crawler:
   restriction:                          # 爬虫的允许爬取的资源限制, 为空表示不限制。爬虫会自动添加扫描目标到 Hostname_allowed。
     hostname_allowed: []                # 允许访问的 Hostname，支持格式如 t.com、*.t.com、1.1.1.1、1.1.1.1/24、1.1-4.1.1-8
     hostname_disallowed:                # 不允许访问的 Hostname，支持格式如 t.com、*.t.com、1.1.1.1、1.1.1.1/24、1.1-4.1.1-8
-      - '*google*'
-      - '*github*'
-      - '*.gov.cn'
-      - '*.edu.cn'
-      - '*chaitin*'
-      - '*.xray.cool'
+    - '*google*'
+    - '*github*'
+    - '*.gov.cn'
+    - '*.edu.cn'
+    - '*chaitin*'
+    - '*.xray.cool'
     port_allowed: []                    # 允许访问的端口, 支持的格式如: 80、80-85
     port_disallowed: []                 # 不允许访问的端口, 支持的格式如: 80、80-85
     path_allowed: []                    # 允许访问的路径，支持的格式如: test、*test*
@@ -206,11 +210,11 @@ subdomain:
   web_only: false                       # 结果中仅显示有 web 应用的, 没有 web 应用的将被丢弃
   ip_only: false                        # 结果中仅展示解析出 IP 的，没有解析成功的将被丢弃
   servers:                              # 子域名扫描过程中使用的 DNS Server
-    - 8.8.8.8
-    - 8.8.4.4
-    - 223.5.5.5
-    - 223.6.6.6
-    - 114.114.114.114
+  - 8.8.8.8
+  - 8.8.4.4
+  - 223.5.5.5
+  - 223.6.6.6
+  - 114.114.114.114
   sources:
     brute:
       enabled: true
