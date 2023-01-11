@@ -20,6 +20,9 @@ public class ListenUtilForm {
     private JPanel centerPanel;
     private JPanel sendPanel;
 
+    private static Thread t;
+    private static boolean isRunning = false;
+
     private void initLang() {
         if (MainForm.LANG == MainForm.CHINESE) {
             portLabel.setText("监听端口");
@@ -37,9 +40,28 @@ public class ListenUtilForm {
         initLang();
 
         listenButton.addActionListener(e -> {
-            String portStr = portText.getText().trim();
-            int port = Integer.parseInt(portStr);
-            new Thread(() -> SocketUtil.serve(port, terminalArea)).start();
+            if (isRunning) {
+                isRunning = false;
+                t.interrupt();
+                t = null;
+                if (MainForm.LANG == MainForm.CHINESE) {
+                    listenButton.setText("开始监听端口");
+                } else {
+                    listenButton.setText("Start Listen");
+                }
+                SocketUtil.area.setText(null);
+            } else {
+                String portStr = portText.getText().trim();
+                int port = Integer.parseInt(portStr);
+                t = new Thread(() -> SocketUtil.serve(port, terminalArea));
+                t.start();
+                isRunning = true;
+                if (MainForm.LANG == MainForm.CHINESE) {
+                    listenButton.setText("关闭监听端口");
+                } else {
+                    listenButton.setText("Stop Listen");
+                }
+            }
         });
         sendButton.addActionListener(e -> SocketUtil.sendServe(sendText.getText()));
     }

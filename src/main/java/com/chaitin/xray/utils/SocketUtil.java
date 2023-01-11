@@ -35,7 +35,7 @@ public class SocketUtil {
     }
 
     private static PrintWriter writer;
-    private static JTextArea area;
+    public static JTextArea area;
 
     @SuppressWarnings("all")
     public static void serve(int port, JTextArea targetArea) {
@@ -52,6 +52,7 @@ public class SocketUtil {
                 area.append(line);
             }
         } catch (Exception e) {
+            area.setText(e.toString());
             e.printStackTrace();
         }
     }
