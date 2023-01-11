@@ -13,13 +13,13 @@
 使用前提：
 - 本地有 `JRE/JDK 8+` 环境（如果使用内置`JRE`的`exe`版本无需`Java`环境）
 - 使用 `java -jar SuperXray.jar` 启动（在`Windows`中双击启动会有权限问题）
-- 前往 [ctstack](https://stack.chaitin.com/tool/detail?id=1) 或 [xray 下载站](https://download.xray.cool) 下载最新版 `xray`
+- 前往 [ctstack](https://stack.chaitin.com/tool/detail?id=1) 或 [xray 下载站](https://download.xray.cool) 下载最新版 `xray` (本工具也有内置一键下载面板)
 
 [常见问题解决](https://github.com/4ra1n/super-xray/issues/98)
 
 注意：
 - 请使用 1080P 及以上分辨率，在 720P 及以下分辨率可能无法完全显示
-- 请使用最新版`xray`（本工具未兼容老版本`xray`）
+- 请使用最新版`xray`（目前是`1.9.4`版本，本工具未兼容老版本`xray`）
 - 支持两种方式的`exe`文件，`system`版使用系统的`JRE`，另一种内置了`JRE 8`
 
 整体架构：
