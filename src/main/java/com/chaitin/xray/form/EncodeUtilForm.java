@@ -129,6 +129,14 @@ public class EncodeUtilForm {
             stringCmdPanel.setBorder(BorderFactory.createTitledBorder(null,
                     "   特殊命令字符串生成", TitledBorder.DEFAULT_JUSTIFICATION,
                     TitledBorder.DEFAULT_POSITION, null, null));
+            baseDecodeButton.setText("解码");
+            baseEncodeButton.setText("编码");
+            cmdBashEncodeButton.setText("生成");
+            md5EncodeButton.setText("加密");
+            cmdPwEncodeButton.setText("生成");
+            urlEncodeButton.setText("编码");
+            urlDecodeButton.setText("解码");
+            stringCmdButton.setText("生成");
         } else {
             bashLabel.setText("  Java commands cannot use redirection and pipeline symbols");
             pwLabel.setText("  Java commands cannot use redirection and pipeline symbols");
@@ -136,6 +144,14 @@ public class EncodeUtilForm {
             stringCmdPanel.setBorder(BorderFactory.createTitledBorder(null,
                     "Amazing Encode", TitledBorder.DEFAULT_JUSTIFICATION,
                     TitledBorder.DEFAULT_POSITION, null, null));
+            baseDecodeButton.setText("Encode");
+            baseEncodeButton.setText("Decode");
+            cmdBashEncodeButton.setText("Generate");
+            md5EncodeButton.setText("Encrypt");
+            cmdPwEncodeButton.setText("Generate");
+            urlEncodeButton.setText("Encode");
+            urlDecodeButton.setText("Decode");
+            stringCmdButton.setText("Generate");
         }
     }
 
