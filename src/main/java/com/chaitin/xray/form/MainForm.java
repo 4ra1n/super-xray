@@ -171,6 +171,8 @@ public class MainForm {
     private JCheckBox xstreamCheckBox;
     private JScrollPane pocScroll;
     private JTextArea targetPocArea;
+    private JLabel tipForAdvance;
+    private JLabel tipForReverse;
     private SubdomainForm subdomainInstance;
 
     public void init() {
@@ -1603,6 +1605,14 @@ public class MainForm {
             levelButton.setText("Set Level");
             radDownButton.setText("Rad Download");
             subDomainButton.setText("Subdomain Scan");
+            targetPocArea.setText("Lookup all PoC\n" +
+                    "Input poc per line\n" +
+                    "For example\n" +
+                    "poc-yaml-1\n" +
+                    "poc-yaml-2");
+            tipForAdvance.setText("Some plugins only for advance");
+            tipForReverse.setText("<html> 1. Only support HTTP/RMI, no DNS<br> " +
+                    "2. Please finish client config then click <b>Server Config</b> to export config<br> </html>");
         } else if (LANG == CHINESE) {
             xrayPathLabel.setText("你选择的xray文件是：");
             noteLabel.setText("<html> 注意：在 Mac OS 中请用 control+c/v 复制/粘贴 </html>");
@@ -1690,6 +1700,14 @@ public class MainForm {
             levelButton.setText("设置等级");
             radDownButton.setText("rad下载面板");
             subDomainButton.setText("子域名扫描");
+            targetPocArea.setText("查看所有PoC后选择你需要的\n" +
+                    "每一行输入一个\n" +
+                    "例如\n" +
+                    "poc-yaml-1\n" +
+                    "poc-yaml-2");
+            tipForAdvance.setText("部分插件仅高级版支持");
+            tipForReverse.setText("<html> 1. 反连只支持HTTP/RMI配置，不包含DNS配置<br> " +
+                    "2. 请先配置好客户端再点击 <b>配置服务端</b> 导出配置文件<br> </html>");
         }
     }
 
@@ -1828,7 +1846,7 @@ public class MainForm {
         choseDirButton.setText("点击按钮选择");
         pathButtonPanel.add(choseDirButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, 1, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         noteLabel = new JLabel();
-        noteLabel.setText("注意：Mac OS 用 control+c/v 复制/粘贴");
+        noteLabel.setText("<html>\n1. Mac OS 用 control+c/v 复制/粘贴\n<br>\n2. 请勿重复加载，否则会有意外的问题\n</html>");
         pathButtonPanel.add(noteLabel, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, new Dimension(300, -1), null, null, 0, false));
         skinPanel = new JPanel();
         skinPanel.setLayout(new GridLayoutManager(2, 4, new Insets(0, 0, 0, 0), -1, -1));
@@ -1901,7 +1919,7 @@ public class MainForm {
         catConfigPanel.setBackground(new Color(-725535));
         leftConfigPanel.add(catConfigPanel, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, 1, 1, null, null, null, 0, false));
         catConfigLabel = new JLabel();
-        catConfigLabel.setText("<html>\n使用的插件：\n<br>\n<b>请配置完成后点击->确认插件</b>\n<p>(部分插件仅高级版支持)</p>\n</html>");
+        catConfigLabel.setText("<html>请配置完成后点击 <b>确认插件</b></html>");
         catConfigPanel.add(catConfigLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         confirmPluginButton = new JButton();
         confirmPluginButton.setText("确认插件");
@@ -1989,6 +2007,9 @@ public class MainForm {
         xstreamCheckBox.setBackground(new Color(-528927));
         xstreamCheckBox.setText("xstream");
         leftConfigPanel.add(xstreamCheckBox, new GridConstraints(10, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        tipForAdvance = new JLabel();
+        tipForAdvance.setText("部分插件仅高级版支持");
+        leftConfigPanel.add(tipForAdvance, new GridConstraints(10, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         rightConfigPanel = new JPanel();
         rightConfigPanel.setLayout(new GridLayoutManager(8, 1, new Insets(0, 0, 0, 0), -1, -1));
         rightConfigPanel.setBackground(new Color(-725535));
@@ -2017,19 +2038,22 @@ public class MainForm {
         rightConfigPanel.add(reverseConfigPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         reverseConfigPanel.setBorder(BorderFactory.createTitledBorder(null, "反连平台", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         reverseUrlPanel = new JPanel();
-        reverseUrlPanel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
+        reverseUrlPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
         reverseUrlPanel.setBackground(new Color(-725535));
         reverseConfigPanel.add(reverseUrlPanel, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         httpReverseLabel = new JLabel();
         httpReverseLabel.setText("请输入HTTP URL（IP形式）");
-        reverseUrlPanel.add(httpReverseLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        reverseUrlPanel.add(httpReverseLabel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         httpReverseText = new JTextField();
-        reverseUrlPanel.add(httpReverseText, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        reverseUrlPanel.add(httpReverseText, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         tokenLabel = new JLabel();
         tokenLabel.setText("Token");
-        reverseUrlPanel.add(tokenLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        reverseUrlPanel.add(tokenLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         tokenText = new JTextField();
-        reverseUrlPanel.add(tokenText, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        reverseUrlPanel.add(tokenText, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        tipForReverse = new JLabel();
+        tipForReverse.setText("<html>\n1. 反连只支持HTTP/RMI配置，不包含DNS配置<br>\n2. 请先配置好客户端再点击 <b>配置服务端</b> 导出配置文件<br>\n</html>");
+        reverseUrlPanel.add(tipForReverse, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         reverseConfigButton = new JButton();
         reverseConfigButton.setText("确认配置");
         reverseConfigPanel.add(reverseConfigButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -2142,6 +2166,7 @@ public class MainForm {
         pocScroll = new JScrollPane();
         pocPanel.add(pocScroll, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 100), null, null, 0, false));
         targetPocArea = new JTextArea();
+        targetPocArea.setText("查看所有PoC后选择你需要的\n每一行输入一个\n例如\npoc-yaml-1\npoc-yaml-2");
         pocScroll.setViewportView(targetPocArea);
         scanTargetPanel = new JPanel();
         scanTargetPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
