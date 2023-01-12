@@ -188,6 +188,7 @@ public class SubdomainForm {
                     JOptionPane.showMessageDialog(this.subdomainPanel, "Stop");
                 }
                 running = false;
+                outputTextArea.setText(null);
                 return;
             }
             if (!StringUtil.notEmpty(targetText.getText())) {
