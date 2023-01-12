@@ -1096,9 +1096,7 @@ public class MainForm {
                 xrayCmd.setConfig(String.format("%s", configPath));
                 xrayCmd.setInput(null);
 
-                if (StringUtil.notEmpty(xrayCmd.getOutput())) {
-                    refreshOutput();
-                }
+                refreshOutput();
 
                 xrayCmd.setOthersPrefix("--listen");
                 xrayCmd.setOthers("127.0.0.1:" + port);
