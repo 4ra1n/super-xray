@@ -173,6 +173,9 @@ public class MainForm {
     private JTextArea targetPocArea;
     private JLabel tipForAdvance;
     private JLabel tipForReverse;
+    private JSpinner parallelSet;
+    private JLabel setParallelLabel;
+    private JLabel tipParallelLabel;
     private SubdomainForm subdomainInstance;
 
     public void init() {
@@ -254,6 +257,8 @@ public class MainForm {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+
+        parallelSet.setValue(configObj.get("parallel"));
 
         for (Map.Entry<String, Object> entry : configObj.entrySet()) {
             if (entry.getKey().equals("plugins")) {
@@ -849,6 +854,11 @@ public class MainForm {
             }
             try {
                 if (!activeRunning) {
+
+                    int value = (int) parallelSet.getValue();
+                    configObj.put("parallel", value);
+                    refreshConfig();
+
                     refreshOutput();
                     xrayCmd.setModule("webscan");
                     xrayCmd.setConfig(String.format("%s", configPath));
@@ -1091,6 +1101,10 @@ public class MainForm {
                     }
                     return;
                 }
+
+                int value = (int) parallelSet.getValue();
+                configObj.put("parallel", value);
+                refreshConfig();
 
                 xrayCmd.setModule("webscan");
                 xrayCmd.setConfig(String.format("%s", configPath));
@@ -1611,6 +1625,8 @@ public class MainForm {
             tipForAdvance.setText("Some plugins only for advance");
             tipForReverse.setText("<html> 1. Only support HTTP/RMI, no DNS<br> " +
                     "2. Please finish client config then click <b>Server Config</b> to export config<br> </html>");
+            setParallelLabel.setText("Set Parallel");
+            tipParallelLabel.setText("Concurrency");
         } else if (LANG == CHINESE) {
             xrayPathLabel.setText("你选择的xray文件是：");
             noteLabel.setText("<html> 注意：在 Mac OS 中请用 control+c/v 复制/粘贴 </html>");
@@ -1706,6 +1722,8 @@ public class MainForm {
             tipForAdvance.setText("部分插件仅高级版支持");
             tipForReverse.setText("<html> 1. 反连只支持HTTP/RMI配置，不包含DNS配置<br> " +
                     "2. 请先配置好客户端再点击 <b>配置服务端</b> 导出配置文件<br> </html>");
+            setParallelLabel.setText("设置并发");
+            tipParallelLabel.setText("并发越高发包越快");
         }
     }
 
@@ -2067,47 +2085,56 @@ public class MainForm {
         activeScanButton.setText("开启主动扫描");
         startScanPanel.add(activeScanButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         mitmPanel = new JPanel();
-        mitmPanel.setLayout(new GridLayoutManager(2, 6, new Insets(0, 0, 0, 0), -1, -1));
+        mitmPanel.setLayout(new GridLayoutManager(3, 6, new Insets(0, 0, 0, 0), -1, -1));
         mitmPanel.setBackground(new Color(-725535));
         startScanPanel.add(mitmPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         mitmScanButton = new JButton();
         mitmScanButton.setText("开启被动扫描");
-        mitmPanel.add(mitmScanButton, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mitmPanel.add(mitmScanButton, new GridConstraints(1, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         portText = new JTextField();
         portText.setText("");
-        mitmPanel.add(portText, new GridConstraints(0, 1, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        mitmPanel.add(portText, new GridConstraints(1, 1, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         portLabel = new JLabel();
         portLabel.setText("被动监听端口:");
-        mitmPanel.add(portLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mitmPanel.add(portLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         radLabel = new JLabel();
         radLabel.setText("开启被动扫描后与rad联动");
-        mitmPanel.add(radLabel, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mitmPanel.add(radLabel, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         radButton = new JButton();
         radButton.setText("点击联动");
-        mitmPanel.add(radButton, new GridConstraints(1, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mitmPanel.add(radButton, new GridConstraints(2, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        setParallelLabel = new JLabel();
+        setParallelLabel.setText("设置并发");
+        mitmPanel.add(setParallelLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        parallelSet = new JSpinner();
+        parallelSet.setBackground(new Color(-725535));
+        mitmPanel.add(parallelSet, new GridConstraints(0, 1, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        tipParallelLabel = new JLabel();
+        tipParallelLabel.setText("并发越高发包越快");
+        mitmPanel.add(tipParallelLabel, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         otherPanel = new JPanel();
-        otherPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
+        otherPanel.setLayout(new GridLayoutManager(2, 3, new Insets(0, 0, 0, 0), -1, -1));
         otherPanel.setBackground(new Color(-725535));
         rightConfigPanel.add(otherPanel, new GridConstraints(6, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         otherPanel.setBorder(BorderFactory.createTitledBorder(null, "其他", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
-        subDomainButton = new JButton();
-        subDomainButton.setText("子域名扫描");
-        otherPanel.add(subDomainButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         xrayUrlButton = new JButton();
         xrayUrlButton.setText("xray下载面板");
-        otherPanel.add(xrayUrlButton, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        otherPanel.add(xrayUrlButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         lookupConfigButton = new JButton();
         lookupConfigButton.setText("查看当前配置文件");
-        otherPanel.add(lookupConfigButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        otherPanel.add(lookupConfigButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         lookupCmdButton = new JButton();
         lookupCmdButton.setText("查看当前命令");
-        otherPanel.add(lookupCmdButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        cleanAreaButton = new JButton();
-        cleanAreaButton.setText("清空命令行输出");
-        otherPanel.add(cleanAreaButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        otherPanel.add(lookupCmdButton, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         radDownButton = new JButton();
         radDownButton.setText("rad下载面板");
-        otherPanel.add(radDownButton, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        otherPanel.add(radDownButton, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        subDomainButton = new JButton();
+        subDomainButton.setText("子域名扫描");
+        otherPanel.add(subDomainButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        cleanAreaButton = new JButton();
+        cleanAreaButton.setText("清空命令行输出");
+        otherPanel.add(cleanAreaButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         midConfigPanel = new JPanel();
         midConfigPanel.setLayout(new GridLayoutManager(4, 1, new Insets(0, 0, 0, 0), -1, -1));
         midConfigPanel.setBackground(new Color(-725535));
