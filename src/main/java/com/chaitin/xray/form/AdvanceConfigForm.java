@@ -321,12 +321,8 @@ public class AdvanceConfigForm {
                 Map<String, Object> obj = (Map<String, Object>) plugins.get("brute-force");
                 String userDic = (String) obj.get("username_dictionary");
                 String pwdDic = (String) obj.get("password_dictionary");
-                if (StringUtil.notEmpty(userDic)) {
-                    usernameDicText.setText(userDic);
-                }
-                if (StringUtil.notEmpty(pwdDic)) {
-                    pwdText.setText(pwdDic);
-                }
+                usernameDicText.setText(userDic);
+                pwdText.setText(pwdDic);
             }
         }
     }
