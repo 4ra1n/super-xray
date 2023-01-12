@@ -16,6 +16,7 @@ import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.plaf.FontUIResource;
@@ -1830,10 +1831,81 @@ public class MainForm {
         instance = new MainForm();
         frame.setContentPane(instance.SuperXray);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setJMenuBar(createMenuBar());
         frame.pack();
         frame.setVisible(true);
 
         frame.setSize(1280, 960);
+    }
+
+    private static JMenu createAboutMenu() {
+        try {
+            JMenu aboutMenu = new JMenu("帮助");
+            JMenuItem bugItem = new JMenuItem("报告bug");
+            InputStream is = MainForm.class.getClassLoader().getResourceAsStream("issue.png");
+            if (is == null) {
+                return null;
+            }
+
+            ImageIcon imageIcon = new ImageIcon(ImageIO.read(is));
+            bugItem.setIcon(imageIcon);
+            aboutMenu.add(bugItem);
+            bugItem.addActionListener(e -> {
+                try {
+                    Desktop desktop = Desktop.getDesktop();
+                    URI oURL = new URI("https://github.com/4ra1n/super-xray/issues/new/choose");
+                    desktop.browse(oURL);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            });
+
+            JMenuItem authorItem = new JMenuItem("项目地址");
+            is = MainForm.class.getClassLoader().getResourceAsStream("address.png");
+            if (is == null) {
+                return null;
+            }
+            imageIcon = new ImageIcon(ImageIO.read(is));
+            authorItem.setIcon(imageIcon);
+            aboutMenu.add(authorItem);
+            authorItem.addActionListener(e -> {
+                try {
+                    Desktop desktop = Desktop.getDesktop();
+                    URI oURL = new URI("https://github.com/4ra1n/super-xray");
+                    desktop.browse(oURL);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            });
+
+            JMenuItem normalItem = new JMenuItem("常见问题");
+            is = MainForm.class.getClassLoader().getResourceAsStream("normal.png");
+            if (is == null) {
+                return null;
+            }
+            imageIcon = new ImageIcon(ImageIO.read(is));
+            normalItem.setIcon(imageIcon);
+            aboutMenu.add(normalItem);
+            normalItem.addActionListener(e -> {
+                try {
+                    Desktop desktop = Desktop.getDesktop();
+                    URI oURL = new URI("https://github.com/4ra1n/super-xray/issues/98");
+                    desktop.browse(oURL);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            });
+
+            return aboutMenu;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    private static JMenuBar createMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+        menuBar.add(createAboutMenu());
+        return menuBar;
     }
 
     {
