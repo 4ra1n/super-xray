@@ -1477,6 +1477,11 @@ public class MainForm {
 
     private void initOther() {
         cleanAreaButton.addActionListener(e -> outputTextArea.setText(null));
+        parallelSet.addChangeListener(e -> {
+            int value = (int) parallelSet.getValue();
+            configObj.put("parallel", value);
+            refreshConfig();
+        });
         xrayUrlButton.addActionListener(e -> {
             JFrame frame = new JFrame("Xray Download");
             frame.setContentPane(new XrayDownForm().xrayDownPanel);
