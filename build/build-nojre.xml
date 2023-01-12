@@ -2,8 +2,8 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>D:\super-xray\target\super-xray-1.2.jar</jar>
-  <outfile>D:\super-xray\super-xray-1.2-system-jre.exe</outfile>
+  <jar>D:\super-xray\target\super-xray-1.3.jar</jar>
+  <outfile>D:\super-xray\super-xray-1.3-system-jre.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>

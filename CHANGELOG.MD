@@ -200,3 +200,7 @@ Others:
 - [improve] 插件模块的UI简单重构 #100
 - [improve] 完善页面上的提示信息 #101
 - 更新`UI`库`flatlaf`到`3.0`版本
+
+## 1.3
+
+todo
