@@ -178,6 +178,7 @@ public class MainForm {
     private JSpinner parallelSet;
     private JLabel setParallelLabel;
     private JLabel tipParallelLabel;
+    public JCheckBox delCaCheckBox;
     private SubdomainForm subdomainInstance;
 
     public void init() {
@@ -1479,6 +1480,7 @@ public class MainForm {
 
     private void initOther() {
         cleanAreaButton.addActionListener(e -> outputTextArea.setText(null));
+        delCaCheckBox.setSelected(true);
         parallelSet.addChangeListener(e -> {
             int value = (int) parallelSet.getValue();
             configObj.put("parallel", value);
@@ -1634,6 +1636,7 @@ public class MainForm {
                     "2. Please finish client config then click <b>Server Config</b> to export config<br> </html>");
             setParallelLabel.setText("Set Parallel");
             tipParallelLabel.setText("Concurrency");
+            delCaCheckBox.setText("Delete CA When Exit");
         } else if (LANG == CHINESE) {
             xrayPathLabel.setText("你选择的xray文件是：");
             noteLabel.setText("<html> 注意：在 Mac OS 中请用 control+c/v 复制/粘贴 </html>");
@@ -1731,6 +1734,7 @@ public class MainForm {
                     "2. 请先配置好客户端再点击 <b>配置服务端</b> 导出配置文件<br> </html>");
             setParallelLabel.setText("设置并发");
             tipParallelLabel.setText("并发越高发包越快");
+            delCaCheckBox.setText("关闭后删除ca文件");
         }
     }
 
@@ -2449,20 +2453,24 @@ public class MainForm {
         resetConfigButton.setText("确认");
         resetPanel.add(resetConfigButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, 1, GridConstraints.SIZEPOLICY_FIXED, null, null, new Dimension(100, -1), 0, false));
         openResultPanel = new JPanel();
-        openResultPanel.setLayout(new GridLayoutManager(1, 3, new Insets(0, 0, 0, 0), -1, -1));
+        openResultPanel.setLayout(new GridLayoutManager(1, 4, new Insets(0, 0, 0, 0), -1, -1));
         openResultPanel.setBackground(new Color(-725535));
         otherButton.add(openResultPanel, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 1, false));
         openResultButton = new JButton();
         openResultButton.setText("点击打开扫描结果");
-        openResultPanel.add(openResultButton, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        openResultPanel.add(openResultButton, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         autoDelCheckBox = new JCheckBox();
         autoDelCheckBox.setBackground(new Color(-725535));
         autoDelCheckBox.setText("关闭后删除报告");
-        openResultPanel.add(autoDelCheckBox, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        openResultPanel.add(autoDelCheckBox, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         delLogCheckBox = new JCheckBox();
         delLogCheckBox.setBackground(new Color(-528927));
         delLogCheckBox.setText("关闭后删除日志");
         openResultPanel.add(delLogCheckBox, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        delCaCheckBox = new JCheckBox();
+        delCaCheckBox.setBackground(new Color(-725535));
+        delCaCheckBox.setText("关闭后删除ca文件");
+        openResultPanel.add(delCaCheckBox, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         stopPanel = new JPanel();
         stopPanel.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
         stopPanel.setBackground(new Color(-725535));
