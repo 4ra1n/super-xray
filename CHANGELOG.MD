@@ -206,3 +206,5 @@ Others:
 更新内容：
 - [important] [feat] 新菜单显示当前版本和支持xray最低版本 #113
 - [important] [feat] 验证super-xray最新版本 #114
+- [improve] 支持关闭时删除被动扫描生成的ca文件 #117
+- [improve] 子域名扫描的输入过滤 #116

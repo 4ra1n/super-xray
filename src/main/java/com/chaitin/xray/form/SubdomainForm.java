@@ -219,11 +219,21 @@ public class SubdomainForm {
                 outputFilePath = outPath.toAbsolutePath().toString();
             }
 
+            String target = targetText.getText();
+            if (target.startsWith("http")) {
+                if (MainForm.LANG == MainForm.CHINESE) {
+                    JOptionPane.showMessageDialog(this.subdomainPanel, "请直接输入域名");
+                } else {
+                    JOptionPane.showMessageDialog(this.subdomainPanel, "Input domain directly");
+                }
+                return;
+            }
+
             String[] finalCmd = new String[]{
                     xray,
                     "subdomain",
                     "--target",
-                    targetText.getText(),
+                    target,
                     "--html-output",
                     outputFilePath,
                     bruteForceCheckBox.isSelected() ? "" : "--no-brute",
