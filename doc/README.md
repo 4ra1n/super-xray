@@ -2,7 +2,7 @@
 [![](https://img.shields.io/github/v/release/4ra1n/super-xray)](https://github.com/4ra1n/super-xray/releases/latest)
 ![](https://img.shields.io/github/downloads/4ra1n/super-xray/total)
 ![](https://img.shields.io/badge/build-JDK8-orange)
-![](https://img.shields.io/badge/Java%20Code%20Lines-6173-orange)
+![](https://img.shields.io/badge/Java%20Code%20Lines-6348-orange)
 
 ## Introduce
 
@@ -24,13 +24,13 @@ Overall architecture:
 
 Support english UI:
 
-![](../img/00003.jpg)
+![](../img/0001.png)
 
-![](../img/00004.jpg)
+![](../img/0002.png)
 
 It is easy to search poc and run:
 
-<img src="../img/21.png" width="500px">
+<img src="../img/0008.png" width="500px">
 
 ## Download
 
@@ -40,7 +40,7 @@ Latest Download：[Latest Release](https://github.com/4ra1n/super-xray/releases/
 
 Search and Copy
 
-![](../img/00007.png)
+![](../img/0007.png)
 
 ## With rad
 
@@ -48,19 +48,19 @@ After version 0.8, it can be linked with `rad`:
 
 Note: First enter the port to enable passive scanning, and then open the `rad` coordination
 
-![](../img/20.png)
+![](../img/0004.png)
 
 ## Download Panel
 
 After version 1.0, we support download panel:
 
-![](../img/00006.png)
+![](../img/0005.png)
 
 ## Subdomain Scan
 
 After version 1.0, we support subdomain scan:
 
-![](../img/00005.jpg)
+![](../img/0006.png)
 
 ## Reverse
 
@@ -73,3 +73,15 @@ After version 1.0, we support subdomain scan:
 7. Server `./xray reverse` Start the reverse platform
 8. Enter the corresponding token and http url on the reverse connection platform (note that the IP format is http://1.1.1.1:8080 ）
 9. Enable active scanning or passive scanning
+
+![](../img/0009.png)
+
+## Menu
+
+Help
+
+![](../img/0010.png)
+
+Version Check
+
+![](../img/0011.png)

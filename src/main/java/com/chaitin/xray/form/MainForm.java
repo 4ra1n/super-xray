@@ -1555,9 +1555,7 @@ public class MainForm {
             leftConfigPanel.setBorder(BorderFactory.createTitledBorder(null,
                     "Plugins Config", TitledBorder.DEFAULT_JUSTIFICATION,
                     TitledBorder.DEFAULT_POSITION, null, null));
-            catConfigLabel.setText("<html> Using Plugins <br> " +
-                    "<b>Please press confirm button after check</b> " +
-                    "<p>(Some only supported by the advanced version)</p> </html>");
+            catConfigLabel.setText("<html>Press After Config <b>Confirm</b></html>");
             bruteForceCheckBox.setText("bruteforce");
             baselineCheckBox.setText("baseline");
             phantasmCheckBox.setText("phantasm");
@@ -1654,8 +1652,7 @@ public class MainForm {
             leftConfigPanel.setBorder(BorderFactory.createTitledBorder(null,
                     "扫描插件配置", TitledBorder.DEFAULT_JUSTIFICATION,
                     TitledBorder.DEFAULT_POSITION, null, null));
-            catConfigLabel.setText("<html> 使用的插件： <br> " +
-                    "<b>请配置完成后点击->确认插件</b> <p>(部分插件仅高级版支持)</p> </html>");
+            catConfigLabel.setText("<html>请配置完成后点击 <b>确认插件</b></html>");
             bruteForceCheckBox.setText("bruteforce（暴力破解）");
             baselineCheckBox.setText("baseline（基线检查）");
             phantasmCheckBox.setText("phantasm（PoC合集）");

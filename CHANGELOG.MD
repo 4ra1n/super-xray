@@ -215,6 +215,7 @@ Others:
 - [important] [security] 加载自身将会耗尽操作系统资源 #112
 - [important] [feat] 新菜单显示当前版本和支持xray最低版本 #113
 - [important] [feat] 验证super-xray最新版本 #114
+- [important] [doc] 更新README中所有的图片 #121
 - [feat] 子域名扫描加入关闭删除选项 #118
 - [improve] 某些情况同步PoC会卡住较长时间 #122
 - [improve] 加载rad也应该对输入文件进行限制 #120

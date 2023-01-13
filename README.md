@@ -2,7 +2,7 @@
 [![](https://img.shields.io/github/v/release/4ra1n/super-xray)](https://github.com/4ra1n/super-xray/releases/latest)
 ![](https://img.shields.io/github/downloads/4ra1n/super-xray/total)
 ![](https://img.shields.io/badge/build-JDK8-orange)
-![](https://img.shields.io/badge/Java%20Code%20Lines-6173-orange)
+![](https://img.shields.io/badge/Java%20Code%20Lines-6348-orange)
 
 [English Version](doc/README.md)
 
@@ -28,13 +28,13 @@
 
 支持中文和英文：
 
-![](img/00001.jpg)
+![](img/0001.png)
 
-![](img/00002.jpg)
+![](img/0002.png)
 
 可以方便地搜索poc并运行：
 
-<img src="img/21.png" width="500px">
+<img src="img/0008.png" width="500px">
 
 ## 下载
 
@@ -44,7 +44,7 @@
 
 搜索后复制到输入框，注意换行分割
 
-![](img/00007.png)
+![](img/0007.png)
 
 ## 与rad联动
 
@@ -52,19 +52,23 @@
 
 注意：先输入端口开启被动扫描，再打开`rad`配合
 
-![](img/20.png)
+![](img/0004.png)
 
 ## 下载面板
 
-在1.0版本以后新增下载面板：
+在1.0版本以后新增下载面板
 
-![](img/00006.png)
+一键下载最新版`xray`和`rad`工具：
+
+![](img/0005.png)
 
 ## 子域名扫描
 
-在1.0版本以后支持子域名扫描：
+在1.0版本以后支持子域名扫描，但是高级版才可以使用
 
-![](img/00005.jpg)
+（测试`xray`高级版的子域名扫描功能效果不错）
+
+![](img/0006.png)
 
 ## 反连平台
 
@@ -77,3 +81,15 @@
 7. 服务端`./xray reverse`启动反连平台
 8. 在反连平台输入对应到`token`和`http url`即可（注意是ip格式例如http://1.1.1.1:8080）
 9. 开启主动扫描或被动扫描即可
+
+![](img/0009.png)
+
+## 菜单
+
+帮助与支持
+
+![](img/0010.png)
+
+版本检测: 由于使用`Github API`查询版本，所有可能有一些延迟
+
+![](img/0011.png)
