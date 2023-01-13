@@ -1,6 +1,7 @@
 package com.chaitin.xray.form;
 
 import com.chaitin.xray.model.DB;
+import com.chaitin.xray.utils.CheckUtil;
 import com.chaitin.xray.utils.ExecUtil;
 import com.chaitin.xray.utils.OSUtil;
 import com.chaitin.xray.utils.StringUtil;
@@ -234,7 +235,10 @@ public class XrayDownForm {
     private void initLoad() {
         loadButton.addActionListener(e -> {
             if (StringUtil.notEmpty(outPath)) {
-                MainForm.instance.loadXray(outPath);
+
+                if (CheckUtil.checkValid(outPath)) {
+                    MainForm.instance.loadXray(outPath);
+                }
 
                 DB data = new DB();
                 data.setLastXrayPath(outPath);

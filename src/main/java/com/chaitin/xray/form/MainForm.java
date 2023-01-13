@@ -478,7 +478,9 @@ public class MainForm {
     public void initLoadXray() {
         if (StringUtil.notEmpty(db.getLastXrayPath()) &&
                 !db.getLastXrayPath().equals("null")) {
-            loadXray(db.getLastXrayPath());
+            if (CheckUtil.checkValid(db.getLastXrayPath())) {
+                loadXray(db.getLastXrayPath());
+            }
         }
 
         choseDirButton.addActionListener(e -> {
@@ -489,7 +491,9 @@ public class MainForm {
                 File file = fileChooser.getSelectedFile();
                 String absPath = file.getAbsolutePath();
 
-                loadXray(absPath);
+                if (CheckUtil.checkValid(absPath)) {
+                    loadXray(absPath);
+                }
 
                 DB data = new DB();
                 data.setLastXrayPath(absPath);

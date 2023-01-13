@@ -203,7 +203,16 @@ Others:
 
 ## 1.3
 
+修复安全漏洞：
+
+[GHSA-vgxx-2crp-32vv](https://github.com/4ra1n/super-xray/security/advisories/GHSA-vgxx-2crp-32vv)
+
+使用`exe`版本加载`super-xray`自身将会无限启动，导致耗尽操作系统`CPU`和内存。
+由于用户输入的可执行文件是什么应该由用户负责，一般情况下不应该是安全漏洞，但是用户输入`super-xray`自身导致的问题应该被处理。
+二进制可执行文件无法判断具体是什么，所以只能限制文件名结合文件大小二者来防止加载自身，但是用户加载其他可执行文件导致的安全问题与本项目无关。
+
 更新内容：
+- [important] [security] 加载自身将会耗尽操作系统资源 #112
 - [important] [feat] 新菜单显示当前版本和支持xray最低版本 #113
 - [important] [feat] 验证super-xray最新版本 #114
 - [feat] 子域名扫描加入关闭删除选项 #118
