@@ -1,6 +1,7 @@
 package com.chaitin.xray.form;
 
 import com.chaitin.xray.model.RadCmd;
+import com.chaitin.xray.utils.CheckUtil;
 import com.chaitin.xray.utils.ExecUtil;
 import com.chaitin.xray.utils.JNAUtil;
 import com.chaitin.xray.utils.OSUtil;
@@ -126,6 +127,11 @@ public class RadForm {
             if (option == JFileChooser.APPROVE_OPTION) {
                 File file = fileChooser.getSelectedFile();
                 String absPath = file.getAbsolutePath();
+
+                if (!CheckUtil.checkRadValid(absPath)) {
+                    return;
+                }
+
                 radCmd.setRad(absPath);
                 radFileText.setText(absPath);
             }
