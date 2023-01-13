@@ -24,6 +24,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -96,6 +97,7 @@ public class SubdomainForm {
             onlyWebCheckbox.setText("只输出web应用子域名");
             openResultButton.setText("打开输出文件");
             generateButton.setText("随机文件名");
+            delCheckbox.setText("关闭时删除报告");
         } else {
             targetLabel.setText("   Target");
             outputLabel.setText("   Output File");
@@ -106,6 +108,7 @@ public class SubdomainForm {
             onlyWebCheckbox.setText("only web apps");
             openResultButton.setText("Open Result");
             generateButton.setText("Generate");
+            delCheckbox.setText("delete reports when exit");
         }
     }
 
@@ -126,9 +129,11 @@ public class SubdomainForm {
     private JButton openResultButton;
     private JButton generateButton;
     private JPanel optionPanel;
+    private JCheckBox delCheckbox;
     private static String xray;
     private static boolean running = false;
-    private static String outputFilePath;
+    public static String outputFilePath;
+    public static ArrayList<String> outputFilePathList = new ArrayList<>();
 
     public void initOpenOutput() {
         openResultButton.addActionListener(e -> {
@@ -150,13 +155,6 @@ public class SubdomainForm {
                     } catch (Exception ignored) {
                     }
                     new Thread(() -> ExecUtil.execOpen(tempOutput)).start();
-                    Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                        try {
-                            Files.delete(Paths.get(tempOutput));
-                        } catch (IOException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                    }));
                 } else {
                     if (MainForm.LANG == MainForm.CHINESE) {
                         JOptionPane.showMessageDialog(this.subdomainPanel, "目前没有输出文件");
@@ -169,6 +167,21 @@ public class SubdomainForm {
     }
 
     public SubdomainForm(XrayCmd xrayCmd) {
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            if (delCheckbox.isSelected()) {
+                for (String path : outputFilePathList) {
+                    try {
+                        Files.delete(Paths.get(path));
+                    } catch (Exception ignored) {
+                    }
+                }
+            }
+        }));
+
+        delCheckbox.setSelected(true);
+        onlyIpCheckbox.setSelected(false);
+        onlyIpCheckbox.setEnabled(false);
         xray = xrayCmd.getXray();
         initLang();
         initOpenOutput();
@@ -217,6 +230,11 @@ public class SubdomainForm {
                     return;
                 }
                 outputFilePath = outPath.toAbsolutePath().toString();
+                if (StringUtil.notEmpty(outputFilePath)) {
+                    outputFilePathList.add(outputFilePath);
+                    String copyName = outputFilePath.split("\\.html")[0] + "copy.html";
+                    outputFilePathList.add(copyName);
+                }
             }
 
             String target = targetText.getText();
@@ -303,7 +321,7 @@ public class SubdomainForm {
         generateButton.setText("Generate");
         confPanel.add(generateButton, new GridConstraints(1, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         optionPanel = new JPanel();
-        optionPanel.setLayout(new GridLayoutManager(1, 5, new Insets(0, 0, 0, 0), -1, -1));
+        optionPanel.setLayout(new GridLayoutManager(1, 6, new Insets(0, 0, 0, 0), -1, -1));
         optionPanel.setBackground(new Color(-528927));
         confPanel.add(optionPanel, new GridConstraints(2, 1, 1, 6, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         bruteForceCheckBox = new JCheckBox();
@@ -318,6 +336,10 @@ public class SubdomainForm {
         onlyWebCheckbox.setBackground(new Color(-725535));
         onlyWebCheckbox.setText("only web apps");
         optionPanel.add(onlyWebCheckbox, new GridConstraints(0, 1, 1, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        delCheckbox = new JCheckBox();
+        delCheckbox.setBackground(new Color(-725535));
+        delCheckbox.setText("delete reports when exit");
+        optionPanel.add(delCheckbox, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer1 = new Spacer();
         configPanel.add(spacer1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 5), null, null, 0, false));
         outputPanel = new JScrollPane();
