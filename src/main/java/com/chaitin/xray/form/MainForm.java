@@ -10,6 +10,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
+import okhttp3.*;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.yaml.snakeyaml.LoaderOptions;
@@ -1902,9 +1903,85 @@ public class MainForm {
         }
     }
 
+    private static JMenu createVersionMenu() {
+        try {
+            JMenu verMenu = new JMenu("版本");
+            JMenuItem xrayItem = new JMenuItem(Const.MinXrayVersion);
+            InputStream is = MainForm.class.getClassLoader().getResourceAsStream("ver.png");
+            if (is == null) {
+                return null;
+            }
+            ImageIcon imageIcon = new ImageIcon(ImageIO.read(is));
+            xrayItem.setIcon(imageIcon);
+
+            JMenuItem superXrayItem = new JMenuItem(Const.SuperXrayVersion);
+            superXrayItem.setIcon(imageIcon);
+
+
+            JMenuItem downItem = new JMenuItem("验证最新版");
+            downItem.setIcon(imageIcon);
+            downItem.addActionListener(e -> {
+                OkHttpClient client = new OkHttpClient();
+                Request request = new Request.Builder()
+                        .url("https://api.github.com/repos/4ra1n/super-xray/releases/latest")
+                        .addHeader("Connection", "close")
+                        .build();
+
+                JOptionPane.showMessageDialog(instance.SuperXray, Const.GithubTip);
+
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        JOptionPane.showMessageDialog(instance.SuperXray, e.toString());
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) {
+                        try {
+                            if (response.body() == null) {
+                                if (LANG == CHINESE) {
+                                    JOptionPane.showMessageDialog(instance.SuperXray, "网络错误");
+                                } else {
+                                    JOptionPane.showMessageDialog(instance.SuperXray, "network error");
+                                }
+                            }
+                            String body = response.body().string();
+                            String ver = body.split("\"tag_name\":")[1].split(",")[0];
+                            ver = ver.substring(1, ver.length() - 1);
+
+                            String output;
+                            if (LANG == CHINESE) {
+                                output = String.format("%s: %s\n%s: %s",
+                                        "您当前的版本", Const.CurVersion,
+                                        "目前最新版本", ver);
+                                JOptionPane.showMessageDialog(instance.SuperXray, output);
+                            } else {
+                                output = String.format("%s: %s\n%s: %s",
+                                        "Your Current Version", Const.CurVersion,
+                                        "Latest Version", ver);
+                                JOptionPane.showMessageDialog(instance.SuperXray, output);
+                            }
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(instance.SuperXray, ex.toString());
+                        }
+                    }
+                });
+            });
+
+            verMenu.add(xrayItem);
+            verMenu.add(superXrayItem);
+            verMenu.add(downItem);
+            return verMenu;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     private static JMenuBar createMenuBar() {
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(createAboutMenu());
+        menuBar.add(createVersionMenu());
         return menuBar;
     }
 

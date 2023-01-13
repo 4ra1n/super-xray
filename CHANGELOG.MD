@@ -203,4 +203,6 @@ Others:
 
 ## 1.3
 
-todo
+更新内容：
+- [important] [feat] 新菜单显示当前版本和支持xray最低版本 #113
+- [important] [feat] 验证super-xray最新版本 #114
