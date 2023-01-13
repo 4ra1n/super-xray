@@ -1024,7 +1024,7 @@ public class MainForm {
             String[] cmd = new String[]{xrayCmd.getXray(), "ws", "--list"};
             InputStream is = Objects.requireNonNull(ExecUtil.exec(cmd)).getInputStream();
             stop = false;
-            execAndFresh(cmd);
+            outputTextArea.setText(null);
             List<String> poc = new ArrayList<>();
             String data = IOUtil.readStringFromIs(is);
             assert data != null;
@@ -1049,8 +1049,10 @@ public class MainForm {
             Poc.clear();
             Poc.addAll(poc);
             if (LANG == CHINESE) {
+                outputTextArea.setText("同步PoC成功\n点击 查看所有PoC 即可搜索");
                 pocNumLabel.setText(String.format("当前共有: %s 个PoC", Poc.getPocList().size()));
             } else {
+                outputTextArea.setText("Success!\nClick Lookup All PoC to Search");
                 pocNumLabel.setText(String.format("PoC Num: %s", Poc.getPocList().size()));
             }
         });
