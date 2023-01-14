@@ -76,6 +76,12 @@ After version 1.0, we support subdomain scan:
 
 ![](../img/0009.png)
 
+## Service Scan
+
+Only support `Tomcat AJP` service scan
+
+![](../img/0012.png)
+
 ## Menu
 
 Help
