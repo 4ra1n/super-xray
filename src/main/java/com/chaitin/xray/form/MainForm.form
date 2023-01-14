@@ -630,14 +630,6 @@
                           <text value="开启被动扫描后与rad联动"/>
                         </properties>
                       </component>
-                      <component id="1b584" class="javax.swing.JButton" binding="radButton">
-                        <constraints>
-                          <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="点击联动"/>
-                        </properties>
-                      </component>
                       <component id="69dd9" class="javax.swing.JLabel" binding="setParallelLabel">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -661,6 +653,30 @@
                         </constraints>
                         <properties>
                           <text value="并发越高发包越快"/>
+                        </properties>
+                      </component>
+                      <component id="1b584" class="javax.swing.JButton" binding="radButton">
+                        <constraints>
+                          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="点击联动"/>
+                        </properties>
+                      </component>
+                      <component id="f1580" class="javax.swing.JButton" binding="ajpScanButton">
+                        <constraints>
+                          <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="AJP服务扫描"/>
+                        </properties>
+                      </component>
+                      <component id="9391e" class="javax.swing.JLabel" binding="ajpLabel">
+                        <constraints>
+                          <grid row="2" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Tomcat AJP"/>
                         </properties>
                       </component>
                     </children>

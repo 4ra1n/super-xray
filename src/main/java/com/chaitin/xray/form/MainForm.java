@@ -179,7 +179,10 @@ public class MainForm {
     private JLabel setParallelLabel;
     private JLabel tipParallelLabel;
     public JCheckBox delCaCheckBox;
+    private JButton ajpScanButton;
+    private JLabel ajpLabel;
     private SubdomainForm subdomainInstance;
+    private AJPScanForm ajpInstance;
 
     public void init() {
         checkBoxList = new ArrayList<>();
@@ -1641,6 +1644,7 @@ public class MainForm {
             setParallelLabel.setText("Set Parallel");
             tipParallelLabel.setText("Concurrency");
             delCaCheckBox.setText("Delete CA When Exit");
+            ajpScanButton.setText("AJP Scan");
         } else if (LANG == CHINESE) {
             xrayPathLabel.setText("你选择的xray文件是：");
             noteLabel.setText("<html> 注意：在 Mac OS 中请用 control+c/v 复制/粘贴 </html>");
@@ -1738,6 +1742,7 @@ public class MainForm {
             setParallelLabel.setText("设置并发");
             tipParallelLabel.setText("并发越高发包越快");
             delCaCheckBox.setText("关闭后删除ca文件");
+            ajpScanButton.setText("AJP服务扫描");
         }
     }
 
@@ -1750,6 +1755,9 @@ public class MainForm {
             }
             if (subdomainInstance != null) {
                 subdomainInstance.stop = true;
+            }
+            if (ajpInstance != null) {
+                ajpInstance.stop = true;
             }
             try {
                 Thread.sleep(3000);
@@ -1803,6 +1811,31 @@ public class MainForm {
         });
     }
 
+    private void initAJP() {
+        ajpScanButton.addActionListener(e -> {
+            String t;
+            if (LANG == CHINESE) {
+                t = "Tomcat AJP 扫描";
+            } else {
+                t = "Tomcat AJP Scan";
+            }
+            if (!StringUtil.notEmpty(xrayCmd.getXray())) {
+                if (LANG == CHINESE) {
+                    JOptionPane.showMessageDialog(this.SuperXray, "请先加载xray");
+                } else {
+                    JOptionPane.showMessageDialog(this.SuperXray, "Load xray first");
+                }
+                return;
+            }
+            JFrame frame = new JFrame(t);
+            ajpInstance = new AJPScanForm(xrayCmd);
+            frame.setContentPane(ajpInstance.ajpPanel);
+            frame.setResizable(false);
+            frame.pack();
+            frame.setVisible(true);
+        });
+    }
+
     public MainForm() {
         init();
         initLang();
@@ -1831,6 +1864,7 @@ public class MainForm {
         initEncodeUtil();
         initSubdomain();
         initOther();
+        initAJP();
         initExit();
     }
 
@@ -2261,9 +2295,6 @@ public class MainForm {
         radLabel = new JLabel();
         radLabel.setText("开启被动扫描后与rad联动");
         mitmPanel.add(radLabel, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        radButton = new JButton();
-        radButton.setText("点击联动");
-        mitmPanel.add(radButton, new GridConstraints(2, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         setParallelLabel = new JLabel();
         setParallelLabel.setText("设置并发");
         mitmPanel.add(setParallelLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -2273,6 +2304,15 @@ public class MainForm {
         tipParallelLabel = new JLabel();
         tipParallelLabel.setText("并发越高发包越快");
         mitmPanel.add(tipParallelLabel, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        radButton = new JButton();
+        radButton.setText("点击联动");
+        mitmPanel.add(radButton, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ajpScanButton = new JButton();
+        ajpScanButton.setText("AJP服务扫描");
+        mitmPanel.add(ajpScanButton, new GridConstraints(2, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ajpLabel = new JLabel();
+        ajpLabel.setText("Tomcat AJP");
+        mitmPanel.add(ajpLabel, new GridConstraints(2, 3, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         otherPanel = new JPanel();
         otherPanel.setLayout(new GridLayoutManager(2, 3, new Insets(0, 0, 0, 0), -1, -1));
         otherPanel.setBackground(new Color(-725535));
