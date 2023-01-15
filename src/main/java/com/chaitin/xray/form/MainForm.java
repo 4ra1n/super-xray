@@ -2070,10 +2070,21 @@ public class MainForm {
             ballItem.setIcon(ballIcon);
             ballItem.addActionListener(e -> new PinballFrame());
 
+            JMenuItem pokerItem = new JMenuItem("斗地主");
+            is = MainForm.class.getClassLoader().getResourceAsStream(
+                    "game/pocker/images/logo.png");
+            if (is == null) {
+                return null;
+            }
+            ImageIcon pokerIcon = new ImageIcon(ImageIO.read(is));
+            pokerItem.setIcon(pokerIcon);
+            pokerItem.addActionListener(e -> new Thread(com.chaitin.xray.pocker.Main::new).start());
+
             gameMenu.add(snakeItem);
             gameMenu.add(flappyItem);
             gameMenu.add(sweepItem);
             gameMenu.add(ballItem);
+            gameMenu.add(pokerItem);
             return gameMenu;
         } catch (Exception ex) {
             ex.printStackTrace();
