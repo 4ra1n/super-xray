@@ -2,7 +2,7 @@
 [![](https://img.shields.io/github/v/release/4ra1n/super-xray)](https://github.com/4ra1n/super-xray/releases/latest)
 ![](https://img.shields.io/github/downloads/4ra1n/super-xray/total)
 ![](https://img.shields.io/badge/build-JDK8-orange)
-![](https://img.shields.io/badge/Code%20Lines-10594-orange)
+![](https://img.shields.io/badge/Code%20Lines-9461-orange)
 
 ## Introduce
 
@@ -91,3 +91,16 @@ Help
 Version Check
 
 ![](../img/0011.png)
+
+Some games
+
+![](../img/0013.png)
+
+## Games
+
+Thanks for this project:
+- https://github.com/hexadeciman/Snake
+- https://github.com/jiashunx/games-flappybird
+- https://github.com/BlankSpacePlus/java-mine-sweeper
+- https://github.com/BlankSpacePlus/java-pinball
+- https://github.com/ljheee/PlayCard

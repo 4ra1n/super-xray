@@ -2,7 +2,7 @@
 [![](https://img.shields.io/github/v/release/4ra1n/super-xray)](https://github.com/4ra1n/super-xray/releases/latest)
 ![](https://img.shields.io/github/downloads/4ra1n/super-xray/total)
 ![](https://img.shields.io/badge/build-JDK8-orange)
-![](https://img.shields.io/badge/Code%20Lines-10594-orange)
+![](https://img.shields.io/badge/Code%20Lines-9461-orange)
 
 [English Version](doc/README.md)
 
@@ -102,6 +102,10 @@
 
 ![](img/0011.png)
 
+一些内置小游戏
+
+![](img/0013.png)
+
 ## 小游戏
 
 感谢以下项目：
@@ -109,3 +113,4 @@
 - Flappy Bird：https://github.com/jiashunx/games-flappybird
 - 扫雷：https://github.com/BlankSpacePlus/java-mine-sweeper
 - 弹球：https://github.com/BlankSpacePlus/java-pinball
+- 斗地主：https://github.com/ljheee/PlayCard
