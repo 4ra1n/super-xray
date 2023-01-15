@@ -1,10 +1,14 @@
 package com.chaitin.xray.form;
 
 import com.chaitin.xray.Application;
+import com.chaitin.xray.flappy.FBMainFrame;
 import com.chaitin.xray.model.Const;
 import com.chaitin.xray.model.DB;
 import com.chaitin.xray.model.Poc;
 import com.chaitin.xray.model.XrayCmd;
+import com.chaitin.xray.pinball.PinballFrame;
+import com.chaitin.xray.snake.Main;
+import com.chaitin.xray.sweep.GameFrame;
 import com.chaitin.xray.utils.*;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.intellij.uiDesigner.core.GridConstraints;
@@ -2019,10 +2023,69 @@ public class MainForm {
         return null;
     }
 
+    private static JMenu createGameMenu() {
+        try {
+            JMenu gameMenu = new JMenu("游戏");
+
+            JMenuItem snakeItem = new JMenuItem("贪吃蛇");
+            InputStream is = MainForm.class.getClassLoader().getResourceAsStream(
+                    "game/snake/logo.png");
+            if (is == null) {
+                return null;
+            }
+            ImageIcon imageIcon = new ImageIcon(ImageIO.read(is));
+            snakeItem.setIcon(imageIcon);
+            snakeItem.addActionListener(e -> Main.start());
+
+            JMenuItem flappyItem = new JMenuItem("Flappy Bird");
+            is = MainForm.class.getClassLoader().getResourceAsStream(
+                    "game/flappy/flappy_bird/bird1_0.png");
+            if (is == null) {
+                return null;
+            }
+            ImageIcon flappyIcon = new ImageIcon(ImageIO.read(is));
+            flappyItem.setIcon(flappyIcon);
+            flappyItem.addActionListener(e -> new FBMainFrame().startGame());
+
+            JMenuItem sweepItem = new JMenuItem("扫雷");
+            is = MainForm.class.getClassLoader().getResourceAsStream(
+                    "game/mine/logo.png");
+            if (is == null) {
+                return null;
+            }
+            ImageIcon sweepIcon = new ImageIcon(ImageIO.read(is));
+            sweepItem.setIcon(sweepIcon);
+            sweepItem.addActionListener(e -> {
+                JFrame frame = new GameFrame();
+                frame.setVisible(true);
+            });
+
+            JMenuItem ballItem = new JMenuItem("弹球");
+            is = MainForm.class.getClassLoader().getResourceAsStream(
+                    "game/pinball/logo.png");
+            if (is == null) {
+                return null;
+            }
+            ImageIcon ballIcon = new ImageIcon(ImageIO.read(is));
+            ballItem.setIcon(ballIcon);
+            ballItem.addActionListener(e -> new PinballFrame());
+
+            gameMenu.add(snakeItem);
+            gameMenu.add(flappyItem);
+            gameMenu.add(sweepItem);
+            gameMenu.add(ballItem);
+            return gameMenu;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     private static JMenuBar createMenuBar() {
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(createAboutMenu());
         menuBar.add(createVersionMenu());
+        menuBar.add(createGameMenu());
         return menuBar;
     }
 

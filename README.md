@@ -101,3 +101,11 @@
 版本检测: 由于使用`Github API`查询版本，所有可能有一些延迟
 
 ![](img/0011.png)
+
+## 小游戏
+
+感谢以下项目：
+- 贪吃蛇：https://github.com/hexadeciman/Snake
+- Flappy Bird：https://github.com/jiashunx/games-flappybird
+- 扫雷：https://github.com/BlankSpacePlus/java-mine-sweeper
+- 弹球：https://github.com/BlankSpacePlus/java-pinball
