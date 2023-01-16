@@ -232,4 +232,5 @@ Others:
 
 ## 1.4
 
-todo
+更新内容：
+- [important] [improve] CPU占用较高需要进行优化 #128

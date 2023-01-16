@@ -33,6 +33,7 @@ public class SubdomainForm {
     public volatile boolean stop = false;
     private static final Logger logger = LogManager.getLogger(SubdomainForm.class);
 
+    @SuppressWarnings("all")
     private void execAndFresh(String[] finalCmd) {
         outputTextArea.setText(null);
         Thread thread = new Thread(() -> {
@@ -56,6 +57,11 @@ public class SubdomainForm {
                 String thisLine;
                 new Thread(() -> {
                     while (true) {
+                        try {
+                            Thread.sleep(100);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
                         if (stop) {
                             long pid = JNAUtil.getProcessID(process);
                             logger.info(String.format("stop pid: %d", pid));

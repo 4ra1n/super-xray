@@ -402,6 +402,7 @@ public class MainForm {
 
     private volatile boolean stop = false;
 
+    @SuppressWarnings("all")
     private void execAndFresh(String[] finalCmd) {
         outputTextArea.setText(null);
         Thread thread = new Thread(() -> {
@@ -425,6 +426,11 @@ public class MainForm {
                 String thisLine;
                 new Thread(() -> {
                     while (true) {
+                        try {
+                            Thread.sleep(100);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
                         if (stop) {
                             long pid = JNAUtil.getProcessID(process);
                             logger.info(String.format("stop pid: %d", pid));
