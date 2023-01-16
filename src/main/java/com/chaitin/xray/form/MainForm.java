@@ -28,6 +28,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
@@ -186,6 +187,7 @@ public class MainForm {
     public JCheckBox delCaCheckBox;
     private JButton ajpScanButton;
     private JLabel ajpLabel;
+    private JButton copyCmdButton;
     private SubdomainForm subdomainInstance;
     private AJPScanForm ajpInstance;
 
@@ -221,8 +223,24 @@ public class MainForm {
             frame.setVisible(true);
         });
 
-        lookupCmdButton.addActionListener(e ->
-                JOptionPane.showMessageDialog(this.SuperXray, xrayCmd.buildCmd()));
+        lookupCmdButton.addActionListener(e -> {
+            String[] cmd = xrayCmd.buildCmd();
+            StringBuilder sb = new StringBuilder();
+            for (String c : cmd) {
+                if (c.length() < 50) {
+                    if (StringUtil.notEmpty(c)) {
+                        sb.append(c);
+                        sb.append("\n");
+                    }
+                } else {
+                    String t = c.substring(0, 44);
+                    sb.append(t);
+                    sb.append("......");
+                    sb.append("\n");
+                }
+            }
+            JOptionPane.showMessageDialog(this.SuperXray, sb.toString().trim());
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -857,6 +875,47 @@ public class MainForm {
     private static boolean activeRunning = false;
 
     public void initActiveScan() {
+        copyCmdButton.addActionListener(e -> {
+            XrayCmd temp = new XrayCmd();
+            temp.setXray(xrayCmd.getXray());
+            temp.setModule("webscan");
+            temp.setConfig(String.format("%s", configPath));
+            temp.setOthers(null);
+
+            String uuid = UUID.randomUUID().toString();
+            if (htmlRadioButton.isSelected()) {
+                temp.setOutputPrefix("--html-output");
+                temp.setOutput(Paths.get(String.format("./xray-%s.html", uuid)).toFile().getAbsolutePath());
+            }
+            if (jsonRadioButton.isSelected()) {
+                temp.setOutputPrefix("--json-output");
+                temp.setOutput(Paths.get(String.format("./xray-%s.txt", uuid)).toFile().getAbsolutePath());
+            }
+            if (cliRadioButton.isSelected()) {
+                temp.setOutput(null);
+            }
+
+            temp.setPoc(xrayCmd.getPoc());
+            temp.setInput(xrayCmd.getInput());
+            temp.setInputPrefix(xrayCmd.getInputPrefix());
+
+            String[] cmdA = temp.buildCmd();
+            StringBuilder sb = new StringBuilder();
+            for (String cmd : cmdA) {
+                sb.append(cmd);
+                sb.append(" ");
+            }
+
+            Toolkit.getDefaultToolkit()
+                    .getSystemClipboard()
+                    .setContents(new StringSelection(sb.toString().trim()), null);
+
+            if (LANG == CHINESE) {
+                JOptionPane.showMessageDialog(this.SuperXray, "已复制");
+            } else {
+                JOptionPane.showMessageDialog(this.SuperXray, "Copy");
+            }
+        });
         activeScanButton.addActionListener(e -> {
             if (!StringUtil.notEmpty(xrayCmd.getInput()) ||
                     !StringUtil.notEmpty(xrayCmd.getInputPrefix())) {
@@ -871,6 +930,17 @@ public class MainForm {
                 if (!activeRunning) {
 
                     int value = (int) parallelSet.getValue();
+
+                    if (value > 100 || value < 1) {
+                        if (LANG == CHINESE) {
+                            JOptionPane.showMessageDialog(this.SuperXray, "设置有误");
+                        } else {
+                            JOptionPane.showMessageDialog(this.SuperXray, "Error Config");
+                        }
+                        parallelSet.setValue(30);
+                        return;
+                    }
+
                     configObj.put("parallel", value);
                     refreshConfig();
 
@@ -1120,6 +1190,15 @@ public class MainForm {
                 }
 
                 int value = (int) parallelSet.getValue();
+                if (value > 100 || value < 1) {
+                    if (LANG == CHINESE) {
+                        JOptionPane.showMessageDialog(this.SuperXray, "设置有误");
+                    } else {
+                        JOptionPane.showMessageDialog(this.SuperXray, "Error Config");
+                    }
+                    parallelSet.setValue(30);
+                    return;
+                }
                 configObj.put("parallel", value);
                 refreshConfig();
 
@@ -1497,6 +1576,15 @@ public class MainForm {
         delCaCheckBox.setSelected(true);
         parallelSet.addChangeListener(e -> {
             int value = (int) parallelSet.getValue();
+            if (value > 100 || value < 1) {
+                if (LANG == CHINESE) {
+                    JOptionPane.showMessageDialog(this.SuperXray, "设置有误");
+                } else {
+                    JOptionPane.showMessageDialog(this.SuperXray, "Error Config");
+                }
+                parallelSet.setValue(30);
+                return;
+            }
             configObj.put("parallel", value);
             refreshConfig();
         });
@@ -1650,6 +1738,7 @@ public class MainForm {
             tipParallelLabel.setText("Concurrency");
             delCaCheckBox.setText("Delete CA When Exit");
             ajpScanButton.setText("AJP Scan");
+            copyCmdButton.setText("Copy Cmd");
         } else if (LANG == CHINESE) {
             xrayPathLabel.setText("你选择的xray文件是：");
             noteLabel.setText("<html> 注意：在 Mac OS 中请用 control+c/v 复制/粘贴 </html>");
@@ -1748,6 +1837,7 @@ public class MainForm {
             tipParallelLabel.setText("并发越高发包越快");
             delCaCheckBox.setText("关闭后删除ca文件");
             ajpScanButton.setText("AJP服务扫描");
+            copyCmdButton.setText("复制当前命令");
         }
     }
 
@@ -2358,7 +2448,7 @@ public class MainForm {
         reverseServerButton.setText("配置服务端");
         reverseConfigPanel.add(reverseServerButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         startScanPanel = new JPanel();
-        startScanPanel.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
+        startScanPanel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
         startScanPanel.setBackground(new Color(-725535));
         rightConfigPanel.add(startScanPanel, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         startScanPanel.setBorder(BorderFactory.createTitledBorder(null, "启动", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
@@ -2368,7 +2458,7 @@ public class MainForm {
         mitmPanel = new JPanel();
         mitmPanel.setLayout(new GridLayoutManager(3, 6, new Insets(0, 0, 0, 0), -1, -1));
         mitmPanel.setBackground(new Color(-725535));
-        startScanPanel.add(mitmPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        startScanPanel.add(mitmPanel, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         mitmScanButton = new JButton();
         mitmScanButton.setText("开启被动扫描");
         mitmPanel.add(mitmScanButton, new GridConstraints(1, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -2399,6 +2489,9 @@ public class MainForm {
         ajpLabel = new JLabel();
         ajpLabel.setText("Tomcat AJP");
         mitmPanel.add(ajpLabel, new GridConstraints(2, 3, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        copyCmdButton = new JButton();
+        copyCmdButton.setText("复制当前命令");
+        startScanPanel.add(copyCmdButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         otherPanel = new JPanel();
         otherPanel.setLayout(new GridLayoutManager(2, 3, new Insets(0, 0, 0, 0), -1, -1));
         otherPanel.setBackground(new Color(-725535));
