@@ -1,15 +1,15 @@
 package com.chaitin.xray.form;
 
 import com.chaitin.xray.Application;
-import com.chaitin.xray.flappy.FBMainFrame;
+import com.chaitin.xray.games.flappy.FBMainFrame;
 import com.chaitin.xray.model.Const;
 import com.chaitin.xray.model.DB;
 import com.chaitin.xray.model.Poc;
 import com.chaitin.xray.model.XrayCmd;
-import com.chaitin.xray.pinball.PinballFrame;
-import com.chaitin.xray.plane.Game;
-import com.chaitin.xray.snake.Main;
-import com.chaitin.xray.sweep.GameFrame;
+import com.chaitin.xray.games.pinball.PinballFrame;
+import com.chaitin.xray.games.plane.Game;
+import com.chaitin.xray.games.snake.Main;
+import com.chaitin.xray.games.sweep.GameFrame;
 import com.chaitin.xray.utils.*;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.intellij.uiDesigner.core.GridConstraints;
@@ -2169,7 +2169,7 @@ public class MainForm {
             }
             ImageIcon pokerIcon = new ImageIcon(ImageIO.read(is));
             pokerItem.setIcon(pokerIcon);
-            pokerItem.addActionListener(e -> new Thread(com.chaitin.xray.pocker.Main::new).start());
+            pokerItem.addActionListener(e -> new Thread(com.chaitin.xray.games.pocker.Main::new).start());
 
             JMenuItem planeItem = new JMenuItem("雷电");
             is = MainForm.class.getClassLoader().getResourceAsStream(

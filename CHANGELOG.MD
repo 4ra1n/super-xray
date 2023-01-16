@@ -203,9 +203,13 @@ Others:
 
 ## 1.3
 
-修复安全漏洞：
+重大更新版本：
+- 修复安全漏洞
+- AJP服务扫描面板
+- 新增多个菜单选项
+- 内置六款小游戏
 
-[GHSA-vgxx-2crp-32vv](https://github.com/4ra1n/super-xray/security/advisories/GHSA-vgxx-2crp-32vv)
+修复安全漏洞：[GHSA-vgxx-2crp-32vv 特殊情况下的完全拒绝服务](https://github.com/4ra1n/super-xray/security/advisories/GHSA-vgxx-2crp-32vv)
 
 使用`exe`版本加载`super-xray`自身将会无限启动，导致耗尽操作系统`CPU`和内存。无限启动原因是启动时需要执行之前保存的`xray`路径，如果选择了`super-xray.exe`自身保存后显然会导致死循环。由于用户输入的可执行文件是什么应该由用户负责，一般情况下不应该是安全漏洞，但是用户输入`super-xray`自身导致的问题应该被处理。二进制可执行文件无法判断具体是什么，所以只能限制文件名结合文件大小二者来防止加载自身，但是用户加载其他可执行文件导致的安全问题与本项目无关。
 
