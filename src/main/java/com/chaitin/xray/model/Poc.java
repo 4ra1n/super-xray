@@ -10,7 +10,7 @@ public class Poc {
 
     public static void addPoc(String[] pocArray) {
         for (String s : pocArray) {
-            if(!StringUtil.notEmpty(s.trim())){
+            if (!StringUtil.notEmpty(s.trim())) {
                 continue;
             }
             if (s.endsWith("\r")) {

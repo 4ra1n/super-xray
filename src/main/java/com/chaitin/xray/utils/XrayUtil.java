@@ -40,8 +40,8 @@ public class XrayUtil {
             Path thisPath = Paths.get(Const.ConfigYaml);
             Path xrayPath = Paths.get(targetDir + Const.ConfigYaml);
             // do not delete current config.yaml
-            if(!thisPath.toFile().getAbsolutePath().equals(
-                    xrayPath.toFile().getAbsolutePath())){
+            if (!thisPath.toFile().getAbsolutePath().equals(
+                    xrayPath.toFile().getAbsolutePath())) {
                 Files.delete(xrayPath);
             }
         } catch (Exception ignored) {

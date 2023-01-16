@@ -19,6 +19,7 @@ public class PinballFrame extends JFrame {
     private boolean isLose;
     private final GameCanvas canvas;
     private Timer timer;
+
     public PinballFrame() {
         super("弹球");
         this.random = new Random();
@@ -42,6 +43,7 @@ public class PinballFrame extends JFrame {
         });
         this.init();
     }
+
     private void init() {
         this.canvas.setPreferredSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
         this.add(this.canvas);

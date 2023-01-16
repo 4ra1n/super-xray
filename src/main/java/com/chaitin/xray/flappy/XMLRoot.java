@@ -8,10 +8,11 @@ import org.dom4j.io.SAXReader;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class XMLRoot  {
-	private XMLRoot() {
-	}
-	public static Element getRootElement(InputStream inputStream) {
+public class XMLRoot {
+    private XMLRoot() {
+    }
+
+    public static Element getRootElement(InputStream inputStream) {
         Element root = null;
         SAXReader reader = new SAXReader();
         Document document;
@@ -32,9 +33,9 @@ public class XMLRoot  {
         return root;
     }
 
-	public static Element getConfigRootElement() {
-	    return getRootElement(
-				Thread.currentThread().getContextClassLoader().getResourceAsStream("game/flappy/Config.xml"));
-	}
-	
+    public static Element getConfigRootElement() {
+        return getRootElement(
+                Thread.currentThread().getContextClassLoader().getResourceAsStream("game/flappy/Config.xml"));
+    }
+
 }

@@ -4,5 +4,5 @@ import java.awt.*;
 
 public interface InDrawImage {
     void drawImage(Graphics g);
-    
+
 }

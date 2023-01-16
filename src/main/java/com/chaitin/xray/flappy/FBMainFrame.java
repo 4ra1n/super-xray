@@ -128,17 +128,20 @@ public class FBMainFrame extends JFrame implements InXMLAnalysis {
         tabImage = new FBImgIcon(this, tabUrl, (frameWidth - tabWidth) / 2, aa + readyHeight
                 , tabWidth, tabHeight);
     }
+
     private void addListener() {
         FBListener listener = new FBListener(this);
         this.addMouseListener(listener);
         this.addMouseMotionListener(listener);
         new Thread(listener).start();
     }
+
     private void move() {
         bird.setX((frameWidth - bird.getWidth()) / 2);
         bird.setY(frameHeight / 4 + titleImage.getHeight());
         new Thread(bird).start();
     }
+
     private void initMainFrame() {
         xmlAnalysis(XMLRoot.getConfigRootElement());
         move();
@@ -149,6 +152,7 @@ public class FBMainFrame extends JFrame implements InXMLAnalysis {
         this.setResizable(false);
         this.setVisible(true);
     }
+
     public boolean isGamePrepared() {
         return !gamePrepared;
     }
@@ -200,6 +204,7 @@ public class FBMainFrame extends JFrame implements InXMLAnalysis {
     public Bird getBird() {
         return bird;
     }
+
     public FBImgIcon getTabImage() {
         return tabImage;
     }

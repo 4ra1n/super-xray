@@ -69,7 +69,7 @@ public class Main extends JFrame implements ActionListener {
             time[1].setVisible(true);
             t = new Time(this, 10);
             t.start();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
@@ -84,6 +84,7 @@ public class Main extends JFrame implements ActionListener {
         container.setLayout(null);
         container.setBackground(new Color(0, 112, 26));
     }
+
     public void CardInit() throws IOException {
 
         int count = 1;

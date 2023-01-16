@@ -20,10 +20,12 @@ public class Pipe extends FBImgIcon implements InXMLAnalysis {
     private int y4;
     private int y5;
     private int bLeftX, bRightX, bUpY, bDownY;
+
     public Pipe(FBMainFrame frame, String url) {
         super(frame, url);
         xmlAnalysis(XMLRoot.getConfigRootElement());
     }
+
     @Override
     public void drawImage(Graphics g) {
         g.drawImage(upIcon.getImage(), x, y, null);
@@ -37,6 +39,7 @@ public class Pipe extends FBImgIcon implements InXMLAnalysis {
         y4 = y3 + verticalSpace;
         y5 = y4 + 24;
     }
+
     public boolean crash() {
         calcBird();
         if (bDownY < y2 && (bRightX < x2 || bLeftX > x4))
@@ -53,6 +56,7 @@ public class Pipe extends FBImgIcon implements InXMLAnalysis {
             return false;
         return bUpY <= y5 || (bRightX >= x2 && bLeftX <= x4);
     }
+
     public boolean doCrashDetection() {
         Bird bird = frame.getBird();
         if (!passed) {
@@ -65,7 +69,7 @@ public class Pipe extends FBImgIcon implements InXMLAnalysis {
         }
         return x < bird.getWidth() + bird.getX() + 1 && x > bird.getX() - width - 1;
     }
-    
+
     @Override
     public void xmlAnalysis(Element root) {
         Element pipe = root.element("FlappyBird").element("model").element("Pipe");
@@ -74,7 +78,7 @@ public class Pipe extends FBImgIcon implements InXMLAnalysis {
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         URL upUrl = loader.getResource(pipe.element("pipe_up_url").getText());
         URL downUrl = loader.getResource(pipe.element("pipe_down_url").getText());
-        if(upUrl==null || downUrl ==null){
+        if (upUrl == null || downUrl == null) {
             return;
         }
         upIcon = new ImageIcon(upUrl);
@@ -88,6 +92,7 @@ public class Pipe extends FBImgIcon implements InXMLAnalysis {
         bUpY = bird.getY();
         bDownY = bird.getY() + bird.getHeight();
     }
+
     public int getVerticalSpace() {
         return verticalSpace;
     }
