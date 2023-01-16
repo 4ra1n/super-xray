@@ -7,6 +7,7 @@ import com.chaitin.xray.model.DB;
 import com.chaitin.xray.model.Poc;
 import com.chaitin.xray.model.XrayCmd;
 import com.chaitin.xray.pinball.PinballFrame;
+import com.chaitin.xray.plane.Game;
 import com.chaitin.xray.snake.Main;
 import com.chaitin.xray.sweep.GameFrame;
 import com.chaitin.xray.utils.*;
@@ -2080,11 +2081,22 @@ public class MainForm {
             pokerItem.setIcon(pokerIcon);
             pokerItem.addActionListener(e -> new Thread(com.chaitin.xray.pocker.Main::new).start());
 
+            JMenuItem planeItem = new JMenuItem("雷电");
+            is = MainForm.class.getClassLoader().getResourceAsStream(
+                    "game/plane/logo.png");
+            if (is == null) {
+                return null;
+            }
+            ImageIcon planeIcon = new ImageIcon(ImageIO.read(is));
+            planeItem.setIcon(planeIcon);
+            planeItem.addActionListener(e -> Game.start());
+
             gameMenu.add(snakeItem);
             gameMenu.add(flappyItem);
             gameMenu.add(sweepItem);
             gameMenu.add(ballItem);
             gameMenu.add(pokerItem);
+            gameMenu.add(planeItem);
             return gameMenu;
         } catch (Exception ex) {
             ex.printStackTrace();

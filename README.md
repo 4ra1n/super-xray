@@ -114,3 +114,4 @@
 - 扫雷：https://github.com/BlankSpacePlus/java-mine-sweeper
 - 弹球：https://github.com/BlankSpacePlus/java-pinball
 - 斗地主：https://github.com/ljheee/PlayCard
+- 雷电：https://github.com/Hph1998/ThunderGame
