@@ -5,11 +5,11 @@ import java.awt.*;
 import java.util.List;
 import java.util.Vector;
 
-@SuppressWarnings("all")
+@SuppressWarnings("unchecked")
 public class Time extends Thread {
     Main main;
     boolean isRun = true;
-    int i = 10;
+    int i;
 
     public Time(Main m, int i) {
         this.main = m;
@@ -17,6 +17,7 @@ public class Time extends Thread {
     }
 
     @Override
+    @SuppressWarnings("all")
     public void run() {
 
         while (i > -1 && isRun) {
@@ -108,7 +109,7 @@ public class Time extends Thread {
         }
     }
 
-
+    @SuppressWarnings("all")
     public void second(int i) {
         try {
             Thread.sleep(i * 1000);
@@ -118,7 +119,7 @@ public class Time extends Thread {
         }
     }
 
-
+    @SuppressWarnings("all")
     public void openlord(boolean is) {
         for (int i = 0; i < 3; i++) {
             if (is)
@@ -172,12 +173,12 @@ public class Time extends Thread {
 
     }
 
-
+    @SuppressWarnings("all")
     public void ShowCard(int role) {
         int orders[] = new int[]{4, 3, 2, 1, 5};
         Model model = Common.getModel(main.playerList[role], orders);
 
-        List<String> list = new Vector();
+        List<String> list = new Vector<>();
 
         if (main.time[(role + 1) % 3].getText().equals("不要")
                 && main.time[(role + 2) % 3].getText().equals("不要")) {
@@ -365,10 +366,10 @@ public class Time extends Thread {
             card.turnFront();
     }
 
-
+    @SuppressWarnings("all")
     public List getCardByName(List<Card> list, String n) {
         String[] name = n.split(",");
-        List cardsList = new Vector<Card>();
+        List<Card> cardsList = new Vector<>();
         int j = 0;
         for (int i = 0, len = list.size(); i < len; i++) {
             if (j < name.length && list.get(i).name.equals(name[j])) {
@@ -380,7 +381,7 @@ public class Time extends Thread {
         return cardsList;
     }
 
-
+    @SuppressWarnings("all")
     public void AI_3(List<String> model, List<Card> player, List<String> list,
                      int role) {
 
@@ -395,7 +396,7 @@ public class Time extends Thread {
         }
     }
 
-
+    @SuppressWarnings("all")
     public void AI_4(List<String> model1, List<String> model2,
                      List<Card> player, List<String> list, int role) {
 
@@ -419,7 +420,7 @@ public class Time extends Thread {
         }
     }
 
-
+    @SuppressWarnings("all")
     public void AI_5(List<String> model1, List<String> model2,
                      List<Card> player, List<String> list, int role) {
 
@@ -438,7 +439,7 @@ public class Time extends Thread {
         }
     }
 
-
+    @SuppressWarnings("all")
     public void AI_1(List<String> model, List<Card> player, List<String> list,
                      int role) {
 
@@ -451,7 +452,7 @@ public class Time extends Thread {
 
     }
 
-
+    @SuppressWarnings("all")
     public void AI_2(List<String> model1, List<String> model2,
                      List<Card> player, List<String> list, int role) {
 
@@ -478,7 +479,7 @@ public class Time extends Thread {
             list.clear();
     }
 
-
+    @SuppressWarnings("all")
     public void timeWait(int n, int player) {
 
         if (main.currentList[player].size() > 0)
@@ -509,7 +510,7 @@ public class Time extends Thread {
         main.time[player].setVisible(false);
     }
 
-
+    @SuppressWarnings("all")
     public int getValueInt(String n) {
         String name[] = n.split(",");
         String s = name[0];

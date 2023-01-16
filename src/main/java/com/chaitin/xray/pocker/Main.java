@@ -7,25 +7,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Vector;
 
-@SuppressWarnings("all")
+@SuppressWarnings("unchecked")
 public class Main extends JFrame implements ActionListener {
     public Container container = null;
-    JMenuItem start, exit, about;
-    JButton landlord[] = new JButton[2];
-    JButton publishCard[] = new JButton[2];
+    JButton[] landlord = new JButton[2];
+    JButton[] publishCard = new JButton[2];
     int dizhuFlag;
     int turn;
     JLabel dizhu;
-    List<Card> currentList[] = new Vector[3];
-    List<Card> playerList[] = new Vector[3];
+    List<Card>[] currentList = new Vector[3];
+    List<Card>[] playerList = new Vector[3];
 
     List<Card> lordList;
 
-    Card card[] = new Card[56];
-    JTextField time[] = new JTextField[3];
+    Card[] card = new Card[56];
+    JTextField[] time = new JTextField[3];
     Time t;
     boolean nextPlayer = false;
 
@@ -55,7 +55,7 @@ public class Main extends JFrame implements ActionListener {
         time[2].setBounds(620, 230, 60, 20);
 
         for (int i = 0; i < 3; i++) {
-            currentList[i] = new Vector<Card>();
+            currentList[i] = new Vector<>();
         }
     }
 
@@ -115,9 +115,9 @@ public class Main extends JFrame implements ActionListener {
 
 
         for (int i = 0; i < 3; i++)
-            playerList[i] = new Vector<Card>();
+            playerList[i] = new Vector<>();
 
-        lordList = new Vector<Card>();
+        lordList = new Vector<>();
         int t = 0;
         for (int i = 1; i <= 54; i++) {
             if (i >= 52) {
@@ -153,7 +153,8 @@ public class Main extends JFrame implements ActionListener {
             Common.rePosition(this, playerList[i], i);
         }
         dizhu = new JLabel(new ImageIcon(ImageIO.read(
-                this.getClass().getClassLoader().getResourceAsStream("game/pocker/images/dizhu.gif"))));
+                Objects.requireNonNull(
+                        this.getClass().getClassLoader().getResourceAsStream("game/pocker/images/dizhu.gif")))));
         dizhu.setVisible(false);
         dizhu.setSize(40, 40);
         container.add(dizhu);
@@ -183,7 +184,7 @@ public class Main extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == publishCard[0]) {
-            List<Card> c = new Vector<Card>();
+            List<Card> c = new Vector<>();
 
             for (int i = 0; i < playerList[1].size(); i++) {
                 Card card = playerList[1].get(i);

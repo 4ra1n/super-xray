@@ -6,8 +6,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Vector;
 
-@SuppressWarnings("all")
+@SuppressWarnings("unchecked")
 public class Common {
+    @SuppressWarnings("all")
     public static CardType jugdeType(List<Card> list) {
 
         int len = list.size();
@@ -93,7 +94,7 @@ public class Common {
         return CardType.c0;
     }
 
-
+    @SuppressWarnings("all")
     public static void move(Card card, Point from, Point to) {
         if (to.x != from.x) {
             double k = (1.0) * (to.y - from.y) / (to.x - from.x);
@@ -119,7 +120,7 @@ public class Common {
         card.setLocation(to);
     }
 
-
+    @SuppressWarnings("all")
     public static void order(List<Card> list) {
         Collections.sort(list, new Comparator<Card>() {
             @Override
@@ -158,7 +159,7 @@ public class Common {
         });
     }
 
-
+    @SuppressWarnings("all")
     public static void rePosition(Main m, List<Card> list, int flag) {
         Point p = new Point();
         if (flag == 0) {
@@ -185,7 +186,7 @@ public class Common {
         }
     }
 
-
+    @SuppressWarnings("all")
     public static int getScore(List<Card> list) {
         int count = 0;
         for (int i = 0, len = list.size(); i < len; i++) {
@@ -207,7 +208,7 @@ public class Common {
         return Integer.parseInt(card.name.substring(0, 1));
     }
 
-
+    @SuppressWarnings("all")
     public static int getValue(Card card) {
         int i = Integer.parseInt(card.name.substring(2, card.name.length()));
         if (card.name.substring(2, card.name.length()).equals("2"))
@@ -219,7 +220,7 @@ public class Common {
         return i;
     }
 
-
+    @SuppressWarnings("all")
     public static void getMax(CardIndex CardIndex, List<Card> list) {
         int count[] = new int[14];
         for (int i = 0; i < 14; i++)
@@ -249,7 +250,7 @@ public class Common {
         }
     }
 
-
+    @SuppressWarnings("all")
     public static Model getModel(List<Card> list, int[] orders) {
 
         List list2 = new Vector<Card>(list);
@@ -259,7 +260,7 @@ public class Common {
         return model;
     }
 
-
+    @SuppressWarnings("all")
     public static void get123(List<Card> list, Model model) {
         List<Card> del = new Vector<Card>();
         if (list.size() > 0
@@ -302,7 +303,7 @@ public class Common {
         list.removeAll(del);
     }
 
-
+    @SuppressWarnings("all")
     public static void getTwoTwo(List<Card> list, Model model) {
         List<String> del = new Vector<String>();
 
@@ -336,7 +337,7 @@ public class Common {
         l.removeAll(del);
     }
 
-
+    @SuppressWarnings("all")
     public static void getPlane(List<Card> list, Model model) {
         List<String> del = new Vector<String>();
 
@@ -370,8 +371,9 @@ public class Common {
     }
 
 
+    @SuppressWarnings("all")
     public static void getBoomb(List<Card> list, Model model) {
-        List<Card> del = new Vector<Card>();
+        List<Card> del = new Vector<>();
         if (list.size() < 1)
             return;
 
@@ -408,7 +410,7 @@ public class Common {
 
 
     public static void getThree(List<Card> list, Model model) {
-        List<Card> del = new Vector<Card>();
+        List<Card> del = new Vector<>();
 
         for (int i = 0, len = list.size(); i < len; i++) {
             if (i + 2 < len
@@ -428,7 +430,7 @@ public class Common {
 
 
     public static void getTwo(List<Card> list, Model model) {
-        List<Card> del = new Vector<Card>();
+        List<Card> del = new Vector<>();
 
         for (int i = 0, len = list.size(); i < len; i++) {
             if (i + 1 < len
@@ -445,7 +447,7 @@ public class Common {
         list.removeAll(del);
     }
 
-
+    @SuppressWarnings("all")
     public static void getSingle(List<Card> list, Model model) {
         List<Card> del = new Vector<Card>();
 
@@ -456,7 +458,7 @@ public class Common {
         list.removeAll(del);
     }
 
-
+    @SuppressWarnings("all")
     public static void hideCards(List<Card> list) {
         for (int i = 0, len = list.size(); i < len; i++) {
             list.get(i).setVisible(false);
@@ -523,7 +525,7 @@ public class Common {
         return 1;
     }
 
-
+    @SuppressWarnings("all")
     public static List getOrder2(List<Card> list) {
         List<Card> list2 = new Vector<Card>(list);
         List<Card> list3 = new Vector<Card>();
