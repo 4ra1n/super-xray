@@ -229,3 +229,7 @@ Others:
 - [improve] 支持关闭时删除被动扫描生成的ca文件 #117
 - [improve] 子域名扫描的输入过滤 #116
 - [improve] 禁用子域名扫描的ip-only选项 #119
+
+## 1.4
+
+todo

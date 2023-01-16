@@ -8,3 +8,4 @@ Release Checklist:
 - Const.java CurVersion
 - CHANGELOG.MD
 - pox.xml
+- jre parent dir
