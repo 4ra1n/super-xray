@@ -215,8 +215,11 @@ Others:
 - [important] [feat] 新菜单显示当前版本和支持xray最低版本 #113
 - [important] [feat] 验证super-xray最新版本 #114
 - [important] [doc] 更新README中所有的图片 #121
-- [feat] 加入五款小游戏用于摸鱼 #124
+- [feat] 加入六款小游戏用于摸鱼 #124
 - [feat] 子域名扫描加入关闭删除选项 #118
+- [feat] 应该提供一个按钮允许用户复制当前命令 #127
+- [improve] 查看命令按钮显示内容过长问题 #126
+- [improve] 并发设置应该有一个上限和下限 #125
 - [improve] 某些情况同步PoC会卡住较长时间 #122
 - [improve] 加载rad也应该对输入文件进行限制 #120
 - [improve] 支持关闭时删除被动扫描生成的ca文件 #117
