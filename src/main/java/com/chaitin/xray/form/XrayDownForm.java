@@ -286,10 +286,10 @@ public class XrayDownForm {
     private void $$$setupUI$$$() {
         xrayDownPanel = new JPanel();
         xrayDownPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        xrayDownPanel.setBackground(new Color(-528927));
+        xrayDownPanel.setBackground(new Color(-12828863));
         innerPanel = new JPanel();
         innerPanel.setLayout(new GridLayoutManager(6, 6, new Insets(0, 0, 0, 0), -1, -1));
-        innerPanel.setBackground(new Color(-528927));
+        innerPanel.setBackground(new Color(-12828863));
         xrayDownPanel.add(innerPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(600, 200), null, null, 1, false));
         curVerText = new JTextField();
         curVerText.setEditable(false);
@@ -303,31 +303,31 @@ public class XrayDownForm {
         innerPanel.add(curVerLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 1, false));
         osTypePanel = new JPanel();
         osTypePanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
-        osTypePanel.setBackground(new Color(-528927));
+        osTypePanel.setBackground(new Color(-12828863));
         innerPanel.add(osTypePanel, new GridConstraints(2, 1, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         windowsAmd64RadioButton = new JRadioButton();
-        windowsAmd64RadioButton.setBackground(new Color(-528927));
+        windowsAmd64RadioButton.setBackground(new Color(-12828863));
         windowsAmd64RadioButton.setText("windows-amd64");
         osTypePanel.add(windowsAmd64RadioButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 1, false));
         windows386RadioButton = new JRadioButton();
-        windows386RadioButton.setBackground(new Color(-528927));
+        windows386RadioButton.setBackground(new Color(-12828863));
         windows386RadioButton.setText("windows-386");
         osTypePanel.add(windows386RadioButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 1, false));
         darwinArm64RadioButton = new JRadioButton();
-        darwinArm64RadioButton.setBackground(new Color(-528927));
+        darwinArm64RadioButton.setBackground(new Color(-12828863));
         darwinArm64RadioButton.setText("darwin-arm64");
         osTypePanel.add(darwinArm64RadioButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 1, false));
         darwinAmd64RadioButton = new JRadioButton();
-        darwinAmd64RadioButton.setBackground(new Color(-528927));
+        darwinAmd64RadioButton.setBackground(new Color(-12828863));
         darwinAmd64RadioButton.setEnabled(true);
         darwinAmd64RadioButton.setText("darwin-amd64");
         osTypePanel.add(darwinAmd64RadioButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 1, false));
         linuxAmd64RadioButton = new JRadioButton();
-        linuxAmd64RadioButton.setBackground(new Color(-528927));
+        linuxAmd64RadioButton.setBackground(new Color(-12828863));
         linuxAmd64RadioButton.setText("linux-amd64");
         osTypePanel.add(linuxAmd64RadioButton, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 1, false));
         linux386RadioButton = new JRadioButton();
-        linux386RadioButton.setBackground(new Color(-528927));
+        linux386RadioButton.setBackground(new Color(-12828863));
         linux386RadioButton.setText("linux-386");
         osTypePanel.add(linux386RadioButton, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 1, false));
         downLabel = new JLabel();
@@ -341,7 +341,7 @@ public class XrayDownForm {
         innerPanel.add(opLabel, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 1, false));
         opPanel = new JPanel();
         opPanel.setLayout(new GridLayoutManager(1, 3, new Insets(0, 0, 0, 0), -1, -1));
-        opPanel.setBackground(new Color(-528927));
+        opPanel.setBackground(new Color(-12828863));
         innerPanel.add(opPanel, new GridConstraints(5, 1, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         downButton = new JButton();
         downButton.setText("下载");
@@ -384,5 +384,4 @@ public class XrayDownForm {
     public JComponent $$$getRootComponent$$$() {
         return xrayDownPanel;
     }
-
 }

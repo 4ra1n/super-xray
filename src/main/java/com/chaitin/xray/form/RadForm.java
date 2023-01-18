@@ -173,11 +173,11 @@ public class RadForm {
         radPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         radPane = new JPanel();
         radPane.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
-        radPane.setBackground(new Color(-725535));
+        radPane.setBackground(new Color(-12828863));
         radPanel.add(radPane, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(500, 300), null, null, 0, false));
         outputPanel = new JScrollPane();
-        outputPanel.setBackground(new Color(-725535));
-        outputPanel.setForeground(new Color(-725535));
+        outputPanel.setBackground(new Color(-12828863));
+        outputPanel.setForeground(new Color(-12828863));
         radPane.add(outputPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 200), null, null, 0, false));
         outputPanel.setBorder(BorderFactory.createTitledBorder(null, "Console", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         outputTextArea = new JTextArea();
@@ -190,7 +190,7 @@ public class RadForm {
         outputPanel.setViewportView(outputTextArea);
         radConfigPanel = new JPanel();
         radConfigPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
-        radConfigPanel.setBackground(new Color(-725535));
+        radConfigPanel.setBackground(new Color(-12828863));
         radPane.add(radConfigPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         targetLabel = new JLabel();
         targetLabel.setText("  Target URL");
@@ -240,5 +240,4 @@ public class RadForm {
     public JComponent $$$getRootComponent$$$() {
         return radPanel;
     }
-
 }

@@ -182,10 +182,10 @@ public class EncodeUtilForm {
     private void $$$setupUI$$$() {
         encodeUtilPanel = new JPanel();
         encodeUtilPanel.setLayout(new GridLayoutManager(6, 1, new Insets(0, 0, 0, 0), -1, -1));
-        encodeUtilPanel.setBackground(new Color(-725535));
+        encodeUtilPanel.setBackground(new Color(-12828863));
         basePanel = new JPanel();
         basePanel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
-        basePanel.setBackground(new Color(-725535));
+        basePanel.setBackground(new Color(-12828863));
         encodeUtilPanel.add(basePanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         basePanel.setBorder(BorderFactory.createTitledBorder(null, "Base64", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         baseEncodeText = new JTextField();
@@ -200,7 +200,7 @@ public class EncodeUtilForm {
         basePanel.add(baseDecodeButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         urlPanel = new JPanel();
         urlPanel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
-        urlPanel.setBackground(new Color(-725535));
+        urlPanel.setBackground(new Color(-12828863));
         encodeUtilPanel.add(urlPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         urlPanel.setBorder(BorderFactory.createTitledBorder(null, "URL", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         urlEncodeText = new JTextField();
@@ -215,7 +215,7 @@ public class EncodeUtilForm {
         urlPanel.add(urlDecodeButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         md5Panel = new JPanel();
         md5Panel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
-        md5Panel.setBackground(new Color(-725535));
+        md5Panel.setBackground(new Color(-12828863));
         encodeUtilPanel.add(md5Panel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         md5Panel.setBorder(BorderFactory.createTitledBorder(null, "MD5", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         md5EncodeText = new JTextField();
@@ -227,7 +227,7 @@ public class EncodeUtilForm {
         md5Panel.add(md5ResultText, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, new Dimension(500, -1), new Dimension(500, -1), new Dimension(500, -1), 0, false));
         cmdBashPanel = new JPanel();
         cmdBashPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
-        cmdBashPanel.setBackground(new Color(-725535));
+        cmdBashPanel.setBackground(new Color(-12828863));
         encodeUtilPanel.add(cmdBashPanel, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         cmdBashPanel.setBorder(BorderFactory.createTitledBorder(null, "Bash Base64 CMD", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         cmdBashEncodeText = new JTextField();
@@ -244,7 +244,7 @@ public class EncodeUtilForm {
         cmdBashPanel.add(bashLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         cmdPwPanel = new JPanel();
         cmdPwPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
-        cmdPwPanel.setBackground(new Color(-725535));
+        cmdPwPanel.setBackground(new Color(-12828863));
         encodeUtilPanel.add(cmdPwPanel, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         cmdPwPanel.setBorder(BorderFactory.createTitledBorder(null, "Powershell Base64 CMD", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         cmdPwEncodeText = new JTextField();
@@ -259,7 +259,7 @@ public class EncodeUtilForm {
         cmdPwPanel.add(pwLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         stringCmdPanel = new JPanel();
         stringCmdPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
-        stringCmdPanel.setBackground(new Color(-725535));
+        stringCmdPanel.setBackground(new Color(-12828863));
         encodeUtilPanel.add(stringCmdPanel, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         stringCmdPanel.setBorder(BorderFactory.createTitledBorder(null, "特殊命令字符串生成", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         stringCmdText = new JTextField();
@@ -280,5 +280,4 @@ public class EncodeUtilForm {
     public JComponent $$$getRootComponent$$$() {
         return encodeUtilPanel;
     }
-
 }

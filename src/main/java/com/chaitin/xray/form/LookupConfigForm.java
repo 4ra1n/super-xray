@@ -94,17 +94,17 @@ public class LookupConfigForm {
     private void $$$setupUI$$$() {
         lookupConfigPanel = new JPanel();
         lookupConfigPanel.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
-        lookupConfigPanel.setBackground(new Color(-725535));
+        lookupConfigPanel.setBackground(new Color(-12828863));
         configTextPanel = new JScrollPane();
-        configTextPanel.setBackground(new Color(-725535));
+        configTextPanel.setBackground(new Color(-12828863));
         lookupConfigPanel.add(configTextPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(600, 500), new Dimension(600, 500), null, 0, false));
         configTextArea = new JTextArea();
-        configTextArea.setBackground(new Color(-725535));
-        configTextArea.setForeground(new Color(-12828863));
+        configTextArea.setBackground(new Color(-12828863));
+        configTextArea.setForeground(new Color(-1));
         configTextPanel.setViewportView(configTextArea);
         configButtonPanel = new JPanel();
         configButtonPanel.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
-        configButtonPanel.setBackground(new Color(-725535));
+        configButtonPanel.setBackground(new Color(-12828863));
         lookupConfigPanel.add(configButtonPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         saveConfigButton = new JButton();
         saveConfigButton.setText("保存配置文件");

@@ -302,11 +302,11 @@ public class AJPScanForm {
         ajpPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         rootPanel = new JPanel();
         rootPanel.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
-        rootPanel.setBackground(new Color(-528927));
+        rootPanel.setBackground(new Color(-12828863));
         ajpPanel.add(rootPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         outputPanel = new JScrollPane();
-        outputPanel.setBackground(new Color(-725535));
-        outputPanel.setForeground(new Color(-725535));
+        outputPanel.setBackground(new Color(-12828863));
+        outputPanel.setForeground(new Color(-12828863));
         rootPanel.add(outputPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(800, 200), null, null, 0, false));
         outputPanel.setBorder(BorderFactory.createTitledBorder(null, "output", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         outputTextArea = new JTextArea();
@@ -319,7 +319,7 @@ public class AJPScanForm {
         outputPanel.setViewportView(outputTextArea);
         ajpConfigPanel = new JPanel();
         ajpConfigPanel.setLayout(new GridLayoutManager(2, 6, new Insets(0, 0, 0, 0), -1, -1));
-        ajpConfigPanel.setBackground(new Color(-528927));
+        ajpConfigPanel.setBackground(new Color(-12828863));
         rootPanel.add(ajpConfigPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         ajpConfigPanel.setBorder(BorderFactory.createTitledBorder(null, "Tomcat AJP Service Scan", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         targetIPLabel = new JLabel();
@@ -347,7 +347,7 @@ public class AJPScanForm {
         startScanButton.setText("Start Scan");
         ajpConfigPanel.add(startScanButton, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         deleteCheckBox = new JCheckBox();
-        deleteCheckBox.setBackground(new Color(-528927));
+        deleteCheckBox.setBackground(new Color(-12828863));
         deleteCheckBox.setText("delete when output");
         ajpConfigPanel.add(deleteCheckBox, new GridConstraints(1, 4, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }

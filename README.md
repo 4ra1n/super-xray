@@ -24,6 +24,10 @@
 - 请使用最新版`xray`（目前是`1.9.4`版本，本工具未兼容老版本`xray`）
 - 支持两种方式的`exe`文件，`system`版使用系统的`JRE`，另一种内置了`JRE 8`
 
+1.4版本将全面适配黑暗主题：(浅色主题绝版)
+
+![](img/0014.png)
+
 整体架构：
 
 ![](img/00000.png)
@@ -111,7 +115,5 @@
 感谢以下项目：
 - 贪吃蛇：https://github.com/hexadeciman/Snake
 - Flappy Bird：https://github.com/jiashunx/games-flappybird
-- 扫雷：https://github.com/BlankSpacePlus/java-mine-sweeper
-- 弹球：https://github.com/BlankSpacePlus/java-pinball
 - 斗地主：https://github.com/ljheee/PlayCard
 - 雷电：https://github.com/Hph1998/ThunderGame

@@ -77,10 +77,10 @@ public class HttpUtilForm {
     private void $$$setupUI$$$() {
         httpUtilPanel = new JPanel();
         httpUtilPanel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
-        httpUtilPanel.setBackground(new Color(-725535));
+        httpUtilPanel.setBackground(new Color(-12828863));
         ipPanel = new JPanel();
         ipPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
-        ipPanel.setBackground(new Color(-725535));
+        ipPanel.setBackground(new Color(-12828863));
         httpUtilPanel.add(ipPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         ipLabel = new JLabel();
         ipLabel.setText("  目标IP");
@@ -100,23 +100,23 @@ public class HttpUtilForm {
         reqButton.setText("发送");
         ipPanel.add(reqButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         reqScroll = new JScrollPane();
-        reqScroll.setBackground(new Color(-725535));
+        reqScroll.setBackground(new Color(-12828863));
         reqScroll.setToolTipText("");
         httpUtilPanel.add(reqScroll, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(500, 600), new Dimension(500, 600), new Dimension(500, 600), 0, false));
         reqScroll.setBorder(BorderFactory.createTitledBorder(null, "request", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         reqArea = new JTextArea();
-        reqArea.setBackground(new Color(-725535));
+        reqArea.setBackground(new Color(-12828863));
         Font reqAreaFont = this.$$$getFont$$$("Consolas", -1, 18, reqArea.getFont());
         if (reqAreaFont != null) reqArea.setFont(reqAreaFont);
         reqArea.setLineWrap(true);
         reqArea.setText("");
         reqScroll.setViewportView(reqArea);
         respScroll = new JScrollPane();
-        respScroll.setBackground(new Color(-725535));
+        respScroll.setBackground(new Color(-12828863));
         httpUtilPanel.add(respScroll, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(500, 600), new Dimension(500, 600), new Dimension(500, 600), 0, false));
         respScroll.setBorder(BorderFactory.createTitledBorder(null, "response", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         respArea = new JTextArea();
-        respArea.setBackground(new Color(-725535));
+        respArea.setBackground(new Color(-12828863));
         Font respAreaFont = this.$$$getFont$$$("Consolas", -1, 18, respArea.getFont());
         if (respAreaFont != null) respArea.setFont(respAreaFont);
         respArea.setLineWrap(true);
@@ -153,5 +153,4 @@ public class HttpUtilForm {
     public JComponent $$$getRootComponent$$$() {
         return httpUtilPanel;
     }
-
 }

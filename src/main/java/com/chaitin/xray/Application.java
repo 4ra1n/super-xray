@@ -3,7 +3,7 @@ package com.chaitin.xray;
 import com.chaitin.xray.form.MainForm;
 import com.chaitin.xray.model.DB;
 import com.chaitin.xray.utils.StringUtil;
-import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
 
 import javax.swing.*;
 import java.io.File;
@@ -17,7 +17,7 @@ public class Application {
 
     private static void setFlatLaf() {
         try {
-            FlatLightLaf.setup();
+            FlatDarkLaf.setup();
             globalSkin = "FlatLaf";
         } catch (Exception e) {
             e.printStackTrace();

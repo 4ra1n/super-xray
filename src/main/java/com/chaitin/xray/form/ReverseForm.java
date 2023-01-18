@@ -136,10 +136,10 @@ public class ReverseForm {
     private void $$$setupUI$$$() {
         reversePanel = new JPanel();
         reversePanel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
-        reversePanel.setBackground(new Color(-725535));
+        reversePanel.setBackground(new Color(-12828863));
         thePanel = new JPanel();
         thePanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
-        thePanel.setBackground(new Color(-725535));
+        thePanel.setBackground(new Color(-12828863));
         reversePanel.add(thePanel, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         dbPathText = new JTextField();
         thePanel.add(dbPathText, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
@@ -157,7 +157,7 @@ public class ReverseForm {
         thePanel.add(httpLabel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         httpPanel = new JPanel();
         httpPanel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
-        httpPanel.setBackground(new Color(-725535));
+        httpPanel.setBackground(new Color(-12828863));
         thePanel.add(httpPanel, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         ipText = new JTextField();
         ipText.setText("0.0.0.0");
@@ -184,5 +184,4 @@ public class ReverseForm {
     public JComponent $$$getRootComponent$$$() {
         return reversePanel;
     }
-
 }

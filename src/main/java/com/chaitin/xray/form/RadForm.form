@@ -16,7 +16,7 @@
           </grid>
         </constraints>
         <properties>
-          <background color="-725535"/>
+          <background color="-12828863"/>
         </properties>
         <border type="none"/>
         <children>
@@ -27,8 +27,8 @@
               </grid>
             </constraints>
             <properties>
-              <background color="-725535"/>
-              <foreground color="-725535"/>
+              <background color="-12828863"/>
+              <foreground color="-12828863"/>
             </properties>
             <border type="none" title="Console"/>
             <children>
@@ -50,7 +50,7 @@
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <background color="-725535"/>
+              <background color="-12828863"/>
             </properties>
             <border type="none"/>
             <children>

@@ -83,10 +83,10 @@ public class ListenUtilForm {
     private void $$$setupUI$$$() {
         listenUtilPanel = new JPanel();
         listenUtilPanel.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
-        listenUtilPanel.setBackground(new Color(-725535));
+        listenUtilPanel.setBackground(new Color(-12828863));
         centerPanel = new JPanel();
         centerPanel.setLayout(new GridLayoutManager(1, 3, new Insets(0, 0, 0, 0), -1, -1));
-        centerPanel.setBackground(new Color(-725535));
+        centerPanel.setBackground(new Color(-12828863));
         listenUtilPanel.add(centerPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         portLabel = new JLabel();
         portLabel.setText("监听端口");
@@ -97,8 +97,8 @@ public class ListenUtilForm {
         listenButton.setText("开始监听端口");
         centerPanel.add(listenButton, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         terminalScroll = new JScrollPane();
-        terminalScroll.setBackground(new Color(-725535));
-        terminalScroll.setForeground(new Color(-725535));
+        terminalScroll.setBackground(new Color(-12828863));
+        terminalScroll.setForeground(new Color(-12828863));
         listenUtilPanel.add(terminalScroll, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(500, 300), new Dimension(500, 300), new Dimension(500, 300), 0, false));
         terminalScroll.setBorder(BorderFactory.createTitledBorder(null, "terminal", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         terminalArea = new JTextArea();
@@ -109,7 +109,7 @@ public class ListenUtilForm {
         terminalScroll.setViewportView(terminalArea);
         sendPanel = new JPanel();
         sendPanel.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
-        sendPanel.setBackground(new Color(-725535));
+        sendPanel.setBackground(new Color(-12828863));
         listenUtilPanel.add(sendPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         sendButton = new JButton();
         sendButton.setText("发送");
@@ -124,5 +124,4 @@ public class ListenUtilForm {
     public JComponent $$$getRootComponent$$$() {
         return listenUtilPanel;
     }
-
 }
