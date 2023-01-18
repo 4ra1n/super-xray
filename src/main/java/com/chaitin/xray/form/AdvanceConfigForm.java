@@ -115,6 +115,11 @@ public class AdvanceConfigForm {
     private JLabel useFullModeLabel;
     private JButton xstreamRefreshButton;
     private JButton xstreamSaveButton;
+    private JPanel proxyConfigPanel;
+    private JPanel proxyPanel;
+    private JButton proxyConfigButton;
+    private JLabel proxyLabel;
+    private JTextField proxyText;
 
     private final List<JCheckBox> baselineCheckBoxList = new ArrayList<>();
     private final List<JCheckBox> sqlCheckBoxList = new ArrayList<>();
@@ -123,7 +128,42 @@ public class AdvanceConfigForm {
     private static boolean sqlAll = false;
     private static boolean xssAll = false;
 
+    @SuppressWarnings("all")
+    public void refreshHttpProxy() {
+        String data = null;
+        for (Map.Entry<String, Object> entry : MainForm.configObj.entrySet()) {
+            if (entry.getKey().equals("http")) {
+                Map<String, Object> httpModule = (Map<String, Object>) entry.getValue();
+                data = (String) httpModule.get("proxy");
+            }
+        }
+        if (data != null) {
+            proxyText.setText(data);
+        }
+    }
+
+    @SuppressWarnings("all")
+    public void initHttpProxy() {
+        refreshHttpProxy();
+        proxyConfigButton.addActionListener(e -> {
+            String httpProxy = proxyText.getText();
+            for (Map.Entry<String, Object> entry : MainForm.configObj.entrySet()) {
+                if (entry.getKey().equals("http")) {
+                    Map<String, Object> httpModule = (Map<String, Object>) entry.getValue();
+                    httpModule.put("proxy", httpProxy);
+                }
+            }
+            MainForm.instance.refreshConfig();
+            if (MainForm.LANG == MainForm.CHINESE) {
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "设置代理成功");
+            } else {
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "Success");
+            }
+        });
+    }
+
     private void init() {
+        initHttpProxy();
         baselineCheckBoxList.add(detectCorsHeaderConfigCheckBox);
         baselineCheckBoxList.add(detectServerErrorPageCheckBox);
         baselineCheckBoxList.add(detectPhpinfoCheckBox);
@@ -149,6 +189,7 @@ public class AdvanceConfigForm {
     }
 
     private void refreshAll() {
+        refreshHttpProxy();
         refreshBaseline();
         refreshThinkphp();
         refreshSql();
@@ -740,6 +781,11 @@ public class AdvanceConfigForm {
             useFullModeLabel.setText("是否开启完全扫描模式");
             xstreamRefreshButton.setText("刷新配置");
             xstreamSaveButton.setText("确认配置");
+            proxyConfigPanel.setBorder(BorderFactory.createTitledBorder(null,
+                    "代理配置", TitledBorder.DEFAULT_JUSTIFICATION,
+                    TitledBorder.DEFAULT_POSITION, null, null));
+            proxyLabel.setText("输入HTTP代理URL");
+            proxyConfigButton.setText("确认");
         } else {
             configCenterPanel.setBorder(BorderFactory.createTitledBorder(null,
                     "Config Center", TitledBorder.DEFAULT_JUSTIFICATION,
@@ -804,6 +850,11 @@ public class AdvanceConfigForm {
             useFullModeLabel.setText("use full mode");
             xstreamRefreshButton.setText("Refresh");
             xstreamSaveButton.setText("Save");
+            proxyConfigPanel.setBorder(BorderFactory.createTitledBorder(null,
+                    "Proxy Config", TitledBorder.DEFAULT_JUSTIFICATION,
+                    TitledBorder.DEFAULT_POSITION, null, null));
+            proxyLabel.setText("Input HTTP Proxy");
+            proxyConfigButton.setText("Confirm");
         }
     }
 
@@ -1179,6 +1230,23 @@ public class AdvanceConfigForm {
         xstreamSaveButton = new JButton();
         xstreamSaveButton.setText("确认配置");
         xstreamPanel.add(xstreamSaveButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        proxyConfigPanel = new JPanel();
+        proxyConfigPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        proxyConfigPanel.setBackground(new Color(-725535));
+        advanceConfigPanel.add(proxyConfigPanel, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        proxyConfigPanel.setBorder(BorderFactory.createTitledBorder(null, "代理配置", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
+        proxyPanel = new JPanel();
+        proxyPanel.setLayout(new GridLayoutManager(1, 3, new Insets(0, 0, 0, 0), -1, -1));
+        proxyPanel.setBackground(new Color(-725535));
+        proxyConfigPanel.add(proxyPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        proxyConfigButton = new JButton();
+        proxyConfigButton.setText("确认");
+        proxyPanel.add(proxyConfigButton, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        proxyLabel = new JLabel();
+        proxyLabel.setText("输入HTTP代理URL");
+        proxyPanel.add(proxyLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        proxyText = new JTextField();
+        proxyPanel.add(proxyText, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
     }
 
     /**

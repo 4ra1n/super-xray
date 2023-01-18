@@ -95,7 +95,6 @@ public class MainForm {
     private JButton activeScanButton;
     private JButton mitmScanButton;
     private JButton outputConfigButton;
-    private JButton proxyConfigButton;
     private JPanel outputConfigPanel;
     private JScrollPane outputPanel;
     private JTextArea outputTextArea;
@@ -115,7 +114,6 @@ public class MainForm {
     private JPanel pocPanel;
     private JButton allPoCButton;
     private JPanel scanTargetPanel;
-    private JPanel proxyConfigPanel;
     private JPanel reverseConfigPanel;
     private JPanel startScanPanel;
     private JPanel otherPanel;
@@ -124,9 +122,6 @@ public class MainForm {
     private JTextField portText;
     private JLabel portLabel;
     private JPanel mitmPanel;
-    private JTextField proxyText;
-    private JLabel proxyLabel;
-    private JPanel proxyPanel;
     public JTextField httpReverseText;
     private JPanel reverseUrlPanel;
     private JLabel httpReverseLabel;
@@ -372,18 +367,6 @@ public class MainForm {
                 }
             }
         }
-
-        String data = null;
-        for (Map.Entry<String, Object> entry : configObj.entrySet()) {
-            if (entry.getKey().equals("http")) {
-                Map<String, Object> httpModule = (Map<String, Object>) entry.getValue();
-                data = (String) httpModule.get("proxy");
-            }
-        }
-        if (data != null) {
-            proxyText.setText(data);
-        }
-
         for (Map.Entry<String, Object> entry : configObj.entrySet()) {
             if (entry.getKey().equals("reverse")) {
                 Map<String, Object> reverse = (Map<String, Object>) entry.getValue();
@@ -1241,35 +1224,6 @@ public class MainForm {
     }
 
     @SuppressWarnings("unchecked")
-    public void initHttpProxy() {
-        String data = null;
-        for (Map.Entry<String, Object> entry : configObj.entrySet()) {
-            if (entry.getKey().equals("http")) {
-                Map<String, Object> httpModule = (Map<String, Object>) entry.getValue();
-                data = (String) httpModule.get("proxy");
-            }
-        }
-        if (data != null) {
-            proxyText.setText(data);
-        }
-        proxyConfigButton.addActionListener(e -> {
-            String httpProxy = proxyText.getText();
-            for (Map.Entry<String, Object> entry : configObj.entrySet()) {
-                if (entry.getKey().equals("http")) {
-                    Map<String, Object> httpModule = (Map<String, Object>) entry.getValue();
-                    httpModule.put("proxy", httpProxy);
-                }
-            }
-            refreshConfig();
-            if (LANG == CHINESE) {
-                JOptionPane.showMessageDialog(this.SuperXray, "设置代理成功");
-            } else {
-                JOptionPane.showMessageDialog(this.SuperXray, "Success");
-            }
-        });
-    }
-
-    @SuppressWarnings("unchecked")
     public void initReverse() {
         for (Map.Entry<String, Object> entry : configObj.entrySet()) {
             if (entry.getKey().equals("reverse")) {
@@ -1688,11 +1642,6 @@ public class MainForm {
             httpUtilButton.setText("Repeater");
             listenUtilButton.setText("Listener");
             encodeUtilButton.setText("Decoder");
-            proxyConfigPanel.setBorder(BorderFactory.createTitledBorder(null,
-                    "Proxy Config", TitledBorder.DEFAULT_JUSTIFICATION,
-                    TitledBorder.DEFAULT_POSITION, null, null));
-            proxyLabel.setText("Input HTTP Proxy");
-            proxyConfigButton.setText("Confirm");
             reverseConfigPanel.setBorder(BorderFactory.createTitledBorder(null,
                     "Reverse", TitledBorder.DEFAULT_JUSTIFICATION,
                     TitledBorder.DEFAULT_POSITION, null, null));
@@ -1787,11 +1736,6 @@ public class MainForm {
             httpUtilButton.setText("http 请求测试");
             listenUtilButton.setText("监听端口");
             encodeUtilButton.setText("编码工具");
-            proxyConfigPanel.setBorder(BorderFactory.createTitledBorder(null,
-                    "代理配置", TitledBorder.DEFAULT_JUSTIFICATION,
-                    TitledBorder.DEFAULT_POSITION, null, null));
-            proxyLabel.setText("输入HTTP代理URL");
-            proxyConfigButton.setText("确认");
             reverseConfigPanel.setBorder(BorderFactory.createTitledBorder(null,
                     "反连平台", TitledBorder.DEFAULT_JUSTIFICATION,
                     TitledBorder.DEFAULT_POSITION, null, null));
@@ -1950,7 +1894,6 @@ public class MainForm {
         initUrlFileConfig();
         initTargetUrlConfig();
         initAllPoC();
-        initHttpProxy();
         initTargetPoC();
         initPoCLevel();
         initActiveScan();
@@ -2404,31 +2347,14 @@ public class MainForm {
         tipForAdvance.setText("部分插件仅高级版支持");
         leftConfigPanel.add(tipForAdvance, new GridConstraints(10, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         rightConfigPanel = new JPanel();
-        rightConfigPanel.setLayout(new GridLayoutManager(8, 1, new Insets(0, 0, 0, 0), -1, -1));
+        rightConfigPanel.setLayout(new GridLayoutManager(7, 1, new Insets(0, 0, 0, 0), -1, -1));
         rightConfigPanel.setBackground(new Color(-725535));
         rightConfigPanel.setEnabled(true);
         configPanel.add(rightConfigPanel, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        proxyConfigPanel = new JPanel();
-        proxyConfigPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        proxyConfigPanel.setBackground(new Color(-725535));
-        rightConfigPanel.add(proxyConfigPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        proxyConfigPanel.setBorder(BorderFactory.createTitledBorder(null, "代理配置", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
-        proxyPanel = new JPanel();
-        proxyPanel.setLayout(new GridLayoutManager(1, 3, new Insets(0, 0, 0, 0), -1, -1));
-        proxyPanel.setBackground(new Color(-725535));
-        proxyConfigPanel.add(proxyPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        proxyConfigButton = new JButton();
-        proxyConfigButton.setText("确认");
-        proxyPanel.add(proxyConfigButton, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        proxyLabel = new JLabel();
-        proxyLabel.setText("输入HTTP代理URL");
-        proxyPanel.add(proxyLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        proxyText = new JTextField();
-        proxyPanel.add(proxyText, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         reverseConfigPanel = new JPanel();
         reverseConfigPanel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
         reverseConfigPanel.setBackground(new Color(-725535));
-        rightConfigPanel.add(reverseConfigPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        rightConfigPanel.add(reverseConfigPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         reverseConfigPanel.setBorder(BorderFactory.createTitledBorder(null, "反连平台", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         reverseUrlPanel = new JPanel();
         reverseUrlPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
@@ -2456,7 +2382,7 @@ public class MainForm {
         startScanPanel = new JPanel();
         startScanPanel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
         startScanPanel.setBackground(new Color(-725535));
-        rightConfigPanel.add(startScanPanel, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        rightConfigPanel.add(startScanPanel, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         startScanPanel.setBorder(BorderFactory.createTitledBorder(null, "启动", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         activeScanButton = new JButton();
         activeScanButton.setText("开启主动扫描");
@@ -2501,7 +2427,7 @@ public class MainForm {
         otherPanel = new JPanel();
         otherPanel.setLayout(new GridLayoutManager(2, 3, new Insets(0, 0, 0, 0), -1, -1));
         otherPanel.setBackground(new Color(-725535));
-        rightConfigPanel.add(otherPanel, new GridConstraints(6, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        rightConfigPanel.add(otherPanel, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         otherPanel.setBorder(BorderFactory.createTitledBorder(null, "其他", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         xrayUrlButton = new JButton();
         xrayUrlButton.setText("xray下载面板");
@@ -2759,5 +2685,4 @@ public class MainForm {
     public JComponent $$$getRootComponent$$$() {
         return SuperXray;
     }
-
 }

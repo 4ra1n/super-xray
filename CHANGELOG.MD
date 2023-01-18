@@ -234,4 +234,5 @@ Others:
 
 更新内容：
 - [important] [improve] CPU占用较高需要进行优化 #128
+- [improve] 不常用的配置应该都移到高级配置中 #132
 - [improve] 避免直接使用其他项目的图标 #130
