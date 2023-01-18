@@ -45,7 +45,7 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <text value="&lt;html&gt;&#10;1. Mac OS 用 control+c/v 复制/粘贴&#10;&lt;br&gt;&#10;2. 请勿重复加载，否则会有意外的问题&#10;&lt;/html&gt;"/>
+                  <text value="&lt;html&gt;&#10;1. Mac OS 用 control+c/v 复制/粘贴&#10;&lt;br&gt;&#10;2. 请勿重复加载，否则会有意外的问题&#10;&lt;br&gt;&#10;3. 遇到config not found报错重启super-xray&#10;&lt;/html&gt;"/>
                 </properties>
               </component>
               <grid id="55662" binding="skinPanel" layout-manager="GridLayoutManager" row-count="2" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -1074,7 +1074,7 @@
             <properties>
               <horizontalAlignment value="0"/>
               <horizontalTextPosition value="0"/>
-              <text value="&lt;html&gt; &lt;p&gt;Author: 4ra1n (https://github.com/4ra1n) from Chaitin Tech&lt;/p&gt; &lt;/html&gt;"/>
+              <text value="&lt;html&gt; &lt;p&gt;https://github.com/4ra1n&lt;/p&gt; &lt;/html&gt;"/>
             </properties>
           </component>
           <vspacer id="efe95">

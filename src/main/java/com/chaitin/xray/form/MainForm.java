@@ -1608,7 +1608,9 @@ public class MainForm {
     public void refreshLang() {
         if (LANG == ENGLISH) {
             xrayPathLabel.setText("You selected xray:");
-            noteLabel.setText("<html> Note: Using control+c/v to copy/paste in Mac OS </html>");
+            noteLabel.setText("<html> 1. Mac OS use control+c/v copy/paste " +
+                    "<br> 2. only load once " +
+                    "<br> 3. if config not found restart super-xray </html>");
             langButton.setText("Confirm Language");
             skinPanel.setBorder(BorderFactory.createTitledBorder(null,
                     "Skin Select", TitledBorder.DEFAULT_JUSTIFICATION,
@@ -1704,7 +1706,9 @@ public class MainForm {
             mitmIpLabel.setText("Listen IP");
         } else if (LANG == CHINESE) {
             xrayPathLabel.setText("你选择的xray文件是：");
-            noteLabel.setText("<html> 注意：在 Mac OS 中请用 control+c/v 复制/粘贴 </html>");
+            noteLabel.setText("<html> 1. Mac OS 用 control+c/v 复制/粘贴 " +
+                    "<br> 2. 请勿重复加载，否则会有意外的问题 " +
+                    "<br> 3. 遇到config not found报错重启super-xray </html>");
             langButton.setText("确认语言");
             skinPanel.setBorder(BorderFactory.createTitledBorder(null,
                     "皮肤选择", TitledBorder.DEFAULT_JUSTIFICATION,
@@ -2192,7 +2196,7 @@ public class MainForm {
         choseDirButton.setText("点击按钮选择");
         pathButtonPanel.add(choseDirButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, 1, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         noteLabel = new JLabel();
-        noteLabel.setText("<html>\n1. Mac OS 用 control+c/v 复制/粘贴\n<br>\n2. 请勿重复加载，否则会有意外的问题\n</html>");
+        noteLabel.setText("<html>\n1. Mac OS 用 control+c/v 复制/粘贴\n<br>\n2. 请勿重复加载，否则会有意外的问题\n<br>\n3. 遇到config not found报错重启super-xray\n</html>");
         pathButtonPanel.add(noteLabel, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, new Dimension(300, -1), null, null, 0, false));
         skinPanel = new JPanel();
         skinPanel.setLayout(new GridLayoutManager(2, 4, new Insets(0, 0, 0, 0), -1, -1));
@@ -2369,16 +2373,18 @@ public class MainForm {
         reverseUrlPanel = new JPanel();
         reverseUrlPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
         reverseUrlPanel.setBackground(new Color(-725535));
-        reverseConfigPanel.add(reverseUrlPanel, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, new Dimension(400, -1), 0, false));
+        reverseConfigPanel.add(reverseUrlPanel, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         httpReverseLabel = new JLabel();
         httpReverseLabel.setText("请输入HTTP URL（IP形式）");
         reverseUrlPanel.add(httpReverseLabel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         httpReverseText = new JTextField();
+        httpReverseText.setText("");
         reverseUrlPanel.add(httpReverseText, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         tokenLabel = new JLabel();
         tokenLabel.setText("Token");
         reverseUrlPanel.add(tokenLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         tokenText = new JTextField();
+        tokenText.setText("");
         reverseUrlPanel.add(tokenText, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         tipForReverse = new JLabel();
         tipForReverse.setText("<html>\n1. 反连只支持HTTP/RMI配置，不包含DNS配置<br>\n2. 请先配置好客户端再点击 <b>配置服务端</b> 导出配置文件<br>\n</html>");
@@ -2596,7 +2602,7 @@ public class MainForm {
         authorLabel = new JLabel();
         authorLabel.setHorizontalAlignment(0);
         authorLabel.setHorizontalTextPosition(0);
-        authorLabel.setText("<html> <p>Author: 4ra1n (https://github.com/4ra1n) from Chaitin Tech</p> </html>");
+        authorLabel.setText("<html> <p>https://github.com/4ra1n</p> </html>");
         bottomPanel.add(authorLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer1 = new Spacer();
         bottomPanel.add(spacer1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 20), null, null, 0, false));
