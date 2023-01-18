@@ -1,6 +1,5 @@
 package com.chaitin.xray.form;
 
-import com.chaitin.xray.Application;
 import com.chaitin.xray.games.flappy.FBMainFrame;
 import com.chaitin.xray.model.Const;
 import com.chaitin.xray.model.DB;
@@ -9,7 +8,6 @@ import com.chaitin.xray.model.XrayCmd;
 import com.chaitin.xray.games.plane.Game;
 import com.chaitin.xray.games.snake.Main;
 import com.chaitin.xray.utils.*;
-import com.formdev.flatlaf.FlatLightLaf;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
@@ -40,7 +38,6 @@ import java.util.List;
 
 public class MainForm {
     private static final Logger logger = LogManager.getLogger(MainForm.class);
-
     public static MainForm instance;
     private XrayCmd xrayCmd;
     public static String configStr;
@@ -139,15 +136,6 @@ public class MainForm {
     private JButton updatePocButton;
     private JTextField localPoCText;
     private JButton localPoCButton;
-    private JPanel skinPanel;
-    private JButton saveSkinButton;
-    private JRadioButton metalRadioButton;
-    private JRadioButton flatLafRadioButton;
-    private JRadioButton nimbusRadioButton;
-    private JRadioButton windowsRadioButton;
-    private JRadioButton winClassicRadioButton;
-    private JRadioButton gtkRadioButton;
-    private JRadioButton aquaRadioButton;
     private JTextField tokenText;
     private JLabel tokenLabel;
     private JCheckBox autoDelCheckBox;
@@ -155,7 +143,6 @@ public class MainForm {
     private JButton xrayUrlButton;
     private JRadioButton chineseLangButton;
     private JRadioButton englishLangButton;
-    private JButton langButton;
     private JButton onlineButton;
     private JButton reverseServerButton;
     private JButton radButton;
@@ -184,6 +171,8 @@ public class MainForm {
     private JTextField mitmIpText;
     private JCheckBox lockCheckBox;
     private JLabel mitmIpLabel;
+    private JPanel langParPanel;
+    private JLabel extraNoteLabel;
     private SubdomainForm subdomainInstance;
     private AJPScanForm ajpInstance;
 
@@ -1400,141 +1389,6 @@ public class MainForm {
         });
     }
 
-    private void initSkin() {
-        switch (Application.globalSkin) {
-            case Const.nimbus:
-                nimbusRadioButton.setSelected(true);
-                break;
-            case Const.aqua:
-                aquaRadioButton.setSelected(true);
-                break;
-            case Const.gtk:
-                gtkRadioButton.setSelected(true);
-                break;
-            case Const.metal:
-                metalRadioButton.setSelected(true);
-                break;
-            case Const.flatLaf:
-                flatLafRadioButton.setSelected(true);
-                break;
-            case Const.windows:
-                windowsRadioButton.setSelected(true);
-                break;
-            case Const.winClassic:
-                winClassicRadioButton.setSelected(true);
-                break;
-        }
-
-        saveSkinButton.addActionListener(e -> {
-            try {
-                if (nimbusRadioButton.isSelected()) {
-                    try {
-                        Class.forName(Const.nimbus);
-                    } catch (Exception ignored) {
-                        if (LANG == CHINESE) {
-                            JOptionPane.showMessageDialog(this.SuperXray, "您的操作系统不能设置该皮肤");
-                        } else {
-                            JOptionPane.showMessageDialog(this.SuperXray,
-                                    "Your OS not support this skin");
-                        }
-                        return;
-                    }
-                    UIManager.setLookAndFeel(Const.nimbus);
-                    db.setSkin(Const.nimbus);
-                } else if (metalRadioButton.isSelected()) {
-                    try {
-                        Class.forName(Const.metal);
-                    } catch (Exception ignored) {
-                        if (LANG == CHINESE) {
-                            JOptionPane.showMessageDialog(this.SuperXray, "您的操作系统不能设置该皮肤");
-                        } else {
-                            JOptionPane.showMessageDialog(this.SuperXray,
-                                    "Your OS not support this skin");
-                        }
-                        return;
-                    }
-                    UIManager.setLookAndFeel(Const.metal);
-                    db.setSkin(Const.metal);
-                } else if (windowsRadioButton.isSelected()) {
-                    try {
-                        Class.forName(Const.windows);
-                    } catch (Exception ignored) {
-                        if (LANG == CHINESE) {
-                            JOptionPane.showMessageDialog(this.SuperXray, "您的操作系统不能设置该皮肤");
-                        } else {
-                            JOptionPane.showMessageDialog(this.SuperXray,
-                                    "Your OS not support this skin");
-                        }
-                        return;
-                    }
-                    UIManager.setLookAndFeel(Const.windows);
-                    db.setSkin(Const.windows);
-                } else if (winClassicRadioButton.isSelected()) {
-                    try {
-                        Class.forName(Const.winClassic);
-                    } catch (Exception ignored) {
-                        if (LANG == CHINESE) {
-                            JOptionPane.showMessageDialog(this.SuperXray, "您的操作系统不能设置该皮肤");
-                        } else {
-                            JOptionPane.showMessageDialog(this.SuperXray,
-                                    "Your OS not support this skin");
-                        }
-                        return;
-                    }
-                    UIManager.setLookAndFeel(Const.winClassic);
-                    db.setSkin(Const.winClassic);
-                } else if (flatLafRadioButton.isSelected()) {
-                    try {
-                        FlatLightLaf.setup();
-                    } catch (Exception ignored) {
-                        if (LANG == CHINESE) {
-                            JOptionPane.showMessageDialog(this.SuperXray, "您的操作系统不能设置该皮肤");
-                        } else {
-                            JOptionPane.showMessageDialog(this.SuperXray,
-                                    "Your OS not support this skin");
-                        }
-                        return;
-                    }
-                    FlatLightLaf.setup();
-                    db.setSkin(Const.flatLaf);
-                } else if (gtkRadioButton.isSelected()) {
-                    try {
-                        Class.forName(Const.gtk);
-                    } catch (Exception ignored) {
-                        if (LANG == CHINESE) {
-                            JOptionPane.showMessageDialog(this.SuperXray, "您的操作系统不能设置该皮肤");
-                        } else {
-                            JOptionPane.showMessageDialog(this.SuperXray,
-                                    "Your OS not support this skin");
-                        }
-                        return;
-                    }
-                    UIManager.setLookAndFeel(Const.gtk);
-                    db.setSkin(Const.gtk);
-                } else if (aquaRadioButton.isSelected()) {
-                    try {
-                        Class.forName(Const.aqua);
-                    } catch (Exception ignored) {
-                        if (LANG == CHINESE) {
-                            JOptionPane.showMessageDialog(this.SuperXray, "您的操作系统不能设置该皮肤");
-                        } else {
-                            JOptionPane.showMessageDialog(this.SuperXray,
-                                    "Your OS not support this skin");
-                        }
-                        return;
-                    }
-                    UIManager.setLookAndFeel(Const.aqua);
-                    db.setSkin(Const.aqua);
-                }
-                SwingUtilities.updateComponentTreeUI(SuperXray);
-                SuperXray.revalidate();
-                db.saveDB();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
-    }
-
     private void initOther() {
         cleanAreaButton.addActionListener(e -> outputTextArea.setText(null));
         delCaCheckBox.setSelected(true);
@@ -1588,10 +1442,19 @@ public class MainForm {
         chineseLangButton.setSelected(true);
         LANG = CHINESE;
         englishLangButton.setSelected(false);
-        langButton.addActionListener(e -> {
+        chineseLangButton.addActionListener(e -> {
             if (chineseLangButton.isSelected()) {
                 LANG = CHINESE;
-            } else if (englishLangButton.isSelected()) {
+            }
+            refreshLang();
+            if (LANG == CHINESE) {
+                pocNumLabel.setText(String.format("当前共有: %s 个PoC", Poc.getPocList().size()));
+            } else {
+                pocNumLabel.setText(String.format("PoC Num: %s", Poc.getPocList().size()));
+            }
+        });
+        englishLangButton.addActionListener(e -> {
+            if (englishLangButton.isSelected()) {
                 LANG = ENGLISH;
             }
             refreshLang();
@@ -1606,14 +1469,11 @@ public class MainForm {
     public void refreshLang() {
         if (LANG == ENGLISH) {
             xrayPathLabel.setText("You selected xray:");
-            noteLabel.setText("<html> 1. Mac OS use control+c/v copy/paste " +
-                    "<br> 2. only load once " +
-                    "<br> 3. if config not found restart super-xray </html>");
-            langButton.setText("Confirm Language");
-            skinPanel.setBorder(BorderFactory.createTitledBorder(null,
-                    "Skin Select", TitledBorder.DEFAULT_JUSTIFICATION,
-                    TitledBorder.DEFAULT_POSITION, null, null));
-            saveSkinButton.setText("Confirm Skin");
+            noteLabel.setText("<html>\n" +
+                    "1. Mac OS use control+c/v copy/paste\n" +
+                    "<br>\n" +
+                    "2. load xray once\n" +
+                    "</html>");
             leftConfigPanel.setBorder(BorderFactory.createTitledBorder(null,
                     "Plugins Config", TitledBorder.DEFAULT_JUSTIFICATION,
                     TitledBorder.DEFAULT_POSITION, null, null));
@@ -1702,16 +1562,15 @@ public class MainForm {
             copyCmdButton.setText("Copy Cmd");
             lockCheckBox.setText("Lock");
             mitmIpLabel.setText("Listen IP");
+            extraNoteLabel.setText("<html> 3. when config not found then restart super-xray" +
+                    "<br> 4. note that many config need confirm </html>");
         } else if (LANG == CHINESE) {
             xrayPathLabel.setText("你选择的xray文件是：");
-            noteLabel.setText("<html> 1. Mac OS 用 control+c/v 复制/粘贴 " +
-                    "<br> 2. 请勿重复加载，否则会有意外的问题 " +
-                    "<br> 3. 遇到config not found报错重启super-xray </html>");
-            langButton.setText("确认语言");
-            skinPanel.setBorder(BorderFactory.createTitledBorder(null,
-                    "皮肤选择", TitledBorder.DEFAULT_JUSTIFICATION,
-                    TitledBorder.DEFAULT_POSITION, null, null));
-            saveSkinButton.setText("确认皮肤");
+            noteLabel.setText("<html>\n" +
+                    "1. Mac OS 用 control+c/v 复制/粘贴\n" +
+                    "<br>\n" +
+                    "2. 请勿重复加载，否则会有意外的问题\n" +
+                    "</html>");
             leftConfigPanel.setBorder(BorderFactory.createTitledBorder(null,
                     "扫描插件配置", TitledBorder.DEFAULT_JUSTIFICATION,
                     TitledBorder.DEFAULT_POSITION, null, null));
@@ -1800,6 +1659,8 @@ public class MainForm {
             copyCmdButton.setText("复制当前命令");
             lockCheckBox.setText("锁定");
             mitmIpLabel.setText("被动监听IP:");
+            extraNoteLabel.setText("<html> 3. 遇到config not found报错重启super-xray即可 " +
+                    "<br> 4. 注意大多数的配置需要点击确认后才能生效应用 </html>");
         }
     }
 
@@ -1896,7 +1757,6 @@ public class MainForm {
     public MainForm() {
         init();
         initLang();
-        initSkin();
         initLoadXray();
         initPluginCheckBox();
         initPluginSave();
@@ -2138,7 +1998,6 @@ public class MainForm {
         return menuBar;
     }
 
-
     {
 // GUI initializer generated by IntelliJ IDEA GUI Designer
 // >>> IMPORTANT!! <<<
@@ -2163,69 +2022,36 @@ public class MainForm {
         SuperXray.add(loadXrayPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         loadXrayPanel.setBorder(BorderFactory.createTitledBorder(null, "Super Xray", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         pathButtonPanel = new JPanel();
-        pathButtonPanel.setLayout(new GridLayoutManager(2, 6, new Insets(0, 0, 0, 0), -1, -1));
+        pathButtonPanel.setLayout(new GridLayoutManager(2, 8, new Insets(0, 0, 0, 0), -1, -1));
         pathButtonPanel.setBackground(new Color(-12828863));
         loadXrayPanel.add(pathButtonPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         choseDirButton = new JButton();
         choseDirButton.setText("点击按钮选择");
         pathButtonPanel.add(choseDirButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, 1, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         noteLabel = new JLabel();
-        noteLabel.setText("<html>\n1. Mac OS 用 control+c/v 复制/粘贴\n<br>\n2. 请勿重复加载，否则会有意外的问题\n<br>\n3. 遇到config not found报错重启super-xray\n</html>");
+        noteLabel.setText("<html>\n1. Mac OS 用 control+c/v 复制/粘贴\n<br>\n2. 请勿重复加载，否则会有意外的问题\n</html>");
         pathButtonPanel.add(noteLabel, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, new Dimension(300, -1), null, null, 0, false));
-        skinPanel = new JPanel();
-        skinPanel.setLayout(new GridLayoutManager(2, 4, new Insets(0, 0, 0, 0), -1, -1));
-        skinPanel.setBackground(new Color(-12828863));
-        pathButtonPanel.add(skinPanel, new GridConstraints(0, 5, 2, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        skinPanel.setBorder(BorderFactory.createTitledBorder(null, "皮肤选择", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
-        metalRadioButton = new JRadioButton();
-        metalRadioButton.setBackground(new Color(-12828863));
-        metalRadioButton.setText("Metal");
-        skinPanel.add(metalRadioButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        flatLafRadioButton = new JRadioButton();
-        flatLafRadioButton.setBackground(new Color(-12828863));
-        flatLafRadioButton.setText("FlatLaf");
-        skinPanel.add(flatLafRadioButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        nimbusRadioButton = new JRadioButton();
-        nimbusRadioButton.setBackground(new Color(-12828863));
-        nimbusRadioButton.setText("Nimbus");
-        skinPanel.add(nimbusRadioButton, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        windowsRadioButton = new JRadioButton();
-        windowsRadioButton.setBackground(new Color(-12828863));
-        windowsRadioButton.setText("Win");
-        skinPanel.add(windowsRadioButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        winClassicRadioButton = new JRadioButton();
-        winClassicRadioButton.setBackground(new Color(-12828863));
-        winClassicRadioButton.setText("Win Classic");
-        skinPanel.add(winClassicRadioButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        gtkRadioButton = new JRadioButton();
-        gtkRadioButton.setBackground(new Color(-12828863));
-        gtkRadioButton.setText("Gtk");
-        skinPanel.add(gtkRadioButton, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        saveSkinButton = new JButton();
-        saveSkinButton.setText("确认皮肤");
-        skinPanel.add(saveSkinButton, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        aquaRadioButton = new JRadioButton();
-        aquaRadioButton.setBackground(new Color(-12828863));
-        aquaRadioButton.setText("Aqua");
-        skinPanel.add(aquaRadioButton, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         xrayPathLabel = new JLabel();
         xrayPathLabel.setText("你选择的xray文件是：");
         pathButtonPanel.add(xrayPathLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         xrayPathTextField = new JTextField();
         xrayPathTextField.setEditable(false);
         xrayPathTextField.setEnabled(false);
-        pathButtonPanel.add(xrayPathTextField, new GridConstraints(0, 1, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(500, -1), null, 0, false));
-        englishLangButton = new JRadioButton();
-        englishLangButton.setBackground(new Color(-12828863));
-        englishLangButton.setText("English");
-        pathButtonPanel.add(englishLangButton, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        pathButtonPanel.add(xrayPathTextField, new GridConstraints(0, 1, 1, 7, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(500, -1), null, 0, false));
+        langParPanel = new JPanel();
+        langParPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        pathButtonPanel.add(langParPanel, new GridConstraints(1, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         chineseLangButton = new JRadioButton();
         chineseLangButton.setBackground(new Color(-12828863));
         chineseLangButton.setText("简体中文");
-        pathButtonPanel.add(chineseLangButton, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        langButton = new JButton();
-        langButton.setText("确认语言");
-        pathButtonPanel.add(langButton, new GridConstraints(1, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        langParPanel.add(chineseLangButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        extraNoteLabel = new JLabel();
+        extraNoteLabel.setText("<html> 3. 遇到config not found报错重启super-xray即可 <br> 4. 注意大多数的配置需要点击确认后才能生效应用 </html>");
+        pathButtonPanel.add(extraNoteLabel, new GridConstraints(1, 2, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, new Dimension(300, -1), null, null, 0, false));
+        englishLangButton = new JRadioButton();
+        englishLangButton.setBackground(new Color(-12828863));
+        englishLangButton.setText("English");
+        pathButtonPanel.add(englishLangButton, new GridConstraints(1, 5, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         configPanel = new JPanel();
         configPanel.setLayout(new GridLayoutManager(2, 3, new Insets(0, 0, 0, 0), -1, -1));
         configPanel.setBackground(new Color(-12828863));
@@ -2641,14 +2467,6 @@ public class MainForm {
         buttonGroup.add(htmlRadioButton);
         buttonGroup.add(cliRadioButton);
         buttonGroup.add(jsonRadioButton);
-        buttonGroup = new ButtonGroup();
-        buttonGroup.add(metalRadioButton);
-        buttonGroup.add(flatLafRadioButton);
-        buttonGroup.add(nimbusRadioButton);
-        buttonGroup.add(windowsRadioButton);
-        buttonGroup.add(winClassicRadioButton);
-        buttonGroup.add(gtkRadioButton);
-        buttonGroup.add(aquaRadioButton);
         buttonGroup = new ButtonGroup();
         buttonGroup.add(chineseLangButton);
         buttonGroup.add(englishLangButton);

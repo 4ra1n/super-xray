@@ -20,7 +20,7 @@
         </properties>
         <border type="none" title="Super Xray"/>
         <children>
-          <grid id="ec4cd" binding="pathButtonPanel" layout-manager="GridLayoutManager" row-count="2" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="ec4cd" binding="pathButtonPanel" layout-manager="GridLayoutManager" row-count="2" column-count="8" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -45,92 +45,9 @@
                   </grid>
                 </constraints>
                 <properties>
-                  <text value="&lt;html&gt;&#10;1. Mac OS 用 control+c/v 复制/粘贴&#10;&lt;br&gt;&#10;2. 请勿重复加载，否则会有意外的问题&#10;&lt;br&gt;&#10;3. 遇到config not found报错重启super-xray&#10;&lt;/html&gt;"/>
+                  <text value="&lt;html&gt;&#10;1. Mac OS 用 control+c/v 复制/粘贴&#10;&lt;br&gt;&#10;2. 请勿重复加载，否则会有意外的问题&#10;&lt;/html&gt;"/>
                 </properties>
               </component>
-              <grid id="55662" binding="skinPanel" layout-manager="GridLayoutManager" row-count="2" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints>
-                  <grid row="0" column="5" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <background color="-12828863"/>
-                </properties>
-                <border type="none" title="皮肤选择"/>
-                <children>
-                  <component id="7bd56" class="javax.swing.JRadioButton" binding="metalRadioButton" default-binding="true">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <background color="-12828863"/>
-                      <text value="Metal"/>
-                    </properties>
-                  </component>
-                  <component id="159a3" class="javax.swing.JRadioButton" binding="flatLafRadioButton">
-                    <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <background color="-12828863"/>
-                      <text value="FlatLaf"/>
-                    </properties>
-                  </component>
-                  <component id="e3dc" class="javax.swing.JRadioButton" binding="nimbusRadioButton" default-binding="true">
-                    <constraints>
-                      <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <background color="-12828863"/>
-                      <text value="Nimbus"/>
-                    </properties>
-                  </component>
-                  <component id="2f791" class="javax.swing.JRadioButton" binding="windowsRadioButton">
-                    <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <background color="-12828863"/>
-                      <text value="Win"/>
-                    </properties>
-                  </component>
-                  <component id="4e5c7" class="javax.swing.JRadioButton" binding="winClassicRadioButton">
-                    <constraints>
-                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <background color="-12828863"/>
-                      <text value="Win Classic"/>
-                    </properties>
-                  </component>
-                  <component id="56a7e" class="javax.swing.JRadioButton" binding="gtkRadioButton">
-                    <constraints>
-                      <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <background color="-12828863"/>
-                      <text value="Gtk"/>
-                    </properties>
-                  </component>
-                  <component id="6182a" class="javax.swing.JButton" binding="saveSkinButton">
-                    <constraints>
-                      <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="确认皮肤"/>
-                    </properties>
-                  </component>
-                  <component id="d18b" class="javax.swing.JRadioButton" binding="aquaRadioButton" default-binding="true">
-                    <constraints>
-                      <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <background color="-12828863"/>
-                      <text value="Aqua"/>
-                    </properties>
-                  </component>
-                </children>
-              </grid>
               <component id="a952d" class="javax.swing.JLabel" binding="xrayPathLabel">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -141,7 +58,7 @@
               </component>
               <component id="d1679" class="javax.swing.JTextField" binding="xrayPathTextField">
                 <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                  <grid row="0" column="1" row-span="1" col-span="7" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="500" height="-1"/>
                   </grid>
                 </constraints>
@@ -150,30 +67,42 @@
                   <enabled value="false"/>
                 </properties>
               </component>
+              <grid id="17451" binding="langParPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="20344" class="javax.swing.JRadioButton" binding="chineseLangButton">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-12828863"/>
+                      <text value="简体中文"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <component id="41b85" class="javax.swing.JLabel" binding="extraNoteLabel">
+                <constraints>
+                  <grid row="1" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="300" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value="&lt;html&gt; 3. 遇到config not found报错重启super-xray即可 &lt;br&gt; 4. 注意大多数的配置需要点击确认后才能生效应用 &lt;/html&gt;"/>
+                </properties>
+              </component>
               <component id="ce55f" class="javax.swing.JRadioButton" binding="englishLangButton">
                 <constraints>
-                  <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-12828863"/>
                   <text value="English"/>
-                </properties>
-              </component>
-              <component id="20344" class="javax.swing.JRadioButton" binding="chineseLangButton">
-                <constraints>
-                  <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <background color="-12828863"/>
-                  <text value="简体中文"/>
-                </properties>
-              </component>
-              <component id="23188" class="javax.swing.JButton" binding="langButton">
-                <constraints>
-                  <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="确认语言"/>
                 </properties>
               </component>
             </children>
