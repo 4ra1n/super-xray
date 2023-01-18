@@ -2,6 +2,8 @@ package com.chaitin.xray.model;
 
 import com.chaitin.xray.utils.StringUtil;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -34,7 +36,11 @@ public class Poc {
 
     public static String getString() {
         StringBuilder sb = new StringBuilder();
-        for (String s : pocList) {
+
+        List<String> finalList = new ArrayList<>(pocList);
+        Collections.sort(finalList);
+
+        for (String s : finalList) {
             sb.append(s);
             sb.append("\n");
         }

@@ -10,6 +10,7 @@ import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -51,11 +52,15 @@ public class AllPoCForm {
                 }
             }
             StringBuilder sb = new StringBuilder();
+
+            Collections.sort(result);
+
             for (String r : result) {
                 sb.append(r);
                 sb.append("\n");
             }
             pocList.setText(sb.toString());
+            pocList.setCaretPosition(0);
         });
     }
 
