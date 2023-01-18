@@ -234,3 +234,4 @@ Others:
 
 更新内容：
 - [important] [improve] CPU占用较高需要进行优化 #128
+- [improve] 避免直接使用其他项目的图标 #130
