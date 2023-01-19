@@ -176,6 +176,9 @@ public class MainForm {
     private JSpinner qpsSet;
     private JLabel qpsLabel;
     private JLabel qpsTip;
+    private JSpinner cphSet;
+    private JLabel cphLabel;
+    private JLabel cphTip;
     private SubdomainForm subdomainInstance;
     private AJPScanForm ajpInstance;
 
@@ -279,6 +282,7 @@ public class MainForm {
 
         Map<String, Object> httpConfig = (Map<String, Object>) configObj.get("http");
         qpsSet.setValue(httpConfig.get("max_qps"));
+        cphSet.setValue(httpConfig.get("max_conns_per_host"));
 
         for (Map.Entry<String, Object> entry : configObj.entrySet()) {
             if (entry.getKey().equals("plugins")) {
@@ -917,6 +921,7 @@ public class MainForm {
 
                     int value = (int) parallelSet.getValue();
                     int qps = (int) qpsSet.getValue();
+                    int cph = (int) cphSet.getValue();
 
                     if (value > 100 || value < 1) {
                         if (LANG == CHINESE) {
@@ -938,9 +943,20 @@ public class MainForm {
                         return;
                     }
 
+                    if (cph > 200 || cph < 1) {
+                        if (LANG == CHINESE) {
+                            JOptionPane.showMessageDialog(this.SuperXray, "设置有误");
+                        } else {
+                            JOptionPane.showMessageDialog(this.SuperXray, "Error Config");
+                        }
+                        cphSet.setValue(50);
+                        return;
+                    }
+
                     configObj.put("parallel", value);
                     Map<String, Object> httpObj = (Map<String, Object>) configObj.get("http");
                     httpObj.put("max_qps", qps);
+                    httpObj.put("max_conns_per_host", cph);
                     refreshConfig();
 
                     refreshOutput();
@@ -1194,6 +1210,7 @@ public class MainForm {
 
                 int value = (int) parallelSet.getValue();
                 int qps = (int) qpsSet.getValue();
+                int cph = (int) cphSet.getValue();
                 if (value > 100 || value < 1) {
                     if (LANG == CHINESE) {
                         JOptionPane.showMessageDialog(this.SuperXray, "设置有误");
@@ -1203,8 +1220,6 @@ public class MainForm {
                     parallelSet.setValue(30);
                     return;
                 }
-
-
                 if (qps > 1000 || qps < 1) {
                     if (LANG == CHINESE) {
                         JOptionPane.showMessageDialog(this.SuperXray, "设置有误");
@@ -1214,10 +1229,20 @@ public class MainForm {
                     qpsSet.setValue(500);
                     return;
                 }
+                if (cph > 200 || cph < 1) {
+                    if (LANG == CHINESE) {
+                        JOptionPane.showMessageDialog(this.SuperXray, "设置有误");
+                    } else {
+                        JOptionPane.showMessageDialog(this.SuperXray, "Error Config");
+                    }
+                    cphSet.setValue(50);
+                    return;
+                }
 
                 configObj.put("parallel", value);
                 Map<String, Object> httpObj = (Map<String, Object>) configObj.get("http");
                 httpObj.put("max_qps", qps);
+                httpObj.put("max_conns_per_host", cph);
 
                 refreshConfig();
 
@@ -1459,6 +1484,21 @@ public class MainForm {
             httpObj.put("max_qps", qps);
             refreshConfig();
         });
+        cphSet.addChangeListener(e -> {
+            int cph = (int) cphSet.getValue();
+            if (cph > 200 || cph < 1) {
+                if (LANG == CHINESE) {
+                    JOptionPane.showMessageDialog(this.SuperXray, "设置有误");
+                } else {
+                    JOptionPane.showMessageDialog(this.SuperXray, "Error Config");
+                }
+                cphSet.setValue(50);
+                return;
+            }
+            Map<String, Object> httpObj = (Map<String, Object>) configObj.get("http");
+            httpObj.put("max_conns_per_host", cph);
+            refreshConfig();
+        });
         xrayUrlButton.addActionListener(e -> {
             JFrame frame = new JFrame("Xray Download");
             frame.setContentPane(new XrayDownForm().xrayDownPanel);
@@ -1617,6 +1657,10 @@ public class MainForm {
             mitmIpLabel.setText("Listen IP");
             extraNoteLabel.setText("<html> 3. when config not found then restart super-xray" +
                     "<br> 4. note that many config need confirm </html>");
+            qpsLabel.setText("QPS");
+            qpsTip.setText("Request speed");
+            cphLabel.setText("Max host conn");
+            cphTip.setText("Host TCP conn");
         } else if (LANG == CHINESE) {
             xrayPathLabel.setText("你选择的xray文件是：");
             noteLabel.setText("<html>\n" +
@@ -1705,8 +1749,8 @@ public class MainForm {
             tipForAdvance.setText("部分插件仅高级版支持");
             tipForReverse.setText("<html> 1. 反连只支持HTTP/RMI配置，不包含DNS配置<br> " +
                     "2. 请先配置好客户端再点击 <b>配置服务端</b> 导出配置文件<br> </html>");
-            setParallelLabel.setText("设置并发");
-            tipParallelLabel.setText("并发越高发包越快");
+            setParallelLabel.setText("设置PoC并发");
+            tipParallelLabel.setText("同时运行的PoC数量");
             delCaCheckBox.setText("关闭后删除ca文件");
             ajpScanButton.setText("AJP服务扫描");
             copyCmdButton.setText("复制当前命令");
@@ -1714,6 +1758,10 @@ public class MainForm {
             mitmIpLabel.setText("被动监听IP:");
             extraNoteLabel.setText("<html> 3. 遇到config not found报错重启super-xray即可 " +
                     "<br> 4. 注意大多数的配置需要点击确认后才能生效应用 </html>");
+            qpsLabel.setText("每秒最大请求");
+            qpsTip.setText("参数越大发包越快");
+            cphLabel.setText("目标主机最大连接");
+            cphTip.setText("参数越大目标压力越大");
         }
     }
 
@@ -2257,21 +2305,21 @@ public class MainForm {
         activeScanButton.setText("开启主动扫描");
         startScanPanel.add(activeScanButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         mitmPanel = new JPanel();
-        mitmPanel.setLayout(new GridLayoutManager(5, 6, new Insets(0, 0, 0, 0), -1, -1));
+        mitmPanel.setLayout(new GridLayoutManager(6, 6, new Insets(0, 0, 0, 0), -1, -1));
         mitmPanel.setBackground(new Color(-12828863));
         startScanPanel.add(mitmPanel, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         mitmScanButton = new JButton();
         mitmScanButton.setText("开启被动扫描");
-        mitmPanel.add(mitmScanButton, new GridConstraints(3, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mitmPanel.add(mitmScanButton, new GridConstraints(4, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         portText = new JTextField();
         portText.setText("");
-        mitmPanel.add(portText, new GridConstraints(3, 1, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mitmPanel.add(portText, new GridConstraints(4, 1, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         portLabel = new JLabel();
         portLabel.setText("被动监听端口:");
-        mitmPanel.add(portLabel, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mitmPanel.add(portLabel, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         radLabel = new JLabel();
         radLabel.setText("开启被动扫描后与rad联动");
-        mitmPanel.add(radLabel, new GridConstraints(4, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mitmPanel.add(radLabel, new GridConstraints(5, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         setParallelLabel = new JLabel();
         setParallelLabel.setText("设置PoC并发");
         mitmPanel.add(setParallelLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -2283,24 +2331,24 @@ public class MainForm {
         mitmPanel.add(tipParallelLabel, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         radButton = new JButton();
         radButton.setText("点击联动");
-        mitmPanel.add(radButton, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mitmPanel.add(radButton, new GridConstraints(5, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         ajpScanButton = new JButton();
         ajpScanButton.setText("AJP服务扫描");
-        mitmPanel.add(ajpScanButton, new GridConstraints(4, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mitmPanel.add(ajpScanButton, new GridConstraints(5, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         ajpLabel = new JLabel();
         ajpLabel.setText("Tomcat AJP");
-        mitmPanel.add(ajpLabel, new GridConstraints(4, 3, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mitmPanel.add(ajpLabel, new GridConstraints(5, 3, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         mitmIpLabel = new JLabel();
         mitmIpLabel.setText("被动监听IP:");
-        mitmPanel.add(mitmIpLabel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mitmPanel.add(mitmIpLabel, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         mitmIpText = new JTextField();
         mitmIpText.setEditable(false);
         mitmIpText.setText("127.0.0.1");
-        mitmPanel.add(mitmIpText, new GridConstraints(2, 1, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mitmPanel.add(mitmIpText, new GridConstraints(3, 1, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         lockCheckBox = new JCheckBox();
         lockCheckBox.setBackground(new Color(-12828863));
         lockCheckBox.setText("锁定");
-        mitmPanel.add(lockCheckBox, new GridConstraints(2, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mitmPanel.add(lockCheckBox, new GridConstraints(3, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         qpsLabel = new JLabel();
         qpsLabel.setText("每秒最大请求");
         mitmPanel.add(qpsLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -2310,6 +2358,15 @@ public class MainForm {
         qpsTip = new JLabel();
         qpsTip.setText("参数越大发包越快");
         mitmPanel.add(qpsTip, new GridConstraints(1, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        cphLabel = new JLabel();
+        cphLabel.setText("目标主机最大连接");
+        mitmPanel.add(cphLabel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        cphSet = new JSpinner();
+        cphSet.setBackground(new Color(-12828863));
+        mitmPanel.add(cphSet, new GridConstraints(2, 1, 1, 4, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        cphTip = new JLabel();
+        cphTip.setText("参数越大目标压力越大");
+        mitmPanel.add(cphTip, new GridConstraints(2, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         copyCmdButton = new JButton();
         copyCmdButton.setText("复制当前命令");
         startScanPanel.add(copyCmdButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
