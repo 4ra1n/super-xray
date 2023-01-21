@@ -253,4 +253,5 @@ Others:
 ## 1.5
 
 更新内容：
+- [important] [feat] 支持拖拽xray文件加载 #140
 - [bug] CPU占用较高问题RAD修复不完善 #139

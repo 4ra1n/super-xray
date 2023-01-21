@@ -24,7 +24,11 @@ import javax.swing.border.TitledBorder;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDropEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
@@ -182,9 +186,40 @@ public class MainForm {
     private SubdomainForm subdomainInstance;
     private AJPScanForm ajpInstance;
 
+    @SuppressWarnings("unchecked")
     public void init() {
         checkBoxList = new ArrayList<>();
         xrayCmd = new XrayCmd();
+
+        DropTarget dt = new DropTarget() {
+            public synchronized void drop(DropTargetDropEvent evt) {
+                try {
+                    evt.acceptDrop(DnDConstants.ACTION_COPY);
+                    Object obj = evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
+                    List<File> droppedFiles = (List<File>) obj;
+                    if (droppedFiles.size() != 1) {
+                        return;
+                    }
+                    String absPath = droppedFiles.get(0).getAbsolutePath();
+                    if (!CheckUtil.checkValid(absPath)) {
+                        return;
+                    }
+                    new Thread(() -> loadXray(absPath)).start();
+                    JOptionPane.showMessageDialog(SuperXray, "Loading...");
+                    DB data = new DB();
+                    data.setLastXrayPath(absPath);
+                    try {
+                        Files.write(Paths.get("super-xray.db"), data.getDB().getBytes());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+
+        SuperXray.setDropTarget(dt);
 
         try {
             Path dbPath = Paths.get("super-xray.db");
