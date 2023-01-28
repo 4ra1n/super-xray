@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Set the working directory
+DIR=$(cd "$(dirname "$0")"; pwd)
+
+# Run the application
+exec "$DIR/runner" $DIR
