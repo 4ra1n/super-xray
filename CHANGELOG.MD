@@ -257,3 +257,4 @@ Others:
 - [important] [feat] 支持拖拽xray文件加载 #140
 - [bug] CPU占用较高问题RAD修复不完善 #139
 - [feat] 增加一键修复/还原的功能 #143
+- [feat] 自动检查版本更新并提示 #142
