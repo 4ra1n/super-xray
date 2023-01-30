@@ -253,5 +253,7 @@ Others:
 ## 1.5
 
 更新内容：
+- [important] 提供MacOS的APP版本 #141
 - [important] [feat] 支持拖拽xray文件加载 #140
 - [bug] CPU占用较高问题RAD修复不完善 #139
+- [feat] 增加一键修复/还原的功能 #143

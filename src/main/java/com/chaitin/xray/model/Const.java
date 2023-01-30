@@ -14,4 +14,5 @@ public interface Const {
     String XrayYaml = String.format(".%s%s", File.separator, "xray.yaml");
     String PluginXrayYaml = String.format(".%s%s", File.separator, "plugin.xray.yaml");
     String ConfigYaml = String.format(".%s%s", File.separator, "config.yaml");
+    String DBFile = String.format(".%s%s", File.separator, "super-xray.db");
 }

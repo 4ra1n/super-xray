@@ -1990,6 +1990,67 @@ public class MainForm {
                 }
             });
 
+            JMenuItem repairItem = new JMenuItem("自动修复");
+            is = MainForm.class.getClassLoader().getResourceAsStream("fix.png");
+            if (is == null) {
+                return null;
+            }
+            imageIcon = new ImageIcon(ImageIO.read(is));
+            repairItem.setIcon(imageIcon);
+            aboutMenu.add(repairItem);
+
+            repairItem.addActionListener(e -> {
+                int i = JOptionPane.showConfirmDialog(instance.SuperXray,
+                        "修复将会删除所有相关的数据，你确定吗？");
+                if (i == 2 || i == 1) {
+                    return;
+                }
+
+                instance.outputTextArea.setText(null);
+
+                instance.outputTextArea.append("正在停止所有进程...\n");
+
+                instance.stop = true;
+                if (instance.radInstance != null) {
+                    instance.radInstance.stop = true;
+                }
+                if (instance.subdomainInstance != null) {
+                    instance.subdomainInstance.stop = true;
+                }
+                if (instance.ajpInstance != null) {
+                    instance.ajpInstance.stop = true;
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception ignored) {
+                }
+
+                String p = instance.xrayPathTextField.getText();
+                if (StringUtil.notEmpty(p)) {
+                    instance.outputTextArea.append("删除xray临时文件...\n");
+                    String tp = Paths.get(p).toFile().getParent();
+                    XrayUtil.rmAllConfig(tp);
+                    try {
+                        Files.delete(Paths.get(tp + Const.ConfigYaml));
+                    } catch (Exception ignored) {
+                    }
+                }
+
+                try {
+                    instance.outputTextArea.append("删除xray配置文件...\n");
+                    Files.delete(Paths.get(Const.ConfigYaml));
+                } catch (Exception ignored) {
+                }
+
+                try {
+                    instance.outputTextArea.append("删除保存的数据...\n");
+                    Files.delete(Paths.get(Const.DBFile));
+                } catch (Exception ignored) {
+                }
+
+                instance.outputTextArea.append("修复完毕请重启...\n");
+            });
+
             return aboutMenu;
         } catch (Exception ex) {
             return null;
