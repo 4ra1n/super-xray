@@ -10,7 +10,6 @@ import com.chaitin.xray.games.snake.Main;
 import com.chaitin.xray.utils.*;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.intellij.uiDesigner.core.Spacer;
 import okhttp3.*;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -29,8 +28,6 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.*;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
@@ -58,16 +55,10 @@ public class MainForm {
     private JButton choseDirButton;
     private JPanel SuperXray;
     private JPanel pathButtonPanel;
-    private JLabel xrayPathLabel;
     private JTextField xrayPathTextField;
-    private JLabel noteLabel;
     private JPanel configPanel;
-    private JPanel bottomPanel;
-    private JLabel authorLabel;
     private JPanel leftConfigPanel;
     private JPanel rightConfigPanel;
-    private JPanel catConfigPanel;
-    private JLabel catConfigLabel;
     private JPanel loadXrayPanel;
     private JCheckBox bruteForceCheckBox;
     private JCheckBox baselineCheckBox;
@@ -163,8 +154,6 @@ public class MainForm {
     private JCheckBox xstreamCheckBox;
     private JScrollPane pocScroll;
     private JTextArea targetPocArea;
-    private JLabel tipForAdvance;
-    private JLabel tipForReverse;
     private JSpinner parallelSet;
     private JLabel setParallelLabel;
     private JLabel tipParallelLabel;
@@ -176,13 +165,13 @@ public class MainForm {
     private JCheckBox lockCheckBox;
     private JLabel mitmIpLabel;
     private JPanel langParPanel;
-    private JLabel extraNoteLabel;
     private JSpinner qpsSet;
     private JLabel qpsLabel;
     private JLabel qpsTip;
     private JSpinner cphSet;
     private JLabel cphLabel;
     private JLabel cphTip;
+    private JPanel botPanel;
     private SubdomainForm subdomainInstance;
     private AJPScanForm ajpInstance;
 
@@ -1340,6 +1329,14 @@ public class MainForm {
 
         reverseConfigButton.addActionListener(e -> {
             String http = httpReverseText.getText();
+            if (!http.startsWith("http")) {
+                if (LANG == CHINESE) {
+                    JOptionPane.showMessageDialog(this.SuperXray, "应该以http开头");
+                } else {
+                    JOptionPane.showMessageDialog(this.SuperXray, "Should start with http");
+                }
+                return;
+            }
             String token = tokenText.getText();
             if (!StringUtil.notEmpty(http) || !StringUtil.notEmpty(token)) {
                 httpReverseText.setText(null);
@@ -1548,18 +1545,6 @@ public class MainForm {
             frame.pack();
             frame.setVisible(true);
         });
-        authorLabel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    Desktop desktop = Desktop.getDesktop();
-                    URI oURL = new URI("https://github.com/4ra1n");
-                    desktop.browse(oURL);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
         new Thread() {
             @Override
             public void run() {
@@ -1648,16 +1633,9 @@ public class MainForm {
 
     public void refreshLang() {
         if (LANG == ENGLISH) {
-            xrayPathLabel.setText("You selected xray:");
-            noteLabel.setText("<html>\n" +
-                    "1. Mac OS use control+c/v copy/paste\n" +
-                    "<br>\n" +
-                    "2. load xray once\n" +
-                    "</html>");
             leftConfigPanel.setBorder(BorderFactory.createTitledBorder(null,
                     "Plugins Config", TitledBorder.DEFAULT_JUSTIFICATION,
                     TitledBorder.DEFAULT_POSITION, null, null));
-            catConfigLabel.setText("<html>Press After Config <b>Confirm</b></html>");
             bruteForceCheckBox.setText("bruteforce");
             baselineCheckBox.setText("baseline");
             phantasmCheckBox.setText("phantasm");
@@ -1727,14 +1705,6 @@ public class MainForm {
             levelButton.setText("Set Level");
             radDownButton.setText("Rad Download");
             subDomainButton.setText("Subdomain Scan");
-            targetPocArea.setText("Lookup all PoC\n" +
-                    "Input poc per line\n" +
-                    "For example\n" +
-                    "poc-yaml-1\n" +
-                    "poc-yaml-2");
-            tipForAdvance.setText("Some plugins only for advance");
-            tipForReverse.setText("<html> 1. Only support HTTP/RMI, no DNS<br> " +
-                    "2. Please finish client config then click <b>Server Config</b> to export config<br> </html>");
             setParallelLabel.setText("Set Parallel");
             tipParallelLabel.setText("Concurrency");
             delCaCheckBox.setText("Delete CA When Exit");
@@ -1742,27 +1712,18 @@ public class MainForm {
             copyCmdButton.setText("Copy Cmd");
             lockCheckBox.setText("Lock");
             mitmIpLabel.setText("Listen IP");
-            extraNoteLabel.setText("<html> 3. when config not found then restart super-xray" +
-                    "<br> 4. note that many config need confirm </html>");
             qpsLabel.setText("QPS");
             qpsTip.setText("Request speed");
             cphLabel.setText("Max host conn");
             cphTip.setText("Host TCP conn");
         } else if (LANG == CHINESE) {
-            xrayPathLabel.setText("你选择的xray文件是：");
-            noteLabel.setText("<html>\n" +
-                    "1. Mac OS 用 control+c/v 复制/粘贴\n" +
-                    "<br>\n" +
-                    "2. 请勿重复加载，否则会有意外的问题\n" +
-                    "</html>");
             leftConfigPanel.setBorder(BorderFactory.createTitledBorder(null,
                     "扫描插件配置", TitledBorder.DEFAULT_JUSTIFICATION,
                     TitledBorder.DEFAULT_POSITION, null, null));
-            catConfigLabel.setText("<html>请配置完成后点击 <b>确认插件</b></html>");
-            bruteForceCheckBox.setText("bruteforce（暴力破解）");
-            baselineCheckBox.setText("baseline（基线检查）");
-            phantasmCheckBox.setText("phantasm（PoC合集）");
-            sqldetCheckBox.setText("sqldet（sql注入）");
+            bruteForceCheckBox.setText("bruteforce");
+            baselineCheckBox.setText("baseline");
+            phantasmCheckBox.setText("phantasm");
+            sqldetCheckBox.setText("sqldet");
             enableAllButton.setText("全选 / 取消全选");
             advanceButton.setText("高级配置");
             pocPanel.setBorder(BorderFactory.createTitledBorder(null,
@@ -1819,7 +1780,7 @@ public class MainForm {
             openResultButton.setText("点击打开扫描结果");
             choseDirButton.setText("点击按钮选择");
             confirmPluginButton.setText("确认插件");
-            reverseServerButton.setText("配置服务端");
+            reverseServerButton.setText("生成服务端配置文件");
             radLabel.setText("开启被动扫描后与rad联动");
             radButton.setText("点击联动");
             onlineButton.setText("在线生成");
@@ -1828,14 +1789,6 @@ public class MainForm {
             levelButton.setText("设置等级");
             radDownButton.setText("rad下载面板");
             subDomainButton.setText("子域名扫描");
-            targetPocArea.setText("查看所有PoC后选择你需要的\n" +
-                    "每一行输入一个\n" +
-                    "例如\n" +
-                    "poc-yaml-1\n" +
-                    "poc-yaml-2");
-            tipForAdvance.setText("部分插件仅高级版支持");
-            tipForReverse.setText("<html> 1. 反连只支持HTTP/RMI配置，不包含DNS配置<br> " +
-                    "2. 请先配置好客户端再点击 <b>配置服务端</b> 导出配置文件<br> </html>");
             setParallelLabel.setText("设置PoC并发");
             tipParallelLabel.setText("同时运行的PoC数量");
             delCaCheckBox.setText("关闭后删除ca文件");
@@ -1843,8 +1796,6 @@ public class MainForm {
             copyCmdButton.setText("复制当前命令");
             lockCheckBox.setText("锁定");
             mitmIpLabel.setText("被动监听IP:");
-            extraNoteLabel.setText("<html> 3. 遇到config not found报错重启super-xray即可 " +
-                    "<br> 4. 注意大多数的配置需要点击确认后才能生效应用 </html>");
             qpsLabel.setText("每秒最大请求");
             qpsTip.setText("参数越大发包越快");
             cphLabel.setText("目标主机最大连接");
@@ -2263,7 +2214,7 @@ public class MainForm {
      */
     private void $$$setupUI$$$() {
         SuperXray = new JPanel();
-        SuperXray.setLayout(new GridLayoutManager(6, 1, new Insets(0, 0, 0, 0), -1, -1));
+        SuperXray.setLayout(new GridLayoutManager(5, 1, new Insets(0, 0, 0, 0), -1, -1));
         SuperXray.setBackground(new Color(-12828863));
         loadXrayPanel = new JPanel();
         loadXrayPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
@@ -2271,144 +2222,125 @@ public class MainForm {
         SuperXray.add(loadXrayPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         loadXrayPanel.setBorder(BorderFactory.createTitledBorder(null, "Super Xray", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         pathButtonPanel = new JPanel();
-        pathButtonPanel.setLayout(new GridLayoutManager(2, 8, new Insets(0, 0, 0, 0), -1, -1));
+        pathButtonPanel.setLayout(new GridLayoutManager(1, 9, new Insets(0, 0, 0, 0), -1, -1));
         pathButtonPanel.setBackground(new Color(-12828863));
         loadXrayPanel.add(pathButtonPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        choseDirButton = new JButton();
-        choseDirButton.setText("点击按钮选择");
-        pathButtonPanel.add(choseDirButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, 1, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        noteLabel = new JLabel();
-        noteLabel.setText("<html>\n1. Mac OS 用 control+c/v 复制/粘贴\n<br>\n2. 请勿重复加载，否则会有意外的问题\n</html>");
-        pathButtonPanel.add(noteLabel, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, new Dimension(300, -1), null, null, 0, false));
-        xrayPathLabel = new JLabel();
-        xrayPathLabel.setText("你选择的xray文件是：");
-        pathButtonPanel.add(xrayPathLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         xrayPathTextField = new JTextField();
         xrayPathTextField.setEditable(false);
         xrayPathTextField.setEnabled(false);
         pathButtonPanel.add(xrayPathTextField, new GridConstraints(0, 1, 1, 7, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(500, -1), null, 0, false));
+        choseDirButton = new JButton();
+        choseDirButton.setText("点击按钮选择");
+        pathButtonPanel.add(choseDirButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, 1, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         langParPanel = new JPanel();
-        langParPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        pathButtonPanel.add(langParPanel, new GridConstraints(1, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        langParPanel.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
+        pathButtonPanel.add(langParPanel, new GridConstraints(0, 8, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         chineseLangButton = new JRadioButton();
         chineseLangButton.setBackground(new Color(-12828863));
         chineseLangButton.setText("简体中文");
         langParPanel.add(chineseLangButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        extraNoteLabel = new JLabel();
-        extraNoteLabel.setText("<html> 3. 遇到config not found报错重启super-xray即可 <br> 4. 注意大多数的配置需要点击确认后才能生效应用 </html>");
-        pathButtonPanel.add(extraNoteLabel, new GridConstraints(1, 2, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, new Dimension(300, -1), null, null, 0, false));
         englishLangButton = new JRadioButton();
         englishLangButton.setBackground(new Color(-12828863));
         englishLangButton.setText("English");
-        pathButtonPanel.add(englishLangButton, new GridConstraints(1, 5, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        langParPanel.add(englishLangButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         configPanel = new JPanel();
         configPanel.setLayout(new GridLayoutManager(2, 3, new Insets(0, 0, 0, 0), -1, -1));
         configPanel.setBackground(new Color(-12828863));
         SuperXray.add(configPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         leftConfigPanel = new JPanel();
-        leftConfigPanel.setLayout(new GridLayoutManager(12, 4, new Insets(0, 0, 0, 0), -1, -1));
+        leftConfigPanel.setLayout(new GridLayoutManager(11, 3, new Insets(0, 0, 0, 0), -1, -1));
         leftConfigPanel.setBackground(new Color(-12828863));
         leftConfigPanel.setEnabled(true);
         leftConfigPanel.setForeground(new Color(-4540485));
         leftConfigPanel.setToolTipText("");
         configPanel.add(leftConfigPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         leftConfigPanel.setBorder(BorderFactory.createTitledBorder(null, "扫描插件配置", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
-        catConfigPanel = new JPanel();
-        catConfigPanel.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
-        catConfigPanel.setBackground(new Color(-12828863));
-        leftConfigPanel.add(catConfigPanel, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, 1, 1, null, null, null, 0, false));
-        catConfigLabel = new JLabel();
-        catConfigLabel.setText("<html>请配置完成后点击 <b>确认插件</b></html>");
-        catConfigPanel.add(catConfigLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        confirmPluginButton = new JButton();
-        confirmPluginButton.setText("确认插件");
-        catConfigPanel.add(confirmPluginButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         bruteForceCheckBox = new JCheckBox();
         bruteForceCheckBox.setBackground(new Color(-12828863));
-        bruteForceCheckBox.setText("bruteforce（暴力破解）");
-        leftConfigPanel.add(bruteForceCheckBox, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        bruteForceCheckBox.setText("bruteforce");
+        leftConfigPanel.add(bruteForceCheckBox, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         baselineCheckBox = new JCheckBox();
         baselineCheckBox.setBackground(new Color(-12828863));
-        baselineCheckBox.setText("baseline（基线检查）");
-        leftConfigPanel.add(baselineCheckBox, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        baselineCheckBox.setText("baseline");
+        leftConfigPanel.add(baselineCheckBox, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         cmdInjectionCheckBox = new JCheckBox();
         cmdInjectionCheckBox.setBackground(new Color(-12828863));
         cmdInjectionCheckBox.setText("cmd-injection");
-        leftConfigPanel.add(cmdInjectionCheckBox, new GridConstraints(3, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        leftConfigPanel.add(cmdInjectionCheckBox, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         crlfInjectionCheckBox = new JCheckBox();
         crlfInjectionCheckBox.setBackground(new Color(-12828863));
         crlfInjectionCheckBox.setText("crlf-injection");
-        leftConfigPanel.add(crlfInjectionCheckBox, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        leftConfigPanel.add(crlfInjectionCheckBox, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         dirscanCheckBox = new JCheckBox();
         dirscanCheckBox.setBackground(new Color(-12828863));
         dirscanCheckBox.setText("dirscan");
-        leftConfigPanel.add(dirscanCheckBox, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        leftConfigPanel.add(dirscanCheckBox, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         fastjsonCheckBox = new JCheckBox();
         fastjsonCheckBox.setBackground(new Color(-12828863));
         fastjsonCheckBox.setText("fastjson");
-        leftConfigPanel.add(fastjsonCheckBox, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        leftConfigPanel.add(fastjsonCheckBox, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         jsonpCheckBox = new JCheckBox();
         jsonpCheckBox.setBackground(new Color(-12828863));
         jsonpCheckBox.setText("jsonp");
-        leftConfigPanel.add(jsonpCheckBox, new GridConstraints(4, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        leftConfigPanel.add(jsonpCheckBox, new GridConstraints(3, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         pathTraversalCheckBox = new JCheckBox();
         pathTraversalCheckBox.setBackground(new Color(-12828863));
         pathTraversalCheckBox.setText("path-traversal");
-        leftConfigPanel.add(pathTraversalCheckBox, new GridConstraints(4, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        leftConfigPanel.add(pathTraversalCheckBox, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         phantasmCheckBox = new JCheckBox();
         phantasmCheckBox.setBackground(new Color(-12828863));
-        phantasmCheckBox.setText("phantasm（PoC合集）");
-        leftConfigPanel.add(phantasmCheckBox, new GridConstraints(5, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        phantasmCheckBox.setText("phantasm");
+        leftConfigPanel.add(phantasmCheckBox, new GridConstraints(4, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         redirectCheckBox = new JCheckBox();
         redirectCheckBox.setBackground(new Color(-12828863));
         redirectCheckBox.setEnabled(true);
         redirectCheckBox.setText("redirect");
-        leftConfigPanel.add(redirectCheckBox, new GridConstraints(5, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        leftConfigPanel.add(redirectCheckBox, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         shiroCheckBox = new JCheckBox();
         shiroCheckBox.setBackground(new Color(-12828863));
         shiroCheckBox.setText("shiro");
-        leftConfigPanel.add(shiroCheckBox, new GridConstraints(6, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        leftConfigPanel.add(shiroCheckBox, new GridConstraints(5, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         sqldetCheckBox = new JCheckBox();
         sqldetCheckBox.setBackground(new Color(-12828863));
-        sqldetCheckBox.setText("sqldet（sql注入）");
-        leftConfigPanel.add(sqldetCheckBox, new GridConstraints(6, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        sqldetCheckBox.setText("sqldet");
+        leftConfigPanel.add(sqldetCheckBox, new GridConstraints(5, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         ssrfCheckBox = new JCheckBox();
         ssrfCheckBox.setBackground(new Color(-12828863));
         ssrfCheckBox.setText("ssrf");
-        leftConfigPanel.add(ssrfCheckBox, new GridConstraints(7, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        leftConfigPanel.add(ssrfCheckBox, new GridConstraints(6, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         strutsCheckBox = new JCheckBox();
         strutsCheckBox.setBackground(new Color(-12828863));
         strutsCheckBox.setText("struts");
-        leftConfigPanel.add(strutsCheckBox, new GridConstraints(7, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        leftConfigPanel.add(strutsCheckBox, new GridConstraints(6, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         thinkphpCheckBox = new JCheckBox();
         thinkphpCheckBox.setBackground(new Color(-12828863));
         thinkphpCheckBox.setText("thinkphp");
-        leftConfigPanel.add(thinkphpCheckBox, new GridConstraints(8, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        leftConfigPanel.add(thinkphpCheckBox, new GridConstraints(7, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         uploadCheckBox = new JCheckBox();
         uploadCheckBox.setBackground(new Color(-12828863));
         uploadCheckBox.setText("upload");
-        leftConfigPanel.add(uploadCheckBox, new GridConstraints(8, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        leftConfigPanel.add(uploadCheckBox, new GridConstraints(7, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         xxeCheckBox = new JCheckBox();
         xxeCheckBox.setBackground(new Color(-12828863));
         xxeCheckBox.setText("xxe");
-        leftConfigPanel.add(xxeCheckBox, new GridConstraints(9, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        leftConfigPanel.add(xxeCheckBox, new GridConstraints(8, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         xssCheckBox = new JCheckBox();
         xssCheckBox.setBackground(new Color(-12828863));
         xssCheckBox.setText("xss");
-        leftConfigPanel.add(xssCheckBox, new GridConstraints(9, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        leftConfigPanel.add(xssCheckBox, new GridConstraints(8, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         enableAllButton = new JButton();
         enableAllButton.setText("全选 / 取消全选");
-        leftConfigPanel.add(enableAllButton, new GridConstraints(11, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        leftConfigPanel.add(enableAllButton, new GridConstraints(10, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         advanceButton = new JButton();
         advanceButton.setText("高级配置");
-        leftConfigPanel.add(advanceButton, new GridConstraints(11, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        leftConfigPanel.add(advanceButton, new GridConstraints(10, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         xstreamCheckBox = new JCheckBox();
         xstreamCheckBox.setBackground(new Color(-12828863));
         xstreamCheckBox.setText("xstream");
-        leftConfigPanel.add(xstreamCheckBox, new GridConstraints(10, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        tipForAdvance = new JLabel();
-        tipForAdvance.setText("部分插件仅高级版支持");
-        leftConfigPanel.add(tipForAdvance, new GridConstraints(10, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        leftConfigPanel.add(xstreamCheckBox, new GridConstraints(9, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        confirmPluginButton = new JButton();
+        confirmPluginButton.setText("确认插件");
+        leftConfigPanel.add(confirmPluginButton, new GridConstraints(9, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         rightConfigPanel = new JPanel();
         rightConfigPanel.setLayout(new GridLayoutManager(7, 1, new Insets(0, 0, 0, 0), -1, -1));
         rightConfigPanel.setBackground(new Color(-12828863));
@@ -2420,29 +2352,26 @@ public class MainForm {
         rightConfigPanel.add(reverseConfigPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         reverseConfigPanel.setBorder(BorderFactory.createTitledBorder(null, "反连平台", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         reverseUrlPanel = new JPanel();
-        reverseUrlPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
+        reverseUrlPanel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
         reverseUrlPanel.setBackground(new Color(-12828863));
         reverseConfigPanel.add(reverseUrlPanel, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         httpReverseLabel = new JLabel();
         httpReverseLabel.setText("请输入HTTP URL（IP形式）");
-        reverseUrlPanel.add(httpReverseLabel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        reverseUrlPanel.add(httpReverseLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         httpReverseText = new JTextField();
         httpReverseText.setText("");
-        reverseUrlPanel.add(httpReverseText, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        reverseUrlPanel.add(httpReverseText, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         tokenLabel = new JLabel();
         tokenLabel.setText("Token");
-        reverseUrlPanel.add(tokenLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        reverseUrlPanel.add(tokenLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         tokenText = new JTextField();
         tokenText.setText("");
-        reverseUrlPanel.add(tokenText, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        tipForReverse = new JLabel();
-        tipForReverse.setText("<html>\n1. 反连只支持HTTP/RMI配置，不包含DNS配置<br>\n2. 请先配置好客户端再点击 <b>配置服务端</b> 导出配置文件<br>\n</html>");
-        reverseUrlPanel.add(tipForReverse, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        reverseUrlPanel.add(tokenText, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         reverseConfigButton = new JButton();
         reverseConfigButton.setText("确认配置");
         reverseConfigPanel.add(reverseConfigButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         reverseServerButton = new JButton();
-        reverseServerButton.setText("配置服务端");
+        reverseServerButton.setText("生成服务端配置文件");
         reverseConfigPanel.add(reverseServerButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         startScanPanel = new JPanel();
         startScanPanel.setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
@@ -2597,7 +2526,7 @@ public class MainForm {
         pocScroll = new JScrollPane();
         pocPanel.add(pocScroll, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 100), null, null, 0, false));
         targetPocArea = new JTextArea();
-        targetPocArea.setText("查看所有PoC后选择你需要的\n每一行输入一个\n例如\npoc-yaml-1\npoc-yaml-2");
+        targetPocArea.setText("");
         pocScroll.setViewportView(targetPocArea);
         scanTargetPanel = new JPanel();
         scanTargetPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
@@ -2662,17 +2591,6 @@ public class MainForm {
         listenUtilButton = new JButton();
         listenUtilButton.setText("监听端口");
         utilPanel.add(listenUtilButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        bottomPanel = new JPanel();
-        bottomPanel.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
-        bottomPanel.setBackground(new Color(-12828863));
-        SuperXray.add(bottomPanel, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        authorLabel = new JLabel();
-        authorLabel.setHorizontalAlignment(0);
-        authorLabel.setHorizontalTextPosition(0);
-        authorLabel.setText("<html> <p>https://github.com/4ra1n</p> </html>");
-        bottomPanel.add(authorLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final Spacer spacer1 = new Spacer();
-        bottomPanel.add(spacer1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 20), null, null, 0, false));
         outputPanel = new JScrollPane();
         outputPanel.setBackground(new Color(-12828863));
         outputPanel.setForeground(new Color(-12828863));
@@ -2729,6 +2647,9 @@ public class MainForm {
         stopButton = new JButton();
         stopButton.setText("强制停止");
         stopPanel.add(stopButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, 1, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        botPanel = new JPanel();
+        botPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        SuperXray.add(botPanel, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         ButtonGroup buttonGroup;
         buttonGroup = new ButtonGroup();
         buttonGroup.add(htmlRadioButton);

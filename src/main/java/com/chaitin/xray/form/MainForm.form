@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.chaitin.xray.form.MainForm">
-  <grid id="27dc6" binding="SuperXray" layout-manager="GridLayoutManager" row-count="6" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="SuperXray" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="1396" height="1105"/>
@@ -20,7 +20,7 @@
         </properties>
         <border type="none" title="Super Xray"/>
         <children>
-          <grid id="ec4cd" binding="pathButtonPanel" layout-manager="GridLayoutManager" row-count="2" column-count="8" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="ec4cd" binding="pathButtonPanel" layout-manager="GridLayoutManager" row-count="1" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -30,32 +30,6 @@
             </properties>
             <border type="none"/>
             <children>
-              <component id="e2c68" class="javax.swing.JButton" binding="choseDirButton">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="点击按钮选择"/>
-                </properties>
-              </component>
-              <component id="574d3" class="javax.swing.JLabel" binding="noteLabel">
-                <constraints>
-                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                    <minimum-size width="300" height="-1"/>
-                  </grid>
-                </constraints>
-                <properties>
-                  <text value="&lt;html&gt;&#10;1. Mac OS 用 control+c/v 复制/粘贴&#10;&lt;br&gt;&#10;2. 请勿重复加载，否则会有意外的问题&#10;&lt;/html&gt;"/>
-                </properties>
-              </component>
-              <component id="a952d" class="javax.swing.JLabel" binding="xrayPathLabel">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="你选择的xray文件是："/>
-                </properties>
-              </component>
               <component id="d1679" class="javax.swing.JTextField" binding="xrayPathTextField">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="7" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
@@ -67,10 +41,18 @@
                   <enabled value="false"/>
                 </properties>
               </component>
-              <grid id="17451" binding="langParPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <component id="e2c68" class="javax.swing.JButton" binding="choseDirButton">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="点击按钮选择"/>
+                </properties>
+              </component>
+              <grid id="17451" binding="langParPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
-                  <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="8" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
@@ -84,27 +66,17 @@
                       <text value="简体中文"/>
                     </properties>
                   </component>
+                  <component id="ce55f" class="javax.swing.JRadioButton" binding="englishLangButton">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <background color="-12828863"/>
+                      <text value="English"/>
+                    </properties>
+                  </component>
                 </children>
               </grid>
-              <component id="41b85" class="javax.swing.JLabel" binding="extraNoteLabel">
-                <constraints>
-                  <grid row="1" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-                    <minimum-size width="300" height="-1"/>
-                  </grid>
-                </constraints>
-                <properties>
-                  <text value="&lt;html&gt; 3. 遇到config not found报错重启super-xray即可 &lt;br&gt; 4. 注意大多数的配置需要点击确认后才能生效应用 &lt;/html&gt;"/>
-                </properties>
-              </component>
-              <component id="ce55f" class="javax.swing.JRadioButton" binding="englishLangButton">
-                <constraints>
-                  <grid row="1" column="5" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <background color="-12828863"/>
-                  <text value="English"/>
-                </properties>
-              </component>
             </children>
           </grid>
         </children>
@@ -119,7 +91,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <grid id="e3ee1" binding="leftConfigPanel" layout-manager="GridLayoutManager" row-count="12" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="e3ee1" binding="leftConfigPanel" layout-manager="GridLayoutManager" row-count="11" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -132,55 +104,27 @@
             </properties>
             <border type="none" title="扫描插件配置"/>
             <children>
-              <grid id="500a3" binding="catConfigPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="1" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <background color="-12828863"/>
-                </properties>
-                <border type="none"/>
-                <children>
-                  <component id="ef583" class="javax.swing.JLabel" binding="catConfigLabel">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="&lt;html&gt;请配置完成后点击 &lt;b&gt;确认插件&lt;/b&gt;&lt;/html&gt;"/>
-                    </properties>
-                  </component>
-                  <component id="eafe1" class="javax.swing.JButton" binding="confirmPluginButton">
-                    <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="确认插件"/>
-                    </properties>
-                  </component>
-                </children>
-              </grid>
               <component id="9655c" class="javax.swing.JCheckBox" binding="bruteForceCheckBox">
                 <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-12828863"/>
-                  <text value="bruteforce（暴力破解）"/>
+                  <text value="bruteforce"/>
                 </properties>
               </component>
               <component id="15cc5" class="javax.swing.JCheckBox" binding="baselineCheckBox">
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-12828863"/>
-                  <text value="baseline（基线检查）"/>
+                  <text value="baseline"/>
                 </properties>
               </component>
               <component id="11ca2" class="javax.swing.JCheckBox" binding="cmdInjectionCheckBox" default-binding="true">
                 <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-12828863"/>
@@ -189,7 +133,7 @@
               </component>
               <component id="85aff" class="javax.swing.JCheckBox" binding="crlfInjectionCheckBox" default-binding="true">
                 <constraints>
-                  <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-12828863"/>
@@ -198,7 +142,7 @@
               </component>
               <component id="38e5" class="javax.swing.JCheckBox" binding="dirscanCheckBox" default-binding="true">
                 <constraints>
-                  <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-12828863"/>
@@ -207,7 +151,7 @@
               </component>
               <component id="46759" class="javax.swing.JCheckBox" binding="fastjsonCheckBox" default-binding="true">
                 <constraints>
-                  <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-12828863"/>
@@ -216,7 +160,7 @@
               </component>
               <component id="25e1c" class="javax.swing.JCheckBox" binding="jsonpCheckBox" default-binding="true">
                 <constraints>
-                  <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-12828863"/>
@@ -225,7 +169,7 @@
               </component>
               <component id="32775" class="javax.swing.JCheckBox" binding="pathTraversalCheckBox" default-binding="true">
                 <constraints>
-                  <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-12828863"/>
@@ -234,16 +178,16 @@
               </component>
               <component id="841b8" class="javax.swing.JCheckBox" binding="phantasmCheckBox">
                 <constraints>
-                  <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-12828863"/>
-                  <text value="phantasm（PoC合集）"/>
+                  <text value="phantasm"/>
                 </properties>
               </component>
               <component id="2451f" class="javax.swing.JCheckBox" binding="redirectCheckBox">
                 <constraints>
-                  <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-12828863"/>
@@ -253,7 +197,7 @@
               </component>
               <component id="bcfcb" class="javax.swing.JCheckBox" binding="shiroCheckBox" default-binding="true">
                 <constraints>
-                  <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-12828863"/>
@@ -262,16 +206,16 @@
               </component>
               <component id="f8bfe" class="javax.swing.JCheckBox" binding="sqldetCheckBox">
                 <constraints>
-                  <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-12828863"/>
-                  <text value="sqldet（sql注入）"/>
+                  <text value="sqldet"/>
                 </properties>
               </component>
               <component id="986ca" class="javax.swing.JCheckBox" binding="ssrfCheckBox" default-binding="true">
                 <constraints>
-                  <grid row="7" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-12828863"/>
@@ -280,7 +224,7 @@
               </component>
               <component id="93127" class="javax.swing.JCheckBox" binding="strutsCheckBox" default-binding="true">
                 <constraints>
-                  <grid row="7" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-12828863"/>
@@ -289,7 +233,7 @@
               </component>
               <component id="a56ac" class="javax.swing.JCheckBox" binding="thinkphpCheckBox" default-binding="true">
                 <constraints>
-                  <grid row="8" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="7" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-12828863"/>
@@ -298,7 +242,7 @@
               </component>
               <component id="199a4" class="javax.swing.JCheckBox" binding="uploadCheckBox" default-binding="true">
                 <constraints>
-                  <grid row="8" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-12828863"/>
@@ -307,7 +251,7 @@
               </component>
               <component id="24e7d" class="javax.swing.JCheckBox" binding="xxeCheckBox" default-binding="true">
                 <constraints>
-                  <grid row="9" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-12828863"/>
@@ -316,7 +260,7 @@
               </component>
               <component id="2bb3f" class="javax.swing.JCheckBox" binding="xssCheckBox" default-binding="true">
                 <constraints>
-                  <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-12828863"/>
@@ -325,7 +269,7 @@
               </component>
               <component id="5d2e4" class="javax.swing.JButton" binding="enableAllButton">
                 <constraints>
-                  <grid row="11" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="10" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="全选 / 取消全选"/>
@@ -333,7 +277,7 @@
               </component>
               <component id="e918b" class="javax.swing.JButton" binding="advanceButton">
                 <constraints>
-                  <grid row="11" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <text value="高级配置"/>
@@ -341,19 +285,19 @@
               </component>
               <component id="6f92b" class="javax.swing.JCheckBox" binding="xstreamCheckBox" default-binding="true">
                 <constraints>
-                  <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-12828863"/>
                   <text value="xstream"/>
                 </properties>
               </component>
-              <component id="23346" class="javax.swing.JLabel" binding="tipForAdvance">
+              <component id="eafe1" class="javax.swing.JButton" binding="confirmPluginButton">
                 <constraints>
-                  <grid row="10" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="9" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="部分插件仅高级版支持"/>
+                  <text value="确认插件"/>
                 </properties>
               </component>
             </children>
@@ -379,7 +323,7 @@
                 </properties>
                 <border type="none" title="反连平台"/>
                 <children>
-                  <grid id="832e8" binding="reverseUrlPanel" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                  <grid id="832e8" binding="reverseUrlPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                     <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -391,7 +335,7 @@
                     <children>
                       <component id="2331f" class="javax.swing.JLabel" binding="httpReverseLabel">
                         <constraints>
-                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <text value="请输入HTTP URL（IP形式）"/>
@@ -399,7 +343,7 @@
                       </component>
                       <component id="5eaec" class="javax.swing.JTextField" binding="httpReverseText">
                         <constraints>
-                          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <text value=""/>
@@ -407,7 +351,7 @@
                       </component>
                       <component id="4676a" class="javax.swing.JLabel" binding="tokenLabel">
                         <constraints>
-                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <text value="Token"/>
@@ -415,18 +359,10 @@
                       </component>
                       <component id="c2dc3" class="javax.swing.JTextField" binding="tokenText">
                         <constraints>
-                          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <text value=""/>
-                        </properties>
-                      </component>
-                      <component id="6082c" class="javax.swing.JLabel" binding="tipForReverse">
-                        <constraints>
-                          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <text value="&lt;html&gt;&#10;1. 反连只支持HTTP/RMI配置，不包含DNS配置&lt;br&gt;&#10;2. 请先配置好客户端再点击 &lt;b&gt;配置服务端&lt;/b&gt; 导出配置文件&lt;br&gt;&#10;&lt;/html&gt;"/>
                         </properties>
                       </component>
                     </children>
@@ -444,7 +380,7 @@
                       <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="配置服务端"/>
+                      <text value="生成服务端配置文件"/>
                     </properties>
                   </component>
                 </children>
@@ -852,7 +788,7 @@
                       <component id="8e36e" class="javax.swing.JTextArea" binding="targetPocArea">
                         <constraints/>
                         <properties>
-                          <text value="查看所有PoC后选择你需要的&#10;每一行输入一个&#10;例如&#10;poc-yaml-1&#10;poc-yaml-2"/>
+                          <text value=""/>
                         </properties>
                       </component>
                     </children>
@@ -1026,35 +962,6 @@
           </grid>
         </children>
       </grid>
-      <grid id="7ad86" binding="bottomPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="0" left="0" bottom="0" right="0"/>
-        <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <background color="-12828863"/>
-        </properties>
-        <border type="none"/>
-        <children>
-          <component id="e5015" class="javax.swing.JLabel" binding="authorLabel">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <horizontalAlignment value="0"/>
-              <horizontalTextPosition value="0"/>
-              <text value="&lt;html&gt; &lt;p&gt;https://github.com/4ra1n&lt;/p&gt; &lt;/html&gt;"/>
-            </properties>
-          </component>
-          <vspacer id="efe95">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
-                <minimum-size width="-1" height="20"/>
-              </grid>
-            </constraints>
-          </vspacer>
-        </children>
-      </grid>
       <scrollpane id="61e4" binding="outputPanel">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
@@ -1195,6 +1102,15 @@
             </children>
           </grid>
         </children>
+      </grid>
+      <grid id="30600" binding="botPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children/>
       </grid>
     </children>
   </grid>

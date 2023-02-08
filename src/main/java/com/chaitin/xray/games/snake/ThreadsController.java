@@ -1,6 +1,5 @@
 package com.chaitin.xray.games.snake;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 public class ThreadsController extends Thread {
@@ -62,7 +61,6 @@ public class ThreadsController extends Thread {
 
     @SuppressWarnings("all")
     private void stopTheGame() {
-        JOptionPane.showMessageDialog(null, "Game Over");
         while (true) {
             pause();
         }
