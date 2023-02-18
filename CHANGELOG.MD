@@ -265,6 +265,7 @@ Others:
 - super-xray-1.5.jar 版本通过`java -jar super-xray-1.5.jar`启动
 - super-xray-1.5-jre-exe.zip 是内置了JRE的exe版本
 - super-xray-1.5-system-jre.exe 是使用系统JRE的exe版本
+- Super-Xray.app.zip 是 Mac OS 的 app (测试版可能有bug)
 
 ## 1.6
 

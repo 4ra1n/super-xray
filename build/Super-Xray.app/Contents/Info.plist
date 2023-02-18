@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+        <key>CFBundleDevelopmentRegion</key>
+        <string>English</string>
+        <key>CFBundleExecutable</key>
+        <string>universalJavaApplicationStub</string><!-- relative to Contents/MacOS -->
+        <key>CFBundleGetInfoString</key>
+        <string>Super-Xray</string>
+        <key>CFBundleIconFile</key>
+        <string>application.icns</string><!-- relative to Contents/Resources -->
+        <key>CFBundleInfoDictionaryVersion</key>
+        <string>8.0</string>
+        <key>CFBundleName</key>
+        <string>Super-Xray</string>
+        <key>CFBundlePackageType</key>
+        <string>APPL</string>
+        <key>CFBundleVersion</key>
+        <string>8.0</string>
+        <key>JVMMainClassName</key>
+        <string>com.chaitin.xray.Application</string>
+</dict>
+</plist>
