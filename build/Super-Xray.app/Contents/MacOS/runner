@@ -1,8 +1,0 @@
-#!/bin/sh
-
-DIR=$1
-APP_JAR="super-xray.jar"
-APP_NAME="Super-Xray.app"
-
-cd "$DIR"
-java -Xdock:name="$APP_NAME" -Xdock:icon="$DIR/../Resources/application.icns" -cp "$DIR;.;" -jar "$DIR/$APP_JAR"

@@ -253,7 +253,6 @@ Others:
 ## 1.5
 
 更新内容：
-- [important] 提供MacOS的APP版本 #141
 - [important] [improve] 更简洁更好用的新UI #144
 - [important] [feat] 支持拖拽xray文件加载 #140
 - [important] [feat] 允许设置日志等级 #146
@@ -261,3 +260,12 @@ Others:
 - [feat] 增加一键修复/还原的功能 #143
 - [feat] 自动检查版本更新并提示 #142
 - [improve] 反连HTTP URL输入的验证 #145
+
+下载：
+- super-xray-1.5.jar 版本通过`java -jar super-xray-1.5.jar`启动
+- super-xray-1.5-jre-exe.zip 是内置了JRE的exe版本
+- super-xray-1.5-system-jre.exe 是使用系统JRE的exe版本
+
+## 1.6
+
+todo
