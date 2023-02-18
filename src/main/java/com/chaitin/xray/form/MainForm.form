@@ -640,6 +640,64 @@
                   </component>
                 </children>
               </grid>
+              <grid id="5e5fd" binding="logPanel" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="1" column="0" row-span="3" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none" title="Log Level"/>
+                <children>
+                  <component id="30420" class="javax.swing.JRadioButton" binding="nullRadioButton" default-binding="true">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="null"/>
+                    </properties>
+                  </component>
+                  <component id="fb3a6" class="javax.swing.JRadioButton" binding="debugRadioButton" default-binding="true">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="debug"/>
+                    </properties>
+                  </component>
+                  <component id="797ae" class="javax.swing.JRadioButton" binding="infoRadioButton" default-binding="true">
+                    <constraints>
+                      <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="info"/>
+                    </properties>
+                  </component>
+                  <component id="e21d9" class="javax.swing.JRadioButton" binding="warnRadioButton" default-binding="true">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="warn"/>
+                    </properties>
+                  </component>
+                  <component id="3d35c" class="javax.swing.JRadioButton" binding="errorRadioButton" default-binding="true">
+                    <constraints>
+                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="error"/>
+                    </properties>
+                  </component>
+                  <component id="62649" class="javax.swing.JRadioButton" binding="fatalRadioButton" default-binding="true">
+                    <constraints>
+                      <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="fatal"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
             </children>
           </grid>
           <grid id="79b0a" binding="midConfigPanel" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -1137,6 +1195,14 @@
       <member id="82848"/>
       <member id="940e3"/>
       <member id="3ea46"/>
+    </group>
+    <group name="log">
+      <member id="30420"/>
+      <member id="fb3a6"/>
+      <member id="797ae"/>
+      <member id="e21d9"/>
+      <member id="3d35c"/>
+      <member id="62649"/>
     </group>
   </buttonGroups>
 </form>

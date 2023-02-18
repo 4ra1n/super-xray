@@ -16,6 +16,15 @@ public class XrayCmd {
     private String outputPrefix;
     private String others;
     private String othersPrefix;
+    private String logLevel;
+
+    public String getLogLevel() {
+        return logLevel != null ? logLevel : "";
+    }
+
+    public void setLogLevel(String logLevel) {
+        this.logLevel = logLevel;
+    }
 
     public String getInputPrefix() {
         return inputPrefix;
@@ -101,6 +110,10 @@ public class XrayCmd {
     public String[] buildCmd() {
         List<String> list = new ArrayList<>();
         list.add(getXray());
+        if (StringUtil.notEmpty(getLogLevel())) {
+            list.add("--log-level");
+            list.add(getLogLevel());
+        }
         if (StringUtil.notEmpty(getConfig())) {
             list.add("--config");
             list.add(getConfig());

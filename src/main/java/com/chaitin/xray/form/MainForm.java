@@ -172,6 +172,13 @@ public class MainForm {
     private JLabel cphLabel;
     private JLabel cphTip;
     private JPanel botPanel;
+    private JRadioButton nullRadioButton;
+    private JRadioButton debugRadioButton;
+    private JRadioButton infoRadioButton;
+    private JRadioButton warnRadioButton;
+    private JRadioButton errorRadioButton;
+    private JRadioButton fatalRadioButton;
+    private JPanel logPanel;
     private SubdomainForm subdomainInstance;
     private AJPScanForm ajpInstance;
 
@@ -891,6 +898,26 @@ public class MainForm {
     public void initActiveScan() {
         copyCmdButton.addActionListener(e -> {
             XrayCmd temp = new XrayCmd();
+
+            if (debugRadioButton.isSelected()) {
+                temp.setLogLevel("debug");
+            }
+            if (infoRadioButton.isSelected()) {
+                temp.setLogLevel("info");
+            }
+            if (warnRadioButton.isSelected()) {
+                temp.setLogLevel("warn");
+            }
+            if (errorRadioButton.isSelected()) {
+                temp.setLogLevel("error");
+            }
+            if (fatalRadioButton.isSelected()) {
+                temp.setLogLevel("fatal");
+            }
+            if (nullRadioButton.isSelected()) {
+                temp.setLogLevel(null);
+            }
+
             temp.setXray(xrayCmd.getXray());
             temp.setModule("webscan");
             temp.setConfig(String.format("%s", configPath));
@@ -984,6 +1011,26 @@ public class MainForm {
                     refreshConfig();
 
                     refreshOutput();
+
+                    if (debugRadioButton.isSelected()) {
+                        xrayCmd.setLogLevel("debug");
+                    }
+                    if (infoRadioButton.isSelected()) {
+                        xrayCmd.setLogLevel("info");
+                    }
+                    if (warnRadioButton.isSelected()) {
+                        xrayCmd.setLogLevel("warn");
+                    }
+                    if (errorRadioButton.isSelected()) {
+                        xrayCmd.setLogLevel("error");
+                    }
+                    if (fatalRadioButton.isSelected()) {
+                        xrayCmd.setLogLevel("fatal");
+                    }
+                    if (nullRadioButton.isSelected()) {
+                        xrayCmd.setLogLevel(null);
+                    }
+
                     xrayCmd.setModule("webscan");
                     xrayCmd.setConfig(String.format("%s", configPath));
                     xrayCmd.setOthers(null);
@@ -1269,6 +1316,25 @@ public class MainForm {
                 httpObj.put("max_conns_per_host", cph);
 
                 refreshConfig();
+
+                if (debugRadioButton.isSelected()) {
+                    xrayCmd.setLogLevel("debug");
+                }
+                if (infoRadioButton.isSelected()) {
+                    xrayCmd.setLogLevel("info");
+                }
+                if (warnRadioButton.isSelected()) {
+                    xrayCmd.setLogLevel("warn");
+                }
+                if (errorRadioButton.isSelected()) {
+                    xrayCmd.setLogLevel("error");
+                }
+                if (fatalRadioButton.isSelected()) {
+                    xrayCmd.setLogLevel("fatal");
+                }
+                if (nullRadioButton.isSelected()) {
+                    xrayCmd.setLogLevel(null);
+                }
 
                 xrayCmd.setModule("webscan");
                 xrayCmd.setConfig(String.format("%s", configPath));
@@ -1893,9 +1959,14 @@ public class MainForm {
         });
     }
 
+    public void initLog() {
+        nullRadioButton.setSelected(true);
+    }
+
     public MainForm() {
         init();
         initLang();
+        initLog();
         initLoadXray();
         initPluginCheckBox();
         initPluginSave();
@@ -2470,6 +2541,28 @@ public class MainForm {
         cleanAreaButton = new JButton();
         cleanAreaButton.setText("清空命令行输出");
         otherPanel.add(cleanAreaButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        logPanel = new JPanel();
+        logPanel.setLayout(new GridLayoutManager(2, 3, new Insets(0, 0, 0, 0), -1, -1));
+        rightConfigPanel.add(logPanel, new GridConstraints(1, 0, 3, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        logPanel.setBorder(BorderFactory.createTitledBorder(null, "Log Level", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
+        nullRadioButton = new JRadioButton();
+        nullRadioButton.setText("null");
+        logPanel.add(nullRadioButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        debugRadioButton = new JRadioButton();
+        debugRadioButton.setText("debug");
+        logPanel.add(debugRadioButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        infoRadioButton = new JRadioButton();
+        infoRadioButton.setText("info");
+        logPanel.add(infoRadioButton, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        warnRadioButton = new JRadioButton();
+        warnRadioButton.setText("warn");
+        logPanel.add(warnRadioButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        errorRadioButton = new JRadioButton();
+        errorRadioButton.setText("error");
+        logPanel.add(errorRadioButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        fatalRadioButton = new JRadioButton();
+        fatalRadioButton.setText("fatal");
+        logPanel.add(fatalRadioButton, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         midConfigPanel = new JPanel();
         midConfigPanel.setLayout(new GridLayoutManager(4, 1, new Insets(0, 0, 0, 0), -1, -1));
         midConfigPanel.setBackground(new Color(-12828863));
@@ -2662,6 +2755,13 @@ public class MainForm {
         buttonGroup.add(criticalRadioButton);
         buttonGroup.add(highRadioButton);
         buttonGroup.add(mediumRadioButton);
+        buttonGroup = new ButtonGroup();
+        buttonGroup.add(nullRadioButton);
+        buttonGroup.add(debugRadioButton);
+        buttonGroup.add(infoRadioButton);
+        buttonGroup.add(warnRadioButton);
+        buttonGroup.add(errorRadioButton);
+        buttonGroup.add(fatalRadioButton);
     }
 
     /**

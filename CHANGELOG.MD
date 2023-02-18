@@ -256,6 +256,7 @@ Others:
 - [important] 提供MacOS的APP版本 #141
 - [important] [improve] 更简洁更好用的新UI #144
 - [important] [feat] 支持拖拽xray文件加载 #140
+- [important] [feat] 允许设置日志等级 #146
 - [bug] CPU占用较高问题RAD修复不完善 #139
 - [feat] 增加一键修复/还原的功能 #143
 - [feat] 自动检查版本更新并提示 #142
