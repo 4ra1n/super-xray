@@ -1,14 +1,14 @@
 package com.chaitin.xray.form;
 
 import com.chaitin.xray.model.RadCmd;
-import com.chaitin.xray.utils.CheckUtil;
-import com.chaitin.xray.utils.ExecUtil;
-import com.chaitin.xray.utils.JNAUtil;
-import com.chaitin.xray.utils.OSUtil;
+import com.chaitin.xray.utils.*;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.yaml.snakeyaml.LoaderOptions;
+import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.SafeConstructor;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -21,8 +21,12 @@ import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class RadForm {
     private static final Logger logger = LogManager.getLogger(RadForm.class);
@@ -37,6 +41,9 @@ public class RadForm {
     private JPanel radConfigPanel;
     private JLabel targetLabel;
     private JLabel startLabel;
+    private JTextField radCookieText;
+    private JLabel radCookieLabel;
+    private JButton confirmButton;
 
     private static RadCmd radCmd;
     public volatile boolean stop = false;
@@ -124,8 +131,60 @@ public class RadForm {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    private void initCookie() {
+        try {
+            Path path = Paths.get("rad_config.yml");
+            String data;
+            if (!Files.exists(path)) {
+                InputStream radIs = RadForm.class.getClassLoader()
+                        .getResourceAsStream("rad_config.yml");
+                data = IOUtil.readStringFromIs(radIs);
+            } else {
+                data = new String(Files.readAllBytes(path));
+            }
+            Yaml yaml = new Yaml(new SafeConstructor(new LoaderOptions()));
+            Map<String, Object> obj = yaml.load(data);
+            List<Object> objList = (List<Object>) obj.get("domain_headers");
+            Map<String, Object> headers = (Map<String, Object>)
+                    ((Map<String, Object>) objList.get(0)).get("headers");
+            String cookie = (String) headers.get("Cookie");
+            radCookieText.setText(cookie);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        confirmButton.addActionListener(e -> new Thread(() -> {
+            try {
+                Path path = Paths.get("rad_config.yml");
+                String data;
+                String co = radCookieText.getText();
+                if (!Files.exists(path)) {
+                    InputStream radIs = RadForm.class.getClassLoader()
+                            .getResourceAsStream("rad_config.yml");
+                    data = IOUtil.readStringFromIs(radIs);
+                } else {
+                    data = new String(Files.readAllBytes(path));
+                }
+                Yaml yaml = new Yaml(new SafeConstructor(new LoaderOptions()));
+                Map<String, Object> obj = yaml.load(data);
+                List<Object> objList = (List<Object>) obj.get("domain_headers");
+                Map<String, Object> headers = (Map<String, Object>)
+                        ((Map<String, Object>) objList.get(0)).get("headers");
+                headers.put("Cookie", co);
+                String out = yaml.dump(obj);
+                Files.write(path, out.getBytes());
+                JOptionPane.showMessageDialog(radPane, "Success");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }).start());
+    }
+
     public RadForm(String inputPort) {
         initLang();
+
+        initCookie();
 
         DropTarget dt = new DropTarget() {
             @SuppressWarnings("unchecked")
@@ -225,27 +284,35 @@ public class RadForm {
         outputTextArea.setLineWrap(true);
         outputPanel.setViewportView(outputTextArea);
         radConfigPanel = new JPanel();
-        radConfigPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
+        radConfigPanel.setLayout(new GridLayoutManager(4, 3, new Insets(0, 0, 0, 0), -1, -1));
         radConfigPanel.setBackground(new Color(-12828863));
         radPane.add(radConfigPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         targetLabel = new JLabel();
         targetLabel.setText("  Target URL");
         radConfigPanel.add(targetLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         urlText = new JTextField();
-        radConfigPanel.add(urlText, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        radConfigPanel.add(urlText, new GridConstraints(1, 1, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         choseRadFileButton = new JButton();
         choseRadFileButton.setText("Chose Rad File");
         radConfigPanel.add(choseRadFileButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         radFileText = new JTextField();
         radFileText.setEditable(false);
         radFileText.setEnabled(false);
-        radConfigPanel.add(radFileText, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        radConfigPanel.add(radFileText, new GridConstraints(0, 1, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         startRadButton = new JButton();
         startRadButton.setText("Start Rad");
-        radConfigPanel.add(startRadButton, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        radConfigPanel.add(startRadButton, new GridConstraints(3, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         startLabel = new JLabel();
         startLabel.setText("  Start");
-        radConfigPanel.add(startLabel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        radConfigPanel.add(startLabel, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        radCookieLabel = new JLabel();
+        radCookieLabel.setText("   Cookie");
+        radConfigPanel.add(radCookieLabel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        radCookieText = new JTextField();
+        radConfigPanel.add(radCookieText, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        confirmButton = new JButton();
+        confirmButton.setText("Confirm");
+        radConfigPanel.add(confirmButton, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
