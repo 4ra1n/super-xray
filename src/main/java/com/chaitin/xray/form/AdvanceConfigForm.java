@@ -120,6 +120,14 @@ public class AdvanceConfigForm {
     private JButton proxyConfigButton;
     private JLabel proxyLabel;
     private JTextField proxyText;
+    private JTextField uaText;
+    private JTextField cookieText;
+    private JButton headerReButton;
+    private JButton headerConButton;
+    private JPanel headerPanel;
+    private JLabel uaLabel;
+    private JLabel cookieLabel;
+    private JPanel headerOpPanel;
 
     private final List<JCheckBox> baselineCheckBoxList = new ArrayList<>();
     private final List<JCheckBox> sqlCheckBoxList = new ArrayList<>();
@@ -198,6 +206,7 @@ public class AdvanceConfigForm {
         refreshDirScan();
         refreshBrute();
         refreshShiro();
+        refreshHeader();
     }
 
 
@@ -212,6 +221,7 @@ public class AdvanceConfigForm {
             applyBruteForce();
             applyShiro();
             applyXStream();
+            applyHeader();
             if (MainForm.LANG == MainForm.CHINESE) {
                 JOptionPane.showMessageDialog(this.advanceConfigPanel, "设置成功");
             } else {
@@ -716,6 +726,56 @@ public class AdvanceConfigForm {
         });
     }
 
+    @SuppressWarnings("unchecked")
+    private void applyHeader() {
+        for (Map.Entry<String, Object> entry : MainForm.configObj.entrySet()) {
+            if (entry.getKey().equals("http")) {
+                Map<String, Object> plugins = (Map<String, Object>) entry.getValue();
+                Map<String, Object> obj = (Map<String, Object>) plugins.get("headers");
+
+                String ua = uaText.getText();
+                if (StringUtil.notEmpty(ua)) {
+                    obj.put("User-Agent", ua);
+                } else {
+                    obj.put("User-Agent",
+                            "Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0");
+                }
+                String cookie = cookieText.getText();
+                if (StringUtil.notEmpty(cookie)) {
+                    obj.put("Cookie", cookie);
+                } else {
+                    obj.remove("Cookie");
+                }
+            }
+        }
+        MainForm.instance.refreshConfig();
+    }
+
+    @SuppressWarnings("unchecked")
+    private void refreshHeader() {
+        for (Map.Entry<String, Object> entry : MainForm.configObj.entrySet()) {
+            if (entry.getKey().equals("http")) {
+                Map<String, Object> plugins = (Map<String, Object>) entry.getValue();
+                Map<String, Object> obj = (Map<String, Object>) plugins.get("headers");
+
+                uaText.setText((String) obj.get("User-Agent"));
+                cookieText.setText(obj.get("Cookie") == null ? "" : (String) obj.get("Cookie"));
+            }
+        }
+    }
+
+    private void initHeader() {
+        headerReButton.addActionListener(e -> refreshHeader());
+        headerConButton.addActionListener(e -> {
+            applyHeader();
+            if (MainForm.LANG == MainForm.CHINESE) {
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "设置成功");
+            } else {
+                JOptionPane.showMessageDialog(this.advanceConfigPanel, "Success");
+            }
+        });
+    }
+
     private void initLang() {
         if (MainForm.LANG == MainForm.CHINESE) {
             configCenterPanel.setBorder(BorderFactory.createTitledBorder(null,
@@ -786,6 +846,8 @@ public class AdvanceConfigForm {
                     TitledBorder.DEFAULT_POSITION, null, null));
             proxyLabel.setText("输入HTTP代理URL");
             proxyConfigButton.setText("确认");
+            headerReButton.setText("刷新配置");
+            headerConButton.setText("确认配置");
         } else {
             configCenterPanel.setBorder(BorderFactory.createTitledBorder(null,
                     "Config Center", TitledBorder.DEFAULT_JUSTIFICATION,
@@ -855,6 +917,8 @@ public class AdvanceConfigForm {
                     TitledBorder.DEFAULT_POSITION, null, null));
             proxyLabel.setText("Input HTTP Proxy");
             proxyConfigButton.setText("Confirm");
+            headerReButton.setText("Refresh");
+            headerConButton.setText("Config");
         }
     }
 
@@ -871,6 +935,7 @@ public class AdvanceConfigForm {
         initDirScan();
         initShiro();
         initXStream();
+        initHeader();
     }
 
     {
@@ -889,12 +954,12 @@ public class AdvanceConfigForm {
      */
     private void $$$setupUI$$$() {
         advanceConfigPanel = new JPanel();
-        advanceConfigPanel.setLayout(new GridLayoutManager(2, 3, new Insets(0, 0, 0, 0), -1, -1));
+        advanceConfigPanel.setLayout(new GridLayoutManager(3, 3, new Insets(0, 0, 0, 0), -1, -1));
         advanceConfigPanel.setBackground(new Color(-12828863));
         leftPanel = new JPanel();
         leftPanel.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
         leftPanel.setBackground(new Color(-12828863));
-        advanceConfigPanel.add(leftPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        advanceConfigPanel.add(leftPanel, new GridConstraints(1, 0, 2, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         baselinePanel = new JPanel();
         baselinePanel.setLayout(new GridLayoutManager(12, 2, new Insets(0, 0, 0, 0), -1, -1));
         baselinePanel.setBackground(new Color(-12828863));
@@ -1032,7 +1097,7 @@ public class AdvanceConfigForm {
         midPanel = new JPanel();
         midPanel.setLayout(new GridLayoutManager(4, 1, new Insets(0, 0, 0, 0), -1, -1));
         midPanel.setBackground(new Color(-12828863));
-        advanceConfigPanel.add(midPanel, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        advanceConfigPanel.add(midPanel, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         bruteForcePanel = new JPanel();
         bruteForcePanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
         bruteForcePanel.setBackground(new Color(-12828863));
@@ -1142,7 +1207,7 @@ public class AdvanceConfigForm {
         rightPanel = new JPanel();
         rightPanel.setLayout(new GridLayoutManager(4, 1, new Insets(0, 0, 0, 0), -1, -1));
         rightPanel.setBackground(new Color(-12828863));
-        advanceConfigPanel.add(rightPanel, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        advanceConfigPanel.add(rightPanel, new GridConstraints(1, 2, 2, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         phantasmPanel = new JPanel();
         phantasmPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
         phantasmPanel.setBackground(new Color(-12828863));
@@ -1247,6 +1312,29 @@ public class AdvanceConfigForm {
         proxyPanel.add(proxyLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         proxyText = new JTextField();
         proxyPanel.add(proxyText, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        headerPanel = new JPanel();
+        headerPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
+        advanceConfigPanel.add(headerPanel, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        headerPanel.setBorder(BorderFactory.createTitledBorder(null, "header", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
+        uaLabel = new JLabel();
+        uaLabel.setText("User-Agent");
+        headerPanel.add(uaLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        cookieLabel = new JLabel();
+        cookieLabel.setText("Cookie");
+        headerPanel.add(cookieLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        uaText = new JTextField();
+        headerPanel.add(uaText, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        cookieText = new JTextField();
+        headerPanel.add(cookieText, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        headerOpPanel = new JPanel();
+        headerOpPanel.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
+        headerPanel.add(headerOpPanel, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        headerReButton = new JButton();
+        headerReButton.setText("刷新配置");
+        headerOpPanel.add(headerReButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        headerConButton = new JButton();
+        headerConButton.setText("确认配置");
+        headerOpPanel.add(headerConButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
