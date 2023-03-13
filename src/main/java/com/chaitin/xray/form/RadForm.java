@@ -16,6 +16,7 @@ import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
@@ -44,6 +45,7 @@ public class RadForm {
     private JTextField radCookieText;
     private JLabel radCookieLabel;
     private JButton confirmButton;
+    private JButton copyCommandButton;
 
     private static RadCmd radCmd;
     public volatile boolean stop = false;
@@ -111,6 +113,8 @@ public class RadForm {
             startRadButton.setText("启动rad");
             startLabel.setText("  启动");
             targetLabel.setText("  目标url");
+            radCookieLabel.setText("  设置Cookie");
+            copyCommandButton.setText("复制命令");
             outputPanel.setBorder(BorderFactory.createTitledBorder(
                     null, "控制台",
                     TitledBorder.DEFAULT_JUSTIFICATION,
@@ -122,6 +126,8 @@ public class RadForm {
             startRadButton.setText("Start Rad");
             startLabel.setText("  Start");
             targetLabel.setText("  Target URL");
+            radCookieLabel.setText("  Cookie");
+            copyCommandButton.setText("Copy Command");
             outputPanel.setBorder(BorderFactory.createTitledBorder(
                     null, "Console",
                     TitledBorder.DEFAULT_JUSTIFICATION,
@@ -247,6 +253,20 @@ public class RadForm {
                 isRunning = false;
             }
         });
+
+        copyCommandButton.addActionListener(e -> {
+            radCmd.setTargetUrl(urlText.getText());
+            String[] cmd = radCmd.buildCmd();
+            StringBuilder sb = new StringBuilder();
+            for (String s : cmd) {
+                sb.append(s);
+                sb.append(" ");
+            }
+            Toolkit.getDefaultToolkit()
+                    .getSystemClipboard()
+                    .setContents(new StringSelection(sb.toString().trim()), null);
+            JOptionPane.showMessageDialog(radPane, "Success");
+        });
     }
 
     {
@@ -284,35 +304,38 @@ public class RadForm {
         outputTextArea.setLineWrap(true);
         outputPanel.setViewportView(outputTextArea);
         radConfigPanel = new JPanel();
-        radConfigPanel.setLayout(new GridLayoutManager(4, 3, new Insets(0, 0, 0, 0), -1, -1));
+        radConfigPanel.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
         radConfigPanel.setBackground(new Color(-12828863));
         radPane.add(radConfigPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         targetLabel = new JLabel();
         targetLabel.setText("  Target URL");
         radConfigPanel.add(targetLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         urlText = new JTextField();
-        radConfigPanel.add(urlText, new GridConstraints(1, 1, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        radConfigPanel.add(urlText, new GridConstraints(1, 1, 1, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         choseRadFileButton = new JButton();
         choseRadFileButton.setText("Chose Rad File");
         radConfigPanel.add(choseRadFileButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         radFileText = new JTextField();
         radFileText.setEditable(false);
         radFileText.setEnabled(false);
-        radConfigPanel.add(radFileText, new GridConstraints(0, 1, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        radConfigPanel.add(radFileText, new GridConstraints(0, 1, 1, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         startRadButton = new JButton();
         startRadButton.setText("Start Rad");
-        radConfigPanel.add(startRadButton, new GridConstraints(3, 1, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        radConfigPanel.add(startRadButton, new GridConstraints(3, 2, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         startLabel = new JLabel();
         startLabel.setText("  Start");
         radConfigPanel.add(startLabel, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         radCookieLabel = new JLabel();
-        radCookieLabel.setText("   Cookie");
+        radCookieLabel.setText("  Cookie");
         radConfigPanel.add(radCookieLabel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         radCookieText = new JTextField();
-        radConfigPanel.add(radCookieText, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        radConfigPanel.add(radCookieText, new GridConstraints(2, 1, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         confirmButton = new JButton();
         confirmButton.setText("Confirm");
-        radConfigPanel.add(confirmButton, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        radConfigPanel.add(confirmButton, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        copyCommandButton = new JButton();
+        copyCommandButton.setText("Copy Command");
+        radConfigPanel.add(copyCommandButton, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
