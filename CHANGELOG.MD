@@ -270,12 +270,14 @@ Others:
 ## 1.6
 
 更新内容：
+- [important] 给RAD联动提供一种批量执行的办法 #155
 - [important] RAD联动支持Cookie配置 #153
 - [feat] RAD联动支持一键复制RAD命令 #154
 - [bug] 备份xray目录原来的config.yaml文件 #152
 - [feat] RAD 联动支持拖拽功能 #151
 - [feat] request 支持自定义 user-agent #149
 - [feat] 允许设置请求Cookie内容 #150
+- [feat] radium support file input #148 (同#155)
 
 下载：
 - super-xray-1.6.jar 版本通过`java -jar super-xray-1.6.jar`启动
