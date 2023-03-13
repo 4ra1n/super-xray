@@ -269,4 +269,10 @@ Others:
 
 ## 1.6
 
-todo
+更新内容：
+- [feat] RAD 联动支持拖拽功能 #151
+
+下载：
+- super-xray-1.6.jar 版本通过`java -jar super-xray-1.6.jar`启动
+- super-xray-1.6-jre-exe.zip 是内置了JRE的exe版本
+- super-xray-1.6-system-jre.exe 是使用系统JRE的exe版本

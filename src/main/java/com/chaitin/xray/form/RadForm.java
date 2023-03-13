@@ -15,8 +15,13 @@ import javax.swing.border.TitledBorder;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDropEvent;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Locale;
 
 public class RadForm {
@@ -121,6 +126,31 @@ public class RadForm {
 
     public RadForm(String inputPort) {
         initLang();
+
+        DropTarget dt = new DropTarget() {
+            @SuppressWarnings("unchecked")
+            public synchronized void drop(DropTargetDropEvent evt) {
+                try {
+                    evt.acceptDrop(DnDConstants.ACTION_COPY);
+                    Object obj = evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
+                    List<File> droppedFiles = (List<File>) obj;
+                    if (droppedFiles.size() != 1) {
+                        return;
+                    }
+                    String absPath = droppedFiles.get(0).getAbsolutePath();
+                    if (!CheckUtil.checkValid(absPath)) {
+                        return;
+                    }
+                    radCmd.setRad(absPath);
+                    radFileText.setText(absPath);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        };
+        radPane.setDropTarget(dt);
+        radPanel.setDropTarget(dt);
+
         radCmd = new RadCmd();
         radCmd.setTarget("-t");
         radCmd.setProxy("-http-proxy");
@@ -246,4 +276,5 @@ public class RadForm {
     public JComponent $$$getRootComponent$$$() {
         return radPanel;
     }
+
 }
