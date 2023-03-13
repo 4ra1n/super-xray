@@ -1,5 +1,6 @@
 package com.chaitin.xray.form;
 
+import com.chaitin.xray.model.DB;
 import com.chaitin.xray.model.RadCmd;
 import com.chaitin.xray.utils.*;
 import com.intellij.uiDesigner.core.GridConstraints;
@@ -257,10 +258,31 @@ public class RadForm {
     }
 
     public RadForm(String inputPort) {
+        radCmd = new RadCmd();
         initLang();
 
         initCookie();
 
+        DB db;
+        try {
+            Path dbPath = Paths.get("super-xray.db");
+            if (Files.exists(dbPath)) {
+                byte[] data = Files.readAllBytes(dbPath);
+                db = DB.parseDB(data);
+            } else {
+                db = new DB();
+                db.setLastRadPath(null);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return;
+        }
+        if (StringUtil.notEmpty(db.getLastRadPath())) {
+            if (!db.getLastRadPath().equalsIgnoreCase("null")) {
+                radCmd.setRad(db.getLastRadPath());
+                radFileText.setText(db.getLastRadPath());
+            }
+        }
         DropTarget dt = new DropTarget() {
             @SuppressWarnings("unchecked")
             public synchronized void drop(DropTargetDropEvent evt) {
@@ -277,6 +299,8 @@ public class RadForm {
                     }
                     radCmd.setRad(absPath);
                     radFileText.setText(absPath);
+                    db.setLastRadPath(absPath);
+                    Files.write(Paths.get("super-xray.db"), db.getDB().getBytes());
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -285,7 +309,6 @@ public class RadForm {
         radPane.setDropTarget(dt);
         radPanel.setDropTarget(dt);
 
-        radCmd = new RadCmd();
         radCmd.setTarget("-t");
         radCmd.setProxy("-http-proxy");
         radCmd.setProxyInfo(String.format("127.0.0.1:%s", inputPort));
@@ -304,6 +327,12 @@ public class RadForm {
 
                 radCmd.setRad(absPath);
                 radFileText.setText(absPath);
+                try {
+                    db.setLastRadPath(absPath);
+                    Files.write(Paths.get("super-xray.db"), db.getDB().getBytes());
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 

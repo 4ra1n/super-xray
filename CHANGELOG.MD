@@ -272,6 +272,7 @@ Others:
 更新内容：
 - [important] 给RAD联动提供一种批量执行的办法 #155
 - [important] RAD联动支持Cookie配置 #153
+- [feat] 第一次加载RAD后支持保存路径下次直接加载 #156
 - [feat] RAD联动支持一键复制RAD命令 #154
 - [bug] 备份xray目录原来的config.yaml文件 #152
 - [feat] RAD 联动支持拖拽功能 #151
