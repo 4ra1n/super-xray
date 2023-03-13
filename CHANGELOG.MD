@@ -284,3 +284,12 @@ Others:
 - super-xray-1.6.jar 版本通过`java -jar super-xray-1.6.jar`启动
 - super-xray-1.6-jre-exe.zip 是内置了JRE的exe版本
 - super-xray-1.6-system-jre.exe 是使用系统JRE的exe版本
+
+## 1.7
+
+todo
+
+下载：
+- super-xray-1.6.jar 版本通过`java -jar super-xray-1.6.jar`启动
+- super-xray-1.6-jre-exe.zip 是内置了JRE的exe版本
+- super-xray-1.6-system-jre.exe 是使用系统JRE的exe版本
