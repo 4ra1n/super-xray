@@ -42,6 +42,9 @@ public class XrayUtil {
             // do not delete current config.yaml
             if (!thisPath.toFile().getAbsolutePath().equals(
                     xrayPath.toFile().getAbsolutePath())) {
+                // 保留
+                Path backPath = Paths.get(xrayPath + Const.ConfigYaml + ".bak");
+                Files.write(backPath, Files.readAllBytes(xrayPath));
                 Files.delete(xrayPath);
             }
         } catch (Exception ignored) {

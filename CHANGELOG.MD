@@ -270,6 +270,7 @@ Others:
 ## 1.6
 
 更新内容：
+- [bug] 备份xray目录原来的config.yaml文件 #152
 - [feat] RAD 联动支持拖拽功能 #151
 - [feat] request 支持自定义 user-agent #149
 - [feat] 允许设置请求Cookie内容 #150
