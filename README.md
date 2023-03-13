@@ -2,7 +2,7 @@
 [![](https://img.shields.io/github/v/release/4ra1n/super-xray)](https://github.com/4ra1n/super-xray/releases/latest)
 ![](https://img.shields.io/github/downloads/4ra1n/super-xray/total)
 ![](https://img.shields.io/badge/build-JDK8-orange)
-![](https://img.shields.io/badge/Code%20Lines-10104-orange)
+![](https://img.shields.io/badge/Code%20Lines-10174-orange)
 
 [English Version](doc/README.md)
 
@@ -55,6 +55,10 @@
 注意：先输入端口开启被动扫描，再打开`rad`配合
 
 ![](img/0004.png)
+
+`1.6`版本的`SuperXray`对`RAD`联动部分加强，用命令表方式解决批量联动问题
+
+更多问题参考`1.6`版本发布文档
 
 ## 下载面板
 
