@@ -39,12 +39,14 @@ public class XrayUtil {
         try {
             Path thisPath = Paths.get(Const.ConfigYaml);
             Path xrayPath = Paths.get(targetDir + Const.ConfigYaml);
+            // 保留
+            Path backPath = Paths.get(xrayPath + ".bak");
+            if (!Files.exists(backPath)) {
+                Files.write(backPath, Files.readAllBytes(xrayPath));
+            }
             // do not delete current config.yaml
             if (!thisPath.toFile().getAbsolutePath().equals(
                     xrayPath.toFile().getAbsolutePath())) {
-                // 保留
-                Path backPath = Paths.get(xrayPath + Const.ConfigYaml + ".bak");
-                Files.write(backPath, Files.readAllBytes(xrayPath));
                 Files.delete(xrayPath);
             }
         } catch (Exception ignored) {
