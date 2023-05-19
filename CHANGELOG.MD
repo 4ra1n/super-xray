@@ -287,9 +287,18 @@ Others:
 
 ## 1.7
 
-todo
+更新内容：
+1. 在Windows中选择xray时设置EXE后缀，在文件较多时提高效率
+2. 选择本地POC时，设置YML和YAML过滤，在文件较多时提高效率
+3. 选择URL列表文件时设置TXT过滤，在文件较多时提高效率 
+4. 删除自带小游戏部分，这部分功能没有必要 
+5. 高级设置部分的代理应该添加提示避免被当成被动代理 
+6. 更新SnakeYAML和Log4j2依赖，虽然不存在漏洞还是更一下 
+7. 更新默认POC列表内容，新版本增加了一些POC 
+8. XRAY和RAD下载面板加入官方链接，镜像站不支持新版本了 
+9. 更新一些版本信息
 
 下载：
-- super-xray-1.6.jar 版本通过`java -jar super-xray-1.6.jar`启动
-- super-xray-1.6-jre-exe.zip 是内置了JRE的exe版本
-- super-xray-1.6-system-jre.exe 是使用系统JRE的exe版本
+- super-xray-1.7.jar 版本通过`java -jar super-xray-1.7.jar`启动
+- super-xray-1.7-jre-exe.zip 是内置了JRE的exe版本
+- super-xray-1.7-system-jre.exe 是使用系统JRE的exe版本

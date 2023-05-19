@@ -17,6 +17,7 @@ import org.yaml.snakeyaml.constructor.SafeConstructor;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
@@ -531,6 +532,11 @@ public class MainForm {
         choseDirButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            if (OSUtil.isWindows()) {
+                fileChooser.setAcceptAllFileFilterUsed(false);
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("EXE", "exe");
+                fileChooser.addChoosableFileFilter(filter);
+            }
             int option = fileChooser.showOpenDialog(new JFrame());
             if (option == JFileChooser.APPROVE_OPTION) {
                 File file = fileChooser.getSelectedFile();
@@ -850,6 +856,9 @@ public class MainForm {
             urlField.setText(null);
             rawFileField.setText(null);
             JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setAcceptAllFileFilterUsed(false);
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("TXT", "txt");
+            fileChooser.addChoosableFileFilter(filter);
             fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
             int option = fileChooser.showOpenDialog(new JFrame());
             if (option == JFileChooser.APPROVE_OPTION) {
@@ -1159,6 +1168,11 @@ public class MainForm {
         localPoCButton.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            fileChooser.setAcceptAllFileFilterUsed(false);
+            FileNameExtensionFilter filter1 = new FileNameExtensionFilter("YML", "yml");
+            FileNameExtensionFilter filter2 = new FileNameExtensionFilter("YAML", "yaml");
+            fileChooser.addChoosableFileFilter(filter1);
+            fileChooser.addChoosableFileFilter(filter2);
             int option = fileChooser.showOpenDialog(new JFrame());
             if (option == JFileChooser.APPROVE_OPTION) {
                 File file = fileChooser.getSelectedFile();
