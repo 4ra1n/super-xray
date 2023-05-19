@@ -2,9 +2,7 @@
 [![](https://img.shields.io/github/v/release/4ra1n/super-xray)](https://github.com/4ra1n/super-xray/releases/latest)
 ![](https://img.shields.io/github/downloads/4ra1n/super-xray/total)
 ![](https://img.shields.io/badge/build-JDK8-orange)
-![](https://img.shields.io/badge/Code%20Lines-10174-orange)
-
-[English Version](doc/README.md)
+![](https://img.shields.io/badge/Code%20Lines-7318-orange)
 
 如果本项目有帮助到你，可以点个`Star`支持作者
 
