@@ -92,9 +92,9 @@
 
 ## 服务扫描
 
-目前只支持`Tomcat AJP`服务扫描
+支持`Tomcat AJP`和一些`Weblogic IIOP`漏洞扫描
 
-![](img/0012.png)
+![](img/0016.png)
 
 ## 菜单
 

@@ -105,6 +105,9 @@ public class AJPScanForm {
     private JLabel targetIPLabel;
     private JLabel targetPortLabel;
     private JLabel outputFileLabel;
+    private JLabel payloadLabel;
+    private JRadioButton tomcatAJPPotentialRCERadioButton;
+    private JRadioButton weblogicRCECVE2023RadioButton;
 
     private static String xray;
     private static boolean running = false;
@@ -163,6 +166,8 @@ public class AJPScanForm {
     }
 
     public AJPScanForm(XrayCmd xrayCmd) {
+
+        weblogicRCECVE2023RadioButton.setSelected(true);
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             if (deleteCheckBox.isSelected()) {
@@ -263,9 +268,21 @@ public class AJPScanForm {
             String targetPort = portText.getText();
             String target = String.format("%s:%s", targetIP, targetPort);
 
+            String p;
+            if (tomcatAJPPotentialRCERadioButton.isSelected()) {
+                p = "tomcat";
+            } else if (weblogicRCECVE2023RadioButton.isSelected()) {
+                p = "weblogic";
+            } else {
+                return;
+            }
+
+
             String[] finalCmd = new String[]{
                     xray,
                     "servicescan",
+                    "-m",
+                    p,
                     "--target",
                     target,
                     "--html-output",
@@ -318,38 +335,51 @@ public class AJPScanForm {
         outputTextArea.setLineWrap(true);
         outputPanel.setViewportView(outputTextArea);
         ajpConfigPanel = new JPanel();
-        ajpConfigPanel.setLayout(new GridLayoutManager(2, 6, new Insets(0, 0, 0, 0), -1, -1));
+        ajpConfigPanel.setLayout(new GridLayoutManager(3, 7, new Insets(0, 0, 0, 0), -1, -1));
         ajpConfigPanel.setBackground(new Color(-12828863));
         rootPanel.add(ajpConfigPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        ajpConfigPanel.setBorder(BorderFactory.createTitledBorder(null, "Tomcat AJP Service Scan", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
+        ajpConfigPanel.setBorder(BorderFactory.createTitledBorder(null, "AJP / IIOP Service Scan", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         targetIPLabel = new JLabel();
         targetIPLabel.setText("Target IP");
-        ajpConfigPanel.add(targetIPLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ajpConfigPanel.add(targetIPLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         targetIPText = new JTextField();
-        ajpConfigPanel.add(targetIPText, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        ajpConfigPanel.add(targetIPText, new GridConstraints(1, 1, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         targetPortLabel = new JLabel();
         targetPortLabel.setText("Target Port");
-        ajpConfigPanel.add(targetPortLabel, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ajpConfigPanel.add(targetPortLabel, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         portText = new JTextField();
-        ajpConfigPanel.add(portText, new GridConstraints(0, 3, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        ajpConfigPanel.add(portText, new GridConstraints(1, 4, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         outputFileLabel = new JLabel();
         outputFileLabel.setText("Output File");
-        ajpConfigPanel.add(outputFileLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ajpConfigPanel.add(outputFileLabel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         outFileText = new JTextField();
-        ajpConfigPanel.add(outFileText, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        ajpConfigPanel.add(outFileText, new GridConstraints(2, 1, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         generateButton = new JButton();
         generateButton.setText("Generate");
-        ajpConfigPanel.add(generateButton, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ajpConfigPanel.add(generateButton, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         openButton = new JButton();
         openButton.setText("Open");
-        ajpConfigPanel.add(openButton, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ajpConfigPanel.add(openButton, new GridConstraints(2, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         startScanButton = new JButton();
         startScanButton.setText("Start Scan");
-        ajpConfigPanel.add(startScanButton, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ajpConfigPanel.add(startScanButton, new GridConstraints(1, 6, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         deleteCheckBox = new JCheckBox();
         deleteCheckBox.setBackground(new Color(-12828863));
         deleteCheckBox.setText("delete when output");
-        ajpConfigPanel.add(deleteCheckBox, new GridConstraints(1, 4, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ajpConfigPanel.add(deleteCheckBox, new GridConstraints(2, 5, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        payloadLabel = new JLabel();
+        payloadLabel.setText("Payload");
+        ajpConfigPanel.add(payloadLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        tomcatAJPPotentialRCERadioButton = new JRadioButton();
+        tomcatAJPPotentialRCERadioButton.setText("Tomcat AJP Potential RCE (CVE-2020-1938)");
+        ajpConfigPanel.add(tomcatAJPPotentialRCERadioButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        weblogicRCECVE2023RadioButton = new JRadioButton();
+        weblogicRCECVE2023RadioButton.setText("Weblogic RCE (CVE-2023-21839/21931/21979)");
+        ajpConfigPanel.add(weblogicRCECVE2023RadioButton, new GridConstraints(0, 2, 1, 5, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ButtonGroup buttonGroup;
+        buttonGroup = new ButtonGroup();
+        buttonGroup.add(tomcatAJPPotentialRCERadioButton);
+        buttonGroup.add(weblogicRCECVE2023RadioButton);
     }
 
     /**
@@ -380,4 +410,5 @@ public class AJPScanForm {
     public JComponent $$$getRootComponent$$$() {
         return ajpPanel;
     }
+
 }

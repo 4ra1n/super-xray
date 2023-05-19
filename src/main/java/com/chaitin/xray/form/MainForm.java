@@ -1787,7 +1787,7 @@ public class MainForm {
             setParallelLabel.setText("Set Parallel");
             tipParallelLabel.setText("Concurrency");
             delCaCheckBox.setText("Delete CA When Exit");
-            ajpScanButton.setText("AJP Scan");
+            ajpScanButton.setText("Service Scan");
             copyCmdButton.setText("Copy Cmd");
             lockCheckBox.setText("Lock");
             mitmIpLabel.setText("Listen IP");
@@ -1872,7 +1872,7 @@ public class MainForm {
             setParallelLabel.setText("设置PoC并发");
             tipParallelLabel.setText("同时运行的PoC数量");
             delCaCheckBox.setText("关闭后删除ca文件");
-            ajpScanButton.setText("AJP服务扫描");
+            ajpScanButton.setText("服务扫描");
             copyCmdButton.setText("复制当前命令");
             lockCheckBox.setText("锁定");
             mitmIpLabel.setText("被动监听IP:");
@@ -1953,9 +1953,9 @@ public class MainForm {
         ajpScanButton.addActionListener(e -> {
             String t;
             if (LANG == CHINESE) {
-                t = "Tomcat AJP 扫描";
+                t = "AJP/IIOP 服务扫描";
             } else {
-                t = "Tomcat AJP Scan";
+                t = "AJP/IIOP Service Scan";
             }
             if (!StringUtil.notEmpty(xrayCmd.getXray())) {
                 if (LANG == CHINESE) {
@@ -2440,10 +2440,10 @@ public class MainForm {
         radButton.setText("点击联动");
         mitmPanel.add(radButton, new GridConstraints(5, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         ajpScanButton = new JButton();
-        ajpScanButton.setText("AJP服务扫描");
+        ajpScanButton.setText("服务扫描");
         mitmPanel.add(ajpScanButton, new GridConstraints(5, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         ajpLabel = new JLabel();
-        ajpLabel.setText("Tomcat AJP");
+        ajpLabel.setText("AJP/IIOP");
         mitmPanel.add(ajpLabel, new GridConstraints(5, 3, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         mitmIpLabel = new JLabel();
         mitmIpLabel.setText("被动监听IP:");
