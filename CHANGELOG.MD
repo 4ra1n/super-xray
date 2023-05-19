@@ -303,3 +303,12 @@ Others:
 - super-xray-1.7.jar 版本通过`java -jar super-xray-1.7.jar`启动
 - super-xray-1.7-jre-exe.zip 是内置了JRE的exe版本
 - super-xray-1.7-system-jre.exe 是使用系统JRE的exe版本
+
+## 1.8
+
+todo
+
+下载：
+- super-xray-1.8.jar 版本通过`java -jar super-xray-1.8.jar`启动
+- super-xray-1.8-jre-exe.zip 是内置了JRE的exe版本
+- super-xray-1.8-system-jre.exe 是使用系统JRE的exe版本

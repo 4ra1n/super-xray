@@ -2,8 +2,8 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>D:\super-xray\target\super-xray-1.7.jar</jar>
-  <outfile>D:\super-xray\super-xray-1.7-system-jre.exe</outfile>
+  <jar>D:\JavaCode\super-xray\target\super-xray-1.8.jar</jar>
+  <outfile>D:\JavaCode\super-xray\super-xray-1.8-system-jre.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
@@ -13,7 +13,7 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
-  <icon>D:\super-xray\build\super-xray.ico</icon>
+  <icon>D:\JavaCode\super-xray\build\super-xray.ico</icon>
   <jre>
     <path>%JAVA_HOME%;%PATH%</path>
     <requiresJdk>false</requiresJdk>
