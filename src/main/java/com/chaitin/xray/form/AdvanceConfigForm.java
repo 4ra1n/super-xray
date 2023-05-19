@@ -128,6 +128,7 @@ public class AdvanceConfigForm {
     private JLabel uaLabel;
     private JLabel cookieLabel;
     private JPanel headerOpPanel;
+    private JLabel proxyNote;
 
     private final List<JCheckBox> baselineCheckBoxList = new ArrayList<>();
     private final List<JCheckBox> sqlCheckBoxList = new ArrayList<>();
@@ -848,6 +849,7 @@ public class AdvanceConfigForm {
             proxyConfigButton.setText("确认");
             headerReButton.setText("刷新配置");
             headerConButton.setText("确认配置");
+            proxyNote.setText("注意：这里的代理不是被动扫描代理");
         } else {
             configCenterPanel.setBorder(BorderFactory.createTitledBorder(null,
                     "Config Center", TitledBorder.DEFAULT_JUSTIFICATION,
@@ -919,6 +921,7 @@ public class AdvanceConfigForm {
             proxyConfigButton.setText("Confirm");
             headerReButton.setText("Refresh");
             headerConButton.setText("Config");
+            proxyNote.setText("Note: The proxy is not passive scan");
         }
     }
 
@@ -1301,17 +1304,20 @@ public class AdvanceConfigForm {
         advanceConfigPanel.add(proxyConfigPanel, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         proxyConfigPanel.setBorder(BorderFactory.createTitledBorder(null, "代理配置", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         proxyPanel = new JPanel();
-        proxyPanel.setLayout(new GridLayoutManager(1, 3, new Insets(0, 0, 0, 0), -1, -1));
+        proxyPanel.setLayout(new GridLayoutManager(2, 3, new Insets(0, 0, 0, 0), -1, -1));
         proxyPanel.setBackground(new Color(-12828863));
         proxyConfigPanel.add(proxyPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         proxyConfigButton = new JButton();
         proxyConfigButton.setText("确认");
-        proxyPanel.add(proxyConfigButton, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        proxyPanel.add(proxyConfigButton, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         proxyLabel = new JLabel();
         proxyLabel.setText("输入HTTP代理URL");
-        proxyPanel.add(proxyLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        proxyPanel.add(proxyLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         proxyText = new JTextField();
-        proxyPanel.add(proxyText, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        proxyPanel.add(proxyText, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        proxyNote = new JLabel();
+        proxyNote.setText("注意：这里的代理不是被动扫描代理");
+        proxyPanel.add(proxyNote, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         headerPanel = new JPanel();
         headerPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
         advanceConfigPanel.add(headerPanel, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));

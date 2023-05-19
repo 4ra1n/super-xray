@@ -1,14 +1,15 @@
 package com.chaitin.xray.utils;
 
 import com.chaitin.xray.model.Const;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class XrayUtil {
-    private static final Logger logger = Logger.getLogger(XrayUtil.class);
+    private static final Logger logger = LogManager.getLogger(XrayUtil.class);
 
     public static void rmAllConfig(String targetDir) {
         logger.info("delete all config");

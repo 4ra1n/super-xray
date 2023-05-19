@@ -1,18 +1,15 @@
 package com.chaitin.xray.form;
 
-import com.chaitin.xray.games.flappy.FBMainFrame;
 import com.chaitin.xray.model.Const;
 import com.chaitin.xray.model.DB;
 import com.chaitin.xray.model.Poc;
 import com.chaitin.xray.model.XrayCmd;
-import com.chaitin.xray.games.plane.Game;
-import com.chaitin.xray.games.snake.Main;
 import com.chaitin.xray.utils.*;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import okhttp3.*;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.SafeConstructor;
@@ -2210,66 +2207,10 @@ public class MainForm {
         return null;
     }
 
-    private static JMenu createGameMenu() {
-        try {
-            JMenu gameMenu = new JMenu("游戏");
-
-            JMenuItem snakeItem = new JMenuItem("贪吃蛇");
-            InputStream is = MainForm.class.getClassLoader().getResourceAsStream(
-                    "game/snake/logo.png");
-            if (is == null) {
-                return null;
-            }
-            ImageIcon imageIcon = new ImageIcon(ImageIO.read(is));
-            snakeItem.setIcon(imageIcon);
-            snakeItem.addActionListener(e -> Main.start());
-
-            JMenuItem flappyItem = new JMenuItem("Flappy Bird");
-            is = MainForm.class.getClassLoader().getResourceAsStream(
-                    "game/flappy/flappy_bird/bird1_0.png");
-            if (is == null) {
-                return null;
-            }
-            ImageIcon flappyIcon = new ImageIcon(ImageIO.read(is));
-            flappyItem.setIcon(flappyIcon);
-            flappyItem.addActionListener(e -> new FBMainFrame().startGame());
-
-            JMenuItem pokerItem = new JMenuItem("斗地主");
-            is = MainForm.class.getClassLoader().getResourceAsStream(
-                    "game/pocker/images/logo.png");
-            if (is == null) {
-                return null;
-            }
-            ImageIcon pokerIcon = new ImageIcon(ImageIO.read(is));
-            pokerItem.setIcon(pokerIcon);
-            pokerItem.addActionListener(e -> new Thread(com.chaitin.xray.games.pocker.Main::new).start());
-
-            JMenuItem planeItem = new JMenuItem("雷电");
-            is = MainForm.class.getClassLoader().getResourceAsStream(
-                    "game/plane/logo.png");
-            if (is == null) {
-                return null;
-            }
-            ImageIcon planeIcon = new ImageIcon(ImageIO.read(is));
-            planeItem.setIcon(planeIcon);
-            planeItem.addActionListener(e -> Game.start());
-
-            gameMenu.add(snakeItem);
-            gameMenu.add(flappyItem);
-            gameMenu.add(pokerItem);
-            gameMenu.add(planeItem);
-            return gameMenu;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
     private static JMenuBar createMenuBar() {
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(createAboutMenu());
         menuBar.add(createVersionMenu());
-        menuBar.add(createGameMenu());
         return menuBar;
     }
 

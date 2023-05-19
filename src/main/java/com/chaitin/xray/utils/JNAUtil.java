@@ -3,13 +3,14 @@ package com.chaitin.xray.utils;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Kernel32;
 import com.sun.jna.platform.win32.WinNT;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class JNAUtil {
-    private static final Logger logger = Logger.getLogger(JNAUtil.class);
+    private static final Logger logger = LogManager.getLogger(JNAUtil.class);
 
     public static long getProcessID(Process p) {
         String javaVersion = System.getProperty("java.version");

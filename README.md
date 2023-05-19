@@ -105,15 +105,3 @@
 版本检测: 由于使用`Github API`查询版本，所有可能有一些延迟
 
 ![](img/0011.png)
-
-一些内置小游戏
-
-![](img/0013.png)
-
-## 小游戏
-
-感谢以下项目：
-- 贪吃蛇：https://github.com/hexadeciman/Snake
-- Flappy Bird：https://github.com/jiashunx/games-flappybird
-- 斗地主：https://github.com/ljheee/PlayCard
-- 雷电：https://github.com/Hph1998/ThunderGame
